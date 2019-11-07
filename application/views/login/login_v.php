@@ -28,7 +28,8 @@
 				'placeholder' => 'Enter Password',
 				'id' => 'password',
 				'autocomplete' => 'off',
-				'required' => 'required'
+				'required' => 'required',
+				'minlength'=> '6'
 			) );
 
 			?>
