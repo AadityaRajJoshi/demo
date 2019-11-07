@@ -8,9 +8,10 @@
         <meta name="description" content="<?php echo $meta['description']; ?>">
         <meta name="viewport" content="width=device-width">
         <base href="<?php echo base_url(); ?>">
-        <link rel="stylesheet" type="text/css" href="assets/build/login.css">
+        <link rel="stylesheet" type="text/css" href="assets/build/style/login.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700,900&display=swap" rel="stylesheet">
     </head>
-    <body>
+    <body class="luft-template-login luft-bg-primary">
         <div>
             <div class="container">
                 <?php if (validation_errors()): ?>
@@ -18,9 +19,9 @@
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <strong>Warning!</strong> <?php echo validation_errors(); ?>
                     </div>
-                <?php endif; ?>
-                <div id="main"><?php $this->load->view($page); ?></div>
+                <?php endif; ?>               
             </div>
         </div>
+        <?php $this->load->view($page); ?>
     </body>
 </html>
