@@ -1,0 +1,30 @@
+$color_primary: #020441;
+$color_green:   #58B975;
+$color_white:   #fff;
+$color_black:   #000;
+$color_light_grey: #F7F7F7;
+$color_border: #DFDFE5;
+$prefix: luft;
+
+.#{$prefix}-bg-primary {
+    background: $color_primary;
+}
+
+
+.display-on-desktop {
+    display: block;
+
+    @include media(mb) {
+        display: none;
+    }
+}
+
+.display-on-mobile {
+    display: none !important;
+
+    @include media(mb) {
+         display: block !important;
+    }
+}
+
+
