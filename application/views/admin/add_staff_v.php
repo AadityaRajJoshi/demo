@@ -41,9 +41,7 @@
 		) );
 
 		echo form_submit( 'add', 'Add Staff' );
-		echo form_close( '' ); 
-
-
+		echo form_close( '' );
 	 ?>
 </body>
 </html>

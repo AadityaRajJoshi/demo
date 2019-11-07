@@ -19,7 +19,7 @@ class MY_Model extends CI_Model {
 	    }else{ 
 	    	#Update
 	        $this->db->where( $where );
-	        $this->db->set( "updated_date", "now()", false );
+	        $this->db->set( "updated_on", "now()", false );
 	        if( $this->db->update( $this->table, $data ) ){
 	        	return $this->db->affected_rows();
 	        }else{
