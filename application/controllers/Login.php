@@ -13,15 +13,25 @@ class Login extends CI_Controller{
 
 
 	public function index(){
-		// $this->check_login();
+		$cookie = json_decode( get_cookie( 'user_logged_in' ) );
+		$user = false;
+		if( '' != $cookie && isset( $cookie->user ) ){
+			$user = array(
+				'name' => $cookie->user,
+				'pass' => $cookie->pass
+			);
+		}
 		$data = array(
 			'meta' => array(
 				'title' => 'Login',
 				'description' => 'Login panel',
 				'keyword' => 'staff, admin, employee'
 			),
-			'page' => 'login_v'
+			'page' => 'login_v',
+			'cookie' => $user
 		);
+/*		var_export( $user );die;
+		var_export( $data );die;*/
 		$this->load->view('login_template_v', $data);
 
 	}
@@ -34,8 +44,8 @@ class Login extends CI_Controller{
 			$this->load->library('form_validation');
 
 			$username = $this->input->post( 'username' );
-			$password = $this->input->post( 'password' );
 			$remember = $this->input->post( 'remember_me' );
+			$password = md5( $this->input->post( 'password' ) );
 
 			$this->form_validation->set_rules('username', 'Username', 'required' );
 			$this->form_validation->set_rules('password', 'Password', 'required' );
@@ -47,7 +57,7 @@ class Login extends CI_Controller{
 
 				$condition = array(
 					$select    => $username,
-					'password' => md5( $password )
+					'password' => $password
 				);
 
 				$this->load->model( 'user_m' );
@@ -71,12 +81,12 @@ class Login extends CI_Controller{
 
 					if( $this->input->post( 'remember_me' ) && 'on' == $this->input->post( 'remember_me' ) ) {
 
-						set_cookie( 'remember_me', $remember, 30*60*60 );
+						// set_cookie( 'remember_me', $remember, 30*60*60 );
 						set_cookie( 
-							'user_pass', 
+							'user_logged_in', 
 							json_encode( [
 								'user' => $username,
-								'pass' => $password
+								'pass' => $this->input->post( 'password' ),
 							] ),
 							30*60*60 
 						);
@@ -84,10 +94,8 @@ class Login extends CI_Controller{
 					}
 					redirect( 'dashboard' );
 				}
-			} 
-				
-			
-		} 
+			}
+		}
 		$this->session->set_flashdata( 'login_error', 'Fields Cannot be empty' );
 		redirect( 'login');
 		
