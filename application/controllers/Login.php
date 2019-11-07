@@ -20,7 +20,7 @@ class Login extends CI_Controller{
 				'description' => 'Login panel',
 				'keyword' => 'staff, admin, employee'
 			),
-			'page' => 'login/login_v'
+			'page' => 'login_v'
 		);
 		$this->load->view('login_template_v', $data);
 
@@ -91,6 +91,19 @@ class Login extends CI_Controller{
 		$this->session->set_flashdata( 'login_error', 'Fields Cannot be empty' );
 		redirect( 'login');
 		
+	}
+
+	public function forgot(){
+
+		$data = array(
+			'meta' => array(
+				'title' => 'Forgot Password?',
+				'description' => '',
+				'keyword' => ''
+			),
+			'page' => 'forgot_v'
+		);
+		$this->load->view( 'login_template_v', $data );
 	}
 
 	public function logout() {

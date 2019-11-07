@@ -28,7 +28,8 @@
 				'placeholder' => 'Enter Password',
 				'id' => 'password',
 				'autocomplete' => 'off',
-				'required' => 'required'
+				'required' => 'required',
+				'minlength'=> '6'
 			) );
 
 			?>
@@ -57,6 +58,6 @@
 	<?php echo form_close( '' ); ?> 
 
 	<div class="luft-forget-password display-on-desktop">
-		<a href="#"> <img src="<?php echo base_url();  ?>assets/image/lock.png" alt="lock" /> <span> Forget Password <span></a>
+		<a href="forgot"> <img src="<?php echo base_url();  ?>assets/image/lock.png" alt="lock" /> <span> Forget Password <span></a>
 	</div>
 </div>
