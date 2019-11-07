@@ -174,7 +174,7 @@ img {
     height: 2px;
     position: absolute;
     left: 21px;
-    background: #000;
+    background: #020441;
     top: 100%;
     transition: all .3s; }
   .luft-forget-password a:hover:after {
