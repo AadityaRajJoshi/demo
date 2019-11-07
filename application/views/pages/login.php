@@ -7,6 +7,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700,900&display=swap" rel="stylesheet">
 	<title>Login</title>
 </head>
+
 <body class="luft-template-login luft-bg-primary">
 	<div class="luft-login-box">
 
