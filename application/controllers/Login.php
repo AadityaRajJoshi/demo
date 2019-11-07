@@ -1,39 +1,33 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Login extends MY_Controller {
-
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
+class Login extends CI_Controller{
 
 	public function __construct(){
 
 		parent::__construct();
-		$this->load->model( 'User_Model' );
 		$this->load->helper('form');
 		$this->load->helper('cookie');
 		$this->check_login();
 	}
 
-	public function index()
-	{
-		$this->load->view('pages/login');
+
+	public function index(){
+		$this->check_login();
+		$data = array(
+			'meta' => array(
+				'title' => 'Login',
+				'description' => 'Login panel',
+				'keyword' => 'staff, admin, employee'
+			),
+			'page' => 'login/login_v'
+		);
+		$this->load->view('login_template_v', $data);
+
 	}
 
-	public function login_attempt(){
+	public function login_attempt() {
+
 
 		if( $this->input->post('login') ) {
 
@@ -46,41 +40,39 @@ class Login extends MY_Controller {
 			$this->form_validation->set_rules('username', 'Username', 'required' );
 			$this->form_validation->set_rules('password', 'Password', 'required' );
 
+
 			$select = strpos( $username, '@' ) ? 'email' : 'username' ;
 			if ( $this->form_validation->run() ){
 				$condition = array(
 					$select    => $username,
-					'password' => $Password
+					'password' => $password
 				);
-				$query = $this->User_Model->get( '*', $condition );
-				if( !$query ){
+				$this->load->model( 'user_m' );
+				$db_user = $this->user_m->get( '*', $condition, 1 );
+				if( !$db_user ){
 					$this->session->set_flashdata( 'login_error', 'Username And Password Not Match' );
-					redirect( 'login' );
+					redirect( '/' );
 				}else{
-					if( isset( $remember ) && $remember == true ){
-						// set_cookie( 'remember', $condition );
-						set_cookie( 'remember_me', $condition ,'3600' );
-					}
-					$logged_user = $this->User_Model->get( array( 'role_id','id') , $condition );
-					$session = array(
-						'id' => $logged_user[ 0 ]->id,	
-						'username' => $username,
-						'role_id'  => $logged_user[ 0 ]->role_id		
-					);
-					$this->session->set_userdata('logged_in_user', $session );
+					$this->session->set_userdata('logged_in_user', array(
+						'id' => $db_user->id,	
+						'name' => $username,
+						'role' => $this->config->item('role')[$db_user->role_id]	
+					));
 					redirect( 'dashboard' );
 				}
 			} else {
-				/* no validate */
+				$this->session->set_flashdata( 'login_error', 'Fields Cannot be empty' );
+				redirect( '/' );
 			}
-		} else {
-			$this->session->set_flashdata( 'login_error', 'Fields Cannot be empty' );
-			redirect( 'login' );
-		}
 	}
 
 	public function logout() {
 	    $this->session->sess_destroy();
-	    redirect( 'login' );
+	    redirect( '/' );
+	}
+
+	public function check_login(){
+	    if ($this->session->userdata('logged_in_user'))
+	        redirect('dashboard', 'refresh');
 	}
 }
