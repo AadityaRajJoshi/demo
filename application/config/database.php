@@ -80,7 +80,7 @@ $db['default'] = array(
 	'password' => 'evisionitse',
 	'database' => 'local_luftlek',
 	'dbdriver' => 'mysqli',
-	'dbprefix' => '',
+	'dbprefix' => 'luftlek_',
 	'pconnect' => FALSE,
 	'db_debug' => (ENVIRONMENT !== 'production'),
 	'cache_on' => FALSE,

@@ -69,6 +69,5 @@
 				<a href="#"> <img src="<?php echo base_url();  ?>assets/image/lock.png" alt="lock" /> <span> Forget Password <span></a>
 			</div>
 	</div>
-
 </body>
 </html>
