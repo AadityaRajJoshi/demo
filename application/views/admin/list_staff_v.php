@@ -8,8 +8,8 @@
   </tr>
 
   <tr>
-  	<?php foreach ($staffs as $staff) {?>
-    <td><?php echo $staff->id; ?></td>
+  	<?php foreach ($staffs as $key => $staff) {?>
+    <td><?php echo $key+1; ?></td>
     <td><?php echo $staff->username; ?></td>
     <td></td>
     <td><a href="<?php echo base_url(); ?>staff/edit/<?php echo $staff->id; ?>"  >Edit</a> <a href="<?php echo base_url();?>staff/delete/<?php echo $staff->id; ?>" >delete</a></td>
