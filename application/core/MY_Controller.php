@@ -9,7 +9,7 @@ class MY_Controller extends CI_Controller{
 	}
 
 	public function check_login(){
-	    if ( $this->session->userdata( 'logged_in_user' ) == TRUE )
+	    if ( $this->session->userdata( 'logged_in_user' ) )
 	        redirect( 'dashboard' );
 	    else
 	        return FALSE;

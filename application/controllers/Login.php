@@ -24,46 +24,56 @@ class Login extends MY_Controller {
 		parent::__construct();
 		$this->load->model( 'User_Model' );
 		$this->load->helper('form');
+		$this->load->helper('cookie');
+		$this->check_login();
 	}
 
 	public function index()
 	{
-		$this->check_login();
 		$this->load->view('pages/login');
 	}
 
 	public function login_attempt(){
-		$this->check_login();
-		$this->load->library('form_validation');
 
-		$username = $this->input->post( 'username' );
-		$Password = md5( $this->input->post( 'password' ) );
-		$remember = $this->input->post( 'remember' );
+		if( $this->input->post('login') ) {
 
-		$this->form_validation->set_rules('username', 'Username', 'required' );
-		$this->form_validation->set_rules('password', 'Password', 'required' );
+			$this->load->library('form_validation');
 
-		$select = strpos( $username, '@' ) ? 'email' : 'username' ;
-		if ( $this->form_validation->run() ){
-			$condition = array(
-				$select    => $username,
-				'password' => $Password
-			);
-			$query = $this->User_Model->get( '*', $condition );
-			if( !$query ){
-				$this->session->set_flashdata( 'login_error', 'Username And Password Not Match' );
-				redirect( 'login' );
-			}else{
-				$logged_user = $this->User_Model->get( array( 'role_id','id') , $condition );
-				$session = array(
-					'id' => $logged_user[ 0 ]->id,	
-					'username' => $username,
-					'role_id'  => $logged_user[ 0 ]->role_id		
+			$username = $this->input->post( 'username' );
+			$Password = md5( $this->input->post( 'password' ) );
+			$remember = $this->input->post( 'remember' );
+
+			$this->form_validation->set_rules('username', 'Username', 'required' );
+			$this->form_validation->set_rules('password', 'Password', 'required' );
+
+			$select = strpos( $username, '@' ) ? 'email' : 'username' ;
+			if ( $this->form_validation->run() ){
+				$condition = array(
+					$select    => $username,
+					'password' => $Password
 				);
-				$this->session->set_userdata('logged_in_user', $session );
-				redirect( 'dashboard' );
+				$query = $this->User_Model->get( '*', $condition );
+				if( !$query ){
+					$this->session->set_flashdata( 'login_error', 'Username And Password Not Match' );
+					redirect( 'login' );
+				}else{
+					if( isset( $remember ) && $remember == true ){
+						// set_cookie( 'remember', $condition );
+						set_cookie( 'remember_me', $condition ,'3600' );
+					}
+					$logged_user = $this->User_Model->get( array( 'role_id','id') , $condition );
+					$session = array(
+						'id' => $logged_user[ 0 ]->id,	
+						'username' => $username,
+						'role_id'  => $logged_user[ 0 ]->role_id		
+					);
+					$this->session->set_userdata('logged_in_user', $session );
+					redirect( 'dashboard' );
+				}
+			} else {
+				/* no validate */
 			}
-		}else{
+		} else {
 			$this->session->set_flashdata( 'login_error', 'Fields Cannot be empty' );
 			redirect( 'login' );
 		}

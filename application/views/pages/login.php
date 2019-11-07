@@ -9,6 +9,10 @@
 			 echo $this->session->flashdata( 'login_error' );
 		 }
 	 ?>
+	 <?php 
+		 $cookie= get_cookie( 'remember_me' );  
+		  var_dump($cookie);
+	 ?>
 	<?php echo form_open( 'login/login_attempt' );
 		echo form_label('User Name', 'username');
 		echo form_input( array(
@@ -26,10 +30,11 @@
 		) );
 
 		echo form_checkbox( array(
-			'name' => 'remember_me',
-			'id'   => 'remember_me'
+			'name'  => 'remember',
+			'id'    => 'remember',
+			'value' => 'true'
 		) );
-		echo form_label( 'Remember Me', 'remember_me');
+		echo form_label( 'Remember Me', 'remember');
 
 		echo form_submit('login', 'Login');
 	echo form_close( '' ); ?>
