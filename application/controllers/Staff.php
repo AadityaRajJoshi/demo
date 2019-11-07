@@ -17,13 +17,13 @@ class Staff extends MY_Controller{
 		));
 
 		$this->data['page'] = 'list_staff_v';
-		$this->load->view('dashboard_template_v', $this->data);	
+		$this->load->view( 'dashboard_template_v', $this->data );	
 	}
 
 	public function add(){
 	
 		$this->data['page'] = 'add_staff_v';
-		$this->load->view('dashboard_template_v', $this->data);	
+		$this->load->view( 'dashboard_template_v', $this->data );	
 
 		$username = $this->input->post( 'name' );
 		$email = $this->input->post( 'email' );
@@ -86,8 +86,8 @@ class Staff extends MY_Controller{
 	}
 
 	public function delete( $id = null ){
-		if($this->user_m->delete( array('id'=>$id) )){
+		if($this->user_m->delete( array('id'=>$id) ))
 			redirect('staff');
-		}
+		
 	}
 }

@@ -84,8 +84,6 @@ class Login extends CI_Controller{
 					redirect( 'dashboard' );
 				}
 			} 
-				
-			
 		} 
 		$this->session->set_flashdata( 'login_error', 'Fields Cannot be empty' );
 		redirect( 'login');
