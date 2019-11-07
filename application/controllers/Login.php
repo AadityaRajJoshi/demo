@@ -19,34 +19,62 @@ class Login extends MY_Controller {
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
 
+	public function __construct(){
+
+		parent::__construct();
+		$this->load->model( 'User_Model' );
+		$this->load->helper('form');
+
+		// echo $this->check_user_session_alive(); die;
+		// if( !$this->check_user_session_alive() ) {
+ 	// 		redirect( 'login' );
+		// }
+
+	}
+
 	public function index()
 	{
-		$this->load->helper('form');
 		$this->load->view('pages/login');
-		$this->load->model( 'User_Model' );
 	}
 
 	public function user_login(){
-		$this->load->model( 'User_Model' );
+		// $this->load->model( 'User_Model' );
 		$this->load->library('form_validation');
 
 
 		$username = $this->input->post( 'username' );
-		$Password = $this->input->post( 'password' );
+		$Password = md5( $this->input->post( 'password' ) );
 		$remember = $this->input->post( 'remember' );
 
 		$this->form_validation->set_rules('username', 'Username', 'required' );
 		$this->form_validation->set_rules('password', 'Password', 'required' );
 
+		$select = strpos( $username, '@' ) ? 'email' : 'username' ;
 		if ( $this->form_validation->run() ){
 			$condition = array(
-				'username' => $username,
+				$select    => $username,
 				'password' => $Password
 			);
 			$query = $this->User_Model->get( '*', $condition );
-			var_export( $query );die;
+			if( !$query ){
+				/**
+				* showm flash messge for unsuccessful login
+				*/
+				$this->session->set_flashdata( 'login_error', 'Username And Password Not Match' );
+				$this->load->view('pages/login');
+				// redirect( 'login' );
+			}else{
+				$this->session->set_userdata('logged_in_user', $condition );
+				redirect( 'dashboard' );
+			}
 		}else{
-			echo "error";
+			$this->session->set_flashdata( 'login_error', 'Fields Cannot be empty' );
+			$this->load->view('pages/login');
 		}
+	}
+
+	public function session_end(){
+		$this->session->sess_destroy();
+		redirect( 'login' );
 	}
 }

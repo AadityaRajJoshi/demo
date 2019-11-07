@@ -44,11 +44,11 @@ class MY_Model extends CI_Model {
 	    	}
 	    }
 
-	    if ($order != false){
-	        $this->db->order_by( $order );
-	    }else{
-	        $this->db->order_by( 'id', $this->order );
-	    }
+	    // if ($order != false){
+	    //     $this->db->order_by( $order );
+	    // }else{
+	    //     $this->db->order_by( 'id', $this->order );
+	    // }
 
 	    $this->db->from( $this->table, false );
 	    $query = $this->db->get();

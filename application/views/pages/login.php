@@ -4,6 +4,11 @@
 	<title>Login</title>
 </head>
 <body>
+	 <?php
+		 if( $this->session->flashdata( 'login_error' ) ){
+			 echo $this->session->flashdata( 'login_error' );
+		 }
+	 ?>
 	<?php echo form_open( 'login/user_login' );
 		echo form_label('User Name', 'username');
 		echo form_input( array(
