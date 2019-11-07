@@ -21,6 +21,7 @@
 		echo form_label( 'Number', 'number' );
 		echo form_input( array(
 			'name' => 'number',
+			'type'=>'tel',
 			'value' => $staff->phone_number,
 			'placeholder' => 'Enter Phone Number',
 			'id' => 'phone',
