@@ -25,10 +25,7 @@ class Login extends MY_Controller {
 		$this->load->model( 'User_Model' );
 		$this->load->helper('form');
 
-		// echo $this->check_user_session_alive(); die;
-		// if( !$this->check_user_session_alive() ) {
- 	// 		redirect( 'login' );
-		// }
+		echo $this->check_user_session_alive();
 
 	}
 
@@ -73,8 +70,10 @@ class Login extends MY_Controller {
 		}
 	}
 
-	public function session_end(){
-		$this->session->sess_destroy();
-		redirect( 'login' );
+	public function check_login(){
+	    if ($this->session->userdata( 'logged_in_user' ) == TRUE)
+	        redirect('dashboard/manage_content', 'refresh');
+	    else
+	        return FALSE;
 	}
 }
