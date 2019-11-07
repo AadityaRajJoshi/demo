@@ -39,16 +39,30 @@
 
                 <div>
                     <?php if('staff' == $user['role']): ?>
-                        Staff Menu here
+                        <div>
+                            <h3>Menu</h3>
+                            <ul>
+                                <li>Dashboard</li>
+                                <li>My Events</li>
+                                <li>My details</li>                                
+                                <li>
+                                    <?php
+                                        echo form_open( 'login/logout' );
+                                        echo form_submit('logout', 'Log Out');
+                                        echo form_close( '' );
+                                    ?>
+                                </li>
+                            </ul>
+                        </div>
                     <?php elseif ('administrator' == $user['role']): ?>
                         <div>
                             <h3>Menu</h3>
                             <ul>
                                 <li>Dashboard</li>
-                                <li>Event
+                                <li>Events
                                     <ul>
                                         <li>Add Event</li>
-                                        <li>All Event</li>
+                                        <li>All Events</li>
                                     </ul>
                                 </li>
                                 <li>Staff</li>
