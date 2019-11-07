@@ -3,17 +3,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MY_Controller extends CI_Controller{
 
+	protected $data = array(
+		'meta' => array(
+			'title' => 'Admin',
+			'description' => 'Staff Description',
+			'keyword' => 'staff, admin, employee'
+		)
+	);
+
 	public function __construct(){
 		parent::__construct();
-		$this->load->model( 'User_Model' );
-	}
 
-	public function check_user_session_alive(){
-		$user_status = $this->session->userdata( 'logged_in_user' );
-		$query = false;
-		if( $user_status ){
-			$query = $this->User_Model->get( '*', $user_status );
+		# Don't let unauthorised user to access dashboar pages
+		if($this->session->userdata('logged_in') != TRUE){ 
+		    //redirect('/', 'refresh');
 		}
-		return $query;
 	}
 }

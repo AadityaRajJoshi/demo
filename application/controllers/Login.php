@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Login extends MY_Controller {
+class Login extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -75,5 +75,14 @@ class Login extends MY_Controller {
 	        redirect('dashboard/manage_content', 'refresh');
 	    else
 	        return FALSE;
+	}
+
+	public function check_user_session_alive(){
+		$user_status = $this->session->userdata( 'logged_in_user' );
+		$query = false;
+		if( $user_status ){
+			$query = $this->User_Model->get( '*', $user_status );
+		}
+		return $query;
 	}
 }
