@@ -53,4 +53,4 @@ $route['default_controller'] = 'Login';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
-$route['User'] = 'User';
+// $route['user'] = 'User';
