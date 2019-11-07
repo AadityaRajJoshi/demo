@@ -46,7 +46,7 @@
                 </div>
                 <div id="main">
                     <?php
-                        $page = 'administrator' == $user['role'] ? 'admin/' : 'staff/' . $page;
+                        $page = ('administrator' == $user['role'] ? 'admin/' : 'staff/') . $page;
                         $this->load->view($page); 
                     ?>
                 </div>

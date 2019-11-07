@@ -522,4 +522,4 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
-$config['role'] = array('administrator','staff');
+$config['role'] = array(1=>'administrator',2=>'staff');
