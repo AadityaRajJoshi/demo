@@ -36,7 +36,7 @@ class Login extends CI_Controller{
 			$username = $this->input->post( 'username' );
 			$password = $this->input->post( 'password' );
 			$remember = $this->input->post( 'remember' );
-
+// print_r( $_POST );die;
 			$this->form_validation->set_rules('username', 'Username', 'required' );
 			$this->form_validation->set_rules('password', 'Password', 'required' );
 

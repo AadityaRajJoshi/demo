@@ -21,7 +21,7 @@
 			}
 		?>
 
-		<?php echo form_open( 'login/user_login' ); ?>
+		<?php echo form_open( 'login/login_attempt' ); ?>
 
 			<div class="luft-form-row luft-input-type">
 				<?php echo form_label('User Name', 'username');

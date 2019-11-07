@@ -9,7 +9,7 @@
 		}
 	?>
 
-	<?php echo form_open( 'login/user_login' ); ?>
+	<?php echo form_open( 'login/login_attempt' ); ?>
 
 		<div class="luft-form-row luft-input-type">
 			<?php echo form_label('User Name', 'username');
@@ -38,7 +38,8 @@
 			<label class="luft-form-row luft-checkbox-type">
 				<?php echo form_checkbox( array(
 					'name' => 'remember_me',
-					'id'   => 'remember_me'
+					'id'   => 'remember_me',
+					// 'value' => 'yes'
 				) ); ?>
 				Remember Me
 				<!-- <?php echo form_label( 'Remember Me', 'remember_me'); ?> -->
