@@ -8,13 +8,14 @@ class Dashboard extends MY_Controller {
 		parent::__construct();
 		$this->load->model( 'User_Model' );
 		$this->load->helper( 'form' );
-
-		if( !$this->check_user_session_alive() ) {
- 			redirect( 'login' );
-		}
 	}
 
 	public function index(){
-		$this->load->view( 'pages/dashboard' );
+		$logged_in_user = $this->session->userdata( 'logged_in_user' );
+		if( $logged_in_user[ 'role_id' ] == 1 ){
+			$this->load->view( 'pages/admin-dashboard' );
+		}else{
+			$this->load->view( 'pages/staff-dashboard' );
+		}
 	}
 }

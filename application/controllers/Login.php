@@ -24,20 +24,17 @@ class Login extends MY_Controller {
 		parent::__construct();
 		$this->load->model( 'User_Model' );
 		$this->load->helper('form');
-
-		echo $this->check_user_session_alive();
-
 	}
 
 	public function index()
 	{
+		$this->check_login();
 		$this->load->view('pages/login');
 	}
 
-	public function user_login(){
-		// $this->load->model( 'User_Model' );
+	public function login_attempt(){
+		$this->check_login();
 		$this->load->library('form_validation');
-
 
 		$username = $this->input->post( 'username' );
 		$Password = md5( $this->input->post( 'password' ) );
@@ -54,26 +51,26 @@ class Login extends MY_Controller {
 			);
 			$query = $this->User_Model->get( '*', $condition );
 			if( !$query ){
-				/**
-				* showm flash messge for unsuccessful login
-				*/
 				$this->session->set_flashdata( 'login_error', 'Username And Password Not Match' );
-				$this->load->view('pages/login');
-				// redirect( 'login' );
+				redirect( 'login' );
 			}else{
-				$this->session->set_userdata('logged_in_user', $condition );
+				$logged_user = $this->User_Model->get( array( 'role_id','id') , $condition );
+				$session = array(
+					'id' => $logged_user[ 0 ]->id,	
+					'username' => $username,
+					'role_id'  => $logged_user[ 0 ]->role_id		
+				);
+				$this->session->set_userdata('logged_in_user', $session );
 				redirect( 'dashboard' );
 			}
 		}else{
 			$this->session->set_flashdata( 'login_error', 'Fields Cannot be empty' );
-			$this->load->view('pages/login');
+			redirect( 'login' );
 		}
 	}
 
-	public function check_login(){
-	    if ($this->session->userdata( 'logged_in_user' ) == TRUE)
-	        redirect('dashboard/manage_content', 'refresh');
-	    else
-	        return FALSE;
+	public function logout() {
+	    $this->session->sess_destroy();
+	    redirect( 'login' );
 	}
 }
