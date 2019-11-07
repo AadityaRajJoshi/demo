@@ -46,11 +46,7 @@
                                 <li>My Events</li>
                                 <li>My details</li>                                
                                 <li>
-                                    <?php
-                                        echo form_open( 'login/logout' );
-                                        echo form_submit('logout', 'Log Out');
-                                        echo form_close( '' );
-                                    ?>
+                                    <a href="login/logout">Log Out</a>
                                 </li>
                             </ul>
                         </div>
@@ -65,15 +61,16 @@
                                         <li>All Events</li>
                                     </ul>
                                 </li>
-                                <li>Staff</li>
+                                <li>Staff
+                                    <ul>
+                                        <li><a href="staff/add">Add Staff</a></li>
+                                        <li><a href="staff">All Staff</a></li>
+                                    </ul>
+                                </li>
                                 <li>Setting</li>
                                 
                                 <li>
-                                    <?php
-                                        echo form_open( 'login/logout' );
-                                        echo form_submit('logout', 'Log Out');
-                                        echo form_close( '' );
-                                    ?>
+                                    <a href="login/logout">Log Out</a>
                                 </li>
                             </ul>
                         </div>
