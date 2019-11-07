@@ -13,6 +13,7 @@ class Login extends CI_Controller{
 
 
 	public function index(){
+		$this->check_login();
 		$cookie = json_decode( get_cookie( 'user_logged_in' ) );
 		$user = false;
 		if( '' != $cookie && isset( $cookie->user ) ){
@@ -30,8 +31,6 @@ class Login extends CI_Controller{
 			'page' => 'login_v',
 			'cookie' => $user
 		);
-/*		var_export( $user );die;
-		var_export( $data );die;*/
 		$this->load->view('login_template_v', $data);
 
 	}
@@ -77,8 +76,6 @@ class Login extends CI_Controller{
 						'role' => $this->config->item('role')[$db_user->role_id]	
 					));
 
-					/*set cookie*/
-
 					if( $this->input->post( 'remember_me' ) && 'on' == $this->input->post( 'remember_me' ) ) {
 
 						// set_cookie( 'remember_me', $remember, 30*60*60 );
@@ -92,7 +89,7 @@ class Login extends CI_Controller{
 						);
 
 					}
-					redirect( 'dashboard' );
+					redirect( 'staff' );
 				}
 
 			}
@@ -120,8 +117,8 @@ class Login extends CI_Controller{
 	    redirect( '/' );
 	}
 
-	public function check_login1(){
+	public function check_login(){
 	    if ($this->session->userdata('logged_in_user'))
-	        redirect('dashboard', 'refresh');
+	        redirect('staff', 'refresh');
 	}
 }

@@ -41,7 +41,28 @@
                     <?php if('staff' == $user['role']): ?>
                         Staff Menu here
                     <?php elseif ('administrator' == $user['role']): ?>
-                        Admin Menu here
+                        <div>
+                            <h3>Menu</h3>
+                            <ul>
+                                <li>Dashboard</li>
+                                <li>Event
+                                    <ul>
+                                        <li>Add Event</li>
+                                        <li>All Event</li>
+                                    </ul>
+                                </li>
+                                <li>Staff</li>
+                                <li>Setting</li>
+                                
+                                <li>
+                                    <?php
+                                        echo form_open( 'login/logout' );
+                                        echo form_submit('logout', 'Log Out');
+                                        echo form_close( '' );
+                                    ?>
+                                </li>
+                            </ul>
+                        </div>
                     <?php endif; ?>
                 </div>
                 <div id="main">
