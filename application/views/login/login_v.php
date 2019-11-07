@@ -8,7 +8,6 @@
 			?> <span class="form-err"> <?php echo $this->session->flashdata( 'login_error' ); ?> </span> <?php 
 		}
 	?>
-
 	<?php echo form_open( 'login/login_attempt' ); ?>
 
 		<div class="luft-form-row luft-input-type">
@@ -17,7 +16,8 @@
 				'name' => 'username',
 				'placeholder' => 'Enter Username Or Email',
 				'id' => 'username',
-				'required' => 'required'
+				'required' => 'required',
+				'value' => isset( $cookie[ 'name' ] ) ? $cookie[ 'name' ] : ''
 			) ); ?>
 		</div>
 
@@ -29,7 +29,7 @@
 				'id' => 'password',
 				'autocomplete' => 'off',
 				'required' => 'required',
-				'minlength'=> '6'
+				'value' => isset( $cookie[ 'pass' ] ) ? $cookie[ 'pass' ] : ''
 			) );
 
 			?>
@@ -40,7 +40,7 @@
 				<?php echo form_checkbox( array(
 					'name' => 'remember_me',
 					'id'   => 'remember_me',
-					// 'value' => 'yes'
+					'value' => 'on'
 				) ); ?>
 				Remember Me
 				<!-- <?php echo form_label( 'Remember Me', 'remember_me'); ?> -->
