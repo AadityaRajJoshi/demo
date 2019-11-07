@@ -5,11 +5,13 @@ class Staff extends MY_Controller{
 	
 	public function __construct(){
 		parent::__construct();
+		$this->load->helper('form');
+		$this->load->library('form_validation');
+		$this->load->model('user_m');
 	} 
 
 	public function index(){
 
-		$this->load->model('user_m');
 		$this->data['staffs'] = $this->user_m->get( '*', array(
 			'role_id' => 2
 		));
@@ -19,53 +21,45 @@ class Staff extends MY_Controller{
 	}
 
 	public function add(){
-		$this->load->library('form_validation');
+	
+		$this->data['page'] = 'add_staff_v';
+		$this->load->view('dashboard_template_v', $this->data);	
 
-		$name = $this->input->post( 'name' );
+		$username = $this->input->post( 'name' );
 		$email = $this->input->post( 'email' );
 		$phone_number = $this->input->post( 'number' );
-		$password = md5($this->input->post( 'password' ) );
-		$displayname = $this->input->post('displayname');
+		$password = md5($this->input->post( 'password' ));
+		$displayname = $this->input->post( 'displayname' );
 
-		$this->form_validation->set_rules('name', 'Name', 'required' );
+		$this->form_validation->set_rules('name', 'Username', 'required' );
 		$this->form_validation->set_rules('email', 'Email', 'required' );
-		$this->form_validation->set_rules('number', 'Number', 'required' );
+		$this->form_validation->set_rules('number', 'phone_number', 'required' );
 		$this->form_validation->set_rules('password', 'Password', 'required' );
 		$this->form_validation->set_rules('displayname', 'Display Name', 'required' );
 
 		if( $this->form_validation->run() ){
-			$data = array( 
-				'username' => $name,
-				'password' => $password,
-				'phone_number' => $phone_number,
+			$data = array(
+				'username'=> $username,
 				'email' => $email,
-				'display_name' => $displayname,
+				'password' => $password,
+				'Phone_number' => $phone_number,
+				'Display_name' => $displayname,
 				'role_id' => 2
-			 );
-
-			$query =$this->User_Model->save( $data );
-
-			if( $query ){
-				redirect('user');
+			);
+			if($this->user_m->save( $data ) ){
+				redirect('staff');
 			}else{
-				echo "error";
+				redirect('staff/add');
 			}
-
-		}else{
-			$this->load->view( 'pages/add-user' );
 		}
 	}
 
 	public function edit( $id = null ){
-		$this->load->model('user_m');
-		$where = array(
-			'id' => $id
-		);
-		$data = $this->user_m->get( '*', $where );
-		$staffs = [
-			'staffs' => $data
-		];
-		$this->load->view('pages/edit-user', $staffs);
+		
+		$this->data['staff'] = $this->user_m->get( '*', array( 
+			'id'=>$id ) );
+		$this->data['page'] = 'edit_staff_v';
+		$this->load->view('dashboard_template_v', $this->data);	
 	}
 
 	public function update(){
@@ -83,14 +77,17 @@ class Staff extends MY_Controller{
 			'email' => $email,
 			'display_name' => $displayname,
 		);
+	
+		if( $this->user_m->save( $data, array(
+			'id'=>$id
+		) )){
+			redirect('staff');
+		}
+	}
 
-		$where = array(
-			'id' => $id
-		);
-
-		$query = $this->User_Model->save( $data, $where );
-		if ( $query ){
-			redirect('user');
+	public function delete( $id = null ){
+		if($this->user_m->delete( array('id'=>$id) )){
+			redirect('staff');
 		}
 	}
 }
