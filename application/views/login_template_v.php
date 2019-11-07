@@ -22,6 +22,6 @@
                 <?php endif; ?>               
             </div>
         </div>
-        <?php $this->load->view($page); ?>
+        <?php $this->load->view('login/' . $page); ?>
     </body>
 </html>

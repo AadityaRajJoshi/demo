@@ -5,7 +5,7 @@
 </head>
 <body>
 	<?php
-		echo form_open( 'user/add' );
+		echo form_open( 'staff/add' );
 		echo form_label( 'Name', 'name' );
 		echo form_input( array(
 			'name' => 'name',
