@@ -55,4 +55,3 @@ $route['translate_uri_dashes'] = FALSE;
 
 // $route['login'] = 'Login/user_login';
 // $route['new_route'] = 'controller/method';
-

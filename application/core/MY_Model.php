@@ -7,8 +7,8 @@ class MY_Model extends CI_Model {
 		
 	    if( $where == false ){ 
 	    	#Insert
-	        $this->db->set( "updated_date", "now()", false );
-	        $this->db->set( "created_date", "now()", false );
+	        $this->db->set( "updated_on", "now()", false );
+	        $this->db->set( "created_on", "now()", false );
 
 	        if( $this->db->insert( $this->table, $data ) ){
 	        	return $this->db->insert_id();
