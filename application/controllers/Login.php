@@ -1,49 +1,33 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Login extends MY_Controller {
-
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
+class Login extends CI_Controller{
 
 	public function __construct(){
 
 		parent::__construct();
-		$this->load->model( 'User_Model' );
 		$this->load->helper('form');
-
-		// echo $this->check_user_session_alive(); die;
-		// if( !$this->check_user_session_alive() ) {
- 	// 		redirect( 'login' );
-		// }
-
 	}
 
-	public function index()
-	{
-		$this->load->view('pages/login');
+	public function index(){
+		$this->check_login();
+		$data = array(
+			'meta' => array(
+				'title' => 'Login',
+				'description' => 'Login panel',
+				'keyword' => 'staff, admin, employee'
+			),
+			'page' => 'login/login_v'
+		);
+		$this->load->view('login_template_v', $data);
 	}
 
-	public function user_login(){
-		// $this->load->model( 'User_Model' );
+	public function login_attempt(){
+		$this->check_login();
 		$this->load->library('form_validation');
 
-
 		$username = $this->input->post( 'username' );
-		$Password = md5( $this->input->post( 'password' ) );
+		$password = md5( $this->input->post( 'password' ) );
 		$remember = $this->input->post( 'remember' );
 
 		$this->form_validation->set_rules('username', 'Username', 'required' );
@@ -53,28 +37,34 @@ class Login extends MY_Controller {
 		if ( $this->form_validation->run() ){
 			$condition = array(
 				$select    => $username,
-				'password' => $Password
+				'password' => $password
 			);
-			$query = $this->User_Model->get( '*', $condition );
-			if( !$query ){
-				/**
-				* showm flash messge for unsuccessful login
-				*/
+			$this->load->model( 'user_m' );
+			$db_user = $this->user_m->get( '*', $condition, 1 );
+			if( !$db_user ){
 				$this->session->set_flashdata( 'login_error', 'Username And Password Not Match' );
-				$this->load->view('pages/login');
-				// redirect( 'login' );
+				redirect( '/' );
 			}else{
-				$this->session->set_userdata('logged_in_user', $condition );
+				$this->session->set_userdata('logged_in_user', array(
+					'id' => $db_user->id,	
+					'name' => $username,
+					'role' => $this->config->item('role')[$db_user->role_id]	
+				));
 				redirect( 'dashboard' );
 			}
 		}else{
 			$this->session->set_flashdata( 'login_error', 'Fields Cannot be empty' );
-			$this->load->view('pages/login');
+			redirect( '/' );
 		}
 	}
 
-	public function session_end(){
-		$this->session->sess_destroy();
-		redirect( 'login' );
+	public function logout() {
+	    $this->session->sess_destroy();
+	    redirect( '/' );
+	}
+
+	public function check_login(){
+	    if ($this->session->userdata('logged_in_user'))
+	        redirect('dashboard', 'refresh');
 	}
 }

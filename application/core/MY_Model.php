@@ -52,8 +52,11 @@ class MY_Model extends CI_Model {
 
 	    $this->db->from( $this->table, false );
 	    $query = $this->db->get();
+	    if( $query ){
+	    	return $limit == 1 ? $query->row() : $query->result();
+	    }
 
-	    return $query ? $query->result() : false;
+	    return false;
 	   
 	}
 
