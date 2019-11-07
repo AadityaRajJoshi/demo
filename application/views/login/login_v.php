@@ -39,7 +39,7 @@
 				<?php echo form_checkbox( array(
 					'name' => 'remember_me',
 					'id'   => 'remember_me',
-					// 'value' => 'yes'
+					'value' => 'on'
 				) ); ?>
 				Remember Me
 				<!-- <?php echo form_label( 'Remember Me', 'remember_me'); ?> -->

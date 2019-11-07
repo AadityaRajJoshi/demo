@@ -35,8 +35,8 @@ class Login extends CI_Controller{
 
 			$username = $this->input->post( 'username' );
 			$password = $this->input->post( 'password' );
-			$remember = $this->input->post( 'remember' );
-// print_r( $_POST );die;
+			$remember = $this->input->post( 'remember_me' );
+
 			$this->form_validation->set_rules('username', 'Username', 'required' );
 			$this->form_validation->set_rules('password', 'Password', 'required' );
 
@@ -68,7 +68,9 @@ class Login extends CI_Controller{
 					));
 
 					/*set cookie*/
-					if( isset( $remember ) ) {
+
+					if( $this->input->post( 'remember_me' ) && 'on' == $this->input->post( 'remember_me' ) ) {
+
 						set_cookie( 'remember_me', $remember, 30*60*60 );
 						set_cookie( 
 							'user_pass', 
@@ -78,9 +80,8 @@ class Login extends CI_Controller{
 							] ),
 							30*60*60 
 						);
-					} 
 
-
+					}
 					redirect( 'dashboard' );
 				}
 			} 
