@@ -6,6 +6,6 @@ class Dashboard extends MY_Controller{
 	public function index(){
 		$role = $this->session->userdata('role');
 		$this->data['page'] = 'administrator' == $role ? 'admin_dashboard_v' : 'staff_dashboard_v';
-		$this->load->view('dashboard_v', $this->data);
+		$this->load->view('dashboard_template_v', $this->data);
 	}
 }

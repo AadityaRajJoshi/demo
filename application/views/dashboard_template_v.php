@@ -1,6 +1,5 @@
 <?php
-    $role = $this->session->userdata('role');
-    $user = $this->session->userdata('username');
+    $user = $this->session->userdata('logged_in_user');
     $error = $this->session->flashdata('error');
     $success = $this->session->flashdata('success');
 ?>
@@ -19,8 +18,8 @@
     <body>
         <div>
             <header>
-                <div class="name"><?php echo $user ?></div>
-                <div class="role"><small><?php echo $role ?></small></div>
+                <div class="name"><?php echo $user['name'] ?></div>
+                <div class="role"><small><?php echo $user['role']; ?></small></div>
                 This is header
             </header>
             <div class="container">
@@ -39,15 +38,15 @@
                 <?php endif; ?>
 
                 <div>
-                    <?php if('staff' == $role): ?>
+                    <?php if('staff' == $user['role']): ?>
                         Staff Menu here
-                    <?php elseif ('administrator' == $role): ?>
+                    <?php elseif ('administrator' == $user['role']): ?>
                         Admin Menu here
                     <?php endif; ?>
                 </div>
                 <div id="main">
                     <?php
-                        $page = 'administrator' == $role ? 'admin/' : 'staff/' . $page;
+                        $page = 'administrator' == $user['role'] ? 'admin/' : 'staff/' . $page;
                         $this->load->view($page); 
                     ?>
                 </div>

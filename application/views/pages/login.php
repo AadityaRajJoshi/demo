@@ -9,7 +9,7 @@
 			 echo $this->session->flashdata( 'login_error' );
 		 }
 	 ?>
-	<?php echo form_open( 'login/user_login' );
+	<?php echo form_open( 'login/login_attempt' );
 		echo form_label('User Name', 'username');
 		echo form_input( array(
 			'name' => 'username',
