@@ -29,7 +29,6 @@
 				'id' => 'password',
 				'autocomplete' => 'off',
 				'required' => 'required',
-				'minlength'=> '6',
 				'value' => isset( $cookie[ 'pass' ] ) ? $cookie[ 'pass' ] : ''
 			) );
 

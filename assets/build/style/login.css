@@ -90,7 +90,9 @@ img {
   max-width: 500px;
   padding: 0 45px 60px;
   border-radius: 10px;
-  width: 100%; }
+  width: 100%;
+  -webkit-animation: scale-up-center 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: scale-up-center 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) both; }
   @media (max-width: 576px) {
     .luft-login-box {
       padding: 0 25px 60px; } }
@@ -174,7 +176,7 @@ img {
     height: 2px;
     position: absolute;
     left: 21px;
-    background: #000;
+    background: #020441;
     top: 100%;
     transition: all .3s; }
   .luft-forget-password a:hover:after {
@@ -194,5 +196,20 @@ span.form-err {
   text-align: center;
   display: block;
   margin-bottom: 30px; }
+
+@-webkit-keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5); }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
+@keyframes scale-up-center {
+  0% {
+    -webkit-transform: scale(0.5);
+    transform: scale(0.5); }
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1); } }
 
 /*# sourceMappingURL=login.css.map */
