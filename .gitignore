@@ -9,7 +9,6 @@ application/logs/*
 !application/*/.htaccess
 
 composer.lock
-assets/build/*
 
 user_guide
 user_guide_src/build/*
