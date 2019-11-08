@@ -49,7 +49,8 @@ class Staff extends MY_Controller{
 			);
 			if( $this->user_m->save( $data ) ){
 				$this->session->set_flashdata( 'success_message', 'Staff Added Successfully' );
-				redirect('staff');
+				// redirect('staff');
+				redirect( get_route( 'staff' ) );
 			}else{
 				$this->session->set_flashdata( 'error_message', 'Error! Staff Not Added' );
 				redirect('staff/add');
@@ -94,6 +95,5 @@ class Staff extends MY_Controller{
 	public function delete( $id = null ){
 		if($this->user_m->delete( array('id'=>$id) ))
 			redirect('staff');
-		
 	}
 }
