@@ -24,14 +24,23 @@ class MY_Controller extends CI_Controller{
 		$role = $this->session->userdata('role');
 		if('administrator' == $role){
 			return array(
-				'staff' => 'Staff',
-				'event' => 'Event',
-				'logout' => 'Logout',
+				'dashboard' => 'Dashboard',
+				'event' => array(
+					'event/add' => 'Add Event',
+					'event' 	=> 'All Event'
+				),
+				'staff' => array(
+					'staff/add' => 'Add Staff',
+					'staff' 	=> 'Staff' 
+				),
+				'logout' => 'Logout'
 			);
 		}elseif('staff' == $role){
 			return array(
-				'logout' => 'Logout',
-
+				'dashboard' => 'Dashboard',
+				'event' 	=> 'My Events' ,
+				'setting'	=> 'Setting',
+				'logout' 	=> 'Logout'
 			);
 		}
 	}

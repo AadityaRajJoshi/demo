@@ -18,25 +18,20 @@
     </head>
     <body class="luft-template-dashboard">
         <div class="luft-content-area">
-            <?php if (!empty($error)): ?>
-                <div class="alert alert-warning alert-dismissible" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>Warning! </strong> <?php echo $error; ?>
-                </div>
+            <?php if (!empty($success)): ?>
+                <span class="form-success"><?php echo $success; ?></span>
             <?php endif; ?>
-            <?php
-                if( $this->session->flashdata( 'success_message' ) ){
-                    ?> <span class="form-success"> <?php echo $this->session->flashdata( 'success_message' ); ?> </span> <?php 
-                }
-            ?>
-            <?php
-                if( $this->session->flashdata( 'error_message' ) ){
-                    ?> <span class="form-err"> <?php echo $this->session->flashdata( 'error_message' ); ?> </span> <?php 
-                }
-            ?>
+
+            <?php if (!empty($error)): ?>
+                <span class="form-err"><?php echo $error; ?></span>
+            <?php endif; ?>
+
+            <?php if (validation_errors()): ?>
+                <span class="form-err"><?php echo validation_errors(); ?></span>
+            <?php endif; ?> 
 
             <?php if('staff' == $role): ?>
-
+            
             <section class="luft-menu-area">
                 <ul class="sidebar-menu">
                     <li class="sidebar-header">MENU</li>
