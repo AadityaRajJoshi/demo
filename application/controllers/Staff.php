@@ -13,7 +13,7 @@ class Staff extends MY_Controller{
 	public function index(){
 
 		$this->data['staffs'] = $this->user_m->get( '*', array(
-			'role_id' => 2
+			'role_id' =>get_role_id("staff")
 		));
 
 		$this->data['page'] = 'list_staff_v';
@@ -23,12 +23,11 @@ class Staff extends MY_Controller{
 	public function add(){
 	
 		$this->data['page'] = 'add_staff_v';
-		$this->load->view( 'dashboard_template_v', $this->data );	
 		$this->load->helper('email');
 
 		$this->form_validation->set_rules('name', 'Username', 'required' );
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|xss_clean' );
-		$this->form_validation->set_rules('number', 'phone_number', 'required' );
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
+		$this->form_validation->set_rules('number', 'phone number', 'required' );
 		$this->form_validation->set_rules('password', 'Password', 'required' );
 		$this->form_validation->set_rules('displayname', 'Display Name', 'required' );
 
@@ -45,17 +44,18 @@ class Staff extends MY_Controller{
 				'password' => $password,
 				'Phone_number' => $phone_number,
 				'Display_name' => $displayname,
-				'role_id' => 2
+				'role_id' => get_role_id("staff")
 			);
 			if( $this->user_m->save( $data ) ){
 				$this->session->set_flashdata( 'success_message', 'Staff Added Successfully' );
-				// redirect('staff');
 				redirect( get_route( 'staff' ) );
 			}else{
 				$this->session->set_flashdata( 'error_message', 'Error! Staff Not Added' );
-				redirect('staff/add');
+				redirect( get_route('staff/add'));
 			}
 		}
+
+		$this->load->view( 'dashboard_template_v', $this->data );	
 	}
 
 	public function edit( $id = null ){
@@ -86,7 +86,7 @@ class Staff extends MY_Controller{
 			'id'=>$id
 		) )){
 			$this->session->set_flashdata( 'success_message', 'Staff Updated Successfully' );
-			redirect('staff');
+			redirect( get_route( 'staff' ) );
 		}else{
 			$this->session->set_flashdata('error_message', 'Error! Staff Not Updated');
 		}
@@ -94,6 +94,6 @@ class Staff extends MY_Controller{
 
 	public function delete( $id = null ){
 		if($this->user_m->delete( array('id'=>$id) ))
-			redirect('staff');
+			redirect( get_route( 'staff' ) );
 	}
 }

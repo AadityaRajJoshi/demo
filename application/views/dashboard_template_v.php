@@ -25,7 +25,11 @@
                     if( $this->session->flashdata( 'success_message' ) ){
                         ?> <span class="form-success"> <?php echo $this->session->flashdata( 'success_message' ); ?> </span> <?php 
                     }
+
                 ?>
+                <?php if (validation_errors() ): ?>
+                    <span class="form-err"><?php echo validation_errors(); ?></span>
+                <?php endif; ?>
                 <div>
                     <?php if('staff' == $user['role']): ?>
                         <div>

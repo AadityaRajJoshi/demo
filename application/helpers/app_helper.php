@@ -16,6 +16,10 @@ if(! function_exists('get_route')){
 			case 'staff':
 				$path = 'staff';
 			break;
+
+			case 'add_staff':
+				$path = 'staff/add';
+			break;
 		}
 		return $path;
 	}
@@ -32,5 +36,13 @@ if(! function_exists('get_role_by_id')){
 		$ci = get_instance();
 		$roles = $ci->config->item('role');
 		return array_search($id,$roles,true);
+	}
+}
+
+if(! function_exists('get_role_id')){
+	function get_role_id( $role ){
+		$ci = get_instance();
+		$roles = $ci->config->item('role');
+		return $roles[$role];
 	}
 }
