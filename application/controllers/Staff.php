@@ -20,8 +20,6 @@ class Staff extends MY_Controller{
 
 			$this->data['page'] = 'list_staff_v';
 			$this->load->view( 'dashboard_template_v', $this->data );	
-
-			$this->is_admin();
 		}
 	}
 
@@ -103,16 +101,30 @@ class Staff extends MY_Controller{
 		}
 	}
 
-	public function delete( $id = null ){
-		if( $this->is_admin() ){
-			$this->data['page'] = 'delete_v';
+	// public function confirmation( $id ){
+	// 	if( $this->is_admin() ){
+
+	// 		$this->data['page'] = 'delete_v';
+	// 		$this->load->view( 'dashboard_template_v', $this->data );
+	// 	}
+
+	// }
+
+	public function delete( $id = false ){
+
+	$this->data['confirm'] = "Are You sure want to delete?";
+	$this->data['page'] = 'delete_v';
 			$this->load->view( 'dashboard_template_v', $this->data );
 
-			
-			// if($this->user_m->delete( array('id'=>$id) )){
-			// 	$this->session->set_flashdata( 'success', get_msg( 'staff_delete' ) );
-			// 	redirect( get_route( 'staff' ) );
-		}
-	}
+
+		
+		
+		// if($this->user_m->delete( array('id'=>$id) )){
+		// 	$this->session->set_flashdata( 'success',get_msg( 'staff_delete' ) );
+		// 	redirect( get_route( 'staff' ) );
+		// }else{
+		// 	redirect( get_route( 'staff' ) );
+		// }
+	}	
 	
 }
