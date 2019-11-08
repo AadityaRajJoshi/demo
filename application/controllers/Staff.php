@@ -19,6 +19,7 @@ class Staff extends MY_Controller{
 			));
 
 			$this->data['page'] = 'list_staff_v';
+
 			$this->load->view( 'dashboard_template_v', $this->data );	
 		}
 	}
@@ -64,6 +65,7 @@ class Staff extends MY_Controller{
 	}
 
 	public function edit( $id = null ){
+		
 		if( $this->is_admin() ){	
 
 			$this->data['staff'] = $this->user_m->get( '*', array( 
@@ -74,6 +76,7 @@ class Staff extends MY_Controller{
 	}
 
 	public function update(){
+
 		if( $this->is_admin() ){
 
 			$this->form_validation->set_rules('name', 'Username', 'required' );
@@ -81,51 +84,48 @@ class Staff extends MY_Controller{
 			$this->form_validation->set_rules('number', 'phone number', 'required' );
 			$this->form_validation->set_rules('displayname', 'Display Name', 'required' );
 
-			if( $this->form_validation->run() ){			
-				
+			if( $this->form_validation->run() ){
 				$name = $this->input->post( 'name' );
 				$email = $this->input->post( 'email' );
 				$phone_number = $this->input->post( 'number' );
-				$displayname = $this->input->post( 'displayname' );
-				$displayname = $this->input->post( 'displayname' );
 				$displayname = $this->input->post( 'displayname' );
 				$pass = $this->input->post( 'password' );
 
 				$id = $this->input->post('id');
 
 				$data = array( 
-					'username' => $name,
-					'phone_number' => $phone_number,
-					'email' => $email,
-					'display_name' => $displayname,
+				'username' => $name,
+				'phone_number' => $phone_number,
+				'email' => $email,
+				'display_name' => $displayname,
 				);
+
 				if( $pass != '' ){
 					$data[ 'password' ] = md5( $pass );
 				}
-			
-				if( $this->user_m->save( $data, array(
-					'id'=>$id
-				) )){
+
+				if( $this->user_m->save( $data, array('id'=>$id) ) ) {
 					$this->session->set_flashdata( 'success', get_msg( 'staff_edit' ) );
 					redirect( get_route( 'staff' ) );
-				}else{
-					$this->session->set_flashdata( 'error', get_msg( 'staff_edit_e' ) );
 				}
 			}
+
+			$id = $this->input->post('id');
+			redirect( get_route( 'staff/edit/'.$id ) );
+
 		}
-		$this->load->view( 'dashboard_template_v', $this->data );	
 	}
 
 	public function delete( $id = false ){
 		if( $this->is_admin() ){
 
 			$this->data['id'] = $id;
-			$this->data['action'] = "staff/delete "; 
+			$this->data['action'] = "staff/delete"; 
 			$this->data['confirm'] = "Are You sure want to delete?";
 			$this->data['page'] = 'delete_v';
 			$this->load->view( 'dashboard_template_v', $this->data );
 
-			if( $this->input->post('yes')  ){
+			if( $this->input->post('yes') ){
 				$id = $this->input->post('id');
 			
 				if($this->user_m->delete( array('id'=>$id) )){
@@ -137,5 +137,4 @@ class Staff extends MY_Controller{
 			}
 		}
 	}	
-	
 }
