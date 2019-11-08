@@ -26,3 +26,11 @@ if(! function_exists('get_route')){
 		);
 	}
 }
+
+if(! function_exists('get_role_by_id')){
+	function get_role_by_id($id){
+		$ci = get_instance();
+		$roles = $ci->config->item('role');
+		return array_search($id,$roles,true);
+	}
+}
