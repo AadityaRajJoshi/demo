@@ -30,92 +30,32 @@
                 <span class="form-err"><?php echo validation_errors(); ?></span>
             <?php endif; ?> 
 
-            <?php if('staff' == $role): ?>
-            
             <section class="luft-menu-area">
                 <ul class="sidebar-menu">
-                    <li class="sidebar-header">MENU</li>
-                    <li>
-                        <a href="#">
-                        <i class="fas fa-home"></i> Dashboard </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            <i class="far fa-calendar-times"></i> <span>events</span> <i class="fa fa-angle-right pull-right"></i>
-                        </a>
-                        <ul class="sidebar-submenu">
-                            <li><a href=""> add events </a></li>
-                            <li><a href=""> all events </a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                        <i class="fas fa-user-friends"></i> <span>staff</span> <i class="fa fa-angle-right pull-right"></i> </a>
-                        <ul class="sidebar-submenu">
-                            <li><a href=""> add staff </a></li>
-                            <li><a href=""> all staff </a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                        <i class="fas fa-cog"></i> setting </a>
-                    </li>
-
-                    <li>
-                        <a href="user/logout">
-                        <i class="fas fa-sign-out-alt"></i> logout </a>
-                    </li>
-
-
+                    <li class="sidebar-header"><?php echo get_msg( 'menu' ) ?></li>
+                    <?php foreach ( $menu as $key => $value) {
+                        if( isset( $value[ 'menu' ] ) ){ ?>
+                            <li>
+                                <a href="#">
+                                    <i class="<?php echo $value[ 'icon' ]; ?>"></i>
+                                    <span><?php echo $value[ 'title' ] ?></span>
+                                    <i class="fa fa-angle-right pull-right"></i>
+                                </a>
+                                <ul class="sidebar-submenu">
+                                    <?php foreach ( $value[ 'menu' ] as $k => $v ){ ?>
+                                        <li><a href="<?php echo $k ?>"> <?php echo $v?> </a></li>
+                                    <?php } ?>  
+                                </ul>
+                            </li>
+                        <?php }else{ ?>
+                            <li>
+                                <a href="<?php echo $key ?>">
+                                <i class="<?php echo $value[ 'icon' ]; ?>"></i> <?php echo $value[ 'title' ] ?> </a>
+                            </li>
+                        <?php }
+                    } ?>
                 </ul>
             </section>
-
-            <?php elseif ('administrator' == $role): ?>
-            <section class="luft-menu-area">
-                <ul class="sidebar-menu">
-                    <li class="sidebar-header">MENU</li>
-                    <li>
-                        <a href="#">
-                        <i class="fas fa-home"></i> Dashboard </a>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                            <i class="far fa-calendar-times"></i> <span>events</span> <i class="fa fa-angle-right pull-right"></i>
-                        </a>
-                        <ul class="sidebar-submenu">
-                            <li><a href=""> add events </a></li>
-                            <li><a href=""> all events </a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                        <i class="fas fa-user-friends"></i> <span>staff</span> <i class="fa fa-angle-right pull-right"></i> </a>
-                        <ul class="sidebar-submenu">
-                            <li><a href=""> add staff </a></li>
-                            <li><a href=""> all staff </a></li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <a href="#">
-                        <i class="fas fa-cog"></i> setting </a>
-                    </li>
-
-                    <li>
-                        <a href="user/logout">
-                        <i class="fas fa-sign-out-alt"></i> logout </a>
-                    </li>
-
-
-                </ul>
-            </section>
-            <?php endif; ?>
-
             <div id="luft-main-content">
                 <div class="luft-user-content-area">
                     <?php

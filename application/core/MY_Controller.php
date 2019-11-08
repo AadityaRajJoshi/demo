@@ -24,23 +24,53 @@ class MY_Controller extends CI_Controller{
 		$role = $this->session->userdata('role');
 		if('administrator' == $role){
 			return array(
-				'dashboard' => 'Dashboard',
+				get_route( 'dashboard' ) => array(
+					'title' => get_msg( 'dashboard' ),
+					'icon'  => 'fas fa-home'
+				),
 				'event' => array(
-					'event/add' => 'Add Event',
-					'event' 	=> 'All Event'
+					'title' => get_msg( 'event' ),
+					'icon'	=> 'far fa-calendar-times',
+					'menu'	=> array(
+						get_route( 'add_event' ) => get_msg( 'add_event' ),
+						get_route( 'event' ) 	 => get_msg( 'all_event' )
+					),
 				),
 				'staff' => array(
-					'staff/add' => 'Add Staff',
-					'staff' 	=> 'Staff' 
+					'title' => get_msg( 'staff' ),
+					'icon'	=> 'fas fa-user-friends',
+					'menu'	=> array(				
+						get_route( 'add_staff' ) => get_msg( 'add_staff' ),
+						get_route( 'staff' ) 	 => get_msg( 'all_staff' )
+					)
 				),
-				'logout' => 'Logout'
+				get_route( 'setting' )	=> array(
+					'title' => get_msg( 'setting' ),
+					'icon'  => 'fas fa-cog'
+				),
+				get_route( 'logout' ) => array(
+					'title' => get_msg( 'logout' ),
+					'icon'  => 'fas fa-sign-out-alt'
+				)
 			);
 		}elseif('staff' == $role){
 			return array(
-				'dashboard' => 'Dashboard',
-				'event' 	=> 'My Events' ,
-				'setting'	=> 'Setting',
-				'logout' 	=> 'Logout'
+				get_route( 'dashboard' ) => array(
+					'title' => get_msg( 'dashboard' ),
+					'icon'  => 'fas fa-home'
+				),
+				'event' 	=> array(
+					'title' => get_msg( 'my_event' ),
+					'icon'	=> 'far fa-calendar-times'
+				) ,
+				get_route( 'setting' )	=> array(
+					'title' => get_msg( 'setting' ),
+					'icon'  => 'fas fa-cog'
+				),
+				get_route( 'logout' ) => array(
+					'title' =>get_msg( 'logout' ),
+					'icon'  => 'fas fa-sign-out-alt'
+				)
 			);
 		}
 	}

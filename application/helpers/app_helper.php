@@ -16,6 +16,26 @@ if(! function_exists('get_route')){
 			case 'staff':
 				$path = 'staff';
 			break;
+
+			case 'event':
+				$path = 'event';
+			break;
+
+			case 'setting':
+				$path = 'setting';
+			break;
+
+			case 'logout':
+				$path = 'user/logout';
+			break;
+
+			case 'add_staff':
+				$path = 'staff/add';
+			break;
+
+			case 'add_event':
+				$path = 'event/add';
+			break;
 		}
 		return $path;
 	}
@@ -31,6 +51,17 @@ if(! function_exists('get_msg')){
 			'staff_edit_e'	=> 'Error! Staff Not Upadted',
 			'staff_delete'	=> 'Staff Deleted Successfully',
 			'staff_delete_e'=> 'Error! Staff Not Deleted',
+			'dashboard'		=> 'Dashboard',
+			'event'			=> 'Event',
+			'add_event'		=> 'Add Event',
+			'all_event'		=> 'All Event',
+			'staff'			=> 'Staff',
+			'add_staff'		=> 'Add Staff',
+			'all_staff'		=> 'All Staff',
+			'setting'		=> 'Setting',
+			'my_event'		=> 'My Event',
+			'logout'		=> 'Log Out',
+			'menu'			=> 'Menu'
 		);
 
 		return $msg[ $key ];
