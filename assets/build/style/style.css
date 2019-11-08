@@ -39,6 +39,56 @@ img {
     margin-bottom: 6px;
     border-radius: 16px; }
 
+.luft-form-row {
+  margin-bottom: 25px; }
+  .luft-form-row label {
+    display: block;
+    margin-bottom: 4px;
+    color: #020441;
+    font-weight: 700; }
+  .luft-form-row input {
+    height: 40px;
+    padding: 15px;
+    background: #F7F7F7;
+    border: 1px solid #DFDFE5;
+    border-radius: 3px;
+    width: 100%;
+    font-size: 14px; }
+    .luft-form-row input::placeholder {
+      color: #000; }
+
+.luft-inline-input {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; }
+  .luft-inline-input .luft-form-row {
+    flex: 0 0 32%; }
+    @media (max-width: 576px) {
+      .luft-inline-input .luft-form-row {
+        flex: 100%; } }
+
+.luft-form-wrapper {
+  max-width: 800px; }
+  .luft-form-wrapper input[type="submit"] {
+    background: #58B975;
+    border: none;
+    color: #fff;
+    font-weight: bold;
+    height: 55px;
+    width: 200px;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all .3s;
+    text-transform: uppercase;
+    font-size: 16px; }
+    .luft-form-wrapper input[type="submit"]:hover {
+      background: #020441; }
+    .luft-form-wrapper input[type="submit"]:focus {
+      outline: none; }
+    @media (max-width: 576px) {
+      .luft-form-wrapper input[type="submit"] {
+        width: 100%; } }
+
 .luft-template-dashboard {
   background: #F7F7F7; }
 
@@ -257,5 +307,42 @@ img {
     display: flex;
     align-items: center;
     justify-content: flex-end; }
+
+.user-info-sub {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: #fff;
+  border: 1px solid #DFDFE5;
+  flex-wrap: wrap;
+  min-width: 194px;
+  visibility: hidden;
+  opacity: 0;
+  z-index: -1;
+  transition: all .3s; }
+  .user-info-sub .luft-user-sub-link {
+    display: flex;
+    list-style: none;
+    flex: 0 0 100%;
+    padding: 12px 20px;
+    border-bottom: 1px solid #DFDFE5; }
+    .user-info-sub .luft-user-sub-link:last-child {
+      border-bottom: none; }
+    .user-info-sub .luft-user-sub-link a {
+      color: #020441;
+      transition: all .3s;
+      font-size: 15px;
+      display: block; }
+      .user-info-sub .luft-user-sub-link a i {
+        font-size: 15px;
+        margin-right: 6px; }
+    .user-info-sub .luft-user-sub-link.logout-link a {
+      color: #E2454B; }
+
+.luft-user-image:hover .user-info-sub {
+  opacity: 1;
+  visibility: visible;
+  z-index: 9;
+  top: 100%; }
 
 /*# sourceMappingURL=style.css.map */
