@@ -17,11 +17,6 @@
     </head>
     <body>
         <div>
-            <header>
-                <div class="name"><?php echo $user['name'] ?></div>
-                <div class="role"><small><?php echo $user['role']; ?></small></div>
-                This is header
-            </header>
             <div class="container">
                 <?php if (!empty($error)): ?>
                     <div class="alert alert-warning alert-dismissible" role="alert">
@@ -39,13 +34,6 @@
                         ?> <span class="form-err"> <?php echo $this->session->flashdata( 'error_message' ); ?> </span> <?php 
                     }
                 ?>
-
-                <?php if(!empty($success)): ?>
-                    <div class="alert alert-success alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <strong><span class="fa fa-check-circle"></span></strong> <?php echo $success; ?>
-                    </div>
-                <?php endif; ?>
 
                 <div>
                     <?php if('staff' == $user['role']): ?>
