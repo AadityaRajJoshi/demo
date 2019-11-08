@@ -83,7 +83,10 @@ class Staff extends MY_Controller{
 		if( $this->user_m->save( $data, array(
 			'id'=>$id
 		) )){
+			$this->session->set_flashdata( 'success_message', 'Staff Updated Successfully' );
 			redirect('staff');
+		}else{
+			$this->session->set_flashdata('error_message', 'Error! Staff Not Updated');
 		}
 	}
 
