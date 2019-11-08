@@ -201,9 +201,12 @@ span.form-err {
   background: #fff;
   padding: 10px 30px;
   top: 15px;
+  font-size: 14px;
   height: min-content;
   -webkit-animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+  span.form-err p {
+    margin: 0; }
 
 @-webkit-keyframes scale-up-center {
   0% {
