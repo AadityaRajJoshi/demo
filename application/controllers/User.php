@@ -55,7 +55,7 @@ class User extends CI_Controller{
 			$db_user = $this->user_m->get( '*', $condition, 1 );
 
 			if ( !$db_user ) {
-				$this->session->set_flashdata( 'error', 'Username And Password Not Match' );
+				$this->session->set_flashdata( 'error', get_msg( 'up_mismatched' ) );
 				
 				redirect( get_route( 'login' ) );
 

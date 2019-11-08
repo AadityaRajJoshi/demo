@@ -29,9 +29,17 @@ if(! function_exists('get_route')){
 
 if(! function_exists('get_msg')){
 	function get_msg( $key ){
-		return array(
+		$msg = array(
 			'up_mismatched' => 'Username And Password Not Match.',
+			'staff_added'	=> 'Staff Successfully',
+			'staff_add_e'	=> 'Error! Staff Not Added',
+			'staff_edit'	=> 'Staff Upadted Successfully',
+			'staff_edit_e'	=> 'Error! Staff Not Upadted',
+			'staff_delete'	=> 'Staff Deleted Successfully',
+			'staff_delete_e'=> 'Error! Staff Not Deleted',
 		);
+
+		return $msg[ $key ];
 	}
 }
 
