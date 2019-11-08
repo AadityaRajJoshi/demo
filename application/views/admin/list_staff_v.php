@@ -12,7 +12,7 @@
     <td><?php echo $key+1; ?></td>
     <td><?php echo $staff->username; ?></td>
     <td></td>
-    <td><a href="staff/edit/<?php echo $staff->id; ?>"  >Edit</a> <a href="staff/delete/<?php echo $staff->id; ?>" >delete</a></td>
+    <td><a href="staff/edit/<?php echo $staff->id; ?>"  >Edit</a> | <a href="staff/delete/<?php echo $staff->id; ?>" >delete</a></td>
   </tr>
   	<?php } ?>
   

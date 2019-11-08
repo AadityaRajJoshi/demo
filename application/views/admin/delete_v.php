@@ -1,6 +1,9 @@
 <?php
-	echo form_open( 'staff/delete' );
-	echo form_label( 'Are You sure want to delete?', 'delete' );
-	echo form_button('yes','Yes');
-	echo form_button('no','No');
-	echo form_close( '' );
+	echo form_open( $action );
+    echo $confirm;
+
+	echo form_hidden('id', $id);
+	echo form_submit('yes','Yes');?>
+	<a href="staff"><?php echo form_button('no','No');  ?> </a>
+	
+	<?php echo form_close( '' );
