@@ -7,13 +7,10 @@ class User extends CI_Controller{
 
 		parent::__construct();
 		$this->load->helper('form');
-		// $this->load->helper('cookie');
-		// $this->check_login();
 	}
 
 
 	public function index(){
-		
 		$this->check_login();
 		$cookie = json_decode( get_cookie( 'user_logged_in' ) );
 		$user = false;
@@ -73,7 +70,7 @@ class User extends CI_Controller{
 					$this->session->set_userdata('logged_in_user', array(
 						'id' => $db_user->id,	
 						'name' => $username,
-						'role' => $this->config->item('role')[$db_user->role_id]	
+						'role' => get_role_by_id($db_user->role_id)
 					));
 
 					if( $this->input->post( 'remember_me' ) && 'on' == $this->input->post( 'remember_me' ) ) {
