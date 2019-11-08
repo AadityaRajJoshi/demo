@@ -57,6 +57,22 @@
                 </ul>
             </section>
             <div id="luft-main-content">
+
+                <div class="luft-header-area">
+                    <div class="luft-menu-toggler">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <div class="luft-user-icon">
+                        <ul>
+                            <li class="luft-notification"><a href="#"><i class="far fa-bell"></i> <span>2</span></a></li>
+                            <li class="luft-user-image"><a href="#"><img src="assets/image/user.png" alt="user" /></a></li>
+                        </ul>
+                    </div>
+
+                </div>
+
                 <div class="luft-user-content-area">
                     <?php
                         $page = ('administrator' == $role ? 'admin/' : 'staff/') . $page;
