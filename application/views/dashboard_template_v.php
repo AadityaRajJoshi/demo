@@ -29,6 +29,16 @@
                         <strong>Warning! </strong> <?php echo $error; ?>
                     </div>
                 <?php endif; ?>
+                <?php
+                    if( $this->session->flashdata( 'success_message' ) ){
+                        ?> <span class="form-success"> <?php echo $this->session->flashdata( 'success_message' ); ?> </span> <?php 
+                    }
+                ?>
+                <?php
+                    if( $this->session->flashdata( 'error_message' ) ){
+                        ?> <span class="form-err"> <?php echo $this->session->flashdata( 'error_message' ); ?> </span> <?php 
+                    }
+                ?>
 
                 <?php if(!empty($success)): ?>
                     <div class="alert alert-success alert-dismissible" role="alert">
@@ -46,11 +56,7 @@
                                 <li>My Events</li>
                                 <li>My details</li>                                
                                 <li>
-                                    <?php
-                                        echo form_open( 'login/logout' );
-                                        echo form_submit('logout', 'Log Out');
-                                        echo form_close( '' );
-                                    ?>
+                                    <a href="login/logout">Log Out</a>
                                 </li>
                             </ul>
                         </div>
@@ -65,15 +71,16 @@
                                         <li>All Events</li>
                                     </ul>
                                 </li>
-                                <li>Staff</li>
+                                <li>Staff
+                                    <ul>
+                                        <li><a href="staff/add">Add Staff</a></li>
+                                        <li><a href="staff">All Staff</a></li>
+                                    </ul>
+                                </li>
                                 <li>Setting</li>
                                 
                                 <li>
-                                    <?php
-                                        echo form_open( 'login/logout' );
-                                        echo form_submit('logout', 'Log Out');
-                                        echo form_close( '' );
-                                    ?>
+                                    <a href="login/logout">Log Out</a>
                                 </li>
                             </ul>
                         </div>

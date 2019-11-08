@@ -78,7 +78,6 @@ class Login extends CI_Controller{
 
 					if( $this->input->post( 'remember_me' ) && 'on' == $this->input->post( 'remember_me' ) ) {
 
-						// set_cookie( 'remember_me', $remember, 30*60*60 );
 						set_cookie( 
 							'user_logged_in', 
 							json_encode( [
