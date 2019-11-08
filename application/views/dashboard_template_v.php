@@ -31,7 +31,7 @@
             <?php endif; ?> 
 
             <?php if('staff' == $role): ?>
-
+            
             <section class="luft-menu-area">
                 <ul class="sidebar-menu">
                     <li class="sidebar-header">MENU</li>
