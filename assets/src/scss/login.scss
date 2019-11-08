@@ -168,9 +168,14 @@ span.form-err {
     background: #fff;
     padding: 10px 30px;
     top: 15px;
+    font-size: 14px;
     height: min-content;
     -webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-	        animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+            animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+            
+   p {
+       margin: 0;
+   }         
 }
 
 @-webkit-keyframes scale-up-center {
