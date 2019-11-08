@@ -19,8 +19,6 @@ if(! function_exists('get_route')){
 		}
 		return $path;
 	}
-
-
 }
 
 if(! function_exists('get_msg')){
