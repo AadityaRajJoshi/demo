@@ -19,4 +19,10 @@ if(! function_exists('get_route')){
 		}
 		return $path;
 	}
+
+	function get_msg( $key ){
+		return array(
+			'up_mismatched' => 'Username And Password Not Match.',
+		);
+	}
 }

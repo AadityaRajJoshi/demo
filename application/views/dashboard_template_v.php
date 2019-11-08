@@ -19,22 +19,13 @@
         <div>
             <div class="container">
                 <?php if (!empty($error)): ?>
-                    <div class="alert alert-warning alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <strong>Warning! </strong> <?php echo $error; ?>
-                    </div>
+                    <span class="form-err"><?php echo $error; ?></span>
                 <?php endif; ?>
                 <?php
                     if( $this->session->flashdata( 'success_message' ) ){
                         ?> <span class="form-success"> <?php echo $this->session->flashdata( 'success_message' ); ?> </span> <?php 
                     }
                 ?>
-                <?php
-                    if( $this->session->flashdata( 'error_message' ) ){
-                        ?> <span class="form-err"> <?php echo $this->session->flashdata( 'error_message' ); ?> </span> <?php 
-                    }
-                ?>
-
                 <div>
                     <?php if('staff' == $user['role']): ?>
                         <div>
