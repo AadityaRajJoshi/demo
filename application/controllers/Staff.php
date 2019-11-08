@@ -47,10 +47,10 @@ class Staff extends MY_Controller{
 				'role_id' => get_role_id("staff")
 			);
 			if( $this->user_m->save( $data ) ){
-				$this->session->set_flashdata( 'success_message', 'Staff Added Successfully' );
+				$this->session->set_flashdata( 'success', get_msg( 'staff_added' ) );
 				redirect( get_route( 'staff' ) );
 			}else{
-				$this->session->set_flashdata( 'error_message', 'Error! Staff Not Added' );
+				$this->session->set_flashdata( 'error', get_msg( 'up_mismatched' ) );
 				redirect( get_route('staff/add'));
 			}
 		}
@@ -85,10 +85,10 @@ class Staff extends MY_Controller{
 		if( $this->user_m->save( $data, array(
 			'id'=>$id
 		) )){
-			$this->session->set_flashdata( 'success_message', 'Staff Updated Successfully' );
+			$this->session->set_flashdata( 'success', get_msg( 'staff_edit' ) );
 			redirect( get_route( 'staff' ) );
 		}else{
-			$this->session->set_flashdata('error_message', 'Error! Staff Not Updated');
+			$this->session->set_flashdata( 'error', get_msg( 'staff_edit_e' ) );
 		}
 	}
 
