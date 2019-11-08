@@ -24,20 +24,21 @@ class Staff extends MY_Controller{
 	
 		$this->data['page'] = 'add_staff_v';
 		$this->load->view( 'dashboard_template_v', $this->data );	
-
-		$username = $this->input->post( 'name' );
-		$email = $this->input->post( 'email' );
-		$phone_number = $this->input->post( 'number' );
-		$password = md5($this->input->post( 'password' ));
-		$displayname = $this->input->post( 'displayname' );
+		$this->load->helper('email');
 
 		$this->form_validation->set_rules('name', 'Username', 'required' );
-		$this->form_validation->set_rules('email', 'Email', 'required' );
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|xss_clean' );
 		$this->form_validation->set_rules('number', 'phone_number', 'required' );
 		$this->form_validation->set_rules('password', 'Password', 'required' );
 		$this->form_validation->set_rules('displayname', 'Display Name', 'required' );
 
 		if( $this->form_validation->run() ){
+			$username = $this->input->post( 'name' );
+			$email = $this->input->post( 'email' );
+			$phone_number = $this->input->post( 'number' );
+			$password = md5($this->input->post( 'password' ));
+			$displayname = $this->input->post( 'displayname' );
+
 			$data = array(
 				'username'=> $username,
 				'email' => $email,
@@ -46,7 +47,7 @@ class Staff extends MY_Controller{
 				'Display_name' => $displayname,
 				'role_id' => 2
 			);
-			if($this->user_m->save( $data ) ){
+			if( $this->user_m->save( $data ) ){
 				$this->session->set_flashdata( 'success_message', 'Staff Added Successfully' );
 				redirect('staff');
 			}else{
