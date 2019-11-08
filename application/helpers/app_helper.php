@@ -16,7 +16,6 @@ if(! function_exists('get_route')){
 			case 'staff':
 				$path = 'staff';
 			break;
-
 			case 'event':
 				$path = 'event';
 			break;
@@ -45,7 +44,7 @@ if(! function_exists('get_msg')){
 	function get_msg( $key ){
 		$msg = array(
 			'up_mismatched' => 'Username And Password Not Match.',
-			'staff_added'	=> 'Staff Successfully',
+			'staff_added'	=> 'Staff added Successfully',
 			'staff_add_e'	=> 'Error! Staff Not Added',
 			'staff_edit'	=> 'Staff Upadted Successfully',
 			'staff_edit_e'	=> 'Error! Staff Not Upadted',
@@ -74,5 +73,13 @@ if(! function_exists('get_role_by_id')){
 		$roles = $ci->config->item('role');
 		$a =  array_search($id,$roles,true);
 		return $a;
+	}
+}
+
+if(! function_exists('get_role_id')){
+	function get_role_id( $role ){
+		$ci = get_instance();
+		$roles = $ci->config->item('role');
+		return $roles[$role];
 	}
 }

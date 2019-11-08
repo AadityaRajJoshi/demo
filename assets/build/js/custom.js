@@ -6,6 +6,7 @@
     /* DOM ready event */
     $(document).ready(documentReadyCallbackFunc);
 
-
+    //delete script 
+    
 
 })(jQuery);
