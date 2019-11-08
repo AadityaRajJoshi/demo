@@ -72,7 +72,6 @@ class Staff extends MY_Controller{
 				'id'=>$id ) );
 			$this->data['page'] = 'edit_staff_v';
 			$this->load->view('dashboard_template_v', $this->data);	
-
 		}
 	}
 
@@ -82,7 +81,7 @@ class Staff extends MY_Controller{
 			$name = $this->input->post( 'name' );
 			$email = $this->input->post( 'email' );
 			$phone_number = $this->input->post( 'number' );
-			$displayname = $this->input->post('displayname');
+			$displayname = $this->input->post( 'displayname' );
 
 			$id = $this->input->post('id');
 
@@ -106,10 +105,14 @@ class Staff extends MY_Controller{
 
 	public function delete( $id = null ){
 		if( $this->is_admin() ){
+			$this->data['page'] = 'delete_v';
+			$this->load->view( 'dashboard_template_v', $this->data );
 
-			if($this->user_m->delete( array('id'=>$id) )){
-				redirect( get_route( 'staff' ) );
-			}
+			
+			// if($this->user_m->delete( array('id'=>$id) )){
+			// 	$this->session->set_flashdata( 'success', get_msg( 'staff_delete' ) );
+			// 	redirect( get_route( 'staff' ) );
 		}
 	}
+	
 }
