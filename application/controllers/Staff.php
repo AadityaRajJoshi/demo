@@ -74,13 +74,15 @@ class Staff extends MY_Controller{
 	}
 
 	public function update(){
-		$this->form_validation->set_rules('name', 'Username', 'required' );
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
-		$this->form_validation->set_rules('number', 'phone number', 'required' );
-		$this->form_validation->set_rules('displayname', 'Display Name', 'required' );
+		if( $this->is_admin() ){
 
-		if( $this->form_validation->run() ){			
-			if( $this->is_admin() ){
+			$this->form_validation->set_rules('name', 'Username', 'required' );
+			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
+			$this->form_validation->set_rules('number', 'phone number', 'required' );
+			$this->form_validation->set_rules('displayname', 'Display Name', 'required' );
+
+			if( $this->form_validation->run() ){			
+				
 				$name = $this->input->post( 'name' );
 				$email = $this->input->post( 'email' );
 				$phone_number = $this->input->post( 'number' );
@@ -114,33 +116,25 @@ class Staff extends MY_Controller{
 		$this->load->view( 'dashboard_template_v', $this->data );	
 	}
 
-	// public function confirmation( $id ){
-	// 	if( $this->is_admin() ){
-
-	// 		$this->data['page'] = 'delete_v';
-	// 		$this->load->view( 'dashboard_template_v', $this->data );
-	// 	}
-
-	// }
-
 	public function delete( $id = false ){
+		if( $this->is_admin() ){
 
-		$this->data['confirm'] = "Are You sure want to delete?";
-		$this->data['page'] = 'delete_v';
-		$this->load->view( 'dashboard_template_v', $this->data );
+			$this->data['id'] = $id;
+			$this->data['action'] = "staff/delete "; 
+			$this->data['confirm'] = "Are You sure want to delete?";
+			$this->data['page'] = 'delete_v';
+			$this->load->view( 'dashboard_template_v', $this->data );
 
-		if( $this->input->post('yes')  ){
+			if( $this->input->post('yes')  ){
+				$id = $this->input->post('id');
 			
-			if($this->user_m->delete( array('id'=>$id) )){
-				$this->session->set_flashdata( 'success',get_msg( 'staff_delete' ) );
-				redirect( get_route( 'staff' ) );
-			}else{
-				redirect( get_route( 'staff' ) );
+				if($this->user_m->delete( array('id'=>$id) )){
+					$this->session->set_flashdata( 'success', get_msg( 'staff_delete' ) );
+					redirect( get_route( 'staff' ) );
+				}else{
+					redirect( get_route( 'staff' ) );
+				}
 			}
-		}
-
-		if( $this->input->post('no') ){
-			redirect( get_route( 'staff' ) );
 		}
 	}	
 	
