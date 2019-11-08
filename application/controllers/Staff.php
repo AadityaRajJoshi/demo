@@ -112,19 +112,23 @@ class Staff extends MY_Controller{
 
 	public function delete( $id = false ){
 
-	$this->data['confirm'] = "Are You sure want to delete?";
-	$this->data['page'] = 'delete_v';
-			$this->load->view( 'dashboard_template_v', $this->data );
+		$this->data['confirm'] = "Are You sure want to delete?";
+		$this->data['page'] = 'delete_v';
+		$this->load->view( 'dashboard_template_v', $this->data );
 
+		if( $this->input->post('yes')  ){
+			
+			if($this->user_m->delete( array('id'=>$id) )){
+				$this->session->set_flashdata( 'success',get_msg( 'staff_delete' ) );
+				redirect( get_route( 'staff' ) );
+			}else{
+				redirect( get_route( 'staff' ) );
+			}
+		}
 
-		
-		
-		// if($this->user_m->delete( array('id'=>$id) )){
-		// 	$this->session->set_flashdata( 'success',get_msg( 'staff_delete' ) );
-		// 	redirect( get_route( 'staff' ) );
-		// }else{
-		// 	redirect( get_route( 'staff' ) );
-		// }
+		if( $this->input->post('no') ){
+			redirect( get_route( 'staff' ) );
+		}
 	}	
 	
 }
