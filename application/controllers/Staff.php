@@ -34,21 +34,21 @@ class Staff extends MY_Controller{
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
 			$this->form_validation->set_rules('number', 'phone number', 'required' );
 			$this->form_validation->set_rules('password', 'Password', 'required' );
-			$this->form_validation->set_rules('displayname', 'Display Name', 'required' );
+			
 
 			if( $this->form_validation->run() ){
 				$username = $this->input->post( 'name' );
 				$email = $this->input->post( 'email' );
 				$phone_number = $this->input->post( 'number' );
 				$password = md5($this->input->post( 'password' ));
-				$displayname = $this->input->post( 'displayname' );
+				
 
 				$data = array(
 					'username'=> $username,
 					'email' => $email,
 					'password' => $password,
 					'Phone_number' => $phone_number,
-					'Display_name' => $displayname,
+					
 					'role_id' => get_role_id("staff")
 				);
 				if( $this->user_m->save( $data ) ){
@@ -65,7 +65,7 @@ class Staff extends MY_Controller{
 	}
 
 	public function edit( $id = null ){
-		
+
 		if( $this->is_admin() ){	
 
 			$this->data['staff'] = $this->user_m->get( '*', array( 
@@ -82,13 +82,13 @@ class Staff extends MY_Controller{
 			$this->form_validation->set_rules('name', 'Username', 'required' );
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
 			$this->form_validation->set_rules('number', 'phone number', 'required' );
-			$this->form_validation->set_rules('displayname', 'Display Name', 'required' );
+			
 
 			if( $this->form_validation->run() ){
 				$name = $this->input->post( 'name' );
 				$email = $this->input->post( 'email' );
 				$phone_number = $this->input->post( 'number' );
-				$displayname = $this->input->post( 'displayname' );
+				
 				$pass = $this->input->post( 'password' );
 
 				$id = $this->input->post('id');
@@ -97,7 +97,7 @@ class Staff extends MY_Controller{
 				'username' => $name,
 				'phone_number' => $phone_number,
 				'email' => $email,
-				'display_name' => $displayname,
+				
 				);
 
 				if( $pass != '' ){
@@ -110,9 +110,7 @@ class Staff extends MY_Controller{
 				}
 			}
 
-			$id = $this->input->post('id');
-			redirect( get_route( 'staff/edit/'.$id ) );
-
+			
 		}
 	}
 
