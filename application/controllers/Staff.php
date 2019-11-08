@@ -67,38 +67,51 @@ class Staff extends MY_Controller{
 		if( $this->is_admin() ){	
 
 			$this->data['staff'] = $this->user_m->get( '*', array( 
-				'id'=>$id ) );
+				'id'=>$id ), 1 );
 			$this->data['page'] = 'edit_staff_v';
 			$this->load->view('dashboard_template_v', $this->data);	
 		}
 	}
 
 	public function update(){
-		if( $this->is_admin() ){
+		$this->form_validation->set_rules('name', 'Username', 'required' );
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
+		$this->form_validation->set_rules('number', 'phone number', 'required' );
+		$this->form_validation->set_rules('displayname', 'Display Name', 'required' );
 
-			$name = $this->input->post( 'name' );
-			$email = $this->input->post( 'email' );
-			$phone_number = $this->input->post( 'number' );
-			$displayname = $this->input->post( 'displayname' );
+		if( $this->form_validation->run() ){			
+			if( $this->is_admin() ){
+				$name = $this->input->post( 'name' );
+				$email = $this->input->post( 'email' );
+				$phone_number = $this->input->post( 'number' );
+				$displayname = $this->input->post( 'displayname' );
+				$displayname = $this->input->post( 'displayname' );
+				$displayname = $this->input->post( 'displayname' );
+				$pass = $this->input->post( 'password' );
 
-			$id = $this->input->post('id');
+				$id = $this->input->post('id');
 
-			$data = array( 
-				'username' => $name,
-				'phone_number' => $phone_number,
-				'email' => $email,
-				'display_name' => $displayname,
-			);
-		
-			if( $this->user_m->save( $data, array(
-				'id'=>$id
-			) )){
-				$this->session->set_flashdata( 'success', get_msg( 'staff_edit' ) );
-				redirect( get_route( 'staff' ) );
-			}else{
-				$this->session->set_flashdata( 'error', get_msg( 'staff_edit_e' ) );
+				$data = array( 
+					'username' => $name,
+					'phone_number' => $phone_number,
+					'email' => $email,
+					'display_name' => $displayname,
+				);
+				if( $pass != '' ){
+					$data[ 'password' ] = md5( $pass );
+				}
+			
+				if( $this->user_m->save( $data, array(
+					'id'=>$id
+				) )){
+					$this->session->set_flashdata( 'success', get_msg( 'staff_edit' ) );
+					redirect( get_route( 'staff' ) );
+				}else{
+					$this->session->set_flashdata( 'error', get_msg( 'staff_edit_e' ) );
+				}
 			}
 		}
+		$this->load->view( 'dashboard_template_v', $this->data );	
 	}
 
 	// public function confirmation( $id ){
