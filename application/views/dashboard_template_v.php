@@ -29,6 +29,16 @@
                         <strong>Warning! </strong> <?php echo $error; ?>
                     </div>
                 <?php endif; ?>
+                <?php
+                    if( $this->session->flashdata( 'success_message' ) ){
+                        ?> <span class="form-success"> <?php echo $this->session->flashdata( 'success_message' ); ?> </span> <?php 
+                    }
+                ?>
+                <?php
+                    if( $this->session->flashdata( 'error_message' ) ){
+                        ?> <span class="form-err"> <?php echo $this->session->flashdata( 'error_message' ); ?> </span> <?php 
+                    }
+                ?>
 
                 <?php if(!empty($success)): ?>
                     <div class="alert alert-success alert-dismissible" role="alert">

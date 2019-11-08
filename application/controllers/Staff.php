@@ -47,8 +47,10 @@ class Staff extends MY_Controller{
 				'role_id' => 2
 			);
 			if($this->user_m->save( $data ) ){
+				$this->session->set_flashdata( 'success_message', 'Staff Added Successfully' );
 				redirect('staff');
 			}else{
+				$this->session->set_flashdata( 'error_message', 'Error! Staff Not Added' );
 				redirect('staff/add');
 			}
 		}
