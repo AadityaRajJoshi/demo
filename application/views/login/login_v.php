@@ -8,7 +8,7 @@
 			?> <span class="form-err"> <?php echo $this->session->flashdata( 'login_error' ); ?> </span> <?php 
 		}
 	?>
-	<?php echo form_open( 'login/login_attempt' ); ?>
+	<?php echo form_open( 'user/login' ); ?>
 
 		<div class="luft-form-row luft-input-type">
 			<?php echo form_label('User Name', 'username');
