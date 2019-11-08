@@ -258,4 +258,41 @@ img {
     align-items: center;
     justify-content: flex-end; }
 
+.user-info-sub {
+  position: absolute;
+  top: 110%;
+  right: 0;
+  background: #fff;
+  border: 1px solid #DFDFE5;
+  flex-wrap: wrap;
+  min-width: 194px;
+  visibility: hidden;
+  opacity: 0;
+  z-index: -1;
+  transition: all .3s; }
+  .user-info-sub .luft-user-sub-link {
+    display: flex;
+    list-style: none;
+    flex: 0 0 100%;
+    padding: 12px 20px;
+    border-bottom: 1px solid #DFDFE5; }
+    .user-info-sub .luft-user-sub-link:last-child {
+      border-bottom: none; }
+    .user-info-sub .luft-user-sub-link a {
+      color: #020441;
+      transition: all .3s;
+      font-size: 15px;
+      display: block; }
+      .user-info-sub .luft-user-sub-link a i {
+        font-size: 15px;
+        margin-right: 6px; }
+    .user-info-sub .luft-user-sub-link.logout-link a {
+      color: #E2454B; }
+
+.luft-user-image:hover .user-info-sub {
+  opacity: 1;
+  visibility: visible;
+  z-index: 9;
+  top: 100%; }
+
 /*# sourceMappingURL=style.css.map */
