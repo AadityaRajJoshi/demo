@@ -1,3 +1,6 @@
+<?php
+    $error = $this->session->flashdata('error');
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,7 +17,7 @@
     <body class="luft-template-login luft-bg-primary">
         <div>
             <div class="container">
-                <?php if (validation_errors()): ?>
+                <?php if (validation_errors() || !empty($error)): ?>
                     <div class="alert alert-warning alert-dismissable">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <strong>Warning!</strong> <?php echo validation_errors(); ?>

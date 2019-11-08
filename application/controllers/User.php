@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Login extends CI_Controller{
+class User extends CI_Controller{
 
 	public function __construct(){
 
@@ -13,6 +13,7 @@ class Login extends CI_Controller{
 
 
 	public function index(){
+		
 		$this->check_login();
 		$cookie = json_decode( get_cookie( 'user_logged_in' ) );
 		$user = false;
@@ -35,8 +36,7 @@ class Login extends CI_Controller{
 
 	}
 
-	public function login_attempt() {
-
+	public function login(){
 
 		if( $this->input->post('login') ) {
 
@@ -64,7 +64,7 @@ class Login extends CI_Controller{
 				$db_user = $this->user_m->get( '*', $condition, 1 );
 
 				if ( !$db_user ) {
-					$this->session->set_flashdata( 'login_error', 'Username And Password Not Match' );
+					$this->session->set_flashdata( 'error', 'Username And Password Not Match' );
 					
 					redirect( 'login' );
 
@@ -94,7 +94,7 @@ class Login extends CI_Controller{
 			}
 		}
 		$this->session->set_flashdata( 'login_error', 'Fields Cannot be empty' );
-		redirect( 'login');
+		redirect( '/');
 		
 	}
 
@@ -118,6 +118,6 @@ class Login extends CI_Controller{
 
 	public function check_login(){
 	    if ($this->session->userdata('logged_in_user'))
-	        redirect('staff', 'refresh');
+	        redirect(get_route('dashboard', 'refresh'));
 	}
 }
