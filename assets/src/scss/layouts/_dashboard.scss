@@ -1,0 +1,25 @@
+.#{$prefix}-template-dashboard {
+    background: $color_light_grey;
+}
+
+.#{$prefix}-content-area {
+    display: flex;
+    flex-wrap: wrap;
+
+    .#{$prefix}-menu-area {
+        flex: 0 0 20%;
+        height: 100vh;
+        background: $color_primary;
+        padding: 30px 0;
+    }
+
+    ##{$prefix}-main-content {
+        flex: 0 0 80%;
+        padding: 30px;
+    }
+
+    .#{$prefix}-user-content-area {
+        background: #fff;
+        padding: 30px;
+    }
+}

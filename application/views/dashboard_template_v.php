@@ -1,5 +1,5 @@
 <?php
-    $user = $this->session->userdata('logged_in_user');
+    $role = $this->session->userdata('role');
     $error = $this->session->flashdata('error');
     $success = $this->session->flashdata('success');
 ?>
@@ -13,69 +13,127 @@
         <meta name="description" content="<?php echo $meta['description']; ?>">
         <meta name="viewport" content="width=device-width">
         <base href="<?php echo base_url(); ?>">
-        <link rel="stylesheet" type="text/css" href="assets/build/style.css">
+        <link rel="stylesheet" type="text/css" href="assets/build/style/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" />
     </head>
-    <body>
-        <div>
-            <div class="container">
-                <?php if (!empty($error)): ?>
-                    <span class="form-err"><?php echo $error; ?></span>
-                <?php endif; ?>
-                <?php
-                    if( $this->session->flashdata( 'success_message' ) ){
-                        ?> <span class="form-success"> <?php echo $this->session->flashdata( 'success_message' ); ?> </span> <?php 
-                    }
-
-                ?>
-                <?php if (validation_errors() ): ?>
-                    <span class="form-err"><?php echo validation_errors(); ?></span>
-                <?php endif; ?>
-                <div>
-                    <?php if('staff' == $user['role']): ?>
-                        <div>
-                            <h3>Menu</h3>
-                            <ul>
-                                <li>Dashboard</li>
-                                <li>My Events</li>
-                                <li>My details</li>                                
-                                <li>
-                                    <a href="login/logout">Log Out</a>
-                                </li>
-                            </ul>
-                        </div>
-                    <?php elseif ('administrator' == $user['role']): ?>
-                        <div>
-                            <h3>Menu</h3>
-                            <ul>
-                                <li>Dashboard</li>
-                                <li>Events
-                                    <ul>
-                                        <li>Add Event</li>
-                                        <li>All Events</li>
-                                    </ul>
-                                </li>
-                                <li>Staff
-                                    <ul>
-                                        <li><a href="staff/add">Add Staff</a></li>
-                                        <li><a href="staff">All Staff</a></li>
-                                    </ul>
-                                </li>
-                                <li>Setting</li>
-                                
-                                <li>
-                                    <a href="login/logout">Log Out</a>
-                                </li>
-                            </ul>
-                        </div>
-                    <?php endif; ?>
+    <body class="luft-template-dashboard">
+        <div class="luft-content-area">
+            <?php if (!empty($error)): ?>
+                <div class="alert alert-warning alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Warning! </strong> <?php echo $error; ?>
                 </div>
-                <div id="main">
+            <?php endif; ?>
+            <?php
+                if( $this->session->flashdata( 'success_message' ) ){
+                    ?> <span class="form-success"> <?php echo $this->session->flashdata( 'success_message' ); ?> </span> <?php 
+                }
+            ?>
+            <?php
+                if( $this->session->flashdata( 'error_message' ) ){
+                    ?> <span class="form-err"> <?php echo $this->session->flashdata( 'error_message' ); ?> </span> <?php 
+                }
+            ?>
+
+            <?php if('staff' == $role): ?>
+
+            <section class="luft-menu-area">
+                <ul class="sidebar-menu">
+                    <li class="sidebar-header">MENU</li>
+                    <li>
+                        <a href="#">
+                        <i class="fas fa-home"></i> Dashboard </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="far fa-calendar-times"></i> <span>events</span> <i class="fa fa-angle-right pull-right"></i>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li><a href=""> add events </a></li>
+                            <li><a href=""> all events </a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                        <i class="fas fa-user-friends"></i> <span>staff</span> <i class="fa fa-angle-right pull-right"></i> </a>
+                        <ul class="sidebar-submenu">
+                            <li><a href=""> add staff </a></li>
+                            <li><a href=""> all staff </a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                        <i class="fas fa-cog"></i> setting </a>
+                    </li>
+
+                    <li>
+                        <a href="user/logout">
+                        <i class="fas fa-sign-out-alt"></i> logout </a>
+                    </li>
+
+
+                </ul>
+            </section>
+
+            <?php elseif ('administrator' == $role): ?>
+            <section class="luft-menu-area">
+                <ul class="sidebar-menu">
+                    <li class="sidebar-header">MENU</li>
+                    <li>
+                        <a href="#">
+                        <i class="fas fa-home"></i> Dashboard </a>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                            <i class="far fa-calendar-times"></i> <span>events</span> <i class="fa fa-angle-right pull-right"></i>
+                        </a>
+                        <ul class="sidebar-submenu">
+                            <li><a href=""> add events </a></li>
+                            <li><a href=""> all events </a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                        <i class="fas fa-user-friends"></i> <span>staff</span> <i class="fa fa-angle-right pull-right"></i> </a>
+                        <ul class="sidebar-submenu">
+                            <li><a href=""> add staff </a></li>
+                            <li><a href=""> all staff </a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="#">
+                        <i class="fas fa-cog"></i> setting </a>
+                    </li>
+
+                    <li>
+                        <a href="user/logout">
+                        <i class="fas fa-sign-out-alt"></i> logout </a>
+                    </li>
+
+
+                </ul>
+            </section>
+            <?php endif; ?>
+
+            <div id="luft-main-content">
+                <div class="luft-user-content-area">
                     <?php
-                        $page = ('administrator' == $user['role'] ? 'admin/' : 'staff/') . $page;
+                        $page = ('administrator' == $role ? 'admin/' : 'staff/') . $page;
                         $this->load->view($page); 
                     ?>
                 </div>
             </div>
         </div>
+
+        <!-- script files -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="assets/build/js/slideout-menu.js"></script>
+        <script src="assets/build/js/custom.js"></script>       
     </body>
 </html>
