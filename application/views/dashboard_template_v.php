@@ -1,5 +1,5 @@
 <?php
-    $user = $this->session->userdata('logged_in_user');
+    $role = $this->session->userdata('role');
     $error = $this->session->flashdata('error');
     $success = $this->session->flashdata('success');
 ?>
@@ -19,15 +19,13 @@
         <div>
             <div class="container">
                 <?php if (!empty($error)): ?>
+                    <span class="form-success"><?php echo $success; ?></span>
+                <?php endif; ?>
+                <?php if (!empty($error)): ?>
                     <span class="form-err"><?php echo $error; ?></span>
                 <?php endif; ?>
-                <?php
-                    if( $this->session->flashdata( 'success_message' ) ){
-                        ?> <span class="form-success"> <?php echo $this->session->flashdata( 'success_message' ); ?> </span> <?php 
-                    }
-                ?>
                 <div>
-                    <?php if('staff' == $user['role']): ?>
+                    <?php var_dump($menu); if('staff' == $role): ?>
                         <div>
                             <h3>Menu</h3>
                             <ul>
@@ -35,11 +33,11 @@
                                 <li>My Events</li>
                                 <li>My details</li>                                
                                 <li>
-                                    <a href="login/logout">Log Out</a>
+                                    <a href="user/logout">Log Out</a>
                                 </li>
                             </ul>
                         </div>
-                    <?php elseif ('administrator' == $user['role']): ?>
+                    <?php elseif ('administrator' == $role): ?>
                         <div>
                             <h3>Menu</h3>
                             <ul>
@@ -59,7 +57,7 @@
                                 <li>Setting</li>
                                 
                                 <li>
-                                    <a href="login/logout">Log Out</a>
+                                    <a href="user/logout">Log Out</a>
                                 </li>
                             </ul>
                         </div>
@@ -67,7 +65,7 @@
                 </div>
                 <div id="main">
                     <?php
-                        $page = ('administrator' == $user['role'] ? 'admin/' : 'staff/') . $page;
+                        $page = ('administrator' == $role ? 'admin/' : 'staff/') . $page;
                         $this->load->view($page); 
                     ?>
                 </div>

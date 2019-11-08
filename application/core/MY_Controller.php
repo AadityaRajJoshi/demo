@@ -13,8 +13,26 @@ class MY_Controller extends CI_Controller{
 
 	public function __construct(){
 		parent::__construct();
-	    if ( !$this->session->userdata( 'logged_in_user' ) ){
+	    if ( !$this->session->userdata('id') ){
 	        redirect( '/' );
 	    }
+
+	    $this->data['menu'] = $this->get_menu();
+	}
+
+	public function get_menu(){
+		$role = $this->session->userdata('role');
+		if('administrator' == $role){
+			return array(
+				'staff' => 'Staff',
+				'event' => 'Event',
+				'logout' => 'Logout',
+			);
+		}elseif('staff' == $role){
+			return array(
+				'logout' => 'Logout',
+
+			);
+		}
 	}
 }

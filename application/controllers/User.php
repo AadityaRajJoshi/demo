@@ -34,65 +34,55 @@ class User extends CI_Controller{
 	}
 
 	public function login(){
+		$this->load->library('form_validation');
 
-		if( $this->input->post('login') ) {
-
-			$this->load->library('form_validation');
-
+		$this->form_validation->set_rules('username', 'Username', 'required' );
+		$this->form_validation->set_rules('password', 'Password', 'required' );
+		/* check validation*/
+		if ( $this->form_validation->run() ){
 			$username = $this->input->post( 'username' );
 			$remember = $this->input->post( 'remember_me' );
 			$password = md5( $this->input->post( 'password' ) );
-
-			$this->form_validation->set_rules('username', 'Username', 'required' );
-			$this->form_validation->set_rules('password', 'Password', 'required' );
-
-
 			$select = strpos( $username, '@' ) ? 'email' : 'username' ;
-			/* check validation*/
-			if ( $this->form_validation->run() ){
 
-				$condition = array(
-					$select    => $username,
-					'password' => $password
-				);
+			$condition = array(
+				$select    => $username,
+				'password' => $password
+			);
 
-				$this->load->model( 'user_m' );
+			$this->load->model( 'user_m' );
 
-				$db_user = $this->user_m->get( '*', $condition, 1 );
+			$db_user = $this->user_m->get( '*', $condition, 1 );
 
-				if ( !$db_user ) {
-					$this->session->set_flashdata( 'error', 'Username And Password Not Match' );
-					
-					redirect( 'login' );
+			if ( !$db_user ) {
+				$this->session->set_flashdata( 'error', 'Username And Password Not Match' );
+				
+				redirect( get_route( 'login' ) );
 
-				} else {
+			} else {
+				$this->session->set_userdata(array(
+					'id' => $db_user->id,	
+					'name' => $username,
+					'role' => get_role_by_id($db_user->role_id)
+				));
 
-					$this->session->set_userdata('logged_in_user', array(
-						'id' => $db_user->id,	
-						'name' => $username,
-						'role' => get_role_by_id($db_user->role_id)
-					));
+				if( $this->input->post( 'remember_me' ) && 'on' == $this->input->post( 'remember_me' ) ) {
 
-					if( $this->input->post( 'remember_me' ) && 'on' == $this->input->post( 'remember_me' ) ) {
+					set_cookie( 
+						'user_logged_in', 
+						json_encode( [
+							'user' => $username,
+							'pass' => $this->input->post( 'password' ),
+						] ),
+						30*60*60 
+					);
 
-						set_cookie( 
-							'user_logged_in', 
-							json_encode( [
-								'user' => $username,
-								'pass' => $this->input->post( 'password' ),
-							] ),
-							30*60*60 
-						);
-
-					}
-					redirect( 'staff' );
 				}
-
+				redirect( 'dashboard' );
 			}
 		}
-		$this->session->set_flashdata( 'login_error', 'Fields Cannot be empty' );
-		redirect( '/');
-		
+
+		$this->index();
 	}
 
 	public function forgot(){
@@ -114,7 +104,8 @@ class User extends CI_Controller{
 	}
 
 	public function check_login(){
-	    if ($this->session->userdata('logged_in_user'))
+
+	    if ($this->session->userdata('id'))
 	        redirect(get_route('dashboard', 'refresh'));
 	}
 }

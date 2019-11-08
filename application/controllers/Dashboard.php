@@ -8,8 +8,14 @@ class Dashboard extends MY_Controller{
 	}
 
 	public function index(){
-		$user = $this->session->userdata('logged_in_user');
-		$this->data['page'] = 'administrator' == $user['role'] ? 'admin_dashboard_v' : 'staff_dashboard_v';
+		
+		$user = $this->session->userdata('role');
+		if( 'administrator' == $user ){
+			$this->data['page'] = 'admin_dashboard_v';
+		}elseif( 'staff' == $user ){
+			$this->data['page'] = 'staff_dashboard_v';
+		}
+
 		$this->load->view('dashboard_template_v', $this->data);
 	}
 }

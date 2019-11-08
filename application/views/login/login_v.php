@@ -16,7 +16,7 @@
 				'name' => 'username',
 				'placeholder' => 'Enter Username Or Email',
 				'id' => 'username',
-				'required' => 'required',
+				// 'required' => 'required',
 				'value' => isset( $cookie[ 'name' ] ) ? $cookie[ 'name' ] : ''
 			) ); ?>
 		</div>
@@ -28,7 +28,7 @@
 				'placeholder' => 'Enter Password',
 				'id' => 'password',
 				'autocomplete' => 'off',
-				'required' => 'required',
+				// 'required' => 'required',
 				'value' => isset( $cookie[ 'pass' ] ) ? $cookie[ 'pass' ] : ''
 			) );
 
