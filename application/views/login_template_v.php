@@ -1,3 +1,7 @@
+<?php
+    $error = $this->session->flashdata('error');
+    $success = $this->session->flashdata('success');
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,15 +16,18 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,700,900&display=swap" rel="stylesheet">
     </head>
     <body class="luft-template-login luft-bg-primary">
-        <div>
-            <div class="container">
-                <?php if (validation_errors()): ?>
-                    <div class="alert alert-warning alert-dismissable">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                        <strong>Warning!</strong> <?php echo validation_errors(); ?>
-                    </div>
-                <?php endif; ?>               
-            </div>
+        <div class="container">
+            <?php if (!empty($success)): ?>
+                <span class="form-success"><?php echo $success; ?></span>
+            <?php endif; ?>
+
+            <?php if (!empty($error)): ?>
+                <span class="form-err"><?php echo $error; ?></span>
+            <?php endif; ?>
+
+            <?php if (validation_errors()): ?>
+                <span class="form-err"><?php echo validation_errors(); ?></span>
+            <?php endif; ?>               
         </div>
         <?php $this->load->view('login/' . $page); ?>
     </body>

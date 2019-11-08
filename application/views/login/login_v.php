@@ -8,7 +8,7 @@
 			?> <span class="form-err"> <?php echo $this->session->flashdata( 'login_error' ); ?> </span> <?php 
 		}
 	?>
-	<?php echo form_open( 'login/login_attempt' ); ?>
+	<?php echo form_open( 'user/login' ); ?>
 
 		<div class="luft-form-row luft-input-type">
 			<?php echo form_label('User Name', 'username');
@@ -16,7 +16,7 @@
 				'name' => 'username',
 				'placeholder' => 'Enter Username Or Email',
 				'id' => 'username',
-				'required' => 'required',
+				// 'required' => 'required',
 				'value' => isset( $cookie[ 'name' ] ) ? $cookie[ 'name' ] : ''
 			) ); ?>
 		</div>
@@ -28,7 +28,7 @@
 				'placeholder' => 'Enter Password',
 				'id' => 'password',
 				'autocomplete' => 'off',
-				'required' => 'required',
+				// 'required' => 'required',
 				'value' => isset( $cookie[ 'pass' ] ) ? $cookie[ 'pass' ] : ''
 			) );
 

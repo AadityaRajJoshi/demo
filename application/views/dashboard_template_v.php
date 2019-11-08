@@ -1,5 +1,5 @@
 <?php
-    $user = $this->session->userdata('logged_in_user');
+    $role = $this->session->userdata('role');
     $error = $this->session->flashdata('error');
     $success = $this->session->flashdata('success');
 ?>
@@ -35,7 +35,7 @@
                 }
             ?>
 
-            <?php if('staff' == $user['role']): ?>
+            <?php if('staff' == $role): ?>
 
             <section class="luft-menu-area">
                 <ul class="sidebar-menu">
@@ -78,7 +78,7 @@
                 </ul>
             </section>
 
-            <?php elseif ('administrator' == $user['role']): ?>
+            <?php elseif ('administrator' == $role): ?>
             <section class="luft-menu-area">
                 <ul class="sidebar-menu">
                     <li class="sidebar-header">MENU</li>
@@ -124,7 +124,7 @@
             <div id="luft-main-content">
                 <div class="luft-user-content-area">
                     <?php
-                        $page = ('administrator' == $user['role'] ? 'admin/' : 'staff/') . $page;
+                        $page = ('administrator' == $role ? 'admin/' : 'staff/') . $page;
                         $this->load->view($page); 
                     ?>
                 </div>
