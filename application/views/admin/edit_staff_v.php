@@ -36,15 +36,7 @@
 			) ); ?>
 		</div>
 
-		<div class="luft-form-row">
-			<?php echo form_label( 'Display Name', 'displayname');
-			echo form_input( array(
-				'name' => 'displayname',
-				'value' => $staff->display_name,
-				'placeholder' => 'Enter display Name',
-				'id' => 'displayname',
-			) ); ?>
-		</div>
+		
 		<div class="luft-form-row">
 			<?php echo form_label( 'Password', 'password' );
 			echo form_password( array(

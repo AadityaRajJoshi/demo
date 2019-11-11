@@ -83,6 +83,7 @@ class Staff extends MY_Controller{
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
 			$this->form_validation->set_rules('number', 'phone number', 'required' );
 			
+				$id = $this->input->post('id');
 
 			if( $this->form_validation->run() ){
 				$name = $this->input->post( 'name' );
@@ -91,7 +92,6 @@ class Staff extends MY_Controller{
 				
 				$pass = $this->input->post( 'password' );
 
-				$id = $this->input->post('id');
 
 				$data = array( 
 				'username' => $name,
@@ -109,6 +109,8 @@ class Staff extends MY_Controller{
 					redirect( get_route( 'staff' ) );
 				}
 			}
+			$this->edit( $id );
+			
 
 		}
 	}

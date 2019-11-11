@@ -29,7 +29,8 @@
 					'name' => 'number',
 					'placeholder' => 'Enter Phone Number',
 					'id' => 'phone',
-					'required' => 'required'
+					'required' => 'required',
+					'type' => 'tel';
 				) ); ?>
 			</div>
 
