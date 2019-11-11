@@ -1,0 +1,69 @@
+.#{$prefix}-notification {
+
+    .#{$prefix}-notification-sub {
+        position: absolute;
+        right: 0;
+        background: $color_white;
+        padding: 15px;
+        top: 120%;
+        border: 1px solid $color_border;
+        width: 250px;
+        flex-wrap: wrap;
+        visibility: hidden;
+        opacity: 0;
+        z-index: -1;
+        transition: all .3s;
+        li {
+            flex: 0 0 100%;
+            padding: 0 0 15px 25px;
+            border-bottom: 1px solid $color_border;
+            margin-bottom: 15px;
+
+            &:last-child {
+                padding-bottom: 0;
+                border-bottom: none;
+                margin-bottom: 0;  
+            }
+
+            &:before {
+                counter-increment: section;
+                content: counter(section);
+                position: absolute;
+                left: 0;
+                color: #fff;
+                font-size: 12px;
+                font-weight: bold;
+                background: $color_primary;
+                border-radius: 50%;
+                width: 16px;
+                height: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                top: -2px;
+            }
+            a {
+                color: #676767;
+                font-size: 13px;
+                transition: all .3s;
+                display: block;
+                white-space: nowrap;
+                width: 89%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                &:hover {
+                    color: $color_primary;
+                }
+            }
+        }
+    }
+    &:hover {
+        .#{$prefix}-notification-sub {
+            visibility: visible;
+            opacity: 1;
+            z-index: 9;
+            top: 100%;
+        }
+        
+    }
+}

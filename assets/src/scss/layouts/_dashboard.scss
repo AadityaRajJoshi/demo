@@ -7,14 +7,16 @@
     flex-wrap: wrap;
 
     .#{$prefix}-menu-area {
-        flex: 0 0 20%;
         height: 100vh;
         background: $color_primary;
         padding: 30px 0;
+        position: fixed;
+        width: 300px;
     }
 
     ##{$prefix}-main-content {
-        flex: 0 0 80%;
+        margin-left: 300px;
+        width: 100%;
     }
 
     .#{$prefix}-user-content-area {

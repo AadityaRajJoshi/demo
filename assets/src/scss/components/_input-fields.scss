@@ -5,6 +5,7 @@
         margin-bottom: 4px;
         color: $color_primary;
         font-weight: 700;
+        text-transform: uppercase;
     }
     input {
         height: 40px;
@@ -41,7 +42,7 @@
         border: none;
         color: $color_white;
         font-weight: bold;
-        height: 55px;
+        height: 50px;
         width: 200px;
         border-radius: 25px;
         cursor: pointer;

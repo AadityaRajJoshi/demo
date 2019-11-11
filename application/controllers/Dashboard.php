@@ -10,13 +10,14 @@ class Dashboard extends MY_Controller{
 
 	public function index(){
 
-		$user = $this->session->userdata('role');
+		$user = get_session('role');
+		$this->data[ 'meta' ][ 'title' ] = 'dashboard';
+		$this->data[ 'breadcrumb' ] = get_msg( 'dashboard' ) ;
 		if( 'administrator' == $user ){
 			$this->data['page'] = 'admin_dashboard_v';
 		}elseif( 'staff' == $user ){
 			$this->data['page'] = 'staff_dashboard_v';
 		}
-
 		$this->load->view('dashboard_template_v', $this->data);
 	}
 }

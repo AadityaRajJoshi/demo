@@ -7,6 +7,7 @@
 				'name' => 'name',
 				'placeholder' => 'Enter name',
 				'id' => 'name',
+				'required' => 'required'
 			) ); ?>
 		</div> 
 		<div class="luft-inline-input">
@@ -17,6 +18,8 @@
 					'name' => 'email',
 					'placeholder' => 'Enter email',
 					'id' => 'email',
+					'required' => 'required',
+					'type' => 'email'
 				) ); ?>
 			</div>
 			<div class="luft-form-row">
@@ -26,6 +29,8 @@
 					'name' => 'number',
 					'placeholder' => 'Enter Phone Number',
 					'id' => 'phone',
+					'required' => 'required',
+					'type' => 'tel'
 				) ); ?>
 			</div>
 
@@ -34,6 +39,8 @@
 				echo form_password( array(
 					'name' => 'password',
 					'id' => 'password',
+					'required' => 'required',
+					'placeholder' => 'Enter Password',
 				) ); ?>
 			</div>
 			

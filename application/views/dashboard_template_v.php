@@ -1,5 +1,5 @@
 <?php
-    $role = $this->session->userdata('role');
+    $role = get_session('role');
     $error = $this->session->flashdata('error');
     $success = $this->session->flashdata('success');
 ?>
@@ -8,7 +8,12 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Admin - <?php echo $meta['title']; ?></title>
+        <title>
+            <?php 
+                $r = 'administrator' == get_session( 'role' ) ? 'Admin' : 'Staff';
+                echo $r . ' - ' . $meta['title'];
+            ?>
+        </title>
         <meta name="keyword" content="<?php echo $meta['keyword']; ?>">
         <meta name="description" content="<?php echo $meta['description']; ?>">
         <meta name="viewport" content="width=device-width">
@@ -30,12 +35,12 @@
                 <span class="form-err"><?php echo validation_errors(); ?></span>
             <?php endif; ?> 
 
-            <section class="luft-menu-area">
+            <section class="luft-menu-area animate-menu animate-menu-left">
                 <ul class="sidebar-menu">
                     <li class="sidebar-header"><?php echo get_msg( 'menu' ) ?></li>
                     <?php foreach ( $menu as $key => $value) {
                         if( isset( $value[ 'menu' ] ) ){ ?>
-                            <li>
+                            <li <?php echo get_active_class( $key ) ?> >
                                 <a href="#">
                                     <i class="<?php echo $value[ 'icon' ]; ?>"></i>
                                     <span><?php echo $value[ 'title' ] ?></span>
@@ -43,12 +48,13 @@
                                 </a>
                                 <ul class="sidebar-submenu">
                                     <?php foreach ( $value[ 'menu' ] as $k => $v ){ ?>
-                                        <li><a href="<?php echo $k ?>"> <?php echo $v?> </a></li>
+                                        <li>
+                                            <a href="<?php echo $k ?>"> <?php echo $v?> </a></li>
                                     <?php } ?>  
                                 </ul>
                             </li>
                         <?php }else{ ?>
-                            <li>
+                            <li <?php echo get_active_class( $key ) ?> >
                                 <a href="<?php echo $key ?>">
                                 <i class="<?php echo $value[ 'icon' ]; ?>"></i> <?php echo $value[ 'title' ] ?> </a>
                             </li>
@@ -59,18 +65,23 @@
             <div id="luft-main-content">
 
                 <div class="luft-header-area">
-                    <div class="luft-menu-toggler">
+                    <div class="luft-menu-toggler btn btn-primary" id="showLeft">
                         <span></span>
                         <span></span>
                         <span></span>
                     </div>
                     <div class="luft-user-icon">
                         <ul>
-                            <li class="luft-notification"><a href="#"><i class="far fa-bell"></i> <span>2</span></a></li>
+                            <li class="luft-notification"><a href="#"><i class="far fa-bell"></i> <span>2</span></a>
+                                <ul class="luft-notification-sub">
+                                    <li><a href="#"> Integer ante arcu accumsan a </a></li>
+                                    <li><a href="#"> Integer ante arcu accumsan a </a></li>
+                                </ul>                        
+                        </li>
                             <li class="luft-user-image">
                                 <a href="#" onclick="return false;"><img src="assets/image/user.png" alt="user" /></a>
                                 <ul class="user-info-sub">
-                                    <li class="luft-user-sub-link"><a href="#"><i class="fas fa-cog"></i> My details </a></li>
+                                    <li class="luft-user-sub-link"><a href="user/edit/<?php echo get_session('id'); ?>"><i class="fas fa-cog"></i> My details </a></li>
                                     <li class="luft-user-sub-link logout-link "><a href="user/logout"><i class="fas fa-sign-out-alt"></i> Logout </a></li>
                                 </ul>
                         
@@ -78,6 +89,14 @@
                         </ul>
                     </div>
 
+                </div>
+
+                <div class="breadcrumb">
+                    <?php 
+                        if( isset( $breadcrumb ) && !empty( $breadcrumb ) ){
+                            breadcrumb_tail( $breadcrumb );
+                        }
+                    ?>
                 </div>
 
                 <div class="luft-user-content-area">

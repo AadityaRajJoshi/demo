@@ -13,7 +13,11 @@ class Staff extends MY_Controller{
 	public function index(){
 
 		if( $this->is_admin() ){
-
+			$this->data[ 'meta' ][ 'title' ] = 'staff';
+			$this->data[ 'breadcrumb' ] = array(
+				get_msg( 'staff' ),
+				get_msg( 'all_staff' )
+			);
 			$this->data['staffs'] = $this->user_m->get( '*', array(
 				'role_id' =>get_role_id("staff")
 			));
@@ -26,7 +30,11 @@ class Staff extends MY_Controller{
 
 	public function add(){
 		if( $this->is_admin() ){
-
+			$this->data[ 'meta' ][ 'title' ] = 'add staff';
+			$this->data[ 'breadcrumb' ] = array(
+				get_msg( 'staff' ),
+				get_msg( 'add_staff' )
+			);
 			$this->data['page'] = 'add_staff_v';
 			$this->load->helper('email');
 
@@ -34,21 +42,18 @@ class Staff extends MY_Controller{
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
 			$this->form_validation->set_rules('number', 'phone number', 'required' );
 			$this->form_validation->set_rules('password', 'Password', 'required' );
-			
-
 			if( $this->form_validation->run() ){
+			
 				$username = $this->input->post( 'name' );
 				$email = $this->input->post( 'email' );
 				$phone_number = $this->input->post( 'number' );
 				$password = md5($this->input->post( 'password' ));
 				
-
 				$data = array(
 					'username'=> $username,
 					'email' => $email,
 					'password' => $password,
-					'Phone_number' => $phone_number,
-					
+					'Phone_number' => $phone_number,					
 					'role_id' => get_role_id("staff")
 				);
 				if( $this->user_m->save( $data ) ){
@@ -64,55 +69,6 @@ class Staff extends MY_Controller{
 		}
 	}
 
-	public function edit( $id = null ){
-
-		if( $this->is_admin() ){	
-
-			$this->data['staff'] = $this->user_m->get( '*', array( 
-				'id'=>$id ), 1 );
-			$this->data['page'] = 'edit_staff_v';
-			$this->load->view('dashboard_template_v', $this->data);	
-		}
-	}
-
-	public function update(){
-
-		if( $this->is_admin() ){
-
-			$this->form_validation->set_rules('name', 'Username', 'required' );
-			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
-			$this->form_validation->set_rules('number', 'phone number', 'required' );
-			
-
-			if( $this->form_validation->run() ){
-				$name = $this->input->post( 'name' );
-				$email = $this->input->post( 'email' );
-				$phone_number = $this->input->post( 'number' );
-				
-				$pass = $this->input->post( 'password' );
-
-				$id = $this->input->post('id');
-
-				$data = array( 
-				'username' => $name,
-				'phone_number' => $phone_number,
-				'email' => $email,
-				
-				);
-
-				if( $pass != '' ){
-					$data[ 'password' ] = md5( $pass );
-				}
-
-				if( $this->user_m->save( $data, array('id'=>$id) ) ) {
-					$this->session->set_flashdata( 'success', get_msg( 'staff_edit' ) );
-					redirect( get_route( 'staff' ) );
-				}
-			}
-
-			
-		}
-	}
 
 	public function delete( $id = false ){
 		if( $this->is_admin() ){
