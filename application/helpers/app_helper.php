@@ -83,3 +83,32 @@ if(! function_exists('get_role_id')){
 		return $roles[$role];
 	}
 }
+
+
+ function is_admin(){
+ 	$ci = get_instance();
+	return $ci->session->userdata( 'role' ) == "administrator";
+}
+
+function is_staff(){
+	$ci = get_instance();
+	return $ci->session->userdata( 'role' ) == "staff";
+
+if( !function_exists( 'get_session' ) ){
+	function get_session( $param = false ){
+		$ci = get_instance();
+		return $ci->session->userdata($param);
+	}
+}
+if( !function_exists( 'get_active_class' ) ){
+	function get_active_class( $key = false ){
+		$ci = get_instance();
+		$a= $ci->uri->segment(1);
+		$class = false;
+		if( $key == $a ){
+			$class = 'class="active" ';
+		}
+		return $class;
+	}
+
+}

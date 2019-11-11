@@ -8,7 +8,13 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Admin - <?php echo $meta['title']; ?></title>
+        <!-- <title>Admin - <?php echo $meta['title']; ?></title> -->
+        <title>
+            <?php 
+                $r = 'administrator' == get_session( 'role' ) ? 'Admin' : 'Staff';
+                echo $r . ' - ' . $meta['title'];
+            ?>
+        </title>
         <meta name="keyword" content="<?php echo $meta['keyword']; ?>">
         <meta name="description" content="<?php echo $meta['description']; ?>">
         <meta name="viewport" content="width=device-width">
@@ -35,7 +41,7 @@
                     <li class="sidebar-header"><?php echo get_msg( 'menu' ) ?></li>
                     <?php foreach ( $menu as $key => $value) {
                         if( isset( $value[ 'menu' ] ) ){ ?>
-                            <li>
+                            <li <?php echo get_active_class( $key ) ?> >
                                 <a href="#">
                                     <i class="<?php echo $value[ 'icon' ]; ?>"></i>
                                     <span><?php echo $value[ 'title' ] ?></span>
@@ -43,12 +49,13 @@
                                 </a>
                                 <ul class="sidebar-submenu">
                                     <?php foreach ( $value[ 'menu' ] as $k => $v ){ ?>
-                                        <li><a href="<?php echo $k ?>"> <?php echo $v?> </a></li>
+                                        <li>
+                                            <a href="<?php echo $k ?>"> <?php echo $v?> </a></li>
                                     <?php } ?>  
                                 </ul>
                             </li>
                         <?php }else{ ?>
-                            <li>
+                            <li <?php echo get_active_class( $key ) ?> >
                                 <a href="<?php echo $key ?>">
                                 <i class="<?php echo $value[ 'icon' ]; ?>"></i> <?php echo $value[ 'title' ] ?> </a>
                             </li>
@@ -70,7 +77,7 @@
                             <li class="luft-user-image">
                                 <a href="#" onclick="return false;"><img src="assets/image/user.png" alt="user" /></a>
                                 <ul class="user-info-sub">
-                                    <li class="luft-user-sub-link"><a href="#"><i class="fas fa-cog"></i> My details </a></li>
+                                    <li class="luft-user-sub-link"><a href="details"><i class="fas fa-cog"></i> My details </a></li>
                                     <li class="luft-user-sub-link logout-link "><a href="user/logout"><i class="fas fa-sign-out-alt"></i> Logout </a></li>
                                 </ul>
                         
