@@ -93,6 +93,7 @@ if(! function_exists('get_role_id')){
 function is_staff(){
 	$ci = get_instance();
 	return $ci->session->userdata( 'role' ) == "staff";
+}
 
 if( !function_exists( 'get_session' ) ){
 	function get_session( $param = false ){
@@ -100,6 +101,7 @@ if( !function_exists( 'get_session' ) ){
 		return $ci->session->userdata($param);
 	}
 }
+
 if( !function_exists( 'get_active_class' ) ){
 	function get_active_class( $key = false ){
 		$ci = get_instance();
@@ -110,5 +112,4 @@ if( !function_exists( 'get_active_class' ) ){
 		}
 		return $class;
 	}
-
 }

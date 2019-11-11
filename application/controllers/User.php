@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class User extends CI_Controller{
+class User extends MY_Controller{
 
 	public function __construct(){
 
@@ -113,7 +113,12 @@ class User extends CI_Controller{
 
 		if( is_admin() ){	
 			$this->load->model('user_m');
-
+			 
+			$this->data['meta'] = array(
+				'title' => 'Admin',
+				'description' => 'Staff Description',
+				'keyword' => 'staff, admin, employee'
+			);
 			$this->data['staff'] = $this->user_m->get( '*', array( 
 				'id'=>$id ), 1 );
 			$this->data['page'] = 'edit_staff_v';
