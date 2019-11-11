@@ -1,0 +1,59 @@
+.#{$prefix}-table {
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    table-layout: fixed;  
+
+    thead {
+        border-top: 1px solid #707070;
+        border-bottom: 1px solid #b7b7b7;
+    }
+
+    tbody {
+        tr {     
+            padding: .35em;
+            background: #F2F2F2;
+            &:nth-child(even) {
+                background: $color_white;
+            }
+        }  
+    }
+    tr {     
+      padding: .35em;     
+    }
+  
+    th, td {
+      padding: 16px;
+      text-align: left;
+      color: $color_primary;
+      text-transform: capitalize;
+    }
+  
+    th {
+        font-size: 17px;
+        text-transform: capitalize;
+        color: $color_primary;
+        &.#{$prefix}-user-id,
+        &.#{$prefix}-update-download {
+            width: 100px;
+        }
+    }
+
+    .#{$prefix}-user-edit {
+        color: $color_primary;
+        font-size: 18px;
+        margin-right: 20px;
+    }
+
+    .#{$prefix}-user-download {
+        color: #cd0000;
+        font-size: 18px;
+    }
+
+    .filter-img {
+        max-width: 13px;
+    }
+
+}
+  
