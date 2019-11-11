@@ -84,15 +84,20 @@ if(! function_exists('get_role_id')){
 	}
 }
 
-
- function is_admin(){
- 	$ci = get_instance();
-	return $ci->session->userdata( 'role' ) == "administrator";
+if( !function_exists( 'is_admin' ) ){	
+	function is_admin(){
+	 	$ci = get_instance();
+		return $ci->session->userdata( 'role' ) == "administrator";
+	}
 }
 
-function is_staff(){
-	$ci = get_instance();
-	return $ci->session->userdata( 'role' ) == "staff";
+
+if( !function_exists( 'is_staff' ) ){	
+	function is_staff(){
+		$ci = get_instance();
+		return $ci->session->userdata( 'role' ) == "staff";
+	}
+
 }
 
 if( !function_exists( 'get_session' ) ){
@@ -105,11 +110,68 @@ if( !function_exists( 'get_session' ) ){
 if( !function_exists( 'get_active_class' ) ){
 	function get_active_class( $key = false ){
 		$ci = get_instance();
-		$a= $ci->uri->segment(1);
 		$class = false;
-		if( $key == $a ){
+		if( $key == $ci->uri->segment(1) ){
 			$class = 'class="active" ';
 		}
 		return $class;
+	}
+}
+
+if( !function_exists( 'get_menu' ) ){	
+	function get_menu(){
+		$ci = get_instance();
+		$role = $ci->session->userdata('role');
+		if('administrator' == $role){
+			return array(
+				get_route( 'dashboard' ) => array(
+					'title' => get_msg( 'dashboard' ),
+					'icon'  => 'fas fa-home'
+				),
+				'event' => array(
+					'title' => get_msg( 'event' ),
+					'icon'	=> 'far fa-calendar-times',
+					'menu'	=> array(
+						get_route( 'add_event' ) => get_msg( 'add_event' ),
+						get_route( 'event' ) 	 => get_msg( 'all_event' )
+					),
+				),
+				'staff' => array(
+					'title' => get_msg( 'staff' ),
+					'icon'	=> 'fas fa-user-friends',
+					'menu'	=> array(				
+						get_route( 'add_staff' ) => get_msg( 'add_staff' ),
+						get_route( 'staff' ) 	 => get_msg( 'all_staff' )
+					)
+				),
+				get_route( 'setting' )	=> array(
+					'title' => get_msg( 'setting' ),
+					'icon'  => 'fas fa-cog'
+				),
+				get_route( 'logout' ) => array(
+					'title' => get_msg( 'logout' ),
+					'icon'  => 'fas fa-sign-out-alt'
+				)
+			);
+		}elseif('staff' == $role){
+			return array(
+				get_route( 'dashboard' ) => array(
+					'title' => get_msg( 'dashboard' ),
+					'icon'  => 'fas fa-home'
+				),
+				'event' 	=> array(
+					'title' => get_msg( 'my_event' ),
+					'icon'	=> 'far fa-calendar-times'
+				) ,
+				get_route( 'setting' )	=> array(
+					'title' => get_msg( 'setting' ),
+					'icon'  => 'fas fa-cog'
+				),
+				get_route( 'logout' ) => array(
+					'title' =>get_msg( 'logout' ),
+					'icon'  => 'fas fa-sign-out-alt'
+				)
+			);
+		}
 	}
 }

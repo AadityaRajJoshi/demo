@@ -1,41 +1,24 @@
 .animate-menu-push {
     left: 0;
     position: relative;
-    transition: all 0.3s ease;
-  
-    &.animate-menu-push-right {
-      left: 200px;
-    }
-  
-    &.animate-menu-push-left {
-      left: -200px;
-    }
+    transition: all 0.3s ease;  
+    
   }
   
   .animate-menu {
-    position: fixed;
-    top: 0;
-    width: 200px;
-    height: 100%;
+    
     transition: all 0.3s ease;
   }
   
   .animate-menu-left {
-    left: -200px;
+    // left: -200px;
   
     &.animate-menu-open {
-      left: 0;
+      // left: 0;
     }
   }
   
-  .animate-menu-right {
-    right: -200px;
-  
-    &.animate-menu-open {
-      right: 0;
-    }
-  }
-  
+
   .sidebar-menu {
     list-style: none;
     margin: 0;
@@ -251,5 +234,22 @@
           color: #fff;
         }
       }
+    }
+  }
+
+  div#luft-main-content {
+    transition: all .3s;
+  } 
+  .animate-menu-open {
+    section.luft-menu-area.animate-menu.animate-menu-left {
+        margin-left: -300px;
+        width: 0;
+        overflow: hidden;
+        visibility: hidden;
+        transition: all .3s;
+    }
+
+    div#luft-main-content {
+      margin-left: 0;
     }
   }

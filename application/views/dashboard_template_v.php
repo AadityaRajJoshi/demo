@@ -8,7 +8,6 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <!-- <title>Admin - <?php echo $meta['title']; ?></title> -->
         <title>
             <?php 
                 $r = 'administrator' == get_session( 'role' ) ? 'Admin' : 'Staff';
@@ -36,7 +35,7 @@
                 <span class="form-err"><?php echo validation_errors(); ?></span>
             <?php endif; ?> 
 
-            <section class="luft-menu-area">
+            <section class="luft-menu-area animate-menu animate-menu-left">
                 <ul class="sidebar-menu">
                     <li class="sidebar-header"><?php echo get_msg( 'menu' ) ?></li>
                     <?php foreach ( $menu as $key => $value) {
@@ -66,7 +65,7 @@
             <div id="luft-main-content">
 
                 <div class="luft-header-area">
-                    <div class="luft-menu-toggler">
+                    <div class="luft-menu-toggler btn btn-primary" id="showLeft">
                         <span></span>
                         <span></span>
                         <span></span>
@@ -85,6 +84,12 @@
                         </ul>
                     </div>
 
+                </div>
+
+                <div class="breadcrumb">
+                    <?php
+                       // var_export( $breadcrumb );
+                    ?>
                 </div>
 
                 <div class="luft-user-content-area">

@@ -27,7 +27,6 @@ class Staff extends MY_Controller{
 	public function add(){
 		if( $this->is_admin() ){
 			$this->data[ 'meta' ][ 'title' ] = 'add staff';
-
 			$this->data['page'] = 'add_staff_v';
 			$this->load->helper('email');
 

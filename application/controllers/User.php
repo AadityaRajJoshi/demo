@@ -7,6 +7,7 @@ class User extends MY_Controller{
 
 		parent::__construct();
 		$this->load->helper('form');
+		$this->data['menu'] = get_menu();
 	}
 
 

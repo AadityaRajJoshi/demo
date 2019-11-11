@@ -12,6 +12,7 @@ class Dashboard extends MY_Controller{
 
 		$user = $this->session->userdata('role');
 		$this->data[ 'meta' ][ 'title' ] = 'dashboard';
+		$this->data[ 'breadcrumb' ] = array( get_msg( 'dashboard' ) );
 		if( 'administrator' == $user ){
 			$this->data['page'] = 'admin_dashboard_v';
 		}elseif( 'staff' == $user ){

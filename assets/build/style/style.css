@@ -148,12 +148,14 @@ span.form-err {
   display: flex;
   flex-wrap: wrap; }
   .luft-content-area .luft-menu-area {
-    flex: 0 0 20%;
     height: 100vh;
     background: #020441;
-    padding: 30px 0; }
+    padding: 30px 0;
+    position: fixed;
+    width: 300px; }
   .luft-content-area #luft-main-content {
-    flex: 0 0 80%; }
+    margin-left: 300px;
+    width: 100%; }
   .luft-content-area .luft-user-content-area {
     background: #fff;
     padding: 30px;
@@ -163,27 +165,9 @@ span.form-err {
   left: 0;
   position: relative;
   transition: all 0.3s ease; }
-  .animate-menu-push.animate-menu-push-right {
-    left: 200px; }
-  .animate-menu-push.animate-menu-push-left {
-    left: -200px; }
 
 .animate-menu {
-  position: fixed;
-  top: 0;
-  width: 200px;
-  height: 100%;
   transition: all 0.3s ease; }
-
-.animate-menu-left {
-  left: -200px; }
-  .animate-menu-left.animate-menu-open {
-    left: 0; }
-
-.animate-menu-right {
-  right: -200px; }
-  .animate-menu-right.animate-menu-open {
-    right: 0; }
 
 .sidebar-menu {
   list-style: none;
@@ -317,6 +301,18 @@ span.form-err {
         width: auto; }
     .sidebar-menu-rtl .sidebar-submenu > li.active > a, .sidebar-menu-rtl .sidebar-submenu > li > a:hover {
       color: #fff; }
+
+div#luft-main-content {
+  transition: all .3s; }
+
+.animate-menu-open section.luft-menu-area.animate-menu.animate-menu-left {
+  margin-left: -300px;
+  width: 0;
+  overflow: hidden;
+  visibility: hidden;
+  transition: all .3s; }
+.animate-menu-open div#luft-main-content {
+  margin-left: 0; }
 
 .luft-header-area {
   background: #DFDFE5;
