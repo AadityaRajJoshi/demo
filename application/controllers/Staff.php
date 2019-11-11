@@ -42,7 +42,6 @@ class Staff extends MY_Controller{
 				$phone_number = $this->input->post( 'number' );
 				$password = md5($this->input->post( 'password' ));
 				
-
 				$data = array(
 					'username'=> $username,
 					'email' => $email,
