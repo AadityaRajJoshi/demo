@@ -30,7 +30,7 @@
 					'placeholder' => 'Enter Phone Number',
 					'id' => 'phone',
 					'required' => 'required',
-					'type' => 'tel';
+					'type' => 'tel'
 				) ); ?>
 			</div>
 
