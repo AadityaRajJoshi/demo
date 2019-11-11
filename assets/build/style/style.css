@@ -89,6 +89,55 @@ img {
       .luft-form-wrapper input[type="submit"] {
         width: 100%; } }
 
+span.form-success {
+  position: fixed;
+  z-index: 999;
+  right: 0;
+  padding: 10px 25px;
+  color: white;
+  border: 1px solid #000;
+  top: 5px;
+  font-size: 14px;
+  background: #58B975; }
+
+span.form-err {
+  color: red;
+  text-align: left;
+  display: block;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background: #fff;
+  padding: 10px 25px;
+  top: 5px;
+  font-size: 14px;
+  height: min-content;
+  -webkit-animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  z-index: 99;
+  box-shadow: 0 0 6px #adadad; }
+  span.form-err p {
+    margin: 0;
+    padding-bottom: 5px; }
+
+@-webkit-keyframes slide-in-right {
+  0% {
+    -webkit-transform: translateX(1000px);
+    transform: translateX(1000px);
+    opacity: 0; }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1; } }
+@keyframes slide-in-right {
+  0% {
+    -webkit-transform: translateX(1000px);
+    transform: translateX(1000px);
+    opacity: 0; }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1; } }
 .luft-template-dashboard {
   background: #F7F7F7; }
 
