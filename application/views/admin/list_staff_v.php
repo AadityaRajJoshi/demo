@@ -14,7 +14,7 @@
       <td><?php echo $key+1; ?></td>
       <td><?php echo $staff->username; ?></td>
       <td>15hrs</td>
-      <td class="luft-text-right"><a href="staff/edit/<?php echo $staff->id; ?>"  class="luft-user-edit" ><i class="far fa-edit"></i></a>  <a href="#" class="luft-user-download"><i class="fas fa-file-pdf"></i></a> </td>
+      <td class="luft-text-right"><a href="user/edit/<?php echo $staff->id; ?>"  class="luft-user-edit" ><i class="far fa-edit"></i></a>  <a href="#" class="luft-user-download"><i class="fas fa-file-pdf"></i></a> </td>
      
     </tr>
   	<?php } ?>

@@ -75,13 +75,7 @@ class MY_Controller extends CI_Controller{
 		}
 	}
 
-	public function is_admin(){
-		return $this->session->userdata( 'role' ) == "administrator";
-	}
-
-	public function is_staff(){
-		return $this->session->userdata( 'role' ) == "staff";
-	}
+	
 
 	public function sendMail(){
 		$config = array(
@@ -105,5 +99,13 @@ class MY_Controller extends CI_Controller{
 		// echo  "called";die;
 		return $this->email->send();
 
+	}
+
+	public function is_admin(){
+		return $this->session->userdata( 'role' ) == "administrator";
+	}
+
+	public function is_staff(){
+		return $this->session->userdata( 'role' ) == "staff";
 	}
 }

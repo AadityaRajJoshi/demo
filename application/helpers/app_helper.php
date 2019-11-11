@@ -83,3 +83,13 @@ if(! function_exists('get_role_id')){
 		return $roles[$role];
 	}
 }
+
+ function is_admin(){
+ 	$ci = get_instance();
+	return $ci->session->userdata( 'role' ) == "administrator";
+}
+
+function is_staff(){
+	$ci = get_instance();
+	return $ci->session->userdata( 'role' ) == "staff";
+}
