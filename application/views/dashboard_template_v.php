@@ -81,7 +81,7 @@
                             <li class="luft-user-image">
                                 <a href="#" onclick="return false;"><img src="assets/image/user.png" alt="user" /></a>
                                 <ul class="user-info-sub">
-                                    <li class="luft-user-sub-link"><a href="details"><i class="fas fa-cog"></i> My details </a></li>
+                                    <li class="luft-user-sub-link"><a href="user/edit/<?php echo get_session('id'); ?>"><i class="fas fa-cog"></i> My details </a></li>
                                     <li class="luft-user-sub-link logout-link "><a href="user/logout"><i class="fas fa-sign-out-alt"></i> Logout </a></li>
                                 </ul>
                         
@@ -92,8 +92,10 @@
                 </div>
 
                 <div class="breadcrumb">
-                    <?php
-                       // var_export( $breadcrumb );
+                    <?php 
+                        if( isset( $breadcrumb ) && !empty( $breadcrumb ) ){
+                            breadcrumb_tail( $breadcrumb );
+                        }
                     ?>
                 </div>
 

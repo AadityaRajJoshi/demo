@@ -60,7 +60,8 @@ if(! function_exists('get_msg')){
 			'setting'		=> 'Setting',
 			'my_event'		=> 'My Event',
 			'logout'		=> 'Log Out',
-			'menu'			=> 'Menu'
+			'menu'			=> 'Menu',
+			'update'		=> 'Update'
 		);
 
 		return $msg[ $key ];
@@ -91,11 +92,13 @@ if( !function_exists( 'is_admin' ) ){
 	}
 }
 
-if( !function_exists( 'is_admin' ) ){	
+
+if( !function_exists( 'is_staff' ) ){	
 	function is_staff(){
 		$ci = get_instance();
 		return $ci->session->userdata( 'role' ) == "staff";
 	}
+
 }
 
 if( !function_exists( 'get_session' ) ){
@@ -104,6 +107,7 @@ if( !function_exists( 'get_session' ) ){
 		return $ci->session->userdata($param);
 	}
 }
+
 if( !function_exists( 'get_active_class' ) ){
 	function get_active_class( $key = false ){
 		$ci = get_instance();
@@ -169,6 +173,21 @@ if( !function_exists( 'get_menu' ) ){
 					'icon'  => 'fas fa-sign-out-alt'
 				)
 			);
+		}
+	}
+}
+
+if( !function_exists( 'breadcrumb_tail' ) ){
+	function breadcrumb_tail( $arr ){
+		$tail = false;
+		if( is_array( $arr ) ){
+			foreach ( $arr as $key => $value ) {
+				$tail .= $value . '  >  ';
+			}
+			$tail = rtrim( $tail, '>  ' );
+			echo $tail;
+		}else{
+			echo $arr;
 		}
 	}
 }

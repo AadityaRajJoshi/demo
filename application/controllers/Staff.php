@@ -14,6 +14,10 @@ class Staff extends MY_Controller{
 
 		if( $this->is_admin() ){
 			$this->data[ 'meta' ][ 'title' ] = 'staff';
+			$this->data[ 'breadcrumb' ] = array(
+				get_msg( 'staff' ),
+				get_msg( 'all_staff' )
+			);
 			$this->data['staffs'] = $this->user_m->get( '*', array(
 				'role_id' =>get_role_id("staff")
 			));
@@ -27,6 +31,10 @@ class Staff extends MY_Controller{
 	public function add(){
 		if( $this->is_admin() ){
 			$this->data[ 'meta' ][ 'title' ] = 'add staff';
+			$this->data[ 'breadcrumb' ] = array(
+				get_msg( 'staff' ),
+				get_msg( 'add_staff' )
+			);
 			$this->data['page'] = 'add_staff_v';
 			$this->load->helper('email');
 
