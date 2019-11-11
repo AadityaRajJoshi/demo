@@ -105,9 +105,9 @@ class User extends CI_Controller{
 	}
 
 	public function check_login(){
-
-	    if ($this->session->userdata('id'))
-	        redirect(get_route('dashboard', 'refresh'));
+	    if (get_session('id') ){
+	        redirect(get_route('dashboard'), 'refresh');
+	    }
 	}
 
 	public function edit( $id = null ){

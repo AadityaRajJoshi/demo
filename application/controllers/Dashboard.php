@@ -10,7 +10,7 @@ class Dashboard extends MY_Controller{
 
 	public function index(){
 
-		$user = $this->session->userdata('role');
+		$user = get_session('role');
 		$this->data[ 'meta' ][ 'title' ] = 'dashboard';
 		$this->data[ 'breadcrumb' ] = get_msg( 'dashboard' ) ;
 		if( 'administrator' == $user ){

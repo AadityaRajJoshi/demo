@@ -61,7 +61,8 @@ if(! function_exists('get_msg')){
 			'my_event'		=> 'My Event',
 			'logout'		=> 'Log Out',
 			'menu'			=> 'Menu',
-			'update'		=> 'Update'
+			'update'		=> 'Update',
+			'my_details'	=> 'My Details'
 		);
 
 		return $msg[ $key ];
@@ -165,7 +166,7 @@ if( !function_exists( 'get_menu' ) ){
 					'icon'	=> 'far fa-calendar-times'
 				) ,
 				get_route( 'setting' )	=> array(
-					'title' => get_msg( 'setting' ),
+					'title' => get_msg( 'my_details' ),
 					'icon'  => 'fas fa-cog'
 				),
 				get_route( 'logout' ) => array(

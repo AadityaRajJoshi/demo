@@ -1,5 +1,5 @@
 <?php
-    $role = $this->session->userdata('role');
+    $role = get_session('role');
     $error = $this->session->flashdata('error');
     $success = $this->session->flashdata('success');
 ?>
