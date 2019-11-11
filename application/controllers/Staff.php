@@ -13,7 +13,7 @@ class Staff extends MY_Controller{
 	public function index(){
 
 		if( $this->is_admin() ){
-
+			$this->data[ 'meta' ][ 'title' ] = 'staff';
 			$this->data['staffs'] = $this->user_m->get( '*', array(
 				'role_id' =>get_role_id("staff")
 			));
@@ -26,7 +26,7 @@ class Staff extends MY_Controller{
 
 	public function add(){
 		if( $this->is_admin() ){
-
+			$this->data[ 'meta' ][ 'title' ] = 'add staff';
 			$this->data['page'] = 'add_staff_v';
 			$this->load->helper('email');
 
@@ -47,8 +47,7 @@ class Staff extends MY_Controller{
 					'username'=> $username,
 					'email' => $email,
 					'password' => $password,
-					'Phone_number' => $phone_number,
-					
+					'Phone_number' => $phone_number,					
 					'role_id' => get_role_id("staff")
 				);
 				if( $this->user_m->save( $data ) ){
