@@ -60,7 +60,7 @@ if(! function_exists('get_msg')){
 			'setting'		=> 'Setting',
 			'my_event'		=> 'My Event',
 			'logout'		=> 'Log Out',
-			'menu'			=> 'Menu'
+			'menu'			=> 'Menu',
 		);
 
 		return $msg[ $key ];
@@ -169,6 +169,21 @@ if( !function_exists( 'get_menu' ) ){
 					'icon'  => 'fas fa-sign-out-alt'
 				)
 			);
+		}
+	}
+}
+
+if( !function_exists( 'breadcrumb_tail' ) ){
+	function breadcrumb_tail( $arr ){
+		$tail = false;
+		if( is_array( $arr ) ){
+			foreach ( $arr as $key => $value ) {
+				$tail .= $value . '  >  ';
+			}
+			$tail = rtrim( $tail, '>  ' );
+			echo $tail;
+		}else{
+			echo $arr;
 		}
 	}
 }

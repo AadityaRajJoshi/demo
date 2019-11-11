@@ -87,8 +87,10 @@
                 </div>
 
                 <div class="breadcrumb">
-                    <?php
-                       // var_export( $breadcrumb );
+                    <?php 
+                        if( isset( $breadcrumb ) && !empty( $breadcrumb ) ){
+                            breadcrumb_tail( $breadcrumb );
+                        }
                     ?>
                 </div>
 
