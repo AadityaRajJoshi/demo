@@ -35,6 +35,10 @@ if(! function_exists('get_route')){
 			case 'add_event':
 				$path = 'event/add';
 			break;
+
+			case 'unauthorized':
+				$path = 'user/edit/'.get_session('id');
+			break;	
 		}
 		return $path;
 	}
@@ -61,6 +65,7 @@ if(! function_exists('get_msg')){
 			'my_event'		=> 'My Event',
 			'logout'		=> 'Log Out',
 			'menu'			=> 'Menu',
+			'access'         => 'Cannot access'
 		);
 
 		return $msg[ $key ];

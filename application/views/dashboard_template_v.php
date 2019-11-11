@@ -72,12 +72,15 @@
                     </div>
                     <div class="luft-user-icon">
                         <ul>
+                            <?php if( is_admin() ){?>
                             <li class="luft-notification"><a href="#"><i class="far fa-bell"></i> <span>2</span></a>
                                 <ul class="luft-notification-sub">
                                     <li><a href="#"> Integer ante arcu accumsan a </a></li>
                                     <li><a href="#"> Integer ante arcu accumsan a </a></li>
                                 </ul>                        
-                        </li>
+                            </li>
+                            <?php }  ?>
+                            
                             <li class="luft-user-image">
                                 <a href="#" onclick="return false;"><img src="assets/image/user.png" alt="user" /></a>
                                 <ul class="user-info-sub">
@@ -101,8 +104,14 @@
 
                 <div class="luft-user-content-area">
                     <?php
-                        $page = ('administrator' == $role ? 'admin/' : 'staff/') . $page;
+                        
+                    if(isset($common)){
+                       $page =  'common/'.$page;
+                        $this->load->view($page);
+                    }else{
+                         $page = ('administrator' == $role ? 'admin/' : 'staff/') . $page;
                         $this->load->view($page); 
+                    }  
                     ?>
                 </div>
             </div>

@@ -111,59 +111,82 @@ class User extends CI_Controller{
 	}
 
 	public function edit( $id = null ){
+	    $this->load->model('user_m');
 
-		if( is_admin() ){	
-			$this->load->model('user_m');
-			 
+		if ( !get_session('id') ){
+	        redirect( '/' );
+	    }
 			$this->data['meta'] = array(
-				'title' => 'Admin',
+				'title' => 'Details',
 				'description' => 'Staff Description',
 				'keyword' => 'staff, admin, employee'
 			);
-			$this->data['staff'] = $this->user_m->get( '*', array( 
-				'id'=>$id ), 1 );
-			$this->data['page'] = 'edit_staff_v';
-			$this->load->view('dashboard_template_v', $this->data);
-		}
+
+	    	if( is_staff() ){
+
+	    		$staff_id = get_session( 'id' );
+	    		if( $staff_id != $id ){
+	    			$this->session->set_flashdata( 'error', get_msg( 'access' ) );
+	    			redirect(get_route('dashboard'));
+	    		}
+	    	}	
+
+	    	$this->data['staff'] = $this->user_m->get( '*', array( 
+	    		'id'=>$id ), 1 );
+	    			
+	    	$this->data['common'] = true;
+	    	$this->data['page'] = 'profile_v';
+	    	$this->load->view('dashboard_template_v', $this->data);	
 	}
 
 	public function update(){
 
-		if( is_admin() ){
-			$this->load->model('user_m');
-			$this->load->library('form_validation');
+		$this->load->model('user_m');
+		$this->load->library('form_validation');
 
-			$this->form_validation->set_rules('name', 'Username', 'required' );
-			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
-			$this->form_validation->set_rules('number', 'phone number', 'required' );
-			
-			$id = $this->input->post('id');
+		$this->form_validation->set_rules('name', 'Username', 'required' );
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
+		$this->form_validation->set_rules('number', 'phone number', 'required' );
+		
+		$id = $this->input->post('id');
 
-			if( $this->form_validation->run() ){
-				$name = $this->input->post( 'name' );
-				$email = $this->input->post( 'email' );
-				$phone_number = $this->input->post( 'number' );
-				
-				$pass = $this->input->post( 'password' );
+		if( is_staff() ){
 
-
-				$data = array( 
-				'username' => $name,
-				'phone_number' => $phone_number,
-				'email' => $email,
-				
-				);
-
-				if( $pass != '' ){
-					$data[ 'password' ] = md5( $pass );
-				}
-
-				if( $this->user_m->save( $data, array('id'=>$id) ) ) {
-					$this->session->set_flashdata( 'success', get_msg( 'staff_edit' ) );
-					redirect( get_route( 'staff' ) );
-				}
+			$staff_id = get_session( 'id' );
+			if( $staff_id != $id ){
+				$this->session->set_flashdata( 'error', get_msg( 'access' ) );
+				redirect(get_route( 'dashboard' ));
 			}
-			$this->edit( $id );
 		}
+
+		if( $this->form_validation->run() ){
+			$name = $this->input->post( 'name' );
+			$email = $this->input->post( 'email' );
+			$phone_number = $this->input->post( 'number' );
+			
+			$pass = $this->input->post( 'password' );
+
+			$data = array( 
+			'username' => $name,
+			'phone_number' => $phone_number,
+			'email' => $email,
+			);
+
+			if( $pass != '' ){
+				$data[ 'password' ] = md5( $pass );
+			}
+
+			$query = $this->user_m->save( $data, array('id'=>$id) );
+
+			if( is_admin() ){
+				$this->session->set_flashdata( 'success', get_msg( 'staff_edit' ) );
+			}
+
+			if( is_staff() ){
+				$this->session->set_flashdata( 'success', get_msg( 'staff_edit' ) );
+			}
+		}
+
+		$this->edit( $id );
 	}
 }
