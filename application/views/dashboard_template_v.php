@@ -72,7 +72,12 @@
                     </div>
                     <div class="luft-user-icon">
                         <ul>
-                            <li class="luft-notification"><a href="#"><i class="far fa-bell"></i> <span>2</span></a></li>
+                            <li class="luft-notification"><a href="#"><i class="far fa-bell"></i> <span>2</span></a>
+                                <ul class="luft-notification-sub">
+                                    <li><a href="#"> Integer ante arcu accumsan a </a></li>
+                                    <li><a href="#"> Integer ante arcu accumsan a </a></li>
+                                </ul>                        
+                        </li>
                             <li class="luft-user-image">
                                 <a href="#" onclick="return false;"><img src="assets/image/user.png" alt="user" /></a>
                                 <ul class="user-info-sub">
@@ -87,8 +92,10 @@
                 </div>
 
                 <div class="breadcrumb">
-                    <?php
-                       // var_export( $breadcrumb );
+                    <?php 
+                        if( isset( $breadcrumb ) && !empty( $breadcrumb ) ){
+                            breadcrumb_tail( $breadcrumb );
+                        }
                     ?>
                 </div>
 
