@@ -180,11 +180,11 @@ if( !function_exists( 'get_menu' ) ){
 if( !function_exists( 'breadcrumb_tail' ) ){
 	function breadcrumb_tail( $arr ){
 		$tail = false;
+		$icon = '<i class="fas fa-angle-right"></i>';
 		if( is_array( $arr ) ){
 			foreach ( $arr as $key => $value ) {
-				$tail .= $value . '  >  ';
+				$tail .= $value . $icon;
 			}
-			$tail = rtrim( $tail, '>  ' );
 			echo $tail;
 		}else{
 			echo $arr;

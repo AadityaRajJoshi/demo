@@ -124,6 +124,7 @@ class User extends CI_Controller{
 				'id'=>$id ), 1 );
 			$this->data[ 'meta' ][ 'title' ] = 'edit';
 			$this->data[ 'breadcrumb' ] = array(
+				get_msg( 'staff' ),
 				get_msg( 'update' )
 			);
 			$this->data['page'] = 'edit_staff_v';
