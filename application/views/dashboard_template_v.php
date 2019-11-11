@@ -8,7 +8,6 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <!-- <title>Admin - <?php echo $meta['title']; ?></title> -->
         <title>
             <?php 
                 $r = 'administrator' == get_session( 'role' ) ? 'Admin' : 'Staff';
@@ -85,6 +84,12 @@
                         </ul>
                     </div>
 
+                </div>
+
+                <div class="breadcrumb">
+                    <?php
+                       // var_export( $breadcrumb );
+                    ?>
                 </div>
 
                 <div class="luft-user-content-area">
