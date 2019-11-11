@@ -13,6 +13,9 @@
     .display-on-mobile {
       display: block !important; } }
 
+.luft-text-right {
+  text-align: right !important; }
+
 body {
   max-width: 100%;
   margin: 0;
@@ -393,5 +396,42 @@ span.form-err {
   visibility: visible;
   z-index: 9;
   top: 100%; }
+
+.luft-table {
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed; }
+  .luft-table thead {
+    border-top: 1px solid #707070;
+    border-bottom: 1px solid #b7b7b7; }
+  .luft-table tbody tr {
+    padding: .35em;
+    background: #F2F2F2; }
+    .luft-table tbody tr:nth-child(even) {
+      background: #fff; }
+  .luft-table tr {
+    padding: .35em; }
+  .luft-table th, .luft-table td {
+    padding: 16px;
+    text-align: left;
+    color: #020441;
+    text-transform: capitalize; }
+  .luft-table th {
+    font-size: 17px;
+    text-transform: capitalize;
+    color: #020441; }
+    .luft-table th.luft-user-id, .luft-table th.luft-update-download {
+      width: 100px; }
+  .luft-table .luft-user-edit {
+    color: #020441;
+    font-size: 18px;
+    margin-right: 20px; }
+  .luft-table .luft-user-download {
+    color: #cd0000;
+    font-size: 18px; }
+  .luft-table .filter-img {
+    max-width: 13px; }
 
 /*# sourceMappingURL=style.css.map */
