@@ -1,8 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class User extends MY_Controller{
-
+class User extends CI_Controller{
 	public function __construct(){
 
 		parent::__construct();
@@ -12,6 +11,7 @@ class User extends MY_Controller{
 
 
 	public function index(){
+
 		$this->check_login();
 		$cookie = json_decode( get_cookie( 'user_logged_in' ) );
 		$user = false;
@@ -31,10 +31,10 @@ class User extends MY_Controller{
 			'cookie' => $user
 		);
 		$this->load->view('login_template_v', $data);
-
 	}
 
 	public function login(){
+
 		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('username', 'Username', 'required' );
@@ -123,7 +123,7 @@ class User extends MY_Controller{
 			$this->data['staff'] = $this->user_m->get( '*', array( 
 				'id'=>$id ), 1 );
 			$this->data['page'] = 'edit_staff_v';
-			$this->load->view('dashboard_template_v', $this->data);	
+			$this->load->view('dashboard_template_v', $this->data);
 		}
 	}
 
@@ -131,6 +131,7 @@ class User extends MY_Controller{
 
 		if( is_admin() ){
 			$this->load->model('user_m');
+			$this->load->library('form_validation');
 
 			$this->form_validation->set_rules('name', 'Username', 'required' );
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );

@@ -1,5 +1,5 @@
 <?php
-	echo form_open( 'staff/update' ); ?>
+	echo form_open( 'user/update' ); ?>
 
 	<div class="luft-form-wrapper">
 		<div class="luft-form-row">
