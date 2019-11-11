@@ -27,6 +27,7 @@ class Staff extends MY_Controller{
 	public function add(){
 		if( $this->is_admin() ){
 
+
 			$this->data['page'] = 'add_staff_v';
 			$this->load->helper('email');
 
@@ -34,9 +35,8 @@ class Staff extends MY_Controller{
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
 			$this->form_validation->set_rules('number', 'phone number', 'required' );
 			$this->form_validation->set_rules('password', 'Password', 'required' );
-			
-
 			if( $this->form_validation->run() ){
+			
 				$username = $this->input->post( 'name' );
 				$email = $this->input->post( 'email' );
 				$phone_number = $this->input->post( 'number' );
@@ -83,6 +83,7 @@ class Staff extends MY_Controller{
 			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
 			$this->form_validation->set_rules('number', 'phone number', 'required' );
 			
+			$id = $this->input->post('id');
 
 			if( $this->form_validation->run() ){
 				$name = $this->input->post( 'name' );
@@ -91,7 +92,6 @@ class Staff extends MY_Controller{
 				
 				$pass = $this->input->post( 'password' );
 
-				$id = $this->input->post('id');
 
 				$data = array( 
 				'username' => $name,
@@ -109,8 +109,7 @@ class Staff extends MY_Controller{
 					redirect( get_route( 'staff' ) );
 				}
 			}
-
-			
+			$this->edit( $id );
 		}
 	}
 
