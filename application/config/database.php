@@ -73,12 +73,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
+
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => '192.168.2.200',
+	'hostname' => '202.166.198.46',
 	'username' => 'evisionitse',
 	'password' => 'evisionitse',
-	'database' => 'local_luftlek',
+	'database' => 'live_luftlek',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => 'luftlek_',
 	'pconnect' => FALSE,
