@@ -110,7 +110,6 @@ class Staff extends MY_Controller{
 				}
 			}
 
-			
 		}
 	}
 
