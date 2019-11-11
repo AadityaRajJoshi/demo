@@ -35,7 +35,7 @@
                 <span class="form-err"><?php echo validation_errors(); ?></span>
             <?php endif; ?> 
 
-            <section class="luft-menu-area">
+            <section class="luft-menu-area animate-menu animate-menu-left">
                 <ul class="sidebar-menu">
                     <li class="sidebar-header"><?php echo get_msg( 'menu' ) ?></li>
                     <?php foreach ( $menu as $key => $value) {
@@ -65,7 +65,7 @@
             <div id="luft-main-content">
 
                 <div class="luft-header-area">
-                    <div class="luft-menu-toggler">
+                    <div class="luft-menu-toggler btn btn-primary" id="showLeft">
                         <span></span>
                         <span></span>
                         <span></span>
