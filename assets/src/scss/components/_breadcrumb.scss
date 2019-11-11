@@ -1,0 +1,13 @@
+.breadcrumb {
+    margin: 25px 20px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: $color_primary;
+
+    i {
+        margin: 0 10px;
+        &:last-child {
+            display: none;
+        }
+    }
+}

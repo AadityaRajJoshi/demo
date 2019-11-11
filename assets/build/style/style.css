@@ -158,7 +158,7 @@ span.form-err {
   transition: all .3s; }
   .luft-notification .luft-notification-sub li {
     flex: 0 0 100%;
-    padding: 0 0 15px 30px;
+    padding: 0 0 15px 25px;
     border-bottom: 1px solid #DFDFE5;
     margin-bottom: 15px; }
     .luft-notification .luft-notification-sub li:last-child {
@@ -175,8 +175,8 @@ span.form-err {
       font-weight: bold;
       background: #020441;
       border-radius: 50%;
-      width: 20px;
-      height: 20px;
+      width: 16px;
+      height: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -197,6 +197,16 @@ span.form-err {
   opacity: 1;
   z-index: 9;
   top: 100%; }
+
+.breadcrumb {
+  margin: 25px 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #020441; }
+  .breadcrumb i {
+    margin: 0 10px; }
+    .breadcrumb i:last-child {
+      display: none; }
 
 .luft-template-dashboard {
   background: #F7F7F7; }
