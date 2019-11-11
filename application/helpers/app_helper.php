@@ -61,6 +61,7 @@ if(! function_exists('get_msg')){
 			'my_event'		=> 'My Event',
 			'logout'		=> 'Log Out',
 			'menu'			=> 'Menu',
+			'update'		=> 'Update'
 		);
 
 		return $msg[ $key ];

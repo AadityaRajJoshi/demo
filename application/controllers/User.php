@@ -114,7 +114,7 @@ class User extends CI_Controller{
 
 		if( is_admin() ){	
 			$this->load->model('user_m');
-			 
+
 			$this->data['meta'] = array(
 				'title' => 'Admin',
 				'description' => 'Staff Description',
@@ -122,6 +122,10 @@ class User extends CI_Controller{
 			);
 			$this->data['staff'] = $this->user_m->get( '*', array( 
 				'id'=>$id ), 1 );
+			$this->data[ 'meta' ][ 'title' ] = 'edit';
+			$this->data[ 'breadcrumb' ] = array(
+				get_msg( 'update' )
+			);
 			$this->data['page'] = 'edit_staff_v';
 			$this->load->view('dashboard_template_v', $this->data);
 		}
