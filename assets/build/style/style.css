@@ -13,6 +13,9 @@
     .display-on-mobile {
       display: block !important; } }
 
+.luft-text-right {
+  text-align: right !important; }
+
 body {
   max-width: 100%;
   margin: 0;
@@ -89,6 +92,55 @@ img {
       .luft-form-wrapper input[type="submit"] {
         width: 100%; } }
 
+span.form-success {
+  position: fixed;
+  z-index: 999;
+  right: 0;
+  padding: 10px 25px;
+  color: white;
+  border: 1px solid #000;
+  top: 5px;
+  font-size: 14px;
+  background: #58B975; }
+
+span.form-err {
+  color: red;
+  text-align: left;
+  display: block;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background: #fff;
+  padding: 10px 25px;
+  top: 5px;
+  font-size: 14px;
+  height: min-content;
+  -webkit-animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  z-index: 99;
+  box-shadow: 0 0 6px #adadad; }
+  span.form-err p {
+    margin: 0;
+    padding-bottom: 5px; }
+
+@-webkit-keyframes slide-in-right {
+  0% {
+    -webkit-transform: translateX(1000px);
+    transform: translateX(1000px);
+    opacity: 0; }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1; } }
+@keyframes slide-in-right {
+  0% {
+    -webkit-transform: translateX(1000px);
+    transform: translateX(1000px);
+    opacity: 0; }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1; } }
 .luft-template-dashboard {
   background: #F7F7F7; }
 
@@ -344,5 +396,42 @@ img {
   visibility: visible;
   z-index: 9;
   top: 100%; }
+
+.luft-table {
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed; }
+  .luft-table thead {
+    border-top: 1px solid #707070;
+    border-bottom: 1px solid #b7b7b7; }
+  .luft-table tbody tr {
+    padding: .35em;
+    background: #F2F2F2; }
+    .luft-table tbody tr:nth-child(even) {
+      background: #fff; }
+  .luft-table tr {
+    padding: .35em; }
+  .luft-table th, .luft-table td {
+    padding: 16px;
+    text-align: left;
+    color: #020441;
+    text-transform: capitalize; }
+  .luft-table th {
+    font-size: 17px;
+    text-transform: capitalize;
+    color: #020441; }
+    .luft-table th.luft-user-id, .luft-table th.luft-update-download {
+      width: 100px; }
+  .luft-table .luft-user-edit {
+    color: #020441;
+    font-size: 18px;
+    margin-right: 20px; }
+  .luft-table .luft-user-download {
+    color: #cd0000;
+    font-size: 18px; }
+  .luft-table .filter-img {
+    max-width: 13px; }
 
 /*# sourceMappingURL=style.css.map */
