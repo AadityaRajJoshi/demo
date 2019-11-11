@@ -45,10 +45,10 @@ class MY_Controller extends CI_Controller{
 	}
 
 	public function is_admin(){
-		return $this->session->userdata( 'role' ) == "administrator";
+		return get_session( 'role' ) == "administrator";
 	}
 
 	public function is_staff(){
-		return $this->session->userdata( 'role' ) == "staff";
+		return get_session( 'role' ) == "staff";
 	}
 }

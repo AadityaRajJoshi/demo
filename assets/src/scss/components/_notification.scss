@@ -15,7 +15,7 @@
         transition: all .3s;
         li {
             flex: 0 0 100%;
-            padding: 0 0 15px 30px;
+            padding: 0 0 15px 25px;
             border-bottom: 1px solid $color_border;
             margin-bottom: 15px;
 
@@ -35,8 +35,8 @@
                 font-weight: bold;
                 background: $color_primary;
                 border-radius: 50%;
-                width: 20px;
-                height: 20px;
+                width: 16px;
+                height: 16px;
                 display: flex;
                 align-items: center;
                 justify-content: center;

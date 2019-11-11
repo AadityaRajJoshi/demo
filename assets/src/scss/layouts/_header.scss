@@ -11,8 +11,7 @@
         align-items: center;
 
         li {
-            display: inline-flex;
-            padding-left: 30px;
+            display: inline-flex;            
             position: relative;
             a {
                 text-decoration: none;
@@ -40,6 +39,7 @@
             } 
 
             &.#{$prefix}-user-image {
+                margin-left: 30px;
                 img {
                     height: 40px;
                     width: 40px;

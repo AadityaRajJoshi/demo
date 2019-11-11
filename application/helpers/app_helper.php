@@ -65,7 +65,12 @@ if(! function_exists('get_msg')){
 			'my_event'		=> 'My Event',
 			'logout'		=> 'Log Out',
 			'menu'			=> 'Menu',
+<<<<<<< HEAD
 			'access'         => 'Cannot access'
+=======
+			'update'		=> 'Update',
+			'my_details'	=> 'My Details'
+>>>>>>> 3d92c7cb879fe6340ead01510fd7081ad6179c5b
 		);
 
 		return $msg[ $key ];
@@ -169,7 +174,7 @@ if( !function_exists( 'get_menu' ) ){
 					'icon'	=> 'far fa-calendar-times'
 				) ,
 				get_route( 'setting' )	=> array(
-					'title' => get_msg( 'setting' ),
+					'title' => get_msg( 'my_details' ),
 					'icon'  => 'fas fa-cog'
 				),
 				get_route( 'logout' ) => array(
@@ -184,11 +189,11 @@ if( !function_exists( 'get_menu' ) ){
 if( !function_exists( 'breadcrumb_tail' ) ){
 	function breadcrumb_tail( $arr ){
 		$tail = false;
+		$icon = '<i class="fas fa-angle-right"></i>';
 		if( is_array( $arr ) ){
 			foreach ( $arr as $key => $value ) {
-				$tail .= $value . '  >  ';
+				$tail .= $value . $icon;
 			}
-			$tail = rtrim( $tail, '>  ' );
 			echo $tail;
 		}else{
 			echo $arr;

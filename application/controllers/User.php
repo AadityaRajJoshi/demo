@@ -105,22 +105,29 @@ class User extends CI_Controller{
 	}
 
 	public function check_login(){
-
-	    if ($this->session->userdata('id'))
-	        redirect(get_route('dashboard', 'refresh'));
+	    if (get_session('id') ){
+	        redirect(get_route('dashboard'), 'refresh');
+	    }
 	}
 
 	public function edit( $id = null ){
 	    $this->load->model('user_m');
 
+<<<<<<< HEAD
 		if ( !get_session('id') ){
 	        redirect( '/' );
 	    }
+=======
+		if( is_admin() ){	
+			$this->load->model('user_m');
+
+>>>>>>> 3d92c7cb879fe6340ead01510fd7081ad6179c5b
 			$this->data['meta'] = array(
 				'title' => 'Details',
 				'description' => 'Staff Description',
 				'keyword' => 'staff, admin, employee'
 			);
+<<<<<<< HEAD
 
 	    	if( is_staff() ){
 
@@ -137,6 +144,18 @@ class User extends CI_Controller{
 	    	$this->data['common'] = true;
 	    	$this->data['page'] = 'profile_v';
 	    	$this->load->view('dashboard_template_v', $this->data);	
+=======
+			$this->data['staff'] = $this->user_m->get( '*', array( 
+				'id'=>$id ), 1 );
+			$this->data[ 'meta' ][ 'title' ] = 'edit';
+			$this->data[ 'breadcrumb' ] = array(
+				get_msg( 'staff' ),
+				get_msg( 'update' )
+			);
+			$this->data['page'] = 'edit_staff_v';
+			$this->load->view('dashboard_template_v', $this->data);
+		}
+>>>>>>> 3d92c7cb879fe6340ead01510fd7081ad6179c5b
 	}
 
 	public function update(){
