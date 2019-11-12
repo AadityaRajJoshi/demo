@@ -125,28 +125,23 @@ class User extends CI_Controller{
                 redirect(get_route('dashboard'));
             }
         }
+        $this->data['meta'] = array(
+            'title' => 'Details',
+            'description' => 'Staff Description',
+            'keyword' => 'staff, admin, employee'
+        );
+        $this->data['staff'] = $this->user_m->get( '*', array( 
+            'id'=>$id ), 1 );                    
+        $this->data['common'] = true;
+        $this->data['page'] = 'profile_v';
+        $this->load->view('dashboard_template_v', $this->data);    
 
-        if( is_admin() ){    
-            $this->load->model('user_m');
-
-
-            $this->data['meta'] = array(
-                'title' => 'Details',
-                'description' => 'Staff Description',
-                'keyword' => 'staff, admin, employee'
-            );
-            $this->data['staff'] = $this->user_m->get( '*', array( 
-                'id'=>$id ), 1 );                    
-            $this->data['common'] = true;
-            $this->data['page'] = 'profile_v';
-            $this->load->view('dashboard_template_v', $this->data);    
-
-            $this->data[ 'meta' ][ 'title' ] = 'edit';
-            $this->data[ 'breadcrumb' ] = array(
-                get_msg( 'staff' ),
-                get_msg( 'update' )
-            );
-        }
+        $this->data[ 'meta' ][ 'title' ] = 'edit';
+        $this->data[ 'breadcrumb' ] = array(
+            get_msg( 'staff' ),
+            get_msg( 'update' )
+        );
+   
     }
 	public function update(){
 
