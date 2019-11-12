@@ -23,7 +23,7 @@ class User extends CI_Controller{
 		}
 		$data = array(
 			'meta' => array(
-				'title' => 'Login',
+				'title' => get_msg( 'login_m' ),
 				'description' => 'Login panel',
 				'keyword' => 'staff, admin, employee'
 			),
@@ -84,7 +84,7 @@ class User extends CI_Controller{
 	public function forgot(){
 		$data = array(
 			'meta' => array(
-				'title' => 'Forgot Password?',
+				'title' => get_msg( 'forgot_pass' ),
 				'description' => '',
 				'keyword' => ''
 			),
