@@ -32,6 +32,10 @@ if(! function_exists('get_route')){
 				$path = 'staff/add';
 			break;
 
+			case 'all_event':
+				$path = 'event';
+			break;
+
 			case 'add_event':
 				$path = 'event/add';
 			break;
@@ -134,7 +138,7 @@ if( !function_exists( 'get_menu' ) ){
 							'title' => get_msg( 'add_event' ),
 						),
 						'list_event' => array(
-							'route' => get_route( 'event' ),
+							'route' => get_route( 'all_event' ),
 							'title' => get_msg( 'all_event' )
 						)
 					)
