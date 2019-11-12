@@ -77,7 +77,6 @@ class User extends CI_Controller{
 						] ),
 						30*60*60 
 					);
-
 				}
 				redirect( 'dashboard' );
 			}
@@ -111,41 +110,40 @@ class User extends CI_Controller{
 	}
 
 	public function edit( $id = null ){
-	    $this->load->model('user_m');
 
-		if ( !get_session('id') ){
-	        redirect( '/' );
-	    }
-		if( is_admin() ){	
+        $this->load->model('user_m');
 
-			$this->data['meta'] = array(
-				'title' => 'Details',
-				'description' => 'Staff Description',
-				'keyword' => 'staff, admin, employee'
-			);
+        if ( !get_session('id') ){
+            redirect( '/' );
+        }
 
-	    	if( is_staff() ){
-	    		$staff_id = get_session( 'id' );
-	    		if( $staff_id != $id ){
-	    			$this->session->set_flashdata( 'error', get_msg( 'access' ) );
-	    			redirect(get_route('dashboard'));
-	    		}
-	    	}	
+        if( is_staff() ){
 
-	    	$this->data['common'] = true;
-	    	$this->data['page'] = 'profile_v';
-			$this->data['staff'] = $this->user_m->get( '*', array( 
-				'id'=>$id ), 1 );
-			$this->data[ 'meta' ][ 'title' ] = 'edit';
-			$this->data[ 'breadcrumb' ] = array(
-				get_msg( 'staff' ),
-				get_msg( 'update' )
-			);
-			$this->data['page'] = 'edit_staff_v';
-			$this->load->view('dashboard_template_v', $this->data);
-		}
-	}
+            $staff_id = get_session( 'id' );
+            if( $staff_id != $id ){
+                $this->session->set_flashdata( 'error', get_msg( 'access' ) );
+                redirect(get_route('dashboard'));
+            }
+        }
+        $this->data['meta'] = array(
+            'title' => 'Details',
+            'description' => 'Staff Description',
+            'keyword' => 'staff, admin, employee'
+        );
+        $this->data['staff'] = $this->user_m->get( '*', array( 
+            'id'=>$id ), 1 );                    
+        $this->data['common'] = true;
+        $this->data['page'] = 'profile_v';
+        $this->load->view('dashboard_template_v', $this->data);    
 
+        $this->data[ 'meta' ][ 'title' ] = 'edit';
+        $this->data[ 'breadcrumb' ] = array(
+            get_msg( 'staff' ),
+            get_msg( 'update' )
+        );
+   
+    }
+    
 	public function update(){
 
 		$this->load->model('user_m');
@@ -187,13 +185,13 @@ class User extends CI_Controller{
 
 			if( is_admin() ){
 				$this->session->set_flashdata( 'success', get_msg( 'staff_edit' ) );
+				redirect(get_route( 'staff' ));
 			}
 
 			if( is_staff() ){
 				$this->session->set_flashdata( 'success', get_msg( 'staff_edit' ) );
 			}
 		}
-
 		$this->edit( $id );
 	}
 }
