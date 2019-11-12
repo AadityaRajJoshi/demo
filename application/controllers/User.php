@@ -112,7 +112,6 @@ class User extends CI_Controller{
 	public function edit( $id = null ){
         $this->load->model('user_m');
 
-
         if ( !get_session('id') ){
             redirect( '/' );
         }
@@ -133,6 +132,7 @@ class User extends CI_Controller{
         $this->data['staff'] = $this->user_m->get( '*', array( 
             'id'=>$id ), 1 );                    
         $this->data['common'] = true;
+  
         $this->data['page'] = 'profile_v';
         $this->load->view('dashboard_template_v', $this->data);    
 
@@ -141,8 +141,8 @@ class User extends CI_Controller{
             get_msg( 'staff' ),
             get_msg( 'update' )
         );
-   
     }
+
 	public function update(){
 
 		$this->load->model('user_m');
@@ -155,7 +155,6 @@ class User extends CI_Controller{
 		$id = $this->input->post('id');
 
 		if( is_staff() ){
-
 			$staff_id = get_session( 'id' );
 			if( $staff_id != $id ){
 				$this->session->set_flashdata( 'error', get_msg( 'access' ) );
@@ -191,6 +190,7 @@ class User extends CI_Controller{
 				$this->session->set_flashdata( 'success', get_msg( 'staff_edit' ) );
 			}
 		}
+
 		$this->edit( $id );
 	}
 }

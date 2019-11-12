@@ -1,7 +1,7 @@
 <?php
 	echo form_open( 'user/update' ); ?>
 
-	<div class="luft-form-wrapper ">
+	<div class="luft-form-wrapper">
 		<div class="luft-form-row">
 			<?php echo form_label( 'Name', 'name' );
 				echo form_input( array(
@@ -35,7 +35,6 @@
 				'id' => 'phone',
 			) ); ?>
 		</div>
-
 		
 		<div class="luft-form-row">
 			<?php echo form_label( 'Password', 'password' );
