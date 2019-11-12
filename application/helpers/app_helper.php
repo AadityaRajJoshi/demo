@@ -54,8 +54,8 @@ if(! function_exists('get_msg')){
 			'up_mismatched' => 'Username And Password Not Match.',
 			'staff_added'	=> 'Staff added Successfully',
 			'staff_add_e'	=> 'Error! Staff Not Added',
-			'staff_edit'	=> 'Staff Upadted Successfully',
-			'staff_edit_e'	=> 'Error! Staff Not Upadted',
+			'user_updated'	=> 'Staff Upadted Successfully',
+			'user_update_failed' => 'Error! Staff Not Upadted',
 			'staff_delete'	=> 'Staff Deleted Successfully',
 			'staff_delete_e'=> 'Error! Staff Not Deleted',
 			'dashboard'		=> 'Dashboard',
@@ -71,6 +71,7 @@ if(! function_exists('get_msg')){
 			'menu'			=> 'Menu',
 			'access'        => 'Cannot access',
 			'update'		=> 'Update',
+
 			'my_details'	=> 'My Details',
 			'name'          => 'name',
 			'name_placeholder' => 'Enter Name',
@@ -79,7 +80,12 @@ if(! function_exists('get_msg')){
 			'number'        => 'Number',
 			'number_placeholder' => 'Enter Phone Number',
 			'password'     => 'Password',
-			'password_placeholder' => 'Enter Password'
+			'password_placeholder' => 'Enter Password',
+
+			'my_details'	=> 'MY DETAILS',
+			'save_details'  => 'SAVE DETAILS',
+			'update_staff'  => 'UPDATE STAFF'
+
 		);
 
 		return $msg[ $key ];
