@@ -21,7 +21,7 @@
         <link rel="stylesheet" type="text/css" href="assets/build/style/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" />
     </head>
-    <body class="luft-template-dashboard">
+    <body class="luft-template-dashboard<?php echo isset($body_class)? ' '.$body_class:''; ?>">
         <div class="luft-content-area">
             <?php if (!empty($success)): ?>
                 <span class="form-success"><?php echo $success; ?></span>

@@ -1,5 +1,4 @@
-<?php
-	echo form_open( 'user/update' ); ?>
+<?php echo form_open( 'user/update' ); ?>
 
 	<div class="luft-form-wrapper">
 		<div class="luft-form-row">
@@ -47,13 +46,9 @@
 	</div>	
 	<?php 
 	echo form_hidden('id', $user->id);
+	echo form_hidden('mode', $mode);
 	
-	if( is_admin() ){
-		echo form_submit( 'update', 'Update Staff' );	
-	}
-
-	if( is_staff() ){
-		echo form_submit( 'update', 'Update Details' );	
-	}
+	$btn_txt = 'own' == $mode ? 'save_details':'update_staff';
+	echo form_submit( 'update', get_msg($btn_txt) );	
 	echo form_close( '' );
 ?>
