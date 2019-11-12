@@ -20,14 +20,17 @@ class Event extends MY_Controller{
 			do_redirect( 'dashboard' );
 		}
 		$this->load->model( 'user_m' );
-		$db_user = $this->user_m->get( array( 'id', 'username' ) , array(
+		$staffs = array();
+		$db_staffs = $this->user_m->get( array( 'id', 'username' ) , array(
 			'role_id' =>get_role_id("staff")
-		), 1);
-		var_export( $db_user );
+		));
+		foreach ($db_staffs as $value) {
+			$staffs[ $value->id ] = $value->username;
+		}
+		$this->data[ 'staffs' ] = $staffs;
 		$this->data[ 'meta' ][ 'title' ] = 'add event';
 		$this->data['page'] = 'add_event_v';
 		$this->data['current_menu'] = 'event';
-		$this->data[ 'staffs' ] = 
 		$this->load->view('dashboard_template_v', $this->data);
 	}
 }
