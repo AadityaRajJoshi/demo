@@ -69,7 +69,7 @@ if(! function_exists('get_msg')){
 			'my_event'		=> 'My Event',
 			'logout'		=> 'Log Out',
 			'menu'			=> 'Menu',
-			'access'         => 'Cannot access',
+			'access'        => 'Cannot access',
 			'update'		=> 'Update',
 			'my_details'	=> 'My Details'
 		);
@@ -126,67 +126,79 @@ if(! function_exists('is_logged_in')){
 
 if( !function_exists( 'get_menu' ) ){	
 	function get_menu(){
-		return [
-			'dashboard' => ['route'=>get_route( 'dashboard' ),'title'=>get_msg( 'dashboard' ),'icon'=>'fas fa-home'],
-			'event' => ['title'=>get_msg( 'event' ),'icon'=>'far fa-calendar-times','menu'=>[
-					'add_event' => ['route'=>get_route( 'add_event' ),'title'=>get_msg('add_event')],
-					'list_event' => ['route'=>get_route( 'event' ),'title'=>get_msg('all_event')]
-			]],
-			'logout' => ['route'=>get_route( 'logout' ),'title'=>get_msg( 'logout' ),'icon'=>'fas fa-sign-out-alt']
-		];
+		
 		if(is_admin()){
 
 			return array(
-				get_route( 'dashboard' ) => array(
+				'dashboard' => array(
+					'route' => 'dashboard',
 					'title' => get_msg( 'dashboard' ),
-					'icon'  => 'fas fa-home'
+					'icon' => 'fas fa-home'
 				),
 				'event' => array(
 					'title' => get_msg( 'event' ),
-					'icon'	=> 'far fa-calendar-times',
-					'menu'	=> array(
-						get_route( 'add_event' ) => get_msg( 'add_event' ),
-						get_route( 'event' ) 	 => get_msg( 'all_event' )
-					),
+					'icon' => 'far fa-calandar-times',
+					'menu' => array(
+						'add_event' => array(
+							'route' => get_route( 'add_event' ),
+							'title' => get_msg( 'add_event' ),
+						),
+						'list_event' => array(
+							'route' => get_route( 'event' ),
+							'title' => get_msg( 'all_event' )
+						)
+					)
 				),
 				'staff' => array(
 					'title' => get_msg( 'staff' ),
 					'icon'	=> 'fas fa-user-friends',
 					'menu'	=> array(				
-						get_route( 'add_staff' ) => get_msg( 'add_staff' ),
-						get_route( 'staff' ) 	 => get_msg( 'all_staff' )
+						'add_staff' => array(
+							'route' => get_route( 'add_staff' ),
+							'title' => get_msg( 'add_staff' )
+						),
+						'all_staff' => array(
+							'route' => get_route( 'staff' ),
+							'title' => get_msg( 'all_staff' )
+						)
 					)
 				),
-				get_route( 'setting' )	=> array(
+				'setting'=> array(
 					'title' => get_msg( 'setting' ),
-					'icon'  => 'fas fa-cog'
+					'icon' => 'fas fa-cog'
 				),
-				get_route( 'logout' ) => array(
+				'logout' => array(
+					'route' => get_route( 'logout' ),
 					'title' => get_msg( 'logout' ),
-					'icon'  => 'fas fa-sign-out-alt'
-				)
-			);
-		}elseif(is_staff()){
-			return array(
-				get_route( 'dashboard' ) => array(
-					'title' => get_msg( 'dashboard' ),
-					'icon'  => 'fas fa-home'
+					'icon' => 'fas fa-sign-out-alt'
 				),
-				'event' 	=> array(
-					'title' => get_msg( 'my_event' ),
-					'icon'	=> 'far fa-calendar-times'
-				) ,
-				get_route( 'setting' )	=> array(
-					'title' => get_msg( 'my_details' ),
-					'icon'  => 'fas fa-cog'
-				),
-				get_route( 'logout' ) => array(
-					'title' =>get_msg( 'logout' ),
-					'icon'  => 'fas fa-sign-out-alt'
-				)
 			);
 		}
-	}
+
+		 if( is_staff() ) {
+		 	return array(
+		 		'dashboard' => array(
+		 			'route' => 'dashboard',
+		 			'title' => get_msg( 'dashboard' ),
+		 			'icon' => 'fas fa-home'
+		 		),
+		 		'event' => array(
+		 			'title' => get_msg( 'my_event' ),
+		 			'icon' => 'far fa-calandar-times'
+		 		),
+		 		'my_details' => array(
+		 			'route' => get_route( 'unauthorized' ),
+		 			'title' => get_msg('my_details'),
+		 			'icon' => 'fas fa-cog'
+		 		),
+		 		'logout' => array(
+					'route' => get_route( 'logout' ),
+					'title' => get_msg( 'logout' ),
+					'icon' => 'fas fa-sign-out-alt'
+				),
+		 	);
+		 }
+	}	
 }
 
 if( !function_exists( 'breadcrumb_tail' ) ){

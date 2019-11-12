@@ -1,12 +1,12 @@
 <?php
 	echo form_open( 'user/update' ); ?>
 
-	<div class="luft-form-wrapper ">
+	<div class="luft-form-wrapper">
 		<div class="luft-form-row">
 			<?php echo form_label( 'Name', 'name' );
 				echo form_input( array(
 				'name' => 'name',
-				'value'=> $staff->username,
+				'value'=> $user->username,
 				'placeholder' => 'Enter name',
 				'id' => 'name',
 			) ); 
@@ -18,7 +18,7 @@
 			echo form_label( 'Email', 'email' );
 			echo form_input( array(
 				'name' => 'email',
-				'value' => $staff->email,
+				'value' => $user->email,
 				'placeholder' => 'Enter email',
 				'id' => 'email',
 				'type' => 'email',
@@ -30,12 +30,11 @@
 			echo form_input( array(
 				'name' => 'number',
 				'type'=>'tel',
-				'value' => $staff->phone_number,
+				'value' => $user->phone_number,
 				'placeholder' => 'Enter Phone Number',
 				'id' => 'phone',
 			) ); ?>
 		</div>
-
 		
 		<div class="luft-form-row">
 			<?php echo form_label( 'Password', 'password' );
@@ -47,7 +46,7 @@
 		</div>
 	</div>	
 	<?php 
-	echo form_hidden('id', $staff->id);
+	echo form_hidden('id', $user->id);
 	
 	if( is_admin() ){
 		echo form_submit( 'update', 'Update Staff' );	

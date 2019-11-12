@@ -114,43 +114,54 @@ class User extends CI_Controller{
             redirect(get_route('login'), 'refresh');
         }
 
-        $current_user_id = get_session( 'id' );
-        if( is_staff() && $current_user_id != $id ){
-            $this->session->set_flashdata( 'error', get_msg( 'access' ) );
+        $invalid_access = function($instance){
+        	$instance->session->set_flashdata( 'error', get_msg( 'access' ) );
             redirect(get_route('dashboard'));
+        };
+
+        $current_user_id = get_session( 'id' );
+        if((is_staff() && $current_user_id != $id) ||  $id <= 0 ){
+        	$invalid_access($this);
         }
 
-        switch($mode){
-        	case 'own':
-        		$this->data['meta'] = array(
-		            'title' => 'Edit Profile',
-		            'description' => 'Edit Profile',
-		            'keyword' => ''
-		        );
-        	break;
+        $this->load->model('user_m');
+        $user = $this->user_m->get('*', array('id'=>$id ), 1);
 
-        	case 'other':
-        		$this->data['meta'] = array(
-		            'title' => 'Edit Staff Profile',
-		            'description' => 'Edit Profile',
-		            'keyword' => ''
-		        );
-        	break;
+        if(! $user){
+        	$invalid_access($this);
+        }
+        
+        $this->data['user'] = $user;
+
+        if('own' == $mode){
+        	# Editing my profile
+    		$this->data['meta'] = array(
+	            'title' => 'Edit Profile',
+	            'description' => 'Edit Profile',
+	            'keyword' => ''
+	        );
+        }else{
+        	# Editing staff profile
+    		$this->data['meta'] = array(
+	            'title' => 'Edit Staff Profile',
+	            'description' => 'Edit Profile',
+	            'keyword' => ''
+	        );
+	        $mode = 'other';
         }
 
         $this->data['mode'] = $mode;
-    	$this->load->model('user_m');
-    	$this->data['user'] = $this->user_m->get('*', array('id'=>$id ), 1);  
                           
         $this->data['common'] = true;
         $this->data['page'] = 'profile_v';
+        $this->data['current_menu'] = 'dashboard';
 
         $this->data[ 'breadcrumb' ] = array(
             get_msg( 'staff' ),
             get_msg( 'update' )
         );
+
         $this->load->view('dashboard_template_v', $this->data);    
-   
     }
 
 	public function update(){
@@ -165,7 +176,6 @@ class User extends CI_Controller{
 		$id = $this->input->post('id');
 
 		if( is_staff() ){
-
 			$staff_id = get_session( 'id' );
 			if( $staff_id != $id ){
 				$this->session->set_flashdata( 'error', get_msg( 'access' ) );
@@ -201,6 +211,7 @@ class User extends CI_Controller{
 				$this->session->set_flashdata( 'success', get_msg( 'staff_edit' ) );
 			}
 		}
+
 		$this->edit( $id );
 	}
 }
