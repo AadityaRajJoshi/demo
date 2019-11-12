@@ -164,7 +164,7 @@ if( !function_exists( 'get_menu' ) ){
 				),
 			);
 		}
-		 elseif( is_staff() ) {
+		elseif( is_staff() ) {
 		 	return array(
 		 		'dashboard' => array(
 		 			'route' => 'dashboard',
@@ -186,7 +186,7 @@ if( !function_exists( 'get_menu' ) ){
 					'icon' => 'fas fa-sign-out-alt'
 				),
 		 	);
-		 }
+		}
 	}	
 }
 
