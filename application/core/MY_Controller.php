@@ -13,8 +13,8 @@ class MY_Controller extends CI_Controller{
 
 	public function __construct(){
 		parent::__construct();
-	    if ( !get_session('id') ){
-	        redirect( '/' );
+	    if ( !is_logged_in() ){
+	        do_redirect( 'login' );
 	    }
 
 	    $this->data['menu'] = get_menu();
@@ -42,13 +42,5 @@ class MY_Controller extends CI_Controller{
 		// echo  "called";die;
 		return $this->email->send();
 
-	}
-
-	public function is_admin(){
-		return get_session( 'role' ) == "administrator";
-	}
-
-	public function is_staff(){
-		return get_session( 'role' ) == "staff";
 	}
 }

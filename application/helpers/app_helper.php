@@ -44,8 +44,8 @@ if(! function_exists('get_route')){
 				$path = 'event/add';
 			break;
 
-			case 'unauthorized':
-				$path = 'user/edit/'.get_session('id');
+			case 'profile':
+				$path = 'profile';
 			break;	
 		}
 		return $path;
@@ -58,8 +58,8 @@ if(! function_exists('get_msg')){
 			'up_mismatched' => 'Username And Password Not Match.',
 			'staff_added'	=> 'Staff added Successfully',
 			'staff_add_e'	=> 'Error! Staff Not Added',
-			'staff_edit'	=> 'Staff Upadted Successfully',
-			'staff_edit_e'	=> 'Error! Staff Not Upadted',
+			'user_updated'	=> 'Staff Upadted Successfully',
+			'user_update_failed' => 'Error! Staff Not Upadted',
 			'staff_delete'	=> 'Staff Deleted Successfully',
 			'staff_delete_e'=> 'Error! Staff Not Deleted',
 			'dashboard'		=> 'Dashboard',
@@ -75,7 +75,18 @@ if(! function_exists('get_msg')){
 			'menu'			=> 'Menu',
 			'access'        => 'Cannot access',
 			'update'		=> 'Update',
-			'my_details'	=> 'My Details',
+			'name'          => 'name',
+			'name_placeholder' => 'Enter Name',
+			'email'         => 'Email',
+			'email_placeholder' => 'Enter Email',
+			'number'        => 'Number',
+			'number_placeholder' => 'Enter Phone Number',
+			'password'     => 'Password',
+			'password_placeholder' => 'Enter Password',
+			'my_details'	=> 'MY DETAILS',
+			'save_details'  => 'SAVE DETAILS',
+			'update_staff'  => 'UPDATE STAFF'
+
 		);
 
 		return $msg[ $key ];
@@ -177,8 +188,7 @@ if( !function_exists( 'get_menu' ) ){
 					'icon' => 'fas fa-sign-out-alt'
 				),
 			);
-		}
-		 elseif( is_staff() ) {
+		}elseif( is_staff() ) {
 		 	return array(
 		 		'dashboard' => array(
 		 			'route' => 'dashboard',
@@ -190,7 +200,7 @@ if( !function_exists( 'get_menu' ) ){
 		 			'icon' => 'far fa-calendar-times'
 		 		),
 		 		'my_details' => array(
-		 			'route' => get_route( '' ),
+		 			'route' => get_route( 'profile' ),
 		 			'title' => get_msg('my_details'),
 		 			'icon' => 'fas fa-cog'
 		 		),
@@ -200,7 +210,7 @@ if( !function_exists( 'get_menu' ) ){
 					'icon' => 'fas fa-sign-out-alt'
 				),
 		 	);
-		 }
+		}
 	}	
 }
 
@@ -261,5 +271,11 @@ if(! function_exists('print_menu')){
 	    if( $wrapper ){
 	        echo '</ul>'; 
 	    }
+	}
+}
+
+if(! function_exists('do_redirect')){
+	function do_redirect($route,$mode='refresh'){
+		redirect(get_route($route), $mode);
 	}
 }
