@@ -36,31 +36,7 @@
             <?php endif; ?> 
 
             <section class="luft-menu-area animate-menu animate-menu-left">
-                <ul class="sidebar-menu">
-                    <li class="sidebar-header"><?php echo get_msg( 'menu' ) ?></li>
-                    <?php foreach ( $menu as $key => $value) {
-                        if( isset( $value[ 'menu' ] ) ){ ?>
-                            <li <?php echo get_active_class( $key ) ?> >
-                                <a href="#">
-                                    <i class="<?php echo $value[ 'icon' ]; ?>"></i>
-                                    <span><?php echo $value[ 'title' ] ?></span>
-                                    <i class="fa fa-angle-right pull-right"></i>
-                                </a>
-                                <ul class="sidebar-submenu">
-                                    <?php foreach ( $value[ 'menu' ] as $k => $v ){ ?>
-                                        <li>
-                                            <a href="<?php echo $k ?>"> <?php echo $v?> </a></li>
-                                    <?php } ?>  
-                                </ul>
-                            </li>
-                        <?php }else{ ?>
-                            <li <?php echo get_active_class( $key ) ?> >
-                                <a href="<?php echo $key ?>">
-                                <i class="<?php echo $value[ 'icon' ]; ?>"></i> <?php echo $value[ 'title' ] ?> </a>
-                            </li>
-                        <?php }
-                    } ?>
-                </ul>
+                <?php menu($current_menu); ?>
             </section>
             <div id="luft-main-content">
 

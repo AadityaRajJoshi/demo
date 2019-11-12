@@ -65,12 +65,9 @@ if(! function_exists('get_msg')){
 			'my_event'		=> 'My Event',
 			'logout'		=> 'Log Out',
 			'menu'			=> 'Menu',
-
-			'access'         => 'Cannot access',
-
+			'access'        => 'Cannot access',
 			'update'		=> 'Update',
 			'my_details'	=> 'My Details'
-
 		);
 
 		return $msg[ $key ];
@@ -117,74 +114,81 @@ if( !function_exists( 'get_session' ) ){
 	}
 }
 
-if( !function_exists( 'get_active_class' ) ){
-	function get_active_class( $key = false ){
-		$ci = get_instance();
-		$class = false;
-		if( $key == $ci->uri->segment(1) ){
-			$class = 'class="active" ';
-		}
-		return $class;
-	}
-}
-
 if( !function_exists( 'get_menu' ) ){	
 	function get_menu(){
-		$ci = get_instance();
-		$role = $ci->session->userdata('role');
-		if('administrator' == $role){
+		
+		if(is_admin()){
+
 			return array(
-				get_route( 'dashboard' ) => array(
+				'dashboard' => array(
+					'route' => 'dashboard',
 					'title' => get_msg( 'dashboard' ),
-					'icon'  => 'fas fa-home'
+					'icon' => 'fas fa-home'
 				),
 				'event' => array(
 					'title' => get_msg( 'event' ),
-					'icon'	=> 'far fa-calendar-times',
-					'menu'	=> array(
-						get_route( 'add_event' ) => get_msg( 'add_event' ),
-						get_route( 'event' ) 	 => get_msg( 'all_event' )
-					),
+					'icon' => 'far fa-calandar-times',
+					'menu' => array(
+						'add_event' => array(
+							'route' => get_route( 'add_event' ),
+							'title' => get_msg( 'add_event' ),
+						),
+						'list_event' => array(
+							'route' => get_route( 'event' ),
+							'title' => get_msg( 'all_event' )
+						)
+					)
 				),
 				'staff' => array(
 					'title' => get_msg( 'staff' ),
 					'icon'	=> 'fas fa-user-friends',
 					'menu'	=> array(				
-						get_route( 'add_staff' ) => get_msg( 'add_staff' ),
-						get_route( 'staff' ) 	 => get_msg( 'all_staff' )
+						'add_staff' => array(
+							'route' => get_route( 'add_staff' ),
+							'title' => get_msg( 'add_staff' )
+						),
+						'all_staff' => array(
+							'route' => get_route( 'staff' ),
+							'title' => get_msg( ' all_staff ' )
+						)
 					)
 				),
-				get_route( 'setting' )	=> array(
+				'setting'=> array(
 					'title' => get_msg( 'setting' ),
-					'icon'  => 'fas fa-cog'
+					'icon' => 'fas fa-cog'
 				),
-				get_route( 'logout' ) => array(
+				'logout' => array(
+					'route' => get_route( 'logout' ),
 					'title' => get_msg( 'logout' ),
-					'icon'  => 'fas fa-sign-out-alt'
-				)
-			);
-		}elseif('staff' == $role){
-			return array(
-				get_route( 'dashboard' ) => array(
-					'title' => get_msg( 'dashboard' ),
-					'icon'  => 'fas fa-home'
+					'icon' => 'fas fa-sign-out-alt'
 				),
-				'event' 	=> array(
-					'title' => get_msg( 'my_event' ),
-					'icon'	=> 'far fa-calendar-times'
-				) ,
-				get_route( 'setting' )	=> array(
-					'title' => get_msg( 'my_details' ),
-					'icon'  => 'fas fa-cog'
-				),
-				get_route( 'logout' ) => array(
-					'title' =>get_msg( 'logout' ),
-					'icon'  => 'fas fa-sign-out-alt'
-				)
 			);
 		}
-	}
+	}	
 }
+
+
+
+		// }elseif(is_staff()){
+		// 	return array(
+		// 		get_route( 'dashboard' ) => array(
+		// 			'title' => get_msg( 'dashboard' ),
+		// 			'icon'  => 'fas fa-home'
+		// 		),
+		// 		'event' 	=> array(
+		// 			'title' => get_msg( 'my_event' ),
+		// 			'icon'	=> 'far fa-calendar-times'
+		// 		) ,
+		// 		get_route( 'setting' )	=> array(
+		// 			'title' => get_msg( 'my_details' ),
+		// 			'icon'  => 'fas fa-cog'
+		// 		),
+		// 		get_route( 'logout' ) => array(
+		// 			'title' =>get_msg( 'logout' ),
+		// 			'icon'  => 'fas fa-sign-out-alt'
+		// 		)
+		// 	);
+		// }
 
 if( !function_exists( 'breadcrumb_tail' ) ){
 	function breadcrumb_tail( $arr ){
@@ -198,5 +202,50 @@ if( !function_exists( 'breadcrumb_tail' ) ){
 		}else{
 			echo $arr;
 		}
+	}
+}
+
+if(! function_exists('menu')){
+	function menu($current_route){
+		print_menu(get_menu(), $current_route);
+	}
+}
+
+if(! function_exists('print_menu')){
+	function print_menu( $menu, $current_menu, $wrapper=true){
+	    $wrapper_class = 'sidebar-menu';
+	    $header = 'Menu';
+
+	    if( $wrapper )
+	        echo sprintf('<ul class="%s"><li class="sidebar-header">%s</li>', $wrapper_class, $header);
+
+	    foreach( $menu as $id => $m ){
+	        $route = isset($m['route']) ? $m['route'] : '#';
+	        $item_class = $current_menu == $id ? 'active menu-item' : 'menu-item';
+	        
+	        echo sprintf('<li class="%s"><a href="%s">',$item_class, $route);
+
+	        if(isset($m['icon']))
+	            echo sprintf('<i class="%s"></i>',$m['icon']);
+
+	        echo $m['title'];
+
+	        if( isset($m['menu']) )
+	            echo '<i class="fa fa-angle-right pull-right"></i>';
+
+	        echo '</a>';
+
+	        if(isset($m['menu'])){
+	            echo '<ul class="sidebar-submenu">';
+	            print_menu($m['menu'], $current_menu, false);
+	            echo '</ul>';
+	        }else{
+	            echo '</li>';
+	        }
+	    }
+
+	    if( $wrapper ){
+	        echo '</ul>'; 
+	    }
 	}
 }

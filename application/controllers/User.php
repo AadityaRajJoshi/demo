@@ -110,7 +110,11 @@ class User extends CI_Controller{
 	}
 
 	public function edit( $id = null ){
+
+
+
         $this->load->model('user_m');
+
 
         if ( !get_session('id') ){
             redirect( '/' );
