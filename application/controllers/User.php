@@ -2,19 +2,20 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User extends CI_Controller{
+	
 	public function __construct(){
-
 		parent::__construct();
 		$this->load->helper('form');
-		$this->data['menu'] = get_menu();
 	}
 
 	public function index(){
 
-		$this->check_login();
+		if(is_logged_in())
+			redirect(get_route('dashboard'), 'refresh');
+
 		$cookie = json_decode( get_cookie( 'user_logged_in' ) );
 		$user = false;
-		if( '' != $cookie && isset( $cookie->user ) ){
+		if('' != $cookie && isset($cookie->user)){
 			$user = array(
 				'name' => $cookie->user,
 				'pass' => $cookie->pass
@@ -95,12 +96,6 @@ class User extends CI_Controller{
 	public function logout() {
 	    $this->session->sess_destroy();
 	    redirect(get_route('login'), 'refresh');
-	}
-
-	public function check_login(){
-	    if (is_logged_in()){
-	        redirect(get_route('dashboard'), 'refresh');
-	    }
 	}
 
 	public function profile(){

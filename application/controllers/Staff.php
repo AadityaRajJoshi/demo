@@ -30,47 +30,45 @@ class Staff extends MY_Controller{
 	}
 
 	public function add(){
-		if( $this->is_admin() ){
-			$this->data[ 'meta' ][ 'title' ] = 'add staff';
-			$this->data[ 'breadcrumb' ] = array(
-				get_msg( 'staff' ),
-				get_msg( 'add_staff' )
-			);
-			$this->data['page'] = 'add_staff_v';
-			$this->data['current_menu'] = 'staff';
-			$this->load->helper('email');
 
-			$this->form_validation->set_rules('name', 'Username', 'required' );
-			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
-			$this->form_validation->set_rules('number', 'phone number', 'required' );
-			$this->form_validation->set_rules('password', 'Password', 'required' );
-			if( $this->form_validation->run() ){
+		if(! is_admin())
+			redirect(get_route('dashboard'),'refresh');
+		
+		$this->data[ 'meta' ][ 'title' ] = 'add staff';
+		$this->data[ 'breadcrumb' ] = array(get_msg( 'staff' ),get_msg( 'add_staff' ));
+		$this->data['page'] = 'add_staff_v';
+		$this->data['current_menu'] = 'staff';
+		$this->load->helper('email');
+
+		$this->form_validation->set_rules('name', 'Username', 'required' );
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
+		$this->form_validation->set_rules('number', 'phone number', 'required' );
+		$this->form_validation->set_rules('password', 'Password', 'required' );
+		if($this->form_validation->run()){
+		
+			$username = $this->input->post( 'name' );
+			$email = $this->input->post( 'email' );
+			$phone_number = $this->input->post( 'number' );
+			$password = md5($this->input->post( 'password' ));
 			
-				$username = $this->input->post( 'name' );
-				$email = $this->input->post( 'email' );
-				$phone_number = $this->input->post( 'number' );
-				$password = md5($this->input->post( 'password' ));
-				
-				$data = array(
-					'username'=> $username,
-					'email' => $email,
-					'password' => $password,
-					'Phone_number' => $phone_number,					
-					'role_id' => get_role_id("staff")
-				);
-				if( $this->user_m->save( $data ) ){
-					$this->session->set_flashdata( 'success', get_msg( 'staff_added' ) );
-					redirect( get_route( 'staff' ) );
-				}else{
-					$this->session->set_flashdata( 'error', get_msg( 'up_mismatched' ) );
-					redirect( get_route('staff/add'));
-				}
+			$data = array(
+				'username'=> $username,
+				'email' => $email,
+				'password' => $password,
+				'Phone_number' => $phone_number,					
+				'role_id' => get_role_id("staff")
+			);
+			if( $this->user_m->save( $data ) ){
+				$this->session->set_flashdata( 'success', get_msg( 'staff_added' ) );
+				redirect( get_route( 'staff' ) );
+			}else{
+				$this->session->set_flashdata( 'error', get_msg( 'up_mismatched' ) );
+				redirect( get_route('add_staff'));
 			}
-
-			$this->load->view( 'dashboard_template_v', $this->data );	
 		}
-	}
 
+		$this->load->view( 'dashboard_template_v', $this->data );	
+	}
 
 	public function delete( $id = false ){
 		if( $this->is_admin() ){
