@@ -127,7 +127,7 @@ if( !function_exists( 'get_menu' ) ){
 				),
 				'event' => array(
 					'title' => get_msg( 'event' ),
-					'icon' => 'far fa-calandar-times',
+					'icon' => 'far fa-calendar-times',
 					'menu' => array(
 						'add_event' => array(
 							'route' => get_route( 'add_event' ),
@@ -174,7 +174,7 @@ if( !function_exists( 'get_menu' ) ){
 		 		),
 		 		'event' => array(
 		 			'title' => get_msg( 'my_event' ),
-		 			'icon' => 'far fa-calandar-times'
+		 			'icon' => 'far fa-calendar-times'
 		 		),
 		 		'my_details' => array(
 		 			'route' => get_route( 'unauthorized' ),
