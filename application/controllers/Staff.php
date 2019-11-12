@@ -32,7 +32,7 @@ class Staff extends MY_Controller{
 	public function add(){
 
 		if(! is_admin())
-			redirect(get_route('dashboard'),'refresh');
+			do_redirect('dashboard');
 		
 		$this->data[ 'meta' ][ 'title' ] = 'add staff';
 		$this->data[ 'breadcrumb' ] = array(get_msg( 'staff' ),get_msg( 'add_staff' ));
@@ -60,10 +60,10 @@ class Staff extends MY_Controller{
 			);
 			if( $this->user_m->save( $data ) ){
 				$this->session->set_flashdata( 'success', get_msg( 'staff_added' ) );
-				redirect( get_route( 'staff' ) );
+				do_redirect('staff');
 			}else{
 				$this->session->set_flashdata( 'error', get_msg( 'up_mismatched' ) );
-				redirect( get_route('add_staff'));
+				do_redirect('add_staff');
 			}
 		}
 
@@ -82,12 +82,10 @@ class Staff extends MY_Controller{
 			if( $this->input->post('yes') ){
 				$id = $this->input->post('id');
 			
-				if($this->user_m->delete( array('id'=>$id) )){
+				if($this->user_m->delete(array('id'=>$id))){
 					$this->session->set_flashdata( 'success', get_msg( 'staff_delete' ) );
-					redirect( get_route( 'staff' ) );
-				}else{
-					redirect( get_route( 'staff' ) );
 				}
+				do_redirect('staff');
 			}
 		}
 	}	

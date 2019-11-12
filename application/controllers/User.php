@@ -11,7 +11,7 @@ class User extends CI_Controller{
 	public function index(){
 
 		if(is_logged_in())
-			redirect(get_route('dashboard'), 'refresh');
+			do_redirect('dashboard');
 
 		$cookie = json_decode( get_cookie( 'user_logged_in' ) );
 		$user = false;
@@ -74,7 +74,7 @@ class User extends CI_Controller{
 						30*60*60 
 					);
 				}
-				redirect(get_route('dashboard'));
+				do_redirect('dashboard');
 			}
 		}
 
@@ -95,7 +95,7 @@ class User extends CI_Controller{
 
 	public function logout() {
 	    $this->session->sess_destroy();
-	    redirect(get_route('login'), 'refresh');
+	    do_redirect('login');
 	}
 
 	public function profile(){
@@ -104,13 +104,13 @@ class User extends CI_Controller{
 
 	public function invalid_access(){
 		$this->session->set_flashdata( 'error', get_msg( 'access' ) );
-	    redirect(get_route('dashboard'));
+	    do_redirect('dashboard');
 	}
 
 	public function edit($id=null, $mode='other'){ 
 
         if (! is_logged_in()){
-            redirect(get_route('login'), 'refresh');
+            do_redirect('login');
         }
 
         if((is_staff() && get_session('id') != $id) ||  $id <= 0 ){
@@ -173,7 +173,7 @@ class User extends CI_Controller{
 	public function update(){
 
 		if (! is_logged_in()){
-		    redirect(get_route('login'), 'refresh');
+		    do_redirect('login');
 		}
 
 		$this->load->library('form_validation');
