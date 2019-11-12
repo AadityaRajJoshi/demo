@@ -13,6 +13,10 @@ if(! function_exists('get_route')){
 				$path = 'dashboard';
 			break;
 
+			case 'profile':
+				$path = 'profile';
+			break;
+
 			case 'staff':
 				$path = 'staff';
 			break;
@@ -115,6 +119,12 @@ if( !function_exists( 'get_session' ) ){
 	function get_session( $param = false ){
 		$ci = get_instance();
 		return $ci->session->userdata($param);
+	}
+}
+
+if(! function_exists('is_logged_in')){
+	function is_logged_in(){
+		return get_session('id');
 	}
 }
 

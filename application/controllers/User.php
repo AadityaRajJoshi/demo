@@ -9,7 +9,6 @@ class User extends CI_Controller{
 		$this->data['menu'] = get_menu();
 	}
 
-
 	public function index(){
 
 		$this->check_login();
@@ -52,15 +51,11 @@ class User extends CI_Controller{
 			);
 
 			$this->load->model( 'user_m' );
-
 			$db_user = $this->user_m->get( '*', $condition, 1 );
 
 			if ( !$db_user ) {
 				$this->session->set_flashdata( 'error', get_msg( 'up_mismatched' ) );
-				
-				redirect( get_route( 'login' ) );
-
-			} else {
+			}else{
 				$this->session->set_userdata(array(
 					'id' => $db_user->id,	
 					'name' => $username,
@@ -78,7 +73,7 @@ class User extends CI_Controller{
 						30*60*60 
 					);
 				}
-				redirect( 'dashboard' );
+				redirect(get_route('dashboard'));
 			}
 		}
 
@@ -100,54 +95,77 @@ class User extends CI_Controller{
 
 	public function logout() {
 	    $this->session->sess_destroy();
-	    redirect( '/' );
+	    redirect(get_route('login'), 'refresh');
 	}
 
 	public function check_login(){
-	    if (get_session('id') ){
+	    if (is_logged_in()){
 	        redirect(get_route('dashboard'), 'refresh');
 	    }
 	}
 
-	public function edit( $id = null ){
+	public function profile(){
+		$this->edit(get_session('id'), 'own');
+	}
+
+	public function edit( $id = null, $mode='other' ){
+
+        if (! is_logged_in()){
+            redirect(get_route('login'), 'refresh');
+        }
+
+        $invalid_access = function($instance){
+        	$instance->session->set_flashdata( 'error', get_msg( 'access' ) );
+            redirect(get_route('dashboard'));
+        };
+
+        $current_user_id = get_session( 'id' );
+        if((is_staff() && $current_user_id != $id) ||  $id <= 0 ){
+        	$invalid_access($this);
+        }
 
         $this->load->model('user_m');
+        $user = $this->user_m->get('*', array('id'=>$id ), 1);
 
-        if ( !get_session('id') ){
-            redirect( '/' );
+        if(! $user){
+        	$invalid_access($this);
+        }
+        
+        $this->data['user'] = $user;
+
+        if('own' == $mode){
+        	# Editing my profile
+    		$this->data['meta'] = array(
+	            'title' => 'Edit Profile',
+	            'description' => 'Edit Profile',
+	            'keyword' => ''
+	        );
+        }else{
+        	# Editing staff profile
+    		$this->data['meta'] = array(
+	            'title' => 'Edit Staff Profile',
+	            'description' => 'Edit Profile',
+	            'keyword' => ''
+	        );
+	        $mode = 'other';
         }
 
-        if( is_staff() ){
-
-            $staff_id = get_session( 'id' );
-            if( $staff_id != $id ){
-                $this->session->set_flashdata( 'error', get_msg( 'access' ) );
-                redirect(get_route('dashboard'));
-            }
-        }
-        $this->data['meta'] = array(
-            'title' => 'Details',
-            'description' => 'Staff Description',
-            'keyword' => 'staff, admin, employee'
-        );
-        $this->data['staff'] = $this->user_m->get( '*', array( 
-            'id'=>$id ), 1 );                    
+        $this->data['mode'] = $mode;
+                          
         $this->data['common'] = true;
-  
         $this->data['page'] = 'profile_v';
-        $this->data['current_menu'] = 'my_details';
-        $this->load->view('dashboard_template_v', $this->data);    
+        $this->data['current_menu'] = 'dashboard';
 
-        $this->data[ 'meta' ][ 'title' ] = 'edit';
         $this->data[ 'breadcrumb' ] = array(
             get_msg( 'staff' ),
             get_msg( 'update' )
         );
+
+        $this->load->view('dashboard_template_v', $this->data);    
     }
 
 	public function update(){
 
-		$this->load->model('user_m');
 		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('name', 'Username', 'required' );
@@ -180,7 +198,7 @@ class User extends CI_Controller{
 			if( $pass != '' ){
 				$data[ 'password' ] = md5( $pass );
 			}
-
+			$this->load->model('user_m');
 			$query = $this->user_m->save( $data, array('id'=>$id) );
 
 			if( is_admin() ){
