@@ -65,12 +65,12 @@ if(! function_exists('get_msg')){
 			'my_event'		=> 'My Event',
 			'logout'		=> 'Log Out',
 			'menu'			=> 'Menu',
-<<<<<<< HEAD
-			'access'         => 'Cannot access'
-=======
+
+			'access'         => 'Cannot access',
+
 			'update'		=> 'Update',
 			'my_details'	=> 'My Details'
->>>>>>> 3d92c7cb879fe6340ead01510fd7081ad6179c5b
+
 		);
 
 		return $msg[ $key ];
