@@ -60,7 +60,7 @@
                             <li class="luft-user-image">
                                 <a href="#" onclick="return false;"><img src="assets/image/user.png" alt="user" /></a>
                                 <ul class="user-info-sub">
-                                    <li class="luft-user-sub-link"><a href="user/edit/<?php echo get_session('id'); ?>"><i class="fas fa-cog"></i> My details </a></li>
+                                    <li class="luft-user-sub-link"><a href="<?php echo get_route('profile'); ?>"><i class="fas fa-cog"></i> My details </a></li>
                                     <li class="luft-user-sub-link logout-link "><a href="user/logout"><i class="fas fa-sign-out-alt"></i> Logout </a></li>
                                 </ul>
                             </li>
@@ -79,14 +79,12 @@
 
                 <div class="luft-user-content-area">
                     <?php
-                        
-                    if(isset($common)){
-                       $page =  'common/'.$page;
-                        $this->load->view($page);
-                    }else{
-                         $page = ('administrator' == $role ? 'admin/' : 'staff/') . $page;
+                        if(isset($common)){
+                           $page = 'common/'.$page;
+                        }else{
+                            $page = ('administrator' == $role ? 'admin/' : 'staff/') . $page;
+                        }
                         $this->load->view($page); 
-                    }  
                     ?>
                 </div>
             </div>
