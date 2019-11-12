@@ -48,18 +48,8 @@
 	echo form_hidden('id', $user->id);
 	echo form_hidden('mode', $mode);
 	
-
-	if( is_admin() ){
-		if( $mode == 'own' ){
-			echo form_submit( 'update', 'Update Details' );
-		}else{
-			echo form_submit( 'update', 'Update Staff' );
-		}
-	}
-
-	if( is_staff() ){
-		echo form_submit( 'update', 'Update Details' );	
-	}
+	$btn_txt = 'own' == $mode ? 'save_details':'update_staff';
+	echo form_submit('update', get_msg($btn_txt));
 
 	echo form_close( '' );
 ?>
