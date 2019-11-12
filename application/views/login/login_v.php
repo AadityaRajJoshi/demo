@@ -40,7 +40,8 @@
 				<?php echo form_checkbox( array(
 					'name' => 'remember_me',
 					'id'   => 'remember_me',
-					'value' => 'on'
+					'value' => 'on',
+					'checked' => isset( $cookie[ 'pass' ] ) ? true : false
 				) ); ?>
 				Remember Me
 				<!-- <?php echo form_label( 'Remember Me', 'remember_me'); ?> -->

@@ -21,7 +21,6 @@ class Staff extends MY_Controller{
 			$this->data['staffs'] = $this->user_m->get( '*', array(
 				'role_id' =>get_role_id("staff")
 			));
-
 			$this->data['page'] = 'list_staff_v';
 			$this->data['current_menu'] = 'staff';
 
