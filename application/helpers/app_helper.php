@@ -137,7 +137,7 @@ if( !function_exists( 'get_menu' ) ){
 				),
 				'event' => array(
 					'title' => get_msg( 'event' ),
-					'icon' => 'far fa-calandar-times',
+					'icon' => 'far fa-calendar-times',
 					'menu' => array(
 						'add_event' => array(
 							'route' => get_route( 'add_event' ),
@@ -157,7 +157,7 @@ if( !function_exists( 'get_menu' ) ){
 							'route' => get_route( 'add_staff' ),
 							'title' => get_msg( 'add_staff' )
 						),
-						'all_staff' => array(
+						'list_staff' => array(
 							'route' => get_route( 'staff' ),
 							'title' => get_msg( 'all_staff' )
 						)
@@ -174,8 +174,7 @@ if( !function_exists( 'get_menu' ) ){
 				),
 			);
 		}
-
-		 if( is_staff() ) {
+		 elseif( is_staff() ) {
 		 	return array(
 		 		'dashboard' => array(
 		 			'route' => 'dashboard',
@@ -184,10 +183,10 @@ if( !function_exists( 'get_menu' ) ){
 		 		),
 		 		'event' => array(
 		 			'title' => get_msg( 'my_event' ),
-		 			'icon' => 'far fa-calandar-times'
+		 			'icon' => 'far fa-calendar-times'
 		 		),
 		 		'my_details' => array(
-		 			'route' => get_route( 'unauthorized' ),
+		 			'route' => get_route( '' ),
 		 			'title' => get_msg('my_details'),
 		 			'icon' => 'fas fa-cog'
 		 		),
