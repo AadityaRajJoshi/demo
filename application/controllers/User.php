@@ -111,10 +111,7 @@ class User extends CI_Controller{
 
 	public function edit( $id = null ){
 
-
-
         $this->load->model('user_m');
-
 
         if ( !get_session('id') ){
             redirect( '/' );
@@ -138,6 +135,7 @@ class User extends CI_Controller{
         $this->data['common'] = true;
   
         $this->data['page'] = 'profile_v';
+        $this->data['current_menu'] = 'my_details';
         $this->load->view('dashboard_template_v', $this->data);    
 
         $this->data[ 'meta' ][ 'title' ] = 'edit';

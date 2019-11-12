@@ -23,6 +23,7 @@ class Staff extends MY_Controller{
 			));
 
 			$this->data['page'] = 'list_staff_v';
+			$this->data['current_menu'] = 'staff';
 
 			$this->load->view( 'dashboard_template_v', $this->data );	
 		}
@@ -36,6 +37,7 @@ class Staff extends MY_Controller{
 				get_msg( 'add_staff' )
 			);
 			$this->data['page'] = 'add_staff_v';
+			$this->data['current_menu'] = 'staff';
 			$this->load->helper('email');
 
 			$this->form_validation->set_rules('name', 'Username', 'required' );

@@ -149,7 +149,7 @@ if( !function_exists( 'get_menu' ) ){
 						),
 						'all_staff' => array(
 							'route' => get_route( 'staff' ),
-							'title' => get_msg( ' all_staff ' )
+							'title' => get_msg( 'all_staff' )
 						)
 					)
 				),
@@ -164,31 +164,32 @@ if( !function_exists( 'get_menu' ) ){
 				),
 			);
 		}
+
+		 if( is_staff() ) {
+		 	return array(
+		 		'dashboard' => array(
+		 			'route' => 'dashboard',
+		 			'title' => get_msg( 'dashboard' ),
+		 			'icon' => 'fas fa-home'
+		 		),
+		 		'event' => array(
+		 			'title' => get_msg( 'my_event' ),
+		 			'icon' => 'far fa-calandar-times'
+		 		),
+		 		'my_details' => array(
+		 			'route' => get_route( 'unauthorized' ),
+		 			'title' => get_msg('my_details'),
+		 			'icon' => 'fas fa-cog'
+		 		),
+		 		'logout' => array(
+					'route' => get_route( 'logout' ),
+					'title' => get_msg( 'logout' ),
+					'icon' => 'fas fa-sign-out-alt'
+				),
+		 	);
+		 }
 	}	
 }
-
-
-
-		// }elseif(is_staff()){
-		// 	return array(
-		// 		get_route( 'dashboard' ) => array(
-		// 			'title' => get_msg( 'dashboard' ),
-		// 			'icon'  => 'fas fa-home'
-		// 		),
-		// 		'event' 	=> array(
-		// 			'title' => get_msg( 'my_event' ),
-		// 			'icon'	=> 'far fa-calendar-times'
-		// 		) ,
-		// 		get_route( 'setting' )	=> array(
-		// 			'title' => get_msg( 'my_details' ),
-		// 			'icon'  => 'fas fa-cog'
-		// 		),
-		// 		get_route( 'logout' ) => array(
-		// 			'title' =>get_msg( 'logout' ),
-		// 			'icon'  => 'fas fa-sign-out-alt'
-		// 		)
-		// 	);
-		// }
 
 if( !function_exists( 'breadcrumb_tail' ) ){
 	function breadcrumb_tail( $arr ){
