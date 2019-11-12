@@ -110,45 +110,44 @@ class User extends CI_Controller{
 	}
 
 	public function edit( $id = null ){
-	    $this->load->model('user_m');
+        $this->load->model('user_m');
 
-		if ( !get_session('id') ){
-	        redirect( '/' );
-	    }
 
-		if( is_admin() ){	
-			$this->load->model('user_m');
+        if ( !get_session('id') ){
+            redirect( '/' );
+        }
 
-			$this->data['meta'] = array(
-				'title' => 'Details',
-				'description' => 'Staff Description',
-				'keyword' => 'staff, admin, employee'
-			);
+        if( is_staff() ){
 
-	    	if( is_staff() ){
+            $staff_id = get_session( 'id' );
+            if( $staff_id != $id ){
+                $this->session->set_flashdata( 'error', get_msg( 'access' ) );
+                redirect(get_route('dashboard'));
+            }
+        }
 
-	    		$staff_id = get_session( 'id' );
-	    		if( $staff_id != $id ){
-	    			$this->session->set_flashdata( 'error', get_msg( 'access' ) );
-	    			redirect(get_route('dashboard'));
-	    		}
-	    	}	
+        if( is_admin() ){    
+            $this->load->model('user_m');
 
-	    	$this->data['staff'] = $this->user_m->get( '*', array( 
-	    		'id'=>$id ), 1 );
-	    			
-	    	$this->data['common'] = true;
-	    	$this->data['page'] = 'profile_v';
-	    	$this->load->view('dashboard_template_v', $this->data);	
-			
-			$this->data[ 'meta' ][ 'title' ] = 'edit';
-			$this->data[ 'breadcrumb' ] = array(
-				get_msg( 'staff' ),
-				get_msg( 'update' )
-			);
-		}
-	}
 
+            $this->data['meta'] = array(
+                'title' => 'Details',
+                'description' => 'Staff Description',
+                'keyword' => 'staff, admin, employee'
+            );
+            $this->data['staff'] = $this->user_m->get( '*', array( 
+                'id'=>$id ), 1 );                    
+            $this->data['common'] = true;
+            $this->data['page'] = 'profile_v';
+            $this->load->view('dashboard_template_v', $this->data);    
+
+            $this->data[ 'meta' ][ 'title' ] = 'edit';
+            $this->data[ 'breadcrumb' ] = array(
+                get_msg( 'staff' ),
+                get_msg( 'update' )
+            );
+        }
+    }
 	public function update(){
 
 		$this->load->model('user_m');
