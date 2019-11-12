@@ -75,7 +75,7 @@ if(! function_exists('get_msg')){
 			'menu'			=> 'Menu',
 			'access'        => 'Cannot access',
 			'update'		=> 'Update',
-			'my_details'	=> 'My Details'
+			'my_details'	=> 'My Details',
 		);
 
 		return $msg[ $key ];
