@@ -51,14 +51,14 @@
 
 	if( is_admin() ){
 		if( $mode == 'own' ){
-			echo form_submit( 'update', 'Update Details' );
+			echo form_submit( 'update', get_msg( 'save_details' ) );
 		}else{
-			echo form_submit( 'update', 'Update Staff' );
+			echo form_submit( 'update', get_msg( 'update_staff' ) );
 		}
 	}
 
 	if( is_staff() ){
-		echo form_submit( 'update', 'Update Details' );	
+		echo form_submit( 'update', get_msg( 'save_details' ) );	
 	}
 
 	echo form_close( '' );

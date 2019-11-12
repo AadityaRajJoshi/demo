@@ -71,8 +71,6 @@ if(! function_exists('get_msg')){
 			'menu'			=> 'Menu',
 			'access'        => 'Cannot access',
 			'update'		=> 'Update',
-
-			'my_details'	=> 'My Details',
 			'name'          => 'name',
 			'name_placeholder' => 'Enter Name',
 			'email'         => 'Email',
@@ -81,9 +79,8 @@ if(! function_exists('get_msg')){
 			'number_placeholder' => 'Enter Phone Number',
 			'password'     => 'Password',
 			'password_placeholder' => 'Enter Password',
-
 			'my_details'	=> 'MY DETAILS',
-			'save_details'  => 'SAVE DETAILS',
+			'save_details'  => 'UPDATE DETAILS',
 			'update_staff'  => 'UPDATE STAFF'
 
 		);
