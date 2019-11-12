@@ -184,8 +184,7 @@ if( !function_exists( 'get_menu' ) ){
 					'icon' => 'fas fa-sign-out-alt'
 				),
 			);
-		}
-		elseif( is_staff() ) {
+		}elseif( is_staff() ) {
 		 	return array(
 		 		'dashboard' => array(
 		 			'route' => 'dashboard',
@@ -268,5 +267,11 @@ if(! function_exists('print_menu')){
 	    if( $wrapper ){
 	        echo '</ul>'; 
 	    }
+	}
+}
+
+if(! function_exists('do_redirect')){
+	function do_redirect($route,$mode='refresh'){
+		redirect(get_route($route), $mode);
 	}
 }
