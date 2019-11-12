@@ -40,8 +40,8 @@ if(! function_exists('get_route')){
 				$path = 'event/add';
 			break;
 
-			case 'unauthorized':
-				$path = 'user/edit/'.get_session('id');
+			case 'profile':
+				$path = 'profile';
 			break;	
 		}
 		return $path;
@@ -71,9 +71,21 @@ if(! function_exists('get_msg')){
 			'menu'			=> 'Menu',
 			'access'        => 'Cannot access',
 			'update'		=> 'Update',
+
+			'my_details'	=> 'My Details',
+			'name'          => 'name',
+			'name_placeholder' => 'Enter Name',
+			'email'         => 'Email',
+			'email_placeholder' => 'Enter Email',
+			'number'        => 'Number',
+			'number_placeholder' => 'Enter Phone Number',
+			'password'     => 'Password',
+			'password_placeholder' => 'Enter Password',
+
 			'my_details'	=> 'MY DETAILS',
 			'save_details'  => 'SAVE DETAILS',
 			'update_staff'  => 'UPDATE STAFF'
+
 		);
 
 		return $msg[ $key ];
@@ -176,7 +188,7 @@ if( !function_exists( 'get_menu' ) ){
 				),
 			);
 		}
-		 elseif( is_staff() ) {
+		elseif( is_staff() ) {
 		 	return array(
 		 		'dashboard' => array(
 		 			'route' => 'dashboard',
@@ -188,7 +200,7 @@ if( !function_exists( 'get_menu' ) ){
 		 			'icon' => 'far fa-calendar-times'
 		 		),
 		 		'my_details' => array(
-		 			'route' => get_route( '' ),
+		 			'route' => get_route( 'profile' ),
 		 			'title' => get_msg('my_details'),
 		 			'icon' => 'fas fa-cog'
 		 		),
@@ -198,7 +210,7 @@ if( !function_exists( 'get_menu' ) ){
 					'icon' => 'fas fa-sign-out-alt'
 				),
 		 	);
-		 }
+		}
 	}	
 }
 

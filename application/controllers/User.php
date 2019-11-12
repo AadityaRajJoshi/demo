@@ -152,6 +152,21 @@ class User extends CI_Controller{
         $this->data['mode'] = $mode;
         $this->data['common'] = true;
         $this->data['page'] = 'profile_v';
+
+        $this->data['current_menu'] = 'dashboard';
+
+        if( $mode == 'own' ){
+
+        $this->data[ 'breadcrumb' ] = array(
+            get_msg( 'my_details' )
+        );
+    	}else{
+    	$this->data[ 'breadcrumb' ] = array(
+    	    get_msg( 'staff' ),
+    	    get_msg( 'update' )
+    	);
+    	}
+
         $this->load->view('dashboard_template_v', $this->data);    
     }
 
