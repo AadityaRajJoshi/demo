@@ -166,7 +166,6 @@ class User extends CI_Controller{
 
 	public function update(){
 
-		$this->load->model('user_m');
 		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('name', 'Username', 'required' );
@@ -199,7 +198,7 @@ class User extends CI_Controller{
 			if( $pass != '' ){
 				$data[ 'password' ] = md5( $pass );
 			}
-
+			$this->load->model('user_m');
 			$query = $this->user_m->save( $data, array('id'=>$id) );
 
 			if( is_admin() ){

@@ -79,14 +79,12 @@
 
                 <div class="luft-user-content-area">
                     <?php
-                        
-                    if(isset($common)){
-                       $page =  'common/'.$page;
-                        $this->load->view($page);
-                    }else{
-                         $page = ('administrator' == $role ? 'admin/' : 'staff/') . $page;
+                        if(isset($common)){
+                           $page = 'common/'.$page;
+                        }else{
+                            $page = ('administrator' == $role ? 'admin/' : 'staff/') . $page;
+                        }
                         $this->load->view($page); 
-                    }  
                     ?>
                 </div>
             </div>
