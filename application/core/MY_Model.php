@@ -3,6 +3,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MY_Model extends CI_Model {
 
+	protected $order = 'DESC';
+	
 	public function save( $data, $where = false ){
 		
 	    if( $where == false ){ 
@@ -44,11 +46,11 @@ class MY_Model extends CI_Model {
 	    	}
 	    }
 
-	    // if ($order != false){
-	    //     $this->db->order_by( $order );
-	    // }else{
-	    //     $this->db->order_by( 'id', $this->order );
-	    // }
+	    if ($order != false){
+	        $this->db->order_by( $order );
+	    }else{
+	        $this->db->order_by( 'id', $this->order );
+	    }
 
 	    $this->db->from( $this->table, false );
 	    $query = $this->db->get();
