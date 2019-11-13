@@ -3,6 +3,11 @@
     display: flex;
     align-items: center;
     padding: 5px 20px;
+    position: fixed;
+    transition: all .3s;
+    width: calc(100% - 300px);
+    z-index: 99;
+    height: 50px;
 
     ul {
         margin: 0;
@@ -112,4 +117,14 @@
         }
     }
 
+}
+
+.animate-menu-open {
+    .#{$prefix}-header-area {
+        width: 100%;
+    }
+}
+
+.luft-header-area + * {
+    margin-top: 75px;
 }
