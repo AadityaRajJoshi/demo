@@ -15,10 +15,8 @@ class Staff extends MY_Controller{
 		if( is_admin() ){
 			$this->data[ 'meta' ][ 'title' ] = get_msg( 'staff' );
 
-			$this->data[ 'breadcrumb' ] = array(
-				get_msg( 'staff' ),
-				get_msg( 'all_staff' )
-			);
+			$this->data[ 'breadcrumb' ] = get_msg( 'breadcrumb_all_staff' );	
+			
 			$this->data['staffs'] = $this->user_m->get( '*', array(
 				'role_id' =>get_role_id("staff")
 			));

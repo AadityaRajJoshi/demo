@@ -142,14 +142,15 @@ class User extends CI_Controller{
         if('own' == $mode){
         	# Editing my profile
     		$this->data['meta'] = get_msg('meta_edit_staff');
-	        $this->data['breadcrumb'] = array(get_msg('my_details'));
+
+	        $this->data['breadcrumb'] = get_msg('breadcrumb_user_edit_own');
 	        $this->data['body_class'] = 'edit-own-profile';
         	$this->data['current_menu'] = 'dashboard';
         }else{
         	# Editing staff profile
 
     		$this->data['meta'] = get_msg('meta_edit_profile');
-	        $this->data[ 'breadcrumb' ] = array(get_msg('staff'), get_msg('update'));
+	        $this->data[ 'breadcrumb' ] = get_msg('breadcrumb_user_edit_other');
 	        $this->data['body_class'] = 'edit-staff-profile';
         	$this->data['current_menu'] = 'staff';
 	        $mode = 'other';
@@ -159,17 +160,6 @@ class User extends CI_Controller{
         $this->data['common'] = true;
         $this->data['page'] = 'profile_v';
         $this->data['current_menu'] = 'dashboard';
-
-        if( $mode == 'own' ){
-	        $this->data[ 'breadcrumb' ] = array(
-	            get_msg( 'my_details' )
-	        );
-    	}else{
-	    	$this->data[ 'breadcrumb' ] = array(
-	    	    get_msg( 'staff' ),
-	    	    get_msg( 'update' )
-	    	);
-    	}
 
         $this->load->view('dashboard_template_v', $this->data);    
     }
@@ -204,32 +194,15 @@ class User extends CI_Controller{
 		$this->form_validation->set_rules('name', 'Username', 'required' );
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
 		$this->form_validation->set_rules('number', 'phone number', 'required' );
-		$this->form_validation->set_rules('userfile', 'image', 'required' );
 		if(! $id)
 			$this->form_validation->set_rules('password', 'Password', 'required' );
-
-		//for image
-		$config['upload_path'] = './uploads';
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size'] = 100;
-		$config['max_width'] = 1024;
-		$config['max_height']= 768;
-
-		$this->load->library( 'upload', $config );
-		if( !$this->upload->do_upload( 'userfile' ) ){
-			$error = array( 'error' => $this->upload->display_errors() );
-		}else{
-
-			$image = array( 'image' => $this->upload->data() );
-			$this->data['image'] = $image;
-		}
+		
 
 		if($this->form_validation->run()){
-			$username = $this->input->post( 'name' );
-			$email = $this->input->post( 'email' );
-			$phone_number = $this->input->post( 'number' );
-			$password = md5($this->input->post( 'password' ));
-			$image = ($image['image']['file_name']);
+			$username = $this->input->post('name');
+			$email = $this->input->post('email');
+			$phone_number = $this->input->post('number');
+			$password = $this->input->post('password');
 			
 			$data = array(
 				'username'=> $username,
@@ -238,16 +211,30 @@ class User extends CI_Controller{
 				'role_id' => get_role_id("staff")
 			);
 
-			if( $password != '' )
+			if( $password != '' ){
 				$data['password'] = md5($password);
-
-			if( $image != '' )
-				$data['image'] = $image;
-
+			}
 
 			$this->load->model( 'user_m' );
 			$where = $id ? array('id'=>$id) : false;
+			if( $where ){
+				unset( $data['role_id'] );
+
+				//for image
+				$config = $this->config->item( 'image' );
+				$new_name = $id.'.'.$config['allowed_types'];
+				$config['file_name'] = $new_name;
+
+				$this->load->library( 'upload', $config );
+				if( !$this->upload->do_upload( 'userfile' ) ){
+					$error = array( 'error' => $this->upload->display_errors() );
+				}else{
+					$image = array( 'image' => $this->upload->data() );
+				}
+			}
+			
 			$operation = $this->user_m->save( $data, $where );
+
 			if( $id ){
 				# Need to update staff
 				if($operation){
