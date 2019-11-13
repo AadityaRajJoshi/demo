@@ -1,5 +1,5 @@
 <?php
-	echo form_open( 'event/add' ); ?>
+	echo form_open( 'event/save' ); ?>
 	<div class="luft-form-wrapper">
 		<div class="luft-form-row">
 			<?php echo form_label( 'event_name', 'event-name' ); 
@@ -184,11 +184,36 @@
 					'id' => 'contactperson'
 					// 'required' => 'required'
 				) ); ?>
-				<?php echo form_label( 'telephone contactperson', 'telephone-contactperson' ); 
+				<?php echo form_label( 'telephone contact person', 'telephone-contactperson' ); 
 				echo form_input( array(
 					'name' => 'telephone-contactperson',
 					'placeholder' => 'Your contact person',
 					'id' => 'telephone-contactperson'
+					// 'required' => 'required'
+				) ); ?>
+			</div>
+			<div class="luft-form-row">
+				<?php echo form_label( 'distance to event', 'distance-to-event' ); 
+				echo form_input( array(
+					'name' => 'distance-to-event',
+					'placeholder' => 'Distance to event',
+					'id' => 'distance-to-event'
+					// 'required' => 'required'
+				) ); ?>
+				<?php echo form_label( 'type of car and wagon', 'type-of-car' ); 
+				echo form_input( array(
+					'name' => 'type-of-car',
+					'placeholder' => 'Enter type of car and wagon',
+					'id' => 'type-of-car'
+					// 'required' => 'required'
+				) ); ?>
+			</div>
+			<div class="luft-form-row">
+				<?php echo form_label( 'link to google map', 'link-gmap' ); 
+				echo form_input( array(
+					'name' => 'link-gmap',
+					'placeholder' => 'Enter link to google map',
+					'id' => 'link-gmap'
 					// 'required' => 'required'
 				) ); ?>
 			</div>

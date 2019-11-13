@@ -12,7 +12,7 @@ class Staff extends MY_Controller{
 
 	public function index(){
 
-		if( $this->is_admin() ){
+		if( is_admin() ){
 			$this->data[ 'meta' ][ 'title' ] = 'staff';
 			$this->data[ 'breadcrumb' ] = array(
 				get_msg( 'staff' ),
@@ -23,7 +23,6 @@ class Staff extends MY_Controller{
 			));
 			$this->data['page'] = 'list_staff_v';
 			$this->data['current_menu'] = 'staff';
-
 			$this->load->view( 'dashboard_template_v', $this->data );	
 		}
 	}
