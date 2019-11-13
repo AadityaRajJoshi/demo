@@ -2,10 +2,10 @@
 	
 	<?php if( $mode == 'own' ){?>
 		<input type='file' name='userfile'/>
-		
-			<?php $full_path =   'uploads/'.$image['image']['file_name']; ?>
+			<?php if( isset($image) ){ 
+			$full_path = 'uploads/'.$image['image']['file_name']; ?>
 			<img src="<?php echo $full_path; ?>"/>
-		
+		<?php	}  ?>
 	<?php }?>
 
 
