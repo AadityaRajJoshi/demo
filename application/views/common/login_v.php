@@ -11,10 +11,10 @@
 	<?php echo form_open( 'user/login' ); ?>
 
 		<div class="luft-form-row luft-input-type">
-			<?php echo form_label('User Name', 'username');
+			<?php echo form_label(get_msg( 'username' ), 'username');
 			echo form_input( array(
 				'name' => 'username',
-				'placeholder' => 'Enter Username Or Email',
+				'placeholder' => get_msg( 'username_placeholder' ),
 				'id' => 'username',
 				'required' => 'required',
 				'value' => isset( $cookie[ 'name' ] ) ? $cookie[ 'name' ] : ''
@@ -25,7 +25,7 @@
 			<?php echo form_label('Password', 'password');
 			echo form_password( array(
 				'name' => 'password',
-				'placeholder' => 'Enter Password',
+				'placeholder' => get_msg( 'password_placeholder' ),
 				'id' => 'password',
 				'autocomplete' => 'off',
 				'required' => 'required',
@@ -43,8 +43,7 @@
 					'value' => 'on',
 					'checked' => isset( $cookie[ 'pass' ] ) ? true : false
 				) ); ?>
-				Remember Me
-				<!-- <?php echo form_label( 'Remember Me', 'remember_me'); ?> -->
+				<?php echo get_msg('remember') ?>
 				<span class="checkmark"></span>
 			</label>	
 			
@@ -53,12 +52,12 @@
 			</div>
 
 			<div class="luft-form-row luft-submit-type">
-				<?php echo form_submit('login', 'Log in'); ?>
+				<?php echo form_submit('login', get_msg( 'login_m' )); ?>
 			</div>	
 		</div>	
 	<?php echo form_close( '' ); ?> 
 
 	<div class="luft-forget-password display-on-desktop">
-		<a href="forgot"> <img src="<?php echo base_url();  ?>assets/image/lock.png" alt="lock" /> <span> Forget Password <span></a>
+		<a href="forgot"> <img src="<?php echo base_url();  ?>assets/image/lock.png" alt="lock" /> <span> <?php echo get_msg( 'forget_pass' ) ?><span></a>
 	</div>
 </div>

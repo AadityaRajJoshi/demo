@@ -2,7 +2,7 @@
 	echo form_open( 'event/save' ); ?>
 	<div class="luft-form-wrapper">
 		<div class="luft-form-row">
-			<?php echo form_label( 'event_name', 'event-name' ); 
+			<?php echo form_label( 'event name', 'event-name' ); 
 			echo form_input( array(
 				'name' => 'event-name',
 				'placeholder' => 'Enter event name',
@@ -10,7 +10,7 @@
 				// 'required' => 'required'
 			) ); ?>
 		</div>
-		<div class="luft-inline-input">
+		<div class="luft-inline-input inline-4">
 			<div class="luft-form-row">
 				<?php
 				echo form_label( 'ordernumber', 'ordernumber' );
@@ -135,23 +135,28 @@
 				) ); ?>
 			</div>
 		</div>
-		<div class="luft-form-row">
+
+		<div class="luft-form-row full-width-row">
 			<?php
 			echo form_label( 'add staff', 'staff' );
 			echo form_dropdown( array(
 				'name' => 'add-staff',
 				'id' => 'add-staff',
-				'options' => $staffs
+				'options' => $staffs,
+				'class' => 'custom-styled-select',
+				'multiple' => 'multiple'
 			) ); ?>
 		</div>
-		<div class="luft-inline-input">
+
+		<div class="luft-inline-input inline-2">
 			<div class="luft-form-row">
 				<?php
 				echo form_label( 'add package staff', 'package-staff' );
 				echo form_dropdown( array(
 					'name' => 'add-package-staff',
 					'id' => 'add-package-staff',
-					'options' => $staffs
+					'options' => $staffs,
+					'class' => 'custom-styled-select'
 				) ); ?>
 			</div>
 			<div class="luft-form-row">
@@ -164,62 +169,78 @@
 				) ); ?>
 			</div>
 		</div>
-		<div class="luft-inline-input">
-			<div class="luft-form-row">
-				<?php
-				echo form_label( 'address', 'address' );
-				echo form_textarea( array(
-					'name' => 'address',
-					'placeholder' => 'Enter Address',
-					'id' => 'address',
-					'rows'        => '8',
-					'cols'        => '30',
-				) );?>
+
+
+		<div class="luft-inline-input second-section">
+			<div class="luft-form-row luft-half-row  text-area-row">
+				<div class="text-area-wrapper">
+					<?php
+					echo form_label( 'address', 'address' );
+					echo form_textarea( array(
+						'name' => 'address',
+						'placeholder' => 'Enter Address',
+						'id' => 'address'						
+					) );?>
+				</div>
 			</div>
-			<div class="luft-form-row">
-				<?php echo form_label( 'contactperson', 'contactperson' ); 
-				echo form_input( array(
-					'name' => 'contactperson',
-					'placeholder' => 'Your contact person',
-					'id' => 'contactperson'
-					// 'required' => 'required'
-				) ); ?>
-				<?php echo form_label( 'telephone contact person', 'telephone-contactperson' ); 
-				echo form_input( array(
-					'name' => 'telephone-contactperson',
-					'placeholder' => 'Your contact person',
-					'id' => 'telephone-contactperson'
-					// 'required' => 'required'
-				) ); ?>
-			</div>
-			<div class="luft-form-row">
-				<?php echo form_label( 'distance to event', 'distance-to-event' ); 
-				echo form_input( array(
-					'name' => 'distance-to-event',
-					'placeholder' => 'Distance to event',
-					'id' => 'distance-to-event'
-					// 'required' => 'required'
-				) ); ?>
-				<?php echo form_label( 'type of car and wagon', 'type-of-car' ); 
-				echo form_input( array(
-					'name' => 'type-of-car',
-					'placeholder' => 'Enter type of car and wagon',
-					'id' => 'type-of-car'
-					// 'required' => 'required'
-				) ); ?>
-			</div>
-			<div class="luft-form-row">
-				<?php echo form_label( 'link to google map', 'link-gmap' ); 
-				echo form_input( array(
-					'name' => 'link-gmap',
-					'placeholder' => 'Enter link to google map',
-					'id' => 'link-gmap'
-					// 'required' => 'required'
-				) ); ?>
-			</div>
+			<div class="luft-half-row">
+				<div class="luft-form-row luft-half-row">
+					<?php echo form_label( 'contactperson', 'contactperson' ); 
+					echo form_input( array(
+						'name' => 'contactperson',
+						'placeholder' => 'Your contact person',
+						'id' => 'contactperson'
+						// 'required' => 'required'
+					) ); ?>
+				</div>
+
+				<div class="luft-form-row luft-half-row">
+
+					<?php echo form_label( 'telephone contact person', 'telephone-contactperson' ); 
+					echo form_input( array(
+						'name' => 'telephone-contactperson',
+						'placeholder' => 'Your contact person',
+						'id' => 'telephone-contactperson'
+						// 'required' => 'required'
+					) ); ?>
+				</div>
+
+
+				<div class="luft-form-row luft-half-row">
+					<?php echo form_label( 'distance to event', 'distance-to-event' ); 
+					echo form_input( array(
+						'name' => 'distance-to-event',
+						'placeholder' => 'Distance to event',
+						'id' => 'distance-to-event'
+						// 'required' => 'required'
+					) ); ?>
+				</div>
+
+				<div class="luft-form-row luft-half-row">
+					<?php echo form_label( 'type of car and wagon', 'type-of-car' ); 
+					echo form_input( array(
+						'name' => 'type-of-car',
+						'placeholder' => 'Enter type of car and wagon',
+						'id' => 'type-of-car'
+						// 'required' => 'required'
+					) ); ?>
+				</div>
+				
+				<div class="luft-form-row map-link">
+					<?php echo form_label( 'link to google map', 'link-gmap' ); 
+					echo form_input( array(
+						'name' => 'link-gmap',
+						'placeholder' => 'Enter link to google map',
+						'id' => 'link-gmap'
+						// 'required' => 'required'
+					) ); ?>
+				</div>
+			</div>	
+
 		</div>
-		<div class="luft-inline-input">
-			<div class="luft-form-row">
+
+		<div class="luft-inline-input section-3">
+			<div class="luft-form-row text-area-wrapper">
 				<?php
 				echo form_label( 'other information', 'other-information' );
 				echo form_textarea( array(
@@ -230,7 +251,7 @@
 					'cols'        => '30',
 				) );?>
 			</div>
-			<div class="luft-form-row">
+			<div class="luft-form-row text-area-wrapper">
 				<?php
 				echo form_label( 'add products', 'add-products' );
 				echo form_textarea( array(
@@ -240,17 +261,21 @@
 					'rows'        => '8',
 					'cols'        => '30',
 				) );?>
-			</div>			
+			</div>	
+			
+			<div class="luft-form-row text-area-wrapper">
+				<?php echo form_label( 'Electricity', 'Electricity' );
+				echo form_textarea( array(
+					'name' => 'Electricity',
+					'id' => 'Electricity',
+					'rows'        => '8',
+					'cols'        => '30',
+				) );?>
+			</div>
 		</div>
-		<div class="luft-form-row">
-			<?php echo form_label( 'Electricity', 'Electricity' );
-			echo form_textarea( array(
-				'name' => 'Electricity',
-				'id' => 'Electricity',
-				'rows'        => '8',
-				'cols'        => '30',
-			) );?>
-		</div>
+
+		
+
 		<?php
 			echo form_button( 'preview-event', 'preview Event' );
 			echo form_submit( 'publish-event', 'publish Event' ); ?>

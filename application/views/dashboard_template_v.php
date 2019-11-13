@@ -20,6 +20,7 @@
         <base href="<?php echo base_url(); ?>">
         <link rel="stylesheet" type="text/css" href="assets/build/style/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" />
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
     </head>
     <body class="luft-template-dashboard<?php echo isset($body_class)? ' '.$body_class:''; ?>">
         <div class="luft-content-area">
@@ -92,6 +93,7 @@
 
         <!-- script files -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
         <script src="assets/build/js/slideout-menu.js"></script>
         <script src="assets/build/js/custom.js"></script>       
     </body>
