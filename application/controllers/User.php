@@ -2,20 +2,20 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class User extends CI_Controller{
+	
 	public function __construct(){
-
 		parent::__construct();
 		$this->load->helper('form');
-		$this->data['menu'] = get_menu();
 	}
-
 
 	public function index(){
 
-		$this->check_login();
+		if(is_logged_in())
+			do_redirect('dashboard');
+
 		$cookie = json_decode( get_cookie( 'user_logged_in' ) );
 		$user = false;
-		if( '' != $cookie && isset( $cookie->user ) ){
+		if('' != $cookie && isset($cookie->user)){
 			$user = array(
 				'name' => $cookie->user,
 				'pass' => $cookie->pass
@@ -52,15 +52,11 @@ class User extends CI_Controller{
 			);
 
 			$this->load->model( 'user_m' );
-
 			$db_user = $this->user_m->get( '*', $condition, 1 );
 
 			if ( !$db_user ) {
 				$this->session->set_flashdata( 'error', get_msg( 'up_mismatched' ) );
-				
-				redirect( get_route( 'login' ) );
-
-			} else {
+			}else{
 				$this->session->set_userdata(array(
 					'id' => $db_user->id,	
 					'name' => $username,
@@ -77,9 +73,8 @@ class User extends CI_Controller{
 						] ),
 						30*60*60 
 					);
-
 				}
-				redirect( 'dashboard' );
+				do_redirect('dashboard');
 			}
 		}
 
@@ -87,7 +82,6 @@ class User extends CI_Controller{
 	}
 
 	public function forgot(){
-
 		$data = array(
 			'meta' => array(
 				'title' => 'Forgot Password?',
@@ -101,74 +95,126 @@ class User extends CI_Controller{
 
 	public function logout() {
 	    $this->session->sess_destroy();
-	    redirect( '/' );
+	    do_redirect('login');
 	}
 
-	public function check_login(){
-	    if (get_session('id') ){
-	        redirect(get_route('dashboard'), 'refresh');
-	    }
+	public function profile(){
+		$this->edit(get_session('id'), 'own');
 	}
 
-	public function edit( $id = null ){
-
-		if( is_admin() ){	
-			$this->load->model('user_m');
-
-			$this->data['meta'] = array(
-				'title' => 'Admin',
-				'description' => 'Staff Description',
-				'keyword' => 'staff, admin, employee'
-			);
-			$this->data['staff'] = $this->user_m->get( '*', array( 
-				'id'=>$id ), 1 );
-			$this->data[ 'meta' ][ 'title' ] = 'edit';
-			$this->data[ 'breadcrumb' ] = array(
-				get_msg( 'staff' ),
-				get_msg( 'update' )
-			);
-			$this->data['page'] = 'edit_staff_v';
-			$this->load->view('dashboard_template_v', $this->data);
-		}
+	public function invalid_access(){
+		$this->session->set_flashdata( 'error', get_msg( 'access' ) );
+	    do_redirect('dashboard');
 	}
+
+	public function edit($id=null, $mode='other'){ 
+
+        if (! is_logged_in()){
+            do_redirect('login');
+        }
+
+        if((is_staff() && get_session('id') != $id) ||  $id <= 0 ){
+        	$this->invalid_access();
+        }
+
+        $this->load->model('user_m');
+        $user = $this->user_m->get('*', array('id'=>$id ), 1);
+
+        if(! $user){
+        	$this->invalid_access();
+        }
+        
+        $this->data['user'] = $user;
+
+        if('own' == $mode){
+        	# Editing my profile
+    		$this->data['meta'] = array(
+	            'title' => 'Edit Profile',
+	            'description' => 'Edit Profile',
+	            'keyword' => ''
+	        );
+	        $this->data['breadcrumb'] = array(get_msg('my_details'));
+	        $this->data['body_class'] = 'edit-own-profile';
+        	$this->data['current_menu'] = 'dashboard';
+        }else{
+        	# Editing staff profile
+    		$this->data['meta'] = array(
+	            'title' => 'Edit Staff Profile',
+	            'description' => 'Edit Profile',
+	            'keyword' => ''
+	        );
+	        $this->data[ 'breadcrumb' ] = array(get_msg('staff'), get_msg('update'));
+	        $this->data['body_class'] = 'edit-staff-profile';
+        	$this->data['current_menu'] = 'staff';
+	        $mode = 'other';
+        }
+
+        $this->data['mode'] = $mode;
+        $this->data['common'] = true;
+        $this->data['page'] = 'profile_v';
+
+        $this->data['current_menu'] = 'dashboard';
+
+        if( $mode == 'own' ){
+
+        $this->data[ 'breadcrumb' ] = array(
+            get_msg( 'my_details' )
+        );
+    	}else{
+    	$this->data[ 'breadcrumb' ] = array(
+    	    get_msg( 'staff' ),
+    	    get_msg( 'update' )
+    	);
+    	}
+
+        $this->load->view('dashboard_template_v', $this->data);    
+    }
 
 	public function update(){
 
-		if( is_admin() ){
-			$this->load->model('user_m');
-			$this->load->library('form_validation');
+		if (! is_logged_in()){
+		    do_redirect('login');
+		}
 
-			$this->form_validation->set_rules('name', 'Username', 'required' );
-			$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
-			$this->form_validation->set_rules('number', 'phone number', 'required' );
-			
-			$id = $this->input->post('id');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('name', 'Username', 'required' );
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
+		$this->form_validation->set_rules('number', 'phone number', 'required' );
+		
+		$mode = $this->input->post('mode');
+		$id = $this->input->post('id');
 
-			if( $this->form_validation->run() ){
-				$name = $this->input->post( 'name' );
-				$email = $this->input->post( 'email' );
-				$phone_number = $this->input->post( 'number' );
-				
-				$pass = $this->input->post( 'password' );
+		if($id<=0)
+			$this->invalid_access();
 
+		if( $this->form_validation->run() ){
 
-				$data = array( 
+			if( is_staff() && get_session( 'id' ) != $id )
+				$this->invalid_access();
+
+			$name = $this->input->post( 'name' );
+			$email = $this->input->post( 'email' );
+			$phone_number = $this->input->post( 'number' );
+			$pass = $this->input->post( 'password' );
+
+			$data = array( 
 				'username' => $name,
 				'phone_number' => $phone_number,
 				'email' => $email,
-				
-				);
+			);
 
-				if( $pass != '' ){
-					$data[ 'password' ] = md5( $pass );
-				}
+			if( $pass != '' )
+				$data['password'] = md5($pass);
 
-				if( $this->user_m->save( $data, array('id'=>$id) ) ) {
-					$this->session->set_flashdata( 'success', get_msg( 'staff_edit' ) );
-					redirect( get_route( 'staff' ) );
-				}
+			$this->load->model('user_m');
+			$updated = $this->user_m->save($data, array('id'=>$id));
+			if($updated){
+				$this->session->set_flashdata('success', get_msg('user_updated'));
+			}else{
+				$this->session->set_flashdata('error', get_msg( 'user_update_failed'));
 			}
-			$this->edit( $id );
 		}
+
+		$this->edit( $id, $mode );
 	}
 }
