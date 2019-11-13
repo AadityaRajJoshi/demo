@@ -33,7 +33,7 @@ if(! function_exists('get_route')){
 			break;
 
 			case 'add_staff':
-				$path = 'staff/add';
+				$path = 'user/add';
 			break;
 
 			case 'all_event':

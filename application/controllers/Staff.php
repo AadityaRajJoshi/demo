@@ -27,7 +27,7 @@ class Staff extends MY_Controller{
 		}
 	}
 
-	public function add(){ /*die('sdfsd');*/
+	public function add(){
 
 		if(! is_admin())
 			do_redirect('dashboard');
@@ -67,7 +67,7 @@ class Staff extends MY_Controller{
 
 		$this->load->view( 'dashboard_template_v', $this->data );	
 	}
-
+	
 	public function delete( $id = false ){
 		if( $this->is_admin() ){
 
