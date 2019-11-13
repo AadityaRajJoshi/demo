@@ -279,3 +279,19 @@ if(! function_exists('do_redirect')){
 		redirect(get_route($route), $mode);
 	}
 }
+
+if(! function_exists('get_staffs_dropdown')){	
+	function get_staffs_dropdown(  ){
+		$ci = get_instance();
+		$ci->load->model( 'user_m' );
+		$staffs = array();
+		$db_staffs = $ci->user_m->get( array( 'id', 'username' ) , array(
+			'role_id' =>get_role_id("staff")
+		));
+		foreach ($db_staffs as $value) {
+			$staffs[ $value->id ] = $value->username;
+		}
+
+		return $staffs;
+	}
+}

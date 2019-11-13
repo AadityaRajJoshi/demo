@@ -1,5 +1,5 @@
 <?php
-	echo form_open( 'event/save' ); ?>
+	echo form_open( 'event/add' ); ?>
 	<div class="luft-form-wrapper">
 		<div class="luft-form-row">
 			<?php echo form_label( 'event_name', 'event-name' ); 
@@ -29,9 +29,9 @@
 					'name' => 'date',
 					'placeholder' => 'Enter date',
 					'id' => 'date',
-					// 'required' => 'required',
+					'required' => 'required',
 					'type' => 'date',
-					'data-date-format' => "DD MMMM YYYY"
+					'value' => date('Y-m-d')
 				) ); ?>
 			</div>
 			<div class="luft-form-row">
@@ -40,7 +40,8 @@
 				echo form_input( array(
 					'name' => 'event-start',
 					'id' => 'event-start',
-					// 'required' => 'required',
+					'required' => 'required',
+					'value' => '10:00',
 					'type' => 'time'
 				) ); ?>
 			</div>
@@ -50,7 +51,8 @@
 				echo form_input( array(
 					'name' => 'event-stop',
 					'id' => 'event-stop',
-					// 'required' => 'required',
+					'required' => 'required',
+					'value' => '16:00',
 					'type' => 'time'
 				) ); ?>
 			</div>
@@ -60,7 +62,8 @@
 				echo form_input( array(
 					'name' => 'traveltime-one-start',
 					'id' => 'traveltime-one-start',
-					// 'required' => 'required',
+					'required' => 'required',
+					'value' => '7:00',
 					'type' => 'time'
 				) ); ?>
 			</div>
@@ -257,4 +260,4 @@
 	</div>
 	<?php
 	echo form_close( '' );
-?>
+?>	

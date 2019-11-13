@@ -27,12 +27,12 @@ class Staff extends MY_Controller{
 		}
 	}
 
-	public function add(){
+	public function add(){ /*die('sdfsd');*/
 
 		if(! is_admin())
 			do_redirect('dashboard');
 		
-		$this->data[ 'meta' ][ 'title' ] = 'add staff';
+		$this->data[ 'meta' ][ 'title' ] = get_msg( 'add_staff' );
 		$this->data[ 'breadcrumb' ] = array(get_msg( 'staff' ),get_msg( 'add_staff' ));
 		$this->data['page'] = 'add_staff_v';
 		$this->data['current_menu'] = 'staff';
