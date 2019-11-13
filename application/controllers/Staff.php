@@ -13,7 +13,8 @@ class Staff extends MY_Controller{
 	public function index(){
 
 		if( is_admin() ){
-			$this->data[ 'meta' ][ 'title' ] = 'staff';
+			$this->data[ 'meta' ][ 'title' ] = get_msg( 'staff' );
+
 			$this->data[ 'breadcrumb' ] = array(
 				get_msg( 'staff' ),
 				get_msg( 'all_staff' )

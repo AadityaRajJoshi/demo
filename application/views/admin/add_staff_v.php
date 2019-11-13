@@ -46,7 +46,7 @@
 			
 		</div>
 		<?php
-			echo form_submit( 'add', 'Add Staff' ); ?>
+			echo form_submit( 'add', get_msg( 'add_staff' ) ); ?>
 	</div>
 	<?php
 	echo form_close( '' );
