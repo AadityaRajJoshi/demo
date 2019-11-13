@@ -139,7 +139,7 @@ class User extends CI_Controller{
         $this->data['user'] = $user;
 
         if('own' == $mode){
-        	# Editing my profile
+        	# Editing own profile
     		$this->data['meta'] = get_msg('meta_edit_staff');
 	        $this->data['breadcrumb'] = array(get_msg('my_details'));
 	        $this->data['body_class'] = 'edit-own-profile';
