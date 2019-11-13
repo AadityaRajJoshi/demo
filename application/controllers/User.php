@@ -157,7 +157,6 @@ class User extends CI_Controller{
         $this->data['mode'] = $mode;
         $this->data['common'] = true;
         $this->data['page'] = 'profile_v';
-
         $this->data['current_menu'] = 'dashboard';
 
         if( $mode == 'own' ){
