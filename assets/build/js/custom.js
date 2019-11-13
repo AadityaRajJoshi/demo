@@ -11,6 +11,8 @@
             $('body').toggleClass('animate-menu-open')
         })
 
+        $('.custom-styled-select').select2();
+
     };
 
     /* DOM ready event */
