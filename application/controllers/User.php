@@ -141,21 +141,13 @@ class User extends CI_Controller{
 
         if('own' == $mode){
         	# Editing my profile
-    		$this->data['meta'] = array(
-	            'title' => 'Edit Profile',
-	            'description' => 'Edit Profile',
-	            'keyword' => ''
-	        );
+    		$this->data['meta'] = get_msg('meta_edit_staff');
 	        $this->data['breadcrumb'] = array(get_msg('my_details'));
 	        $this->data['body_class'] = 'edit-own-profile';
         	$this->data['current_menu'] = 'dashboard';
         }else{
         	# Editing staff profile
-    		$this->data['meta'] = array(
-	            'title' => 'Edit Staff Profile',
-	            'description' => 'Edit Profile',
-	            'keyword' => ''
-	        );
+    		$this->data['meta'] = get_msg('meta_edit_profile');
 	        $this->data[ 'breadcrumb' ] = array(get_msg('staff'), get_msg('update'));
 	        $this->data['body_class'] = 'edit-staff-profile';
         	$this->data['current_menu'] = 'staff';

@@ -87,6 +87,16 @@ if(! function_exists('get_msg')){
 			'save_details'  => 'SAVE DETAILS',
 			'update_staff'  => 'UPDATE STAFF',
 
+			'meta_edit_staff' => array(
+	            'title' => 'Edit Profile',
+	            'description' => 'Edit Profile',
+	            'keyword' => ''
+	        ),
+	        'meta_edit_profile' => array(
+	            'title' => 'Edit Staff Profile',
+	            'description' => 'Edit Profile',
+	            'keyword' => ''
+	        ),
 		);
 
 		return $msg[ $key ];
