@@ -124,7 +124,6 @@ class User extends CI_Controller{
         	$this->invalid_access();
         }
         
-
         $id = $this->input->post('id');
         if($id){
         	if($id<=0)
