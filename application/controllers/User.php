@@ -37,8 +37,8 @@ class User extends CI_Controller{
 
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('username', 'Username', 'required' );
-		$this->form_validation->set_rules('password', 'Password', 'required' );
+		$this->form_validation->set_rules('username', get_msg('username'), 'required' );
+		$this->form_validation->set_rules('password', get_msg('password'), 'required' );
 		/* check validation*/
 		if ( $this->form_validation->run() ){
 			$username = $this->input->post( 'username' );
@@ -129,7 +129,7 @@ class User extends CI_Controller{
         if('own' == $mode){
         	# Editing my profile
     		$this->data['meta'] = array(
-	            'title' => 'Edit Profile',
+	            'title' => get_msg( 'edit_title_m' ),
 	            'description' => 'Edit Profile',
 	            'keyword' => ''
 	        );
@@ -139,7 +139,7 @@ class User extends CI_Controller{
         }else{
         	# Editing staff profile
     		$this->data['meta'] = array(
-	            'title' => 'Edit Staff Profile',
+	            'title' => get_msg( 'edit_staff_title_m' ),
 	            'description' => 'Edit Profile',
 	            'keyword' => ''
 	        );
@@ -170,16 +170,16 @@ class User extends CI_Controller{
         $this->load->view('dashboard_template_v', $this->data);    
     }
 
-	public function update(){
+	public function update(  ){
 
 		if (! is_logged_in()){
 		    do_redirect('login');
 		}
 
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('name', 'Username', 'required' );
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
-		$this->form_validation->set_rules('number', 'phone number', 'required' );
+		$this->form_validation->set_rules('name', get_msg( 'username' ), 'required' );
+		$this->form_validation->set_rules('email', get_msg( 'email' ), 'trim|required|valid_email' );
+		$this->form_validation->set_rules('number', get_msg( 'number' ), 'required' );
 		
 		$mode = $this->input->post('mode');
 		$id = $this->input->post('id');
@@ -197,15 +197,36 @@ class User extends CI_Controller{
 			$phone_number = $this->input->post( 'number' );
 			$pass = $this->input->post( 'password' );
 
+			if( $pass != '' )
+				$data['password'] = md5($pass);
+
+			//for image
+			$config['upload_path'] = './uploads';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size'] = 100;
+			$config['max_width'] = 1024;
+			$config['max_height']= 768;
+
+			$this->load->library( 'upload', $config );
+			if( !$this->upload->do_upload( 'userfile' ) ){
+				$error = array( 'error' => $this->upload->display_errors() );
+			}else{
+
+				$image = array( 'image' => $this->upload->data() );
+				if( isset($image) ){
+					
+				$this->data['image'] = $image;
+				}
+				
+			}
+
 			$data = array( 
 				'username' => $name,
 				'phone_number' => $phone_number,
 				'email' => $email,
+				'image' => ($image['image']['file_name'])
 			);
-
-			if( $pass != '' )
-				$data['password'] = md5($pass);
-
+			
 			$this->load->model('user_m');
 			$updated = $this->user_m->save($data, array('id'=>$id));
 			if($updated){

@@ -12,8 +12,8 @@ class Staff extends MY_Controller{
 
 	public function index(){
 
-		if( $this->is_admin() ){
-			$this->data[ 'meta' ][ 'title' ] = 'staff';
+		if( is_admin() ){
+			$this->data[ 'meta' ][ 'title' ] = get_msg( 'staff' );
 			$this->data[ 'breadcrumb' ] = array(
 				get_msg( 'staff' ),
 				get_msg( 'all_staff' )
@@ -39,10 +39,10 @@ class Staff extends MY_Controller{
 		$this->data['current_menu'] = 'staff';
 		$this->load->helper('email');
 
-		$this->form_validation->set_rules('name', 'Username', 'required' );
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
-		$this->form_validation->set_rules('number', 'phone number', 'required' );
-		$this->form_validation->set_rules('password', 'Password', 'required' );
+		$this->form_validation->set_rules('name', get_msg( 'username' ), 'required' );
+		$this->form_validation->set_rules('email', get_msg( 'password' ), 'trim|required|valid_email' );
+		$this->form_validation->set_rules('number', get_msg( 'number' ), 'required' );
+		$this->form_validation->set_rules('password', get_msg( 'password' ), 'required' );
 		if($this->form_validation->run()){
 		
 			$username = $this->input->post( 'name' );
