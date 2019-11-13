@@ -85,7 +85,7 @@ if(! function_exists('get_msg')){
 			'password_placeholder' => 'Enter Password',
 			'my_details'	=> 'MY DETAILS',
 			'save_details'  => 'SAVE DETAILS',
-			'update_staff'  => 'UPDATE STAFF'
+			'update_staff'  => 'UPDATE STAFF',
 
 		);
 
