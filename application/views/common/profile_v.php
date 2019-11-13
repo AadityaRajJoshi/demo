@@ -1,5 +1,4 @@
-<?php echo form_open( 'user/update' ); ?>
-
+<?php echo form_open(); ?>
 	<div class="luft-form-wrapper">
 		<div class="luft-form-row">
 			<?php echo form_label( get_msg('name'), 'name' );
