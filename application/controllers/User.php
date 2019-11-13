@@ -124,25 +124,31 @@ class User extends CI_Controller{
         	$this->invalid_access();
         }
         
+        $id = $this->input->post('id');
+        if($id){
+        	if($id<=0)
+        		$this->invalid_access();
+
+        	if( is_staff() && get_session( 'id' ) != $id )
+        		$this->invalid_access();
+
+        	$update = $this->save($id);
+        	if($update)
+        		$user = $this->user_m->get('*', array('id'=>$id ), 1);
+        }
+
         $this->data['user'] = $user;
 
         if('own' == $mode){
         	# Editing my profile
-    		$this->data['meta'] = array(
-	            'title' => get_msg( 'edit_title_m' ),
-	            'description' => 'Edit Profile',
-	            'keyword' => ''
-	        );
+    		$this->data['meta'] = get_msg('meta_edit_staff');
 	        $this->data['breadcrumb'] = array(get_msg('my_details'));
 	        $this->data['body_class'] = 'edit-own-profile';
         	$this->data['current_menu'] = 'dashboard';
         }else{
         	# Editing staff profile
-    		$this->data['meta'] = array(
-	            'title' => get_msg( 'edit_staff_title_m' ),
-	            'description' => 'Edit Profile',
-	            'keyword' => ''
-	        );
+
+    		$this->data['meta'] = get_msg('meta_edit_profile');
 	        $this->data[ 'breadcrumb' ] = array(get_msg('staff'), get_msg('update'));
 	        $this->data['body_class'] = 'edit-staff-profile';
         	$this->data['current_menu'] = 'staff';
@@ -152,7 +158,6 @@ class User extends CI_Controller{
         $this->data['mode'] = $mode;
         $this->data['common'] = true;
         $this->data['page'] = 'profile_v';
-
         $this->data['current_menu'] = 'dashboard';
 
         if( $mode == 'own' ){
@@ -192,25 +197,6 @@ class User extends CI_Controller{
 
     	$this->load->view( 'dashboard_template_v', $this->data );
     }
-
-	public function update(){
-
-		if(! is_logged_in()){
-		    do_redirect('login');
-		}
-		$mode = $this->input->post('mode');
-		$id = $this->input->post('id');
-
-		if($id<=0)
-			$this->invalid_access();
-
-		if( is_staff() && get_session( 'id' ) != $id )
-			$this->invalid_access();
-
-		$this->save($id);
-
-		$this->edit( $id, $mode );
-	}
 
 	public function save($id=false){
 
@@ -266,8 +252,10 @@ class User extends CI_Controller{
 				# Need to update staff
 				if($operation){
 					$this->session->set_flashdata('success', get_msg('user_updated'));
+					return true;
 				}else{
 					$this->session->set_flashdata('error', get_msg( 'user_update_failed'));
+					return false;
 				}
 
 			}else{
@@ -277,8 +265,11 @@ class User extends CI_Controller{
 					do_redirect('staff');
 				}else{
 					$this->session->set_flashdata( 'error', get_msg( 'up_mismatched' ) );
+					return false;
 				}
 			}
+		}else{
+			return false;
 		}
 	}
 }

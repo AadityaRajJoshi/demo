@@ -96,8 +96,18 @@ if(! function_exists('get_msg')){
 			'id' => 'ID',
 			'work_time'    => 'Total WorkingTime',
 			'edit_title_m'  => 'Edit Profile',
-			'edit_staff_title_m' => 'Edit Staff Profile'
+			'edit_staff_title_m' => 'Edit Staff Profile',
 
+			'meta_edit_staff' => array(
+	            'title' => 'Edit Profile',
+	            'description' => 'Edit Profile',
+	            'keyword' => ''
+	        ),
+	        'meta_edit_profile' => array(
+	            'title' => 'Edit Staff Profile',
+	            'description' => 'Edit Profile',
+	            'keyword' => ''
+	        )
 		);
 
 		return $msg[ $key ];

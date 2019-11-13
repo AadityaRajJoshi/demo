@@ -1,4 +1,4 @@
-<?php echo form_open_multipart( 'user/update' ); ?>
+<?php echo form_open_multipart(); ?>
 	
 	<?php if( $mode == 'own' ){?>
 		<input type='file' name='userfile'/>
@@ -7,9 +7,6 @@
 			<img src="<?php echo $full_path; ?>"/>
 		<?php	}  ?>
 	<?php }?>
-
-
-	
 
 	<div class="luft-form-wrapper">
 		<div class="luft-form-row">
