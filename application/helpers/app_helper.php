@@ -33,7 +33,7 @@ if(! function_exists('get_route')){
 			break;
 
 			case 'add_staff':
-				$path = 'staff/add';
+				$path = 'user/add';
 			break;
 
 			case 'all_event':
@@ -75,18 +75,39 @@ if(! function_exists('get_msg')){
 			'menu'			=> 'Menu',
 			'access'        => 'Cannot access',
 			'update'		=> 'Update',
-			'name'          => 'name',
+			'name'          => 'Name',
 			'name_placeholder' => 'Enter Name',
 			'email'         => 'Email',
 			'email_placeholder' => 'Enter Email',
 			'number'        => 'Number',
 			'number_placeholder' => 'Enter Phone Number',
-			'password'     => 'Password',
+			'password'     => 'PASSWORD',
 			'password_placeholder' => 'Enter Password',
 			'my_details'	=> 'MY DETAILS',
-			'save_details'  => 'SAVE DETAILS',
-			'update_staff'  => 'UPDATE STAFF',
 
+			'save_details'  => 'UPDATE DETAILS',
+			'update_staff'  => 'UPDATE STAFF',
+			'login_m'      => 'Login',
+			'forgot_pass'  => 'Forgot Password',
+			'username'     => 'User Name',
+			'username_placeholder' => 'Enter Username Or Email',
+			'remember'     => 'Remember me',
+			'forget_pass'  => 'Forget Password',
+			'id' => 'ID',
+			'work_time'    => 'Total WorkingTime',
+			'edit_title_m'  => 'Edit Profile',
+			'edit_staff_title_m' => 'Edit Staff Profile',
+
+			'meta_edit_staff' => array(
+	            'title' => 'Edit Profile',
+	            'description' => 'Edit Profile',
+	            'keyword' => ''
+	        ),
+	        'meta_edit_profile' => array(
+	            'title' => 'Edit Staff Profile',
+	            'description' => 'Edit Profile',
+	            'keyword' => ''
+	        )
 		);
 
 		return $msg[ $key ];
