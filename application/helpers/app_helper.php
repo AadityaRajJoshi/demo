@@ -33,7 +33,7 @@ if(! function_exists('get_route')){
 			break;
 
 			case 'add_staff':
-				$path = 'staff/add';
+				$path = 'user/add';
 			break;
 
 			case 'all_event':
@@ -84,6 +84,7 @@ if(! function_exists('get_msg')){
 			'password'     => 'PASSWORD',
 			'password_placeholder' => 'Enter Password',
 			'my_details'	=> 'MY DETAILS',
+
 			'save_details'  => 'UPDATE DETAILS',
 			'update_staff'  => 'UPDATE STAFF',
 			'login_m'      => 'Login',
@@ -96,6 +97,7 @@ if(! function_exists('get_msg')){
 			'work_time'    => 'Total WorkingTime',
 			'edit_title_m'  => 'Edit Profile',
 			'edit_staff_title_m' => 'Edit Staff Profile'
+
 		);
 
 		return $msg[ $key ];

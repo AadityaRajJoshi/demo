@@ -67,10 +67,10 @@ class User extends CI_Controller{
 
 					set_cookie( 
 						'user_logged_in', 
-						json_encode( [
+						json_encode([
 							'user' => $username,
 							'pass' => $this->input->post( 'password' ),
-						] ),
+						]),
 						30*60*60 
 					);
 				}
@@ -156,86 +156,107 @@ class User extends CI_Controller{
         $this->data['current_menu'] = 'dashboard';
 
         if( $mode == 'own' ){
-
-        $this->data[ 'breadcrumb' ] = array(
-            get_msg( 'my_details' )
-        );
+	        $this->data[ 'breadcrumb' ] = array(
+	            get_msg( 'my_details' )
+	        );
     	}else{
-    	$this->data[ 'breadcrumb' ] = array(
-    	    get_msg( 'staff' ),
-    	    get_msg( 'update' )
-    	);
+	    	$this->data[ 'breadcrumb' ] = array(
+	    	    get_msg( 'staff' ),
+	    	    get_msg( 'update' )
+	    	);
     	}
 
         $this->load->view('dashboard_template_v', $this->data);    
     }
 
-	public function update(  ){
+    public function add(){
+    	if(! is_logged_in()){
+    	    do_redirect('login');
+    	}
 
-		if (! is_logged_in()){
+    	if(! is_admin())
+    		do_redirect('dashboard');
+
+    	$this->data = array(
+    		'meta' => array(
+    			'title' => 'Add Staff',
+    			'description' => '',
+    			'keyword' => ''
+    		),
+    		'page' => 'add_staff_v',
+    		'breadcrumb' => array(get_msg( 'staff' ),get_msg( 'add_staff' )),
+    		'current_menu' => 'staff'
+    	);
+
+    	$this->save();
+
+    	$this->load->view( 'dashboard_template_v', $this->data );
+    }
+
+	public function update(){
+
+		if(! is_logged_in()){
 		    do_redirect('login');
 		}
-
-		$this->load->library('form_validation');
-		$this->form_validation->set_rules('name', get_msg( 'username' ), 'required' );
-		$this->form_validation->set_rules('email', get_msg( 'email' ), 'trim|required|valid_email' );
-		$this->form_validation->set_rules('number', get_msg( 'number' ), 'required' );
-		
 		$mode = $this->input->post('mode');
 		$id = $this->input->post('id');
 
 		if($id<=0)
 			$this->invalid_access();
 
-		if( $this->form_validation->run() ){
+		if( is_staff() && get_session( 'id' ) != $id )
+			$this->invalid_access();
 
-			if( is_staff() && get_session( 'id' ) != $id )
-				$this->invalid_access();
-
-			$name = $this->input->post( 'name' );
-			$email = $this->input->post( 'email' );
-			$phone_number = $this->input->post( 'number' );
-			$pass = $this->input->post( 'password' );
-
-			if( $pass != '' )
-				$data['password'] = md5($pass);
-
-			//for image
-			$config['upload_path'] = './uploads';
-			$config['allowed_types'] = 'gif|jpg|png';
-			$config['max_size'] = 100;
-			$config['max_width'] = 1024;
-			$config['max_height']= 768;
-
-			$this->load->library( 'upload', $config );
-			if( !$this->upload->do_upload( 'userfile' ) ){
-				$error = array( 'error' => $this->upload->display_errors() );
-			}else{
-
-				$image = array( 'image' => $this->upload->data() );
-				if( isset($image) ){
-					
-				$this->data['image'] = $image;
-				}
-				
-			}
-
-			$data = array( 
-				'username' => $name,
-				'phone_number' => $phone_number,
-				'email' => $email,
-				'image' => ($image['image']['file_name'])
-			);
-			
-			$this->load->model('user_m');
-			$updated = $this->user_m->save($data, array('id'=>$id));
-			if($updated){
-				$this->session->set_flashdata('success', get_msg('user_updated'));
-			}else{
-				$this->session->set_flashdata('error', get_msg( 'user_update_failed'));
-			}
-		}
+		$this->save($id);
 
 		$this->edit( $id, $mode );
+	}
+
+	public function save($id=false){
+
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('name', 'Username', 'required' );
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
+		$this->form_validation->set_rules('number', 'phone number', 'required' );
+		if(! $id)
+			$this->form_validation->set_rules('password', 'Password', 'required' );
+
+		if($this->form_validation->run()){
+			$username = $this->input->post( 'name' );
+			$email = $this->input->post( 'email' );
+			$phone_number = $this->input->post( 'number' );
+			$password = md5($this->input->post( 'password' ));
+			
+			$data = array(
+				'username'=> $username,
+				'email' => $email,
+				'Phone_number' => $phone_number,					
+				'role_id' => get_role_id("staff")
+			);
+
+			if( $password != '' )
+				$data['password'] = md5($password);
+
+			$this->load->model( 'user_m' );
+			$where = $id ? array('id'=>$id) : false;
+			$operation = $this->user_m->save( $data, $where );
+			if( $id ){
+				# Need to update staff
+				if($operation){
+					$this->session->set_flashdata('success', get_msg('user_updated'));
+				}else{
+					$this->session->set_flashdata('error', get_msg( 'user_update_failed'));
+				}
+
+			}else{
+				# Need to create staff
+				if($operation){
+					$this->session->set_flashdata( 'success', get_msg( 'staff_added' ) );
+					do_redirect('staff');
+				}else{
+					$this->session->set_flashdata( 'error', get_msg( 'up_mismatched' ) );
+				}
+			}
+		}
 	}
 }
