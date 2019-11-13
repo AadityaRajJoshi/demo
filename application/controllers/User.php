@@ -53,7 +53,6 @@ class User extends CI_Controller{
 
 			$this->load->model( 'user_m' );
 			$db_user = $this->user_m->get( '*', $condition, 1 );
-
 			if ( !$db_user ) {
 				$this->session->set_flashdata( 'error', get_msg( 'up_mismatched' ) );
 			}else{
