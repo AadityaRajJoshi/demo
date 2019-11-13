@@ -9,7 +9,6 @@ class Dashboard extends MY_Controller{
 	}
 
 	public function index(){
-
 		$this->data[ 'meta' ][ 'title' ] = 'dashboard';
 		$this->data[ 'breadcrumb' ] = get_msg( 'dashboard' ) ;
 		if( is_admin() ){

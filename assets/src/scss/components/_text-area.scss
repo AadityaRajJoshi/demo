@@ -1,0 +1,31 @@
+textarea {
+    font-family: 'Roboto', sans-serif;
+}
+
+.luft-form-row {
+    &.text-area-row {
+        flex: 0 0 48%;
+
+        @include media(mb) {
+            flex: 0 0 100%;
+        }
+    }    
+}
+
+.text-area-wrapper {
+    width: 100%;
+    textarea {
+        width: 100%;
+        padding: 10px;
+        height: calc(100% - 25px);
+        background: $color_light_grey;
+        border: 1px solid $color_border;
+        border-radius: 3px;
+        font-size: 14px;
+        color: $color_primary;
+        &::placeholder {
+            color: $color_primary;
+        }
+    }
+}
+

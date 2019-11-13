@@ -13,11 +13,10 @@ class Staff extends MY_Controller{
 	public function index(){
 
 		if( is_admin() ){
-			$this->data[ 'meta' ][ 'title' ] = 'staff';
-			$this->data[ 'breadcrumb' ] = array(
-				get_msg( 'staff' ),
-				get_msg( 'all_staff' )
-			);
+			$this->data[ 'meta' ][ 'title' ] = get_msg( 'staff' );
+
+			$this->data[ 'breadcrumb' ] = get_msg( 'breadcrumb_all_staff' );	
+			
 			$this->data['staffs'] = $this->user_m->get( '*', array(
 				'role_id' =>get_role_id("staff")
 			));
@@ -32,7 +31,7 @@ class Staff extends MY_Controller{
 		if(! is_admin())
 			do_redirect('dashboard');
 		
-		$this->data[ 'meta' ][ 'title' ] = 'add staff';
+		$this->data[ 'meta' ][ 'title' ] = get_msg( 'add_staff' );
 		$this->data[ 'breadcrumb' ] = array(get_msg( 'staff' ),get_msg( 'add_staff' ));
 		$this->data['page'] = 'add_staff_v';
 		$this->data['current_menu'] = 'staff';
@@ -67,7 +66,7 @@ class Staff extends MY_Controller{
 
 		$this->load->view( 'dashboard_template_v', $this->data );	
 	}
-
+	
 	public function delete( $id = false ){
 		if( $this->is_admin() ){
 

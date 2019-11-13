@@ -29,6 +29,6 @@
                 <span class="form-err"><?php echo validation_errors(); ?></span>
             <?php endif; ?>               
         </div>
-        <?php $this->load->view('login/' . $page); ?>       
+        <?php $this->load->view('common/' . $page); ?>       
     </body>
 </html>
