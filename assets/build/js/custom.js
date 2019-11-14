@@ -7,7 +7,7 @@
             $('.form-success, .form-err').fadeOut('slow');
         }, 5000);
 
-        $('#showLeft').click(function () {
+        $('#showLeft, .close-icon-mobile').click(function () {
             $('body').toggleClass('animate-menu-open')
         })
 
