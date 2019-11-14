@@ -359,19 +359,24 @@ if(! function_exists('get_date_from_datetime')){
 
 if(! function_exists('get_total_working_time')){	
 	function get_total_working_time( $args ){
-		var_export( $args );
+		$event_start = strtotime( $args['start_time'] );
+		$event_end = strtotime( $args['stop_time'] );
+		$tt_1_start = strtotime( $args['traveltime_1_start'] );
+		$tt_1_stop = strtotime( $args['traveltime_1_stop'] );
+		$tt_2_start = strtotime( $args['traveltime_2_start'] );
+		$tt_2_stop = strtotime( $args['traveltime_2_stop'] );
+		$construct_start = strtotime( $args['construction_start'] );
+		$construct_stop = strtotime( $args['construction_stop'] );
+		$dismantl_start = strtotime( $args['dismantling_start'] );
+		$dismantl_stop = strtotime( $args['dismantling_stop'] );
 
-		// $stamp = strtotime('2019-01-01 14:15:00') - strtotime('2019-01-01 14:15:00');
+		$event_diff = abs( $event_end - $event_start );
+		$tt_1_diff = abs( $tt_1_stop - $tt_1_start) ;  
+		$tt_2_diff = abs( $tt_2_stop - $tt_2_start) ;
+		$construct_diff = abs( $construct_stop - $construct_start) ;
+		$dismantl_diff = abs( $dismantl_stop - $dismantl_start) ;
 
-		// $to_time = strtotime('2019-01-01 12:15:00');
-		// $from_time = strtotime('2019-01-01 14:30:00');
-		// $time_diff_1 = $from_time - $to_time;
-
-		// $to_time = strtotime('2019-01-01 12:15:00');
-		// $from_time = strtotime('2019-01-01 14:45:00');
-		// $time_diff_2 = $from_time - $to_time;
-
-		// echo gmdate('H:i:s', $time_diff_1 + $time_diff_2); die;
+		return gmdate('H:i:s',$event_diff + $tt_1_diff + $tt_2_diff + $construct_diff + $dismantl_diff);
 	}
 }
 

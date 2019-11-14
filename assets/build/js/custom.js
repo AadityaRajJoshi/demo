@@ -19,7 +19,14 @@
     $(document).ready(documentReadyCallbackFunc);
 
     //delete script 
-
+    $( document ).on( 'click', '.onoffswitch-checkbox', function(){
+        var id = $(this).data( 'id' );
+        $.ajax({
+            url : 'http://localhost/luftlek/event/status',
+            type : 'POST',
+            data : {event_id : id },
+        });
+    } );
 
 })(jQuery);
 

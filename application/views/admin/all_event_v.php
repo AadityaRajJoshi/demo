@@ -9,29 +9,27 @@
   		<th class="luft-event-status"><?php echo get_msg( 'finished' ) ?></th>
   	</thead>
   	<tbody>
-  		<?php //echo "<pre>"; ?>
-  		<?php //var_export( $events ); ?>
-  			<?php foreach ($events as $event) { ?>
-  			<tr>
-  				<td><?php echo $event->order_number ?></td>
-  				<td><?php echo $event->name ?></td>
-  				<td><?php echo  get_date_from_datetime( $event->start_time ); ?></td>
-  				<td>Kathmandu</td>
-  				<td>
-  					<?php echo get_time_from_datetime(  $event->start_time ) . ' - ' . get_time_from_datetime(  $event->stop_time )  ?>							
-  				</td>
-  				<td><?php get_total_working_time( $event ) ?></td>
-  				<td class="d-flex-center right-text">
-  					<a href="<?php echo $event->id; ?>"  class="luft-user-edit" ><i class="far fa-edit"></i></a>
-					<div class="onoffswitch">
-						<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch-<?php echo $event->id ?>" checked>
-						<label class="onoffswitch-label" for="switch-<?php echo $event->id ?>">
-							<span class="onoffswitch-inner"></span>
-							<span class="onoffswitch-switch"></span>
-						</label>
-					</div>
-  				</td>
-  			</tr>
-  			<?php } ?>
+		<?php foreach ($events as $event) { ?>
+		<tr>
+			<td><?php echo $event->order_number ?></td>
+			<td><?php echo $event->name ?></td>
+			<td><?php echo  get_date_from_datetime( $event->start_time ); ?></td>
+			<td>Kathmandu</td>
+			<td>
+				<?php echo get_time_from_datetime( $event->start_time ) . ' - ' . get_time_from_datetime(  $event->stop_time )  ?>							
+			</td>
+			<td><?php echo get_time_from_datetime( $event->total_worktime ) ?></td>
+			<td class="d-flex-center right-text">
+				<a href="<?php echo $event->id; ?>"  class="luft-user-edit" ><i class="far fa-edit"></i></a>
+			<div class="onoffswitch">
+				<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch-<?php echo $event->id ?>"<?php echo $event->finished ? 'checked' : '' ?> data-id = <?php echo $event->id ?> >
+				<label class="onoffswitch-label" for="switch-<?php echo $event->id ?>">
+					<span class="onoffswitch-inner"></span>
+					<span class="onoffswitch-switch"></span>
+				</label>
+			</div>
+			</td>
+		</tr>
+		<?php } ?>
   	</tbody>
 </table>
