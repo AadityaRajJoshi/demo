@@ -1,12 +1,12 @@
 <table class="luft-table">
   	<thead>
-  		<th class="luft-user-id"><?php echo get_msg('ordernumber') ?> <img src='assets/image/filter.png' alt="filter" class="filter-img" /> </th>
-  		<th><?php echo get_msg( 'event' ); ?><img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
-  		<th><?php echo get_msg( 'date' ); ?><img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
-  		<th><?php echo get_msg( 'city' ); ?><img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
-  		<th><?php echo get_msg( 'eventime' ); ?><img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
-  		<th><?php echo get_msg( 'total_workingtime' ); ?><img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
-  		<th><?php echo get_msg( 'finished' ) ?></th>
+  		<th class="luft-event-id"><?php echo get_msg('ordernumber') ?> <img src='assets/image/filter.png' alt="filter" class="filter-img" /> </th>
+  		<th class="luft-event-name"><?php echo get_msg( 'event' ); ?><img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
+  		<th class="luft-event-date"><?php echo get_msg( 'date' ); ?><img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
+  		<th class="luft-event-city"><?php echo get_msg( 'city' ); ?><img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
+  		<th class="luft-event-time"><?php echo get_msg( 'eventime' ); ?><img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
+  		<th class="luft-working-time"><?php echo get_msg( 'total_workingtime' ); ?><img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
+  		<th class="luft-event-status"><?php echo get_msg( 'finished' ) ?></th>
   	</thead>
   	<tbody>
   		<?php //echo "<pre>"; ?>
@@ -20,15 +20,16 @@
   				<td>
   					<?php echo get_time_from_datetime(  $event->start_time ) . ' - ' . get_time_from_datetime(  $event->stop_time )  ?>							
   				</td>
-  				<td> 						
-  				</td>
-  				<td>
+  				<td></td>
+  				<td class="d-flex-center right-text">
   					<a href="<?php echo $event->id; ?>"  class="luft-user-edit" ><i class="far fa-edit"></i></a>
-  					<?php echo form_checkbox( array(
-  						'name' => 'event_status',
-  						'id'   => 'event_status',
-  						'checked' => false
-  					) ); ?>
+					<div class="onoffswitch">
+						<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch-<?php echo $event->id ?>" checked>
+						<label class="onoffswitch-label" for="switch-<?php echo $event->id ?>">
+							<span class="onoffswitch-inner"></span>
+							<span class="onoffswitch-switch"></span>
+						</label>
+					</div>
   				</td>
   			</tr>
   			<?php } ?>
