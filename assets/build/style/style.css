@@ -16,6 +16,10 @@
 .luft-text-right {
   text-align: right !important; }
 
+.d-flex-center {
+  display: flex;
+  align-items: center; }
+
 body {
   max-width: 100%;
   margin: 0;
@@ -207,7 +211,7 @@ span.form-err {
   height: min-content;
   -webkit-animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  z-index: 99;
+  z-index: 999;
   box-shadow: 0 0 6px #adadad; }
   span.form-err p {
     margin: 0;
@@ -363,6 +367,116 @@ textarea {
     color: #020441; }
     .text-area-wrapper textarea::placeholder {
       color: #020441; }
+
+/* The luft-checkbox-type */
+.luft-checkbox-type {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  font-weight: normal;
+  color: #020441; }
+  .luft-checkbox-type input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0; }
+  .luft-checkbox-type .checkmark {
+    position: absolute;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #F7F7F7;
+    border: 1px solid #DFDFE5;
+    border-radius: 3px; }
+    .luft-checkbox-type .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+      left: 9px;
+      top: 5px;
+      width: 5px;
+      height: 10px;
+      border: solid white;
+      border-width: 0 3px 3px 0;
+      -webkit-transform: rotate(45deg);
+      -ms-transform: rotate(45deg);
+      transform: rotate(45deg); }
+  .luft-checkbox-type:hover input ~ .checkmark {
+    background-color: #ccc; }
+
+.luft-checkbox-type input:checked ~ .checkmark {
+  background-color: #020441; }
+
+.luft-checkbox-type input:checked ~ .checkmark:after {
+  display: block; }
+
+.onoffswitch {
+  position: relative;
+  width: 65px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none; }
+
+.onoffswitch-checkbox {
+  display: none; }
+
+.onoffswitch-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 20px; }
+
+.onoffswitch-inner {
+  display: block;
+  width: 200%;
+  margin-left: -100%;
+  transition: margin 0.3s ease-in 0s; }
+  .onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block;
+    float: left;
+    width: 50%;
+    height: 30px;
+    padding: 0;
+    line-height: 30px;
+    font-size: 14px;
+    color: white;
+    box-sizing: border-box; }
+  .onoffswitch-inner:before {
+    content: "Yes";
+    padding-left: 10px;
+    background-color: #58B975;
+    color: #FFFFFF; }
+  .onoffswitch-inner:after {
+    content: "No";
+    padding-right: 10px;
+    background-color: #DFDFE5;
+    color: #000;
+    text-align: right; }
+
+.onoffswitch-switch {
+  display: block;
+  width: 18px;
+  margin: 6px;
+  background: #F7F7F7;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 35px;
+  border-radius: 20px;
+  transition: all 0.3s ease-in 0s; }
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+  margin-left: 0; }
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+  right: 0px; }
 
 .luft-template-dashboard {
   background: #F7F7F7; }
@@ -692,5 +806,20 @@ div#luft-main-content {
   font-size: 16px; }
   .luft-form-wrapper button:hover {
     background: #F7F7F7; }
+
+th.luft-event-date, th.luft-event-time {
+  width: 130px; }
+th.luft-event-status, th.luft-event-city {
+  width: 144px; }
+th.luft-event-id {
+  width: 165px; }
+th.luft-event-status {
+  text-align: right; }
+th.luft-event-name {
+  width: 170px; }
+
+td.right-text {
+  padding-right: 10px;
+  justify-content: flex-end; }
 
 /*# sourceMappingURL=style.css.map */
