@@ -1,11 +1,11 @@
 <table class="luft-table">
   	<thead>
   		<th class="luft-event-id"><?php echo get_msg('ordernumber') ?> <img src='assets/image/filter.png' alt="filter" class="filter-img" /> </th>
-  		<th class="luft-event-name"><?php echo get_msg( 'event' ); ?><img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
-  		<th class="luft-event-date"><?php echo get_msg( 'date' ); ?><img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
-  		<th class="luft-event-city"><?php echo get_msg( 'city' ); ?><img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
-  		<th class="luft-event-time"><?php echo get_msg( 'eventime' ); ?><img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
-  		<th class="luft-working-time"><?php echo get_msg( 'total_workingtime' ); ?><img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
+  		<th class="luft-event-name"><?php echo get_msg( 'event' ); ?> <img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
+  		<th class="luft-event-date"><?php echo get_msg( 'date' ); ?> <img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
+  		<th class="luft-event-city"><?php echo get_msg( 'city' ); ?> <img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
+  		<th class="luft-event-time"><?php echo get_msg( 'eventime' ); ?> <img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
+  		<th class="luft-working-time"><?php echo get_msg( 'total_workingtime' ); ?> <img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
   		<th class="luft-event-status"><?php echo get_msg( 'finished' ) ?></th>
   	</thead>
   	<tbody>
