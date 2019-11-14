@@ -141,7 +141,7 @@ class Event extends MY_Controller{
 		}
 	}
 
-	public function status(){
+	public function toggle_status(){
 		$id = $this->input->post( 'event_id' );
 		$this->load->model( 'event_m' );
 		$event_status = $this->event_m->get( array( 'finished' ), array( 'id' => $id ),1 );

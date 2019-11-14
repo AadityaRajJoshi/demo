@@ -46,7 +46,11 @@ if(! function_exists('get_route')){
 
 			case 'profile':
 				$path = 'profile';
-			break;	
+			break;
+
+			case 'event_toggle_status':
+				$path = 'event/toggle_status';
+			break;
 		}
 		return $path;
 	}
@@ -103,8 +107,7 @@ if(! function_exists('get_msg')){
 			'id' => 'ID',
 			'work_time'    => 'Total WorkingTime',
 			'edit_title_m'  => 'Edit Profile',
-			'edit_staff_title_m' => 'Edit Staff Profile',
-			
+			'edit_staff_title_m' => 'Edit Staff Profile',			
 			'breadcrumb_user_edit_own' => array('MY DETAILS'),
 			'breadcrumb_user_edit_other' => array('Staff', 'Update'),
 			'breadcrumb_all_staff' => array('Staff', 'All Staff'),
