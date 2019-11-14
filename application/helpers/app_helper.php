@@ -36,6 +36,10 @@ if(! function_exists('get_route')){
 				$path = 'user/add';
 			break;
 
+			case 'user_edit':
+				$path = 'user/edit';
+			break;
+
 			case 'all_event':
 				$path = 'event';
 			break;
@@ -46,7 +50,15 @@ if(! function_exists('get_route')){
 
 			case 'profile':
 				$path = 'profile';
+			break;
+
+			case 'forgot':
+				$path = 'forgot';
 			break;	
+
+			case 'event_toggle_status':
+				$path = 'event/toggle_status';
+			break;
 		}
 		return $path;
 	}
@@ -56,52 +68,78 @@ if(! function_exists('get_msg')){
 	function get_msg( $key ){
 		$msg = array(
 			'up_mismatched' => 'Username And Password Not Match.',
+			'staff'	        => 'Staff',
+			'add_staff'	    => 'Add Staff',
 			'staff_added'	=> 'Staff added Successfully',
 			'staff_add_e'	=> 'Error! Staff Not Added',
-			'user_updated'	=> 'Staff Upadted Successfully',
-			'user_update_failed' => 'Error! Staff Not Upadted',
 			'staff_delete'	=> 'Staff Deleted Successfully',
 			'staff_delete_e'=> 'Error! Staff Not Deleted',
+			'user_updated'	=> 'Staff Upadted Successfully',
+			'user_update_failed' => 'Error! Staff Not Upadted',
 			'dashboard'		=> 'Dashboard',
 			'event'			=> 'Event',
 			'add_event'		=> 'Add Event',
 			'all_event'		=> 'All Event',
-			'add_staff'		=> 'Add Staff',
 			'all_staff'     => 'All Staff',
 			'staff'         => 'Staff',
-			'my_details'    => 'My Details',
- 			
+			'my_details'    => 'My Details', 			
 			'setting'		=> 'Setting',
 			'my_event'		=> 'My Event',
+			'login'         => 'Login',
 			'logout'		=> 'Log Out',
 			'menu'			=> 'Menu',
 			'access'        => 'Cannot access',
-			'name'          => 'Name',
-			'name_placeholder' => 'Enter Name',
-			'email'         => 'Email',
-			'email_placeholder' => 'Enter Email',
-			'number'        => 'Number',
-			'number_placeholder' => 'Enter Phone Number',
-			'password'     => 'PASSWORD',
-			'password_placeholder' => 'Enter Password',
+			'event_added'   => 'Event Added Successfully',
+			'event_update'  => 'Event Updated Successfully',
+			'date'			=> 'Date',
+			'city'			=> 'City',
+			'eventime'		=> 'Eventtime',
+			'finished'		=> 'Finished',
+			'ordernumber'	=> 'Ordernumber',
+			'total_workingtime' => 'Total Workingtime',
+			'event_rollback_error' => 'Error! Cannot Insert Event',
+
+			'label_name'         => 'Name',
+			'label_email'        => 'Email',
+			'label_password'     => 'Password',
+			'label_phone_number' => 'Number',
+			'label_username'     => 'User Name',
+
+			'placeholder_name' => 'Enter Name',
+			'placeholder_email' => 'Enter Email',
+			'placeholder_phone_number' => 'Enter Phone Number',
+			'placeholder_password' => 'Enter Password',
+			'placeholder_username' => 'Enter Username Or Email',
 
 			'save_details'  => 'UPDATE DETAILS',
 			'update_staff'  => 'UPDATE STAFF',
-			'login_m'      => 'Login',
-			'forgot_pass'  => 'Forgot Password',
-			'username'     => 'User Name',
-			'username_placeholder' => 'Enter Username Or Email',
 			'remember'     => 'Remember me',
 			'forget_pass'  => 'Forget Password',
 			'id' => 'ID',
 			'work_time'    => 'Total WorkingTime',
 			'edit_title_m'  => 'Edit Profile',
-			'edit_staff_title_m' => 'Edit Staff Profile',
-
+			'toggle_status_error' => 'You are not authorized',
+			'edit_staff_title_m' => 'Edit Staff Profile',			
 			'breadcrumb_user_edit_own' => array('MY DETAILS'),
 			'breadcrumb_user_edit_other' => array('Staff', 'Update'),
 			'breadcrumb_all_staff' => array('Staff', 'All Staff'),
+			'breadcrumb_add_staff' => array('Staff','Add Staff'),
 
+			'meta_login' => array(
+				'title' => 'Login',
+				'description' => 'Login panel',
+				'keyword' => 'staff, admin, employee'
+			),
+			'meta_forgot' => array(
+				'title' => 'Forgot Password',
+				'description' => '',
+				'keyword' => ''
+			),
+			'meta_add_staff' => array(
+    			'title' => 'Add Staff',
+    			'description' => '',
+    			'keyword' => ''
+    		),
 			'meta_edit_staff' => array(
 	            'title' => 'Edit Profile',
 	            'description' => 'Edit Profile',
@@ -112,7 +150,6 @@ if(! function_exists('get_msg')){
 	            'description' => 'Edit Profile',
 	            'keyword' => ''
 	        ),
-
 		);
 
 		return $msg[ $key ];
@@ -167,9 +204,7 @@ if(! function_exists('is_logged_in')){
 
 if( !function_exists( 'get_menu' ) ){	
 	function get_menu(){
-		
 		if(is_admin()){
-
 			return array(
 				'dashboard' => array(
 					'route' => 'dashboard',
@@ -319,5 +354,97 @@ if(! function_exists('get_staffs_dropdown')){
 		}
 
 		return $staffs;
+	}
+}
+
+
+if(! function_exists('get_time_from_datetime')){	
+	function get_time_from_datetime( $datetime ){
+		$time=strtotime($datetime);
+		return date("H:i", $time);
+	}
+}
+
+if(! function_exists('get_date_from_datetime')){	
+	function get_date_from_datetime( $datetime ){
+		$time=strtotime($datetime);
+		return date("d M Y", $time);
+	}
+}
+
+if(! function_exists('get_total_working_time')){	
+	function get_total_working_time( $args ){
+		$event_start = strtotime( $args['start_time'] );
+		$event_end = strtotime( $args['stop_time'] );
+		$tt_1_start = strtotime( $args['traveltime_1_start'] );
+		$tt_1_stop = strtotime( $args['traveltime_1_stop'] );
+		$tt_2_start = strtotime( $args['traveltime_2_start'] );
+		$tt_2_stop = strtotime( $args['traveltime_2_stop'] );
+		$construct_start = strtotime( $args['construction_start'] );
+		$construct_stop = strtotime( $args['construction_stop'] );
+		$dismantl_start = strtotime( $args['dismantling_start'] );
+		$dismantl_stop = strtotime( $args['dismantling_stop'] );
+
+		$event_diff = abs( $event_end - $event_start );
+		$tt_1_diff = abs( $tt_1_stop - $tt_1_start) ;  
+		$tt_2_diff = abs( $tt_2_stop - $tt_2_start) ;
+		$construct_diff = abs( $construct_stop - $construct_start) ;
+		$dismantl_diff = abs( $dismantl_stop - $dismantl_start) ;
+
+		return gmdate('H:i:s',$event_diff + $tt_1_diff + $tt_2_diff + $construct_diff + $dismantl_diff);
+	}
+}
+
+if(! function_exists('print_success_msg')){
+	function print_success_msg($msg){
+		if(!$msg || count($msg) <= 0)
+			return;
+
+		echo '<span class="form-success">';
+		foreach($msg as $m){echo $m;}
+		echo '</span>';
+	}
+}
+
+if(! function_exists('print_error_msg')){
+	function print_error_msg($msg){
+		if(!$msg || count($msg) <= 0)
+			return;
+		
+		echo '<span class="form-err">';
+		foreach($msg as $m){echo $m;}
+		echo '</span>';
+	}
+}
+
+
+if(! function_exists('get_staff_worktime')){
+	function get_staff_worktime( $user_id ){
+		$ci = get_instance();
+		$ci->load->model( 'event_m' );
+		// $ci->load->model( 'package_staff_m' );
+		$ci->load->model( 'staff_m' );
+		$staff_releated_event = $ci->staff_m->get( array( 'event_id' ), array( 'user_id' => $user_id ) );
+		if( !$staff_releated_event ){
+			echo "Not assigned on any event";
+		}else{
+			foreach ($staff_releated_event as $value) {
+				$worktime_event = $ci->event_m->get( array( 'total_worktime' ), array( 'id' => $value->event_id ) );
+				//var_export( $worktime_event );
+			}
+			echo "15hr";
+		}
+	}
+}			
+
+if(! function_exists('get_value')){	
+	function get_value($object, $key){
+		if(is_object($object)){
+			return $object->$key;
+		}else{
+			$ci = get_instance();
+			return $ci->input->post($key);
+
+		}
 	}
 }

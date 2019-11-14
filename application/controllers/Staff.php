@@ -12,58 +12,16 @@ class Staff extends MY_Controller{
 
 	public function index(){
 
-		if( is_admin() ){
-			$this->data[ 'meta' ][ 'title' ] = get_msg( 'staff' );
-
-			$this->data[ 'breadcrumb' ] = get_msg( 'breadcrumb_all_staff' );	
-			
-			$this->data['staffs'] = $this->user_m->get( '*', array(
-				'role_id' =>get_role_id("staff")
-			));
-			$this->data['page'] = 'list_staff_v';
-			$this->data['current_menu'] = 'staff';
-			$this->load->view( 'dashboard_template_v', $this->data );	
-		}
-	}
-
-	public function add(){
-
-		if(! is_admin())
+		if(! is_admin() )
 			do_redirect('dashboard');
-		
-		$this->data[ 'meta' ][ 'title' ] = get_msg( 'add_staff' );
-		$this->data[ 'breadcrumb' ] = array(get_msg( 'staff' ),get_msg( 'add_staff' ));
-		$this->data['page'] = 'add_staff_v';
+
+		$this->data[ 'meta' ][ 'title' ] = get_msg( 'staff' );
+		$this->data[ 'breadcrumb' ] = get_msg( 'breadcrumb_all_staff' );	
+		$this->data['staffs'] = $this->user_m->get( '*', array(
+			'role_id' =>get_role_id("staff")
+		));
+		$this->data['page'] = 'list_staff_v';
 		$this->data['current_menu'] = 'staff';
-		$this->load->helper('email');
-
-		$this->form_validation->set_rules('name', 'Username', 'required' );
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
-		$this->form_validation->set_rules('number', 'phone number', 'required' );
-		$this->form_validation->set_rules('password', 'Password', 'required' );
-		if($this->form_validation->run()){
-		
-			$username = $this->input->post( 'name' );
-			$email = $this->input->post( 'email' );
-			$phone_number = $this->input->post( 'number' );
-			$password = md5($this->input->post( 'password' ));
-			
-			$data = array(
-				'username'=> $username,
-				'email' => $email,
-				'password' => $password,
-				'Phone_number' => $phone_number,					
-				'role_id' => get_role_id("staff")
-			);
-			if( $this->user_m->save( $data ) ){
-				$this->session->set_flashdata( 'success', get_msg( 'staff_added' ) );
-				do_redirect('staff');
-			}else{
-				$this->session->set_flashdata( 'error', get_msg( 'up_mismatched' ) );
-				do_redirect('add_staff');
-			}
-		}
-
 		$this->load->view( 'dashboard_template_v', $this->data );	
 	}
 	

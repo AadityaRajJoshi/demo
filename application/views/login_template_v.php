@@ -1,6 +1,17 @@
 <?php
-    $error = $this->session->flashdata('error');
-    $success = $this->session->flashdata('success');
+    $flash_error = $this->session->flashdata('error');
+    if(! empty($flash_error)){
+        $error[] = $flash_error;
+    }
+
+    if(validation_errors()){
+        $error[] = validation_errors();
+    }
+
+    $flash_success = $this->session->flashdata('success');
+    if(! empty($flash_success)){
+        $success[] = $flash_success;
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -17,13 +28,10 @@
     </head>
     <body class="luft-template-login luft-bg-primary">
         <div class="container">
-            <?php if (!empty($success)): ?>
-                <span class="form-success"><?php echo $success; ?></span>
-            <?php endif; ?>
-
-            <?php if (!empty($error)): ?>
-                <span class="form-err"><?php echo $error; ?></span>
-            <?php endif; ?>
+            <?php 
+                print_success_msg($success); 
+                print_error_msg($error);
+            ?>
 
             <?php if (validation_errors()): ?>
                 <span class="form-err"><?php echo validation_errors(); ?></span>

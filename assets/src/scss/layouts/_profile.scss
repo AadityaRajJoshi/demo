@@ -1,0 +1,36 @@
+.template-profile {
+    .#{$prefix}-inline-input {
+        .#{$prefix}-form-row {
+            flex: 0 0 100%;
+        }
+    } 
+
+    .#{$prefix}-profile-image {
+        margin-bottom: 20px;
+        img {
+            max-width: 300px;
+        }
+    }
+
+    .#{$prefix}-form-row-file {
+        margin-bottom: 20px;
+        label {
+            text-decoration: underline;
+            color: $color_primary;
+            cursor: pointer;
+        }
+    }
+
+    input#profile-image {   
+        
+        visibility: hidden;
+        opacity: -1;
+        position: absolute;
+        left: 0;
+       
+    }
+
+    .#{$prefix}-form-wrapper {
+        max-width: 650px;
+    }
+}

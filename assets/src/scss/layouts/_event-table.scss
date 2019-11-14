@@ -1,0 +1,30 @@
+th {
+    &.#{$prefix}-event-date,
+    &.#{$prefix}-event-time {
+        width: 140px;
+    }
+
+    &.#{$prefix}-event-status,
+    &.#{$prefix}-event-city {
+        width: 145px;
+    }
+
+    &.#{$prefix}-event-id {
+        width: 165px;
+    }
+
+    &.#{$prefix}-event-status {
+        text-align: right;
+    }
+
+    &.#{$prefix}-event-name {
+        width: 170px;
+    }
+}
+
+td {
+    &.right-text {
+        padding-right: 10px;
+        justify-content: flex-end;
+    }
+}

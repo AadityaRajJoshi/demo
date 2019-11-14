@@ -66,6 +66,9 @@
         font-weight: bold;
         text-align: left;
         margin-bottom: 15px;
+        @include media(mb) {
+          display: none;
+        }
       }
   
       > a > .fa-angle-right {
@@ -175,6 +178,11 @@
         font-size: 12px;
         color: #4b646f;
         background: #1a2226;
+
+        @include media(mb) {
+          display: none;
+        }
+  
       }
   
       > a > .fa-angle-right {
@@ -242,14 +250,35 @@
   } 
   .animate-menu-open {
     section.luft-menu-area.animate-menu.animate-menu-left {
-        margin-left: -300px;
+        margin-left: -250px;
         width: 0;
         overflow: hidden;
         visibility: hidden;
         transition: all .3s;
+
+        @include media(mb) {
+          margin-left: 0;
+          width: 100%;
+          overflow: hidden;
+          visibility: visible;
+          transition: all .3s;
+        }
+  
     }
 
     div#luft-main-content {
       margin-left: 0;
     }
   }
+
+.close-icon-mobile {
+    position: absolute;
+    z-index: 999;
+    top: 22px;
+    left: 30px;
+    cursor: pointer
+    ;
+    img {
+      max-width: 18px;
+    }
+}
