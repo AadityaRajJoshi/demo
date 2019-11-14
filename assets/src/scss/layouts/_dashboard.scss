@@ -12,11 +12,21 @@
         padding: 30px 0;
         position: fixed;
         width: 250px;
+        z-index: 999;
+        @include media(mb) {
+            width: 100%;
+            margin-left: -100%;
+            padding-top: 80px;
+
+        }
     }
 
     ##{$prefix}-main-content {
         margin-left: 250px;
         width: 100%;
+        @include media(mb) {
+            margin-left: 0;
+        }
     }
 
     .#{$prefix}-user-content-area {

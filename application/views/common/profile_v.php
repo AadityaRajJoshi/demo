@@ -1,13 +1,19 @@
 <?php echo form_open_multipart(); ?>
 
 <?php if( 'own' == $mode ): ?>
-	<input type="file" name="userfile" size="20" />
-	<?php if(isset($profile_picture)): ?>				
-		<img src="<?php echo $profile_picture; ?>" alt="profile picture" />
-	<?php endif; ?>
+	
+	<div class="luft-profile-image">
+		<?php if(isset($profile_picture)): ?>				
+			<img src="<?php echo $profile_picture; ?>" alt="profile picture" />
+		<?php endif; ?>
+	</div>
+	<div class="luft-form-row-file">
+		<label for="profile-image">Upload profile picture</label>
+		<input type="file" name="userfile" size="20" id="profile-image" />
+	</div>
 <?php endif; ?>
 
-	<div class="luft-form-wrapper <?php echo 'own' == $mode ? "own-template" : '' ?> ">
+	<div class="luft-form-wrapper">
 		<div class="luft-form-row"  >
 			<?php echo form_label( get_msg('label_name'), 'name' );
 				echo form_input( array(

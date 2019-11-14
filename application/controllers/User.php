@@ -134,14 +134,14 @@ class User extends MY_Controller{
 	    		}
     		}
 	        $this->data['breadcrumb'] = get_msg('breadcrumb_user_edit_own');
-	        $this->data['body_class'] = 'edit-own-profile';
+	        $this->data['body_class'] = 'template-profile';
         	$this->data['current_menu'] = 'dashboard';
         }else{
         	# Editing staff profile
 
     		$this->data['meta'] = get_msg('meta_edit_profile');
 	        $this->data[ 'breadcrumb' ] = get_msg('breadcrumb_user_edit_other');
-	        $this->data['body_class'] = 'edit-staff-profile';
+	        $this->data['body_class'] = 'template-staff-profile';
         	$this->data['current_menu'] = 'staff';
 	        $mode = 'other';
         }

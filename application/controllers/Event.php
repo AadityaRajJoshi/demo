@@ -66,12 +66,13 @@ class Event extends MY_Controller{
 			$data=array();
 			foreach ($date as $key ) {
 				$data[$key] = $ci->input->post('date'). ' ' .$ci->input->post($key);
-			}
+			} 	
 			return $data;
 		};
 
 		if($this->form_validation->run()){		
 			$data = $formated_date();		
+			$data[ 'total_worktime' ] = $this->input->post('date') . ' ' . get_total_working_time( $formated_date() );
 			$optional_value = array(
 				'name',
 				'order_number',
@@ -86,13 +87,15 @@ class Event extends MY_Controller{
 				'add_products',
 				'electricity'
 			);
+			if( !$id ){
+				$data[ 'finished' ] = false;
+			}
 
 			foreach ( $optional_value as $key => $value) {
 				if( $this->input->post( $value )){
 					$data[ $value ] = $this->input->post( $value );
 				}
 			}
-
 			$this->load->model( 'event_m' );
 			$this->load->model( 'package_staff_m' );
 			$this->load->model( 'staff_m' );
@@ -136,5 +139,16 @@ class Event extends MY_Controller{
 			}
 
 		}
+	}
+
+	public function toggle_status(){
+		$id = $this->input->post( 'event_id' );
+		$this->load->model( 'event_m' );
+		$event_status = $this->event_m->get( array( 'finished' ), array( 'id' => $id ),1 );
+		$status = $event_status->finished;
+		$data = array(
+			'finished' => $status ? false : true,
+		);
+		$this->event_m->save( $data, array( 'id' => $id ) );
 	}
 }

@@ -26,7 +26,7 @@
         </title>
         <meta name="keyword" content="<?php echo $meta['keyword']; ?>">
         <meta name="description" content="<?php echo $meta['description']; ?>">
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <base href="<?php echo base_url(); ?>">
         <link rel="stylesheet" type="text/css" href="assets/build/style/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" />
@@ -39,6 +39,9 @@
                 print_error_msg($error);
             ?>
             <section class="luft-menu-area animate-menu animate-menu-left">
+                <div class="display-on-mobile close-icon-mobile">
+                    <img src="assets/image/close.png" alt="close" />
+                </div>
                 <?php menu($current_menu); ?>
             </section>
             <div id="luft-main-content">
@@ -96,6 +99,14 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
         <script src="assets/build/js/slideout-menu.js"></script>
+        <script type="text/javascript">
+            var LUFTLEK = {
+                'ajax_url': '<?php echo base_url(); ?>',
+                'route': {
+                    'event_toggle_status': '<?php echo get_route('event_toggle_status'); ?>'
+                }
+            };
+        </script>
         <script src="assets/build/js/custom.js"></script>       
     </body>
 </html>
