@@ -35,7 +35,7 @@ img {
 .luft-menu-toggler {
   cursor: pointer; }
   .luft-menu-toggler span {
-    height: 3px;
+    height: 2px;
     width: 30px;
     background: #000;
     flex: 100%;
@@ -67,6 +67,7 @@ img {
     max-width: 49%; }
     @media (max-width: 576px) {
       .luft-form-row.full-width-row {
+        max-width: 100%;
         flex: 100%; } }
 
 .luft-inline-input {
@@ -77,7 +78,7 @@ img {
     flex: 0 0 32%; }
     @media (max-width: 576px) {
       .luft-inline-input .luft-form-row {
-        flex: 100%; } }
+        flex: 100% !important; } }
   .luft-inline-input.inline-4 .luft-form-row {
     flex: 0 0 23%; }
     @media (max-width: 576px) {
@@ -87,6 +88,7 @@ img {
     max-width: 87%; }
     @media (max-width: 576px) {
       .luft-inline-input.inline-2 {
+        max-width: 100%;
         flex: 100%; } }
     .luft-inline-input.inline-2 > .luft-form-row:first-child {
       flex: 0 0 56%; }
@@ -126,8 +128,14 @@ img {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between; }
+  @media (max-width: 576px) {
+    .luft-inline-input > .luft-half-row {
+      flex: 0 0 100%; } }
   .luft-inline-input > .luft-half-row .luft-half-row {
     flex: 0 0 48%; }
+    @media (max-width: 576px) {
+      .luft-inline-input > .luft-half-row .luft-half-row {
+        flex: 0 0 100%; } }
   .luft-inline-input > .luft-half-row .map-link {
     flex: 0 0 100%; }
 
@@ -142,7 +150,9 @@ input[type=time]::-webkit-calendar-picker-indicator {
 input[type=date]::-webkit-inner-spin-button,
 input[type=date]::-webkit-clear-button,
 input[type=time]::-webkit-inner-spin-button,
-input[type=time]::-webkit-clear-button {
+input[type=time]::-webkit-clear-button,
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   display: none; }
 
@@ -167,6 +177,10 @@ input[type="date"]:after {
 
 input[type=time]:after {
   content: "\f017"; }
+
+input:focus,
+textarea:focus {
+  outline: none; }
 
 span.form-success {
   position: fixed;
@@ -332,6 +346,9 @@ textarea {
 
 .luft-form-row.text-area-row {
   flex: 0 0 48%; }
+  @media (max-width: 576px) {
+    .luft-form-row.text-area-row {
+      flex: 0 0 100%; } }
 
 .text-area-wrapper {
   width: 100%; }

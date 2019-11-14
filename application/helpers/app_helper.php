@@ -66,15 +66,16 @@ if(! function_exists('get_msg')){
 			'event'			=> 'Event',
 			'add_event'		=> 'Add Event',
 			'all_event'		=> 'All Event',
-			'staff'			=> 'Staff',
 			'add_staff'		=> 'Add Staff',
-			'all_staff'		=> 'All Staff',
+			'all_staff'     => 'All Staff',
+			'staff'         => 'Staff',
+			'my_details'    => 'My Details',
+ 			
 			'setting'		=> 'Setting',
 			'my_event'		=> 'My Event',
 			'logout'		=> 'Log Out',
 			'menu'			=> 'Menu',
 			'access'        => 'Cannot access',
-			'update'		=> 'Update',
 			'name'          => 'Name',
 			'name_placeholder' => 'Enter Name',
 			'email'         => 'Email',
@@ -83,7 +84,6 @@ if(! function_exists('get_msg')){
 			'number_placeholder' => 'Enter Phone Number',
 			'password'     => 'PASSWORD',
 			'password_placeholder' => 'Enter Password',
-			'my_details'	=> 'MY DETAILS',
 
 			'save_details'  => 'UPDATE DETAILS',
 			'update_staff'  => 'UPDATE STAFF',
@@ -98,6 +98,10 @@ if(! function_exists('get_msg')){
 			'edit_title_m'  => 'Edit Profile',
 			'edit_staff_title_m' => 'Edit Staff Profile',
 
+			'breadcrumb_user_edit_own' => array('MY DETAILS'),
+			'breadcrumb_user_edit_other' => array('Staff', 'Update'),
+			'breadcrumb_all_staff' => array('Staff', 'All Staff'),
+
 			'meta_edit_staff' => array(
 	            'title' => 'Edit Profile',
 	            'description' => 'Edit Profile',
@@ -107,7 +111,8 @@ if(! function_exists('get_msg')){
 	            'title' => 'Edit Staff Profile',
 	            'description' => 'Edit Profile',
 	            'keyword' => ''
-	        )
+	        ),
+
 		);
 
 		return $msg[ $key ];
@@ -298,5 +303,21 @@ if(! function_exists('print_menu')){
 if(! function_exists('do_redirect')){
 	function do_redirect($route,$mode='refresh'){
 		redirect(get_route($route), $mode);
+	}
+}
+
+if(! function_exists('get_staffs_dropdown')){	
+	function get_staffs_dropdown(  ){
+		$ci = get_instance();
+		$ci->load->model( 'user_m' );
+		$staffs = array();
+		$db_staffs = $ci->user_m->get( array( 'id', 'username' ) , array(
+			'role_id' =>get_role_id("staff")
+		));
+		foreach ($db_staffs as $value) {
+			$staffs[ $value->id ] = $value->username;
+		}
+
+		return $staffs;
 	}
 }
