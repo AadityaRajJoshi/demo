@@ -69,7 +69,8 @@ if(! function_exists('get_msg')){
 			'add_event'		=> 'Add Event',
 			'all_event'		=> 'All Event',
 			'all_staff'     => 'All Staff',
-			'my_details'    => 'My Details',
+			'staff'         => 'Staff',
+			'my_details'    => 'My Details', 			
 			'setting'		=> 'Setting',
 			'my_event'		=> 'My Event',
 			'login'         => 'Login',
@@ -77,6 +78,15 @@ if(! function_exists('get_msg')){
 			'menu'			=> 'Menu',
 			'access'        => 'Cannot access',
 			'name'          => 'Name',
+			'event_added'   => 'Event Added Successfully',
+			'event_update'  => 'Event Updated Successfully',
+			'date'			=> 'Date',
+			'city'			=> 'City',
+			'eventime'		=> 'Eventtime',
+			'finished'		=> 'Finished',
+			'ordernumber'	=> 'Ordernumber',
+			'total_workingtime' => 'Total Workingtime',
+			'event_rollback_error' => 'Error! Cannot Insert Event',
 			'name_placeholder' => 'Enter Name',
 			'email'         => 'Email',
 			'email_placeholder' => 'Enter Email',
@@ -84,7 +94,6 @@ if(! function_exists('get_msg')){
 			'number_placeholder' => 'Enter Phone Number',
 			'password'     => 'PASSWORD',
 			'password_placeholder' => 'Enter Password',
-
 			'save_details'  => 'UPDATE DETAILS',
 			'update_staff'  => 'UPDATE STAFF',
 			'username'     => 'User Name',
@@ -95,7 +104,7 @@ if(! function_exists('get_msg')){
 			'work_time'    => 'Total WorkingTime',
 			'edit_title_m'  => 'Edit Profile',
 			'edit_staff_title_m' => 'Edit Staff Profile',
-
+			
 			'breadcrumb_user_edit_own' => array('MY DETAILS'),
 			'breadcrumb_user_edit_other' => array('Staff', 'Update'),
 			'breadcrumb_all_staff' => array('Staff', 'All Staff'),
@@ -126,7 +135,6 @@ if(! function_exists('get_msg')){
 	            'description' => 'Edit Profile',
 	            'keyword' => ''
 	        ),
-
 		);
 
 		return $msg[ $key ];
