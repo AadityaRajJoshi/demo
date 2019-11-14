@@ -159,10 +159,16 @@ class User extends MY_Controller{
     	if(! is_admin())
     		$this->invalid_access();
 
-    	$this->data['meta'] = get_msg('meta_add_staff');
-    	$this->data['page'] = 'add_staff_v';
+    	$this->data[ 'meta' ][ 'title' ] = get_msg('meta_add_staff');
+    	$this->data['page'] = 'profile_v';
+    	$this->data['common'] = true;
+    	$this->data['user'] = false;
+    	$this->data['mode'] = 'other';
     	$this->data['breadcrumb'] = get_msg('breadcrumb_add_staff');
     	$this->data['current_menu'] = 'staff';
+
+    	$this->load->model( 'event_m' );
+    	$this->data[ 'staffs' ] = get_staffs_dropdown();
 
     	$this->save();
     	$this->load->view( 'dashboard_template_v', $this->data );
@@ -203,7 +209,7 @@ class User extends MY_Controller{
 					$this->load->library('upload', $config);
 					if($this->upload->do_upload('userfile')){
 						$upload_data = $this->upload->data();
-						foreach(explode('|',$config['allowed_types']) as $ext ){
+						foreach(explode('|',$config['allowed_types']) as $ext){
 							$file_name = $id . '.' . $ext;
 							$path = $config['upload_path'] . $file_name;
 							if($upload_data['file_name'] != $file_name && file_exists($path)){

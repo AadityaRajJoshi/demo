@@ -11,17 +11,11 @@ class Event extends MY_Controller{
 
 	public function index(){
 		$this->load->model( 'event_m' );
-		$this->data = array(
-			'meta' => array(
-				'title' => get_msg( 'event' ),
-				'description' => '',
-				'keyword' => ''
-			),
-			'page' => 'all_event_v',
-			'breadcrumb' => array( get_msg( 'event' ),get_msg( 'all_event' ) ),
-			'events' => $this->event_m->get( '*' ),
-			'current_menu' => 'event',
-		);
+		$this->data[ 'meta' ][ 'title' ] = get_msg( 'event' );
+		$this->data[ 'page' ] = 'all_event_v';
+		$this->data[ 'events' ] = $this->event_m->get( '*' );
+		$this->data[ 'current_menu' ] = 'event';
+		$this->data[ 'breadcrumb' ] = array( get_msg( 'event' ),get_msg( 'all_event' ) );
 		$this->load->view('dashboard_template_v', $this->data);
 	}
 
@@ -29,20 +23,13 @@ class Event extends MY_Controller{
 		if( !is_admin() ){
 			do_redirect( 'dashboard' );
 		}
-		$this->data = array(
-			'meta' => array(
-				'title' => get_msg( 'add_event' ),
-				'description' => '',
-				'keyword' => ''
-			),
-			'page' => 'add_event_v',
-			'breadcrumb' => array(get_msg( 'event' ),get_msg( 'add_event' )),
-			'current_menu' =>'event',
-			'staffs' => get_staffs_dropdown() 
-		);
-		$this->data[ 'staffs' ] = get_staffs_dropdown();
+		$this->load->model( 'event_m' );
+		$this->data[ 'meta' ][ 'title' ] = get_msg( 'add_event' );
+		$this->data[ 'page' ] = 'add_event_v';
+		$this->data[ 'current_menu' ] = 'event';
+		$this->data[ 'breadcrumb' ] = array(get_msg( 'event' ),get_msg( 'add_event' ));
+		$this->data[ 'staffs' ] = get_staffs_dropdown();	
 		$this->save();
-	
 		$this->load->view( 'dashboard_template_v', $this->data );
 	}
 
