@@ -857,4 +857,24 @@ td.right-text {
   padding-right: 10px;
   justify-content: flex-end; }
 
+.template-profile .luft-inline-input .luft-form-row {
+  flex: 0 0 100%; }
+.template-profile .luft-profile-image {
+  margin-bottom: 20px; }
+  .template-profile .luft-profile-image img {
+    max-width: 300px; }
+.template-profile .luft-form-row-file {
+  margin-bottom: 20px; }
+  .template-profile .luft-form-row-file label {
+    text-decoration: underline;
+    color: #020441;
+    cursor: pointer; }
+.template-profile input#profile-image {
+  visibility: hidden;
+  opacity: -1;
+  position: absolute;
+  left: 0; }
+.template-profile .luft-form-wrapper {
+  max-width: 650px; }
+
 /*# sourceMappingURL=style.css.map */
