@@ -36,6 +36,10 @@ if(! function_exists('get_route')){
 				$path = 'user/add';
 			break;
 
+			case 'user_edit':
+				$path = 'user/edit';
+			break;
+
 			case 'all_event':
 				$path = 'event';
 			break;
@@ -47,6 +51,10 @@ if(! function_exists('get_route')){
 			case 'profile':
 				$path = 'profile';
 			break;
+
+			case 'forgot':
+				$path = 'forgot';
+			break;	
 
 			case 'event_toggle_status':
 				$path = 'event/toggle_status';
@@ -81,7 +89,6 @@ if(! function_exists('get_msg')){
 			'logout'		=> 'Log Out',
 			'menu'			=> 'Menu',
 			'access'        => 'Cannot access',
-			'name'          => 'Name',
 			'event_added'   => 'Event Added Successfully',
 			'event_update'  => 'Event Updated Successfully',
 			'date'			=> 'Date',
@@ -91,17 +98,21 @@ if(! function_exists('get_msg')){
 			'ordernumber'	=> 'Ordernumber',
 			'total_workingtime' => 'Total Workingtime',
 			'event_rollback_error' => 'Error! Cannot Insert Event',
-			'name_placeholder' => 'Enter Name',
-			'email'         => 'Email',
-			'email_placeholder' => 'Enter Email',
-			'number'        => 'Number',
-			'number_placeholder' => 'Enter Phone Number',
-			'password'     => 'PASSWORD',
-			'password_placeholder' => 'Enter Password',
+
+			'label_name'         => 'Name',
+			'label_email'        => 'Email',
+			'label_password'     => 'Password',
+			'label_phone_number' => 'Number',
+			'label_username'     => 'User Name',
+
+			'placeholder_name' => 'Enter Name',
+			'placeholder_email' => 'Enter Email',
+			'placeholder_phone_number' => 'Enter Phone Number',
+			'placeholder_password' => 'Enter Password',
+			'placeholder_username' => 'Enter Username Or Email',
+
 			'save_details'  => 'UPDATE DETAILS',
 			'update_staff'  => 'UPDATE STAFF',
-			'username'     => 'User Name',
-			'username_placeholder' => 'Enter Username Or Email',
 			'remember'     => 'Remember me',
 			'forget_pass'  => 'Forget Password',
 			'id' => 'ID',
@@ -406,6 +417,7 @@ if(! function_exists('print_error_msg')){
 	}
 }
 
+
 if(! function_exists('get_staff_worktime')){
 	function get_staff_worktime( $user_id ){
 		$ci = get_instance();
@@ -420,7 +432,19 @@ if(! function_exists('get_staff_worktime')){
 				$worktime_event = $ci->event_m->get( array( 'total_worktime' ), array( 'id' => $value->event_id ) );
 				//var_export( $worktime_event );
 			}
-			echo "15hr";				
+			echo "15hr";
+		}
+	}
+}			
+
+if(! function_exists('get_value')){	
+	function get_value($object, $key){
+		if(is_object($object)){
+			return $object->$key;
+		}else{
+			$ci = get_instance();
+			return $ci->input->post($key);
+
 		}
 	}
 }

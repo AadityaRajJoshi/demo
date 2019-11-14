@@ -32,8 +32,8 @@ class User extends MY_Controller{
 
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('username', get_msg('username'), 'required' );
-		$this->form_validation->set_rules('password', get_msg('password'), 'required' );
+		$this->form_validation->set_rules('username', get_msg('label_username'), 'required');
+		$this->form_validation->set_rules('password', get_msg('label_password'), 'required');
 		# check validation
 		if ( $this->form_validation->run() ){
 			$username = $this->input->post( 'username' );
@@ -76,11 +76,9 @@ class User extends MY_Controller{
 	}
 
 	public function forgot(){
-		$data = array(
-			'meta' => get_msg('meta_forgot'),
-			'page' => 'forgot_v'
-		);
-		$this->load->view( 'login_template_v', $data );
+		$this->data['meta'] = get_msg('meta_forgot');
+		$this->data['page'] = 'forgot_v';
+		$this->load->view( 'login_template_v', $this->data );
 	}
 
 	public function logout() {
@@ -159,38 +157,40 @@ class User extends MY_Controller{
     public function add(){
     	
     	if(! is_admin())
-    		do_redirect('dashboard');
-    	$this->load->model( 'event_m' );
-    	$this->data[ 'meta' ] = get_msg('meta_add_staff');
-    	$this->data[ 'page' ] = 'add_staff_v';
-    	$this->data[ 'current_menu' ] = 'staff';
-    	$this->data[ 'breadcrumb' ] = get_msg('breadcrumb_add_staff');
-    	$this->data[ 'staffs' ] = get_staffs_dropdown();
+    	$this->invalid_access();
+
+    	$this->data[ 'meta' ][ 'title' ] = get_msg('meta_add_staff');
+    	$this->data['page'] = 'profile_v';
+    	$this->data['common'] = true;
+    	$this->data['user'] = false;
+    	$this->data['mode'] = 'other';
+    	$this->data['breadcrumb'] = get_msg('breadcrumb_add_staff');
+    	$this->data['current_menu'] = 'staff';
 
     	$this->save();
-
     	$this->load->view( 'dashboard_template_v', $this->data );
     }
 
 	public function save($id=false){
 
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('name', 'Username', 'required' );
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
-		$this->form_validation->set_rules('number', 'phone number', 'required' );
+		$this->form_validation->set_rules('username', get_msg('label_name'), 'trim|required' );
+		$this->form_validation->set_rules('email', get_msg('label_email'), 'trim|required|valid_email' );
+		$this->form_validation->set_rules('phone_number', get_msg('label_phone_number'), 'required|regex_match[/^[0-9]{10}$/]' );
+
 		if(! $id)
-			$this->form_validation->set_rules('password', 'Password', 'required' );
+			$this->form_validation->set_rules('password', get_msg('label_password'), 'required' );
 		
 		if($this->form_validation->run()){
-			$username = $this->input->post('name');
+			$username = $this->input->post('username');
 			$email = $this->input->post('email');
-			$phone_number = $this->input->post('number');
+			$phone_number = $this->input->post('phone_number');
 			$password = $this->input->post('password');
 			
 			$data = array(
 				'username'=> $username,
 				'email' => $email,
-				'Phone_number' => $phone_number,
+				'phone_number' => $phone_number,
 			);
 
 			if( $password != '' ){
@@ -200,7 +200,7 @@ class User extends MY_Controller{
 			$where = $id ? array('id'=>$id) : false;
 			if( $where ){
 				# do update 
-				if($_FILES['userfile']['size'] > 0){
+				if(isset($_FILES['userfile']) && $_FILES['userfile']['size'] > 0){
 					$config = $this->config->item('profile_picture');
 					$config['file_name'] = $id;
 					$this->load->library('upload', $config);
@@ -231,7 +231,7 @@ class User extends MY_Controller{
 					$this->data['success'][] = get_msg('user_updated');
 					return true;
 				}else{
-					$this->session->set_flashdata('error', get_msg( 'user_update_failed'));
+					$this->data['error'][] = get_msg('user_update_failed');
 					return false;
 				}
 			}else{
@@ -240,7 +240,7 @@ class User extends MY_Controller{
 					$this->session->set_flashdata( 'success', get_msg( 'staff_added' ) );
 					do_redirect('staff');
 				}else{
-					$this->session->set_flashdata( 'error', get_msg( 'up_mismatched' ) );
+					$this->data['error'][] = get_msg('up_mismatched');
 					return false;
 				}
 			}
