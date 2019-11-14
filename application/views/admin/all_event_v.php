@@ -20,7 +20,7 @@
   				<td>
   					<?php echo get_time_from_datetime(  $event->start_time ) . ' - ' . get_time_from_datetime(  $event->stop_time )  ?>							
   				</td>
-  				<td></td>
+  				<td><?php get_total_working_time( $event ) ?></td>
   				<td class="d-flex-center right-text">
   					<a href="<?php echo $event->id; ?>"  class="luft-user-edit" ><i class="far fa-edit"></i></a>
 					<div class="onoffswitch">
