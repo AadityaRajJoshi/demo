@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class User extends CI_Controller{
-	
+class User extends MY_Controller{
+
 	public function __construct(){
 		parent::__construct();
 		$this->load->helper('form');
@@ -21,16 +21,11 @@ class User extends CI_Controller{
 				'pass' => $cookie->pass
 			);
 		}
-		$data = array(
-			'meta' => array(
-				'title' => get_msg( 'login_m' ),
-				'description' => 'Login panel',
-				'keyword' => 'staff, admin, employee'
-			),
-			'page' => 'login_v',
-			'cookie' => $user
-		);
-		$this->load->view('login_template_v', $data);
+		$this->data['meta'] = get_msg('meta_login');
+		$this->data['page'] = 'login_v';
+		$this->data['cookie'] = $user;
+		
+		$this->load->view('login_template_v', $this->data);
 	}
 
 	public function login(){
@@ -54,7 +49,7 @@ class User extends CI_Controller{
 			$this->load->model( 'user_m' );
 			$db_user = $this->user_m->get( '*', $condition, 1 );
 			if ( !$db_user ) {
-				$this->session->set_flashdata( 'error', get_msg( 'up_mismatched' ) );
+				$this->data['error'][] = get_msg( 'up_mismatched' );
 			}else{
 				$this->session->set_userdata(array(
 					'id' => $db_user->id,	
@@ -82,11 +77,7 @@ class User extends CI_Controller{
 
 	public function forgot(){
 		$data = array(
-			'meta' => array(
-				'title' => get_msg( 'forgot_pass' ),
-				'description' => '',
-				'keyword' => ''
-			),
+			'meta' => get_msg('meta_forgot'),
 			'page' => 'forgot_v'
 		);
 		$this->load->view( 'login_template_v', $data );
@@ -107,10 +98,6 @@ class User extends CI_Controller{
 	}
 
 	public function edit($id=null, $mode='other'){ 
-
-        if (! is_logged_in()){
-            do_redirect('login');
-        }
 
         if((is_staff() && get_session('id') != $id) ||  $id <= 0 ){
         	$this->invalid_access();
@@ -141,7 +128,13 @@ class User extends CI_Controller{
         if('own' == $mode){
         	# Editing own profile
     		$this->data['meta'] = get_msg('meta_edit_staff');
-
+    		$config = $this->config->item('profile_picture');
+    		foreach(explode('|',$config['allowed_types']) as $ext){
+    			$path = $config['upload_path'].$user->id. '.' . $ext;
+	    		if(file_exists($path)){
+	    			$this->data['profile_picture'] = $path;
+	    		}
+    		}
 	        $this->data['breadcrumb'] = get_msg('breadcrumb_user_edit_own');
 	        $this->data['body_class'] = 'edit-own-profile';
         	$this->data['current_menu'] = 'dashboard';
@@ -164,21 +157,14 @@ class User extends CI_Controller{
     }
 
     public function add(){
-    	if(! is_logged_in()){
-    	    do_redirect('login');
-    	}
-
+    	
     	if(! is_admin())
     		do_redirect('dashboard');
 
     	$this->data = array(
-    		'meta' => array(
-    			'title' => 'Add Staff',
-    			'description' => '',
-    			'keyword' => ''
-    		),
+    		'meta' => get_msg('meta_add_staff'),
     		'page' => 'add_staff_v',
-    		'breadcrumb' => array(get_msg( 'staff' ),get_msg( 'add_staff' )),
+    		'breadcrumb' => get_msg('breadcrumb_add_staff'),
     		'current_menu' => 'staff'
     	);
 
@@ -196,7 +182,6 @@ class User extends CI_Controller{
 		if(! $id)
 			$this->form_validation->set_rules('password', 'Password', 'required' );
 		
-
 		if($this->form_validation->run()){
 			$username = $this->input->post('name');
 			$email = $this->input->post('email');
@@ -207,43 +192,49 @@ class User extends CI_Controller{
 				'username'=> $username,
 				'email' => $email,
 				'Phone_number' => $phone_number,
-				'role_id' => get_role_id("staff")
 			);
 
 			if( $password != '' ){
 				$data['password'] = md5($password);
 			}
 
-			$this->load->model( 'user_m' );
 			$where = $id ? array('id'=>$id) : false;
 			if( $where ){
-				unset( $data['role_id'] );
-
-				//for image
-				$config = $this->config->item( 'image' );
-				$new_name = $id.'.'.$config['allowed_types'];
-				$config['file_name'] = $new_name;
-
-				$this->load->library( 'upload', $config );
-				if( !$this->upload->do_upload( 'userfile' ) ){
-					$error = array( 'error' => $this->upload->display_errors() );
-				}else{
-					$image = array( 'image' => $this->upload->data() );
+				# do update 
+				if($_FILES['userfile']['size'] > 0){
+					$config = $this->config->item('profile_picture');
+					$config['file_name'] = $id;
+					$this->load->library('upload', $config);
+					if($this->upload->do_upload('userfile')){
+						$upload_data = $this->upload->data();
+						foreach(explode('|',$config['allowed_types']) as $ext ){
+							$file_name = $id . '.' . $ext;
+							$path = $config['upload_path'] . $file_name;
+							if($upload_data['file_name'] != $file_name && file_exists($path)){
+								unlink($path);
+							}
+						}
+					}else{
+						$this->data['error'][] = $this->upload->display_errors();
+					}
 				}
+			}else{
+				# do insert
+				$data['role_id'] = get_role_id("staff");
 			}
 			
+			$this->load->model( 'user_m' );
 			$operation = $this->user_m->save( $data, $where );
 
 			if( $id ){
 				# Need to update staff
 				if($operation){
-					$this->session->set_flashdata('success', get_msg('user_updated'));
+					$this->data['success'][] = get_msg('user_updated');
 					return true;
 				}else{
 					$this->session->set_flashdata('error', get_msg( 'user_update_failed'));
 					return false;
 				}
-
 			}else{
 				# Need to create staff
 				if($operation){

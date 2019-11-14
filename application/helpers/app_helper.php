@@ -56,23 +56,23 @@ if(! function_exists('get_msg')){
 	function get_msg( $key ){
 		$msg = array(
 			'up_mismatched' => 'Username And Password Not Match.',
+			'staff'	        => 'Staff',
+			'add_staff'	    => 'Add Staff',
 			'staff_added'	=> 'Staff added Successfully',
 			'staff_add_e'	=> 'Error! Staff Not Added',
-			'user_updated'	=> 'Staff Upadted Successfully',
-			'user_update_failed' => 'Error! Staff Not Upadted',
 			'staff_delete'	=> 'Staff Deleted Successfully',
 			'staff_delete_e'=> 'Error! Staff Not Deleted',
+			'user_updated'	=> 'Staff Upadted Successfully',
+			'user_update_failed' => 'Error! Staff Not Upadted',
 			'dashboard'		=> 'Dashboard',
 			'event'			=> 'Event',
 			'add_event'		=> 'Add Event',
 			'all_event'		=> 'All Event',
-			'add_staff'		=> 'Add Staff',
 			'all_staff'     => 'All Staff',
-			'staff'         => 'Staff',
 			'my_details'    => 'My Details',
- 			
 			'setting'		=> 'Setting',
 			'my_event'		=> 'My Event',
+			'login'         => 'Login',
 			'logout'		=> 'Log Out',
 			'menu'			=> 'Menu',
 			'access'        => 'Cannot access',
@@ -87,8 +87,6 @@ if(! function_exists('get_msg')){
 
 			'save_details'  => 'UPDATE DETAILS',
 			'update_staff'  => 'UPDATE STAFF',
-			'login_m'      => 'Login',
-			'forgot_pass'  => 'Forgot Password',
 			'username'     => 'User Name',
 			'username_placeholder' => 'Enter Username Or Email',
 			'remember'     => 'Remember me',
@@ -101,7 +99,23 @@ if(! function_exists('get_msg')){
 			'breadcrumb_user_edit_own' => array('MY DETAILS'),
 			'breadcrumb_user_edit_other' => array('Staff', 'Update'),
 			'breadcrumb_all_staff' => array('Staff', 'All Staff'),
+			'breadcrumb_add_staff' => array('Staff','Add Staff'),
 
+			'meta_login' => array(
+				'title' => 'Login',
+				'description' => 'Login panel',
+				'keyword' => 'staff, admin, employee'
+			),
+			'meta_forgot' => array(
+				'title' => 'Forgot Password',
+				'description' => '',
+				'keyword' => ''
+			),
+			'meta_add_staff' => array(
+    			'title' => 'Add Staff',
+    			'description' => '',
+    			'keyword' => ''
+    		),
 			'meta_edit_staff' => array(
 	            'title' => 'Edit Profile',
 	            'description' => 'Edit Profile',
@@ -167,9 +181,7 @@ if(! function_exists('is_logged_in')){
 
 if( !function_exists( 'get_menu' ) ){	
 	function get_menu(){
-		
 		if(is_admin()){
-
 			return array(
 				'dashboard' => array(
 					'route' => 'dashboard',
@@ -319,5 +331,27 @@ if(! function_exists('get_staffs_dropdown')){
 		}
 
 		return $staffs;
+	}
+}
+
+if(! function_exists('print_success_msg')){
+	function print_success_msg($msg){
+		if(count($msg) <= 0)
+			return;
+
+		echo '<span class="form-success">';
+		foreach($msg as $m){echo $m;}
+		echo '</span>';
+	}
+}
+
+if(! function_exists('print_error_msg')){
+	function print_error_msg($msg){
+		if(count($msg) <= 0)
+			return;
+		
+		echo '<span class="form-err">';
+		foreach($msg as $m){echo $m;}
+		echo '</span>';
 	}
 }
