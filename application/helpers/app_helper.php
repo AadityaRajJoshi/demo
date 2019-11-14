@@ -344,7 +344,7 @@ if(! function_exists('get_staffs_dropdown')){
 
 if(! function_exists('print_success_msg')){
 	function print_success_msg($msg){
-		if(count($msg) <= 0)
+		if(!$msg || count($msg) <= 0)
 			return;
 
 		echo '<span class="form-success">';
@@ -355,7 +355,7 @@ if(! function_exists('print_success_msg')){
 
 if(! function_exists('print_error_msg')){
 	function print_error_msg($msg){
-		if(count($msg) <= 0)
+		if(!$msg || count($msg) <= 0)
 			return;
 		
 		echo '<span class="form-err">';

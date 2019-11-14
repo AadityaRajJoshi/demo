@@ -1,5 +1,4 @@
 <?php
-    $role = get_session('role');
     $flash_error = $this->session->flashdata('error');
     if(! empty($flash_error)){
         $error[] = $flash_error;
@@ -70,7 +69,6 @@
                             </li>
                         </ul>
                     </div>
-
                 </div>
 
                 <div class="breadcrumb">
@@ -86,7 +84,7 @@
                         if(isset($common)){
                            $page = 'common/'.$page;
                         }else{
-                            $page = ('administrator' == $role ? 'admin/' : 'staff/') . $page;
+                            $page = ('administrator' == get_session('role') ? 'admin/' : 'staff/') . $page;
                         }
                         $this->load->view($page); 
                     ?>
