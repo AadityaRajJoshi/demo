@@ -159,17 +159,14 @@ class User extends MY_Controller{
     public function add(){
     	
     	if(! is_admin())
-    		do_redirect('dashboard');
+    		$this->invalid_access();
 
-    	$this->data = array(
-    		'meta' => get_msg('meta_add_staff'),
-    		'page' => 'add_staff_v',
-    		'breadcrumb' => get_msg('breadcrumb_add_staff'),
-    		'current_menu' => 'staff'
-    	);
+    	$this->data['meta'] = get_msg('meta_add_staff');
+    	$this->data['page'] = 'add_staff_v';
+    	$this->data['breadcrumb'] = get_msg('breadcrumb_add_staff');
+    	$this->data['current_menu'] = 'staff';
 
     	$this->save();
-
     	$this->load->view( 'dashboard_template_v', $this->data );
     }
 
@@ -201,7 +198,7 @@ class User extends MY_Controller{
 			$where = $id ? array('id'=>$id) : false;
 			if( $where ){
 				# do update 
-				if($_FILES['userfile']['size'] > 0){
+				if(isset($_FILES['userfile']) && $_FILES['userfile']['size'] > 0){
 					$config = $this->config->item('profile_picture');
 					$config['file_name'] = $id;
 					$this->load->library('upload', $config);
@@ -232,7 +229,7 @@ class User extends MY_Controller{
 					$this->data['success'][] = get_msg('user_updated');
 					return true;
 				}else{
-					$this->session->set_flashdata('error', get_msg( 'user_update_failed'));
+					$this->data['error'][] = get_msg('user_update_failed');
 					return false;
 				}
 			}else{
@@ -241,7 +238,7 @@ class User extends MY_Controller{
 					$this->session->set_flashdata( 'success', get_msg( 'staff_added' ) );
 					do_redirect('staff');
 				}else{
-					$this->session->set_flashdata( 'error', get_msg( 'up_mismatched' ) );
+					$this->data['error'][] = get_msg('up_mismatched');
 					return false;
 				}
 			}
