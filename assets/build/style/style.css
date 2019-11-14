@@ -489,9 +489,9 @@ textarea {
     background: #020441;
     padding: 30px 0;
     position: fixed;
-    width: 300px; }
+    width: 250px; }
   .luft-content-area #luft-main-content {
-    margin-left: 300px;
+    margin-left: 250px;
     width: 100%; }
   .luft-content-area .luft-user-content-area {
     background: #fff;
@@ -643,7 +643,7 @@ div#luft-main-content {
   transition: all .3s; }
 
 .animate-menu-open section.luft-menu-area.animate-menu.animate-menu-left {
-  margin-left: -300px;
+  margin-left: -250px;
   width: 0;
   overflow: hidden;
   visibility: hidden;
@@ -658,7 +658,7 @@ div#luft-main-content {
   padding: 5px 20px;
   position: fixed;
   transition: all .3s;
-  width: calc(100% - 300px);
+  width: calc(100% - 250px);
   z-index: 99;
   height: 50px; }
   .luft-header-area ul {
@@ -777,7 +777,8 @@ div#luft-main-content {
     color: #cd0000;
     font-size: 18px; }
   .luft-table .filter-img {
-    max-width: 13px; }
+    max-width: 13px;
+    margin-left: 7px; }
 
 .second-section {
   margin: 20px 0;
@@ -808,9 +809,9 @@ div#luft-main-content {
     background: #F7F7F7; }
 
 th.luft-event-date, th.luft-event-time {
-  width: 130px; }
+  width: 140px; }
 th.luft-event-status, th.luft-event-city {
-  width: 144px; }
+  width: 145px; }
 th.luft-event-id {
   width: 165px; }
 th.luft-event-status {
