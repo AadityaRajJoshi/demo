@@ -36,6 +36,10 @@ if(! function_exists('get_route')){
 				$path = 'user/add';
 			break;
 
+			case 'user_edit':
+				$path = 'user/edit';
+			break;
+
 			case 'all_event':
 				$path = 'event';
 			break;
@@ -409,5 +413,16 @@ if(! function_exists('print_error_msg')){
 		echo '<span class="form-err">';
 		foreach($msg as $m){echo $m;}
 		echo '</span>';
+	}
+}
+
+if(! function_exists('get_value')){	
+	function get_value($object, $key){
+		if(is_object($object)){
+			return $object->$key;
+		}else{
+			$ci = get_instance();
+			return $ci->input->post($key);
+		}
 	}
 }

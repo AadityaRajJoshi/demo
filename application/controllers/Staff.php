@@ -12,18 +12,17 @@ class Staff extends MY_Controller{
 
 	public function index(){
 
-		if( is_admin() ){
-			$this->data[ 'meta' ][ 'title' ] = get_msg( 'staff' );
+		if(! is_admin() )
+			do_redirect('dashboard');
 
-			$this->data[ 'breadcrumb' ] = get_msg( 'breadcrumb_all_staff' );	
-			
-			$this->data['staffs'] = $this->user_m->get( '*', array(
-				'role_id' =>get_role_id("staff")
-			));
-			$this->data['page'] = 'list_staff_v';
-			$this->data['current_menu'] = 'staff';
-			$this->load->view( 'dashboard_template_v', $this->data );	
-		}
+		$this->data[ 'meta' ][ 'title' ] = get_msg( 'staff' );
+		$this->data[ 'breadcrumb' ] = get_msg( 'breadcrumb_all_staff' );	
+		$this->data['staffs'] = $this->user_m->get( '*', array(
+			'role_id' =>get_role_id("staff")
+		));
+		$this->data['page'] = 'list_staff_v';
+		$this->data['current_menu'] = 'staff';
+		$this->load->view( 'dashboard_template_v', $this->data );	
 	}
 	
 	public function delete( $id = false ){

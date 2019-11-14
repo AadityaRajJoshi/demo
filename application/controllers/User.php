@@ -167,9 +167,6 @@ class User extends MY_Controller{
     	$this->data['breadcrumb'] = get_msg('breadcrumb_add_staff');
     	$this->data['current_menu'] = 'staff';
 
-    	$this->load->model( 'event_m' );
-    	$this->data[ 'staffs' ] = get_staffs_dropdown();
-
     	$this->save();
     	$this->load->view( 'dashboard_template_v', $this->data );
     }
@@ -177,23 +174,23 @@ class User extends MY_Controller{
 	public function save($id=false){
 
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('name', get_msg('label_name'), 'trim|required' );
+		$this->form_validation->set_rules('username', get_msg('label_name'), 'trim|required' );
 		$this->form_validation->set_rules('email', get_msg('label_email'), 'trim|required|valid_email' );
-		$this->form_validation->set_rules('number', get_msg('label_phone_number'), 'required|regex_match[/^[0-9]{10}$/]' );
+		$this->form_validation->set_rules('phone_number', get_msg('label_phone_number'), 'required|regex_match[/^[0-9]{10}$/]' );
 
 		if(! $id)
 			$this->form_validation->set_rules('password', get_msg('label_password'), 'required' );
 		
 		if($this->form_validation->run()){
-			$username = $this->input->post('name');
+			$username = $this->input->post('username');
 			$email = $this->input->post('email');
-			$phone_number = $this->input->post('number');
+			$phone_number = $this->input->post('phone_number');
 			$password = $this->input->post('password');
 			
 			$data = array(
 				'username'=> $username,
 				'email' => $email,
-				'Phone_number' => $phone_number,
+				'phone_number' => $phone_number,
 			);
 
 			if( $password != '' ){

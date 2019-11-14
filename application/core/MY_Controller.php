@@ -15,7 +15,6 @@ class MY_Controller extends CI_Controller{
 
 	public function __construct(){
 		parent::__construct();
-		$this->load->helper('date');
 		$exception_methods = array('index', 'login', 'logout', 'forgot');
 		$exception_controllers = array('user');
 		$controller = $this->router->fetch_class();
