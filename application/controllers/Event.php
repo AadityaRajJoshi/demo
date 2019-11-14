@@ -10,10 +10,18 @@ class Event extends MY_Controller{
 	}
 
 	public function index(){
-		$this->data[ 'meta' ][ 'title' ] =  get_msg( 'event' );
-		$this->data['page'] = 'all_event_v';
-		$this->data[ 'breadcrumb' ] = array( get_msg( 'event' ),get_msg( 'all_event' ) );
-		$this->data['current_menu'] = 'event';
+		$this->load->model( 'event_m' );
+		$this->data = array(
+			'meta' => array(
+				'title' => get_msg( 'event' ),
+				'description' => '',
+				'keyword' => ''
+			),
+			'page' => 'all_event_v',
+			'breadcrumb' => array( get_msg( 'event' ),get_msg( 'all_event' ) ),
+			'events' => $this->event_m->get( '*' ),
+			'current_menu' => 'event',
+		);
 		$this->load->view('dashboard_template_v', $this->data);
 	}
 
@@ -98,15 +106,48 @@ class Event extends MY_Controller{
 				}
 			}
 
-			$a = $this->input->post( 'add_staff' );
-			$b = $this->input->post( 'add_package_staff' );
-			echo "<pre>";
-			var_export( $a );
-			// var_export( $b );
-			die;
-
 			$this->load->model( 'event_m' );
-			$this->event_m->save( $data );
+			$this->load->model( 'package_staff_m' );
+			$this->load->model( 'staff_m' );
+			$where_event = $id ? array('id'=>$id) : false;
+			$where_staff = $id ? array('event_id'=>$id) : false;
+
+			$this->db->trans_start();
+			$event_id = $this->event_m->save( $data, $where_event );
+
+			$event_releated_staff = $this->input->post( 'add_staff' );
+			foreach ( $event_releated_staff as  $value) {
+				$insert_staff = array(
+					'user_id' => $value,
+					'event_id' => $event_id
+				);
+				$this->staff_m->save( $insert_staff, $where_staff );
+			}
+
+			if( $this->input->post( 'add_package_staff' ) ){
+				$event_releated_package_staff = $this->input->post( 'add_package_staff' );
+				$insert_package_staff = array(
+					'user_id' => $this->input->post( 'add_package_staff' ),
+					'event_id' => $event_id
+				);
+			}
+
+			$this->package_staff_m->save( $insert_package_staff, $where_staff );
+
+			if ($this->db->trans_status() === FALSE){
+			    $this->db->trans_rollback();
+			   	$this->session->set_flashdata( 'error', get_msg( 'event_rollback_error' ) );
+			}else{
+			    $this->db->trans_commit();
+			    if( $id ){
+			    	$this->session->set_flashdata( 'success', get_msg( 'event_update' ) );
+			    	do_redirect('event');
+			    }else{
+			    	$this->session->set_flashdata( 'success', get_msg( 'event_added' ) );
+			    	do_redirect('event');
+			    }
+			}
+
 		}
 	}
 }
