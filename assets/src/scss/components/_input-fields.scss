@@ -26,6 +26,7 @@
     &.full-width-row {
         max-width: 49%;
         @include media(mb) {
+            max-width: 100%;
             flex: 100%;
         }
     } 
@@ -41,7 +42,7 @@
     .#{$prefix}-form-row {
         flex: 0 0 32%;
         @include media(mb) {
-            flex: 100%;
+            flex: 100% !important;
         }
     }
 
@@ -58,6 +59,7 @@
     &.inline-2 {
         max-width: 87%;
         @include media(mb) {
+            max-width: 100%;
             flex: 100%;
         }
         > .#{$prefix}-form-row{
@@ -113,8 +115,16 @@
         flex-wrap: wrap;
         justify-content: space-between;
 
+        @include media(mb) {
+            flex: 0 0 100%;
+        }
+
         .#{$prefix}-half-row {
             flex: 0 0 48%;
+
+            @include media(mb) {
+                flex: 0 0 100%;
+            }
         }
 
         .map-link {
@@ -137,10 +147,13 @@ input[type=time]::-webkit-calendar-picker-indicator{
 input[type=date]::-webkit-inner-spin-button,
 input[type=date]::-webkit-clear-button,
 input[type=time]::-webkit-inner-spin-button,
-input[type=time]::-webkit-clear-button {
+input[type=time]::-webkit-clear-button,
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     display: none;
 }
+
 
 input[type="date"]:after,
 input[type=time]:after {
@@ -166,4 +179,9 @@ input[type="date"]:after {
 input[type=time]:after {    
     content: "\f017";
    
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
 }

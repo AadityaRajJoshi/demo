@@ -1,5 +1,5 @@
 <?php
-	echo form_open( 'staff/add' ); ?>
+	echo form_open( 'user/add' ); ?>
 	<div class="luft-form-wrapper">
 		<div class="luft-form-row">
 			<?php echo form_label( get_msg( 'name' ), 'name' ); 

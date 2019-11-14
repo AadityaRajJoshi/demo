@@ -5,6 +5,10 @@ textarea {
 .luft-form-row {
     &.text-area-row {
         flex: 0 0 48%;
+
+        @include media(mb) {
+            flex: 0 0 100%;
+        }
     }    
 }
 
