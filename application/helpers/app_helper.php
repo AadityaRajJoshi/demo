@@ -418,8 +418,9 @@ if(! function_exists('get_staff_worktime')){
 		}else{
 			foreach ($staff_releated_event as $value) {
 				$worktime_event = $ci->event_m->get( array( 'total_worktime' ), array( 'id' => $value->event_id ) );
-				var_export( $worktime_event );				
+				//var_export( $worktime_event );
 			}
+			echo "15hr";				
 		}
 	}
 }
