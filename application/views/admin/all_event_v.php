@@ -15,9 +15,11 @@
   			<tr>
   				<td><?php echo $event->order_number ?></td>
   				<td><?php echo $event->name ?></td>
-  				<td><?php echo $event->start_time ?></td>
+  				<td><?php echo  get_date_from_datetime( $event->start_time ); ?></td>
   				<td>Kathmandu</td>
-  				<td></td>
+  				<td>
+  					<?php echo get_time_from_datetime(  $event->start_time ) . ' - ' . get_time_from_datetime(  $event->stop_time )  ?>							
+  				</td>
   				<td></td>
   				<td class="d-flex-center right-text">
   					<a href="<?php echo $event->id; ?>"  class="luft-user-edit" ><i class="far fa-edit"></i></a>

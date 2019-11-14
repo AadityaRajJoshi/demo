@@ -342,6 +342,46 @@ if(! function_exists('get_staffs_dropdown')){
 	}
 }
 
+
+if(! function_exists('get_time_from_datetime')){	
+	function get_time_from_datetime( $datetime ){
+		$time=strtotime($datetime);
+		return date("H:i", $time);
+	}
+}
+
+if(! function_exists('get_date_from_datetime')){	
+	function get_date_from_datetime( $datetime ){
+		$time=strtotime($datetime);
+		return date("d M Y", $time);
+	}
+}
+
+if(! function_exists('get_total_working_time')){	
+	function get_total_working_time( $args ){
+
+		$stamp = strtotime('2019-01-01 14:15:00') - strtotime('2019-01-01 14:15:00');
+
+		$to_time = strtotime('2019-01-01 12:15:00');
+		$from_time = strtotime('2019-01-01 14:30:00');
+		$time_diff_1 = $from_time - $to_time;
+
+		$to_time = strtotime('2019-01-01 12:15:00');
+		$from_time = strtotime('2019-01-01 14:45:00');
+		$time_diff_2 = $from_time - $to_time;
+
+		echo gmdate('H:i:s', $time_diff_1 + $time_diff_2); die;
+	}
+}
+
+function time_diff( $time1, $time2 ){
+	$datetime1 = date_create( $time1 );
+	$datetime2 = date_create( $time2 );
+	$interval = date_diff($datetime1, $datetime2);
+	echo $interval->format('%H%I');
+	var_export( $interval );
+}
+
 if(! function_exists('print_success_msg')){
 	function print_success_msg($msg){
 		if(!$msg || count($msg) <= 0)
