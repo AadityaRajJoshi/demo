@@ -99,6 +99,14 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
         <script src="assets/build/js/slideout-menu.js"></script>
+        <script type="text/javascript">
+            var LUFTLEK = {
+                'ajax_url': '<?php echo base_url(); ?>',
+                'route': {
+                    'event_toggle_status': '<?php echo get_route('event_toggle_status'); ?>'
+                }
+            };
+        </script>
         <script src="assets/build/js/custom.js"></script>       
     </body>
 </html>

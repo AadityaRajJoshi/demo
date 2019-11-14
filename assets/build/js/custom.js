@@ -17,12 +17,12 @@
 
     /* DOM ready event */
     $(document).ready(documentReadyCallbackFunc);
-
-    //delete script 
+    
+    //delete script
     $( document ).on( 'click', '.onoffswitch-checkbox', function(){
         var id = $(this).data( 'id' );
         $.ajax({
-            url : 'http://localhost/luftlek/event/status',
+            url : LUFTLEK.ajax_url + LUFTLEK.route.event_toggle_status,
             type : 'POST',
             data : {event_id : id },
         });
