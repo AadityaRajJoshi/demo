@@ -326,3 +326,36 @@ if(! function_exists('get_staffs_dropdown')){
 		return $staffs;
 	}
 }
+
+if(! function_exists('get_time_from_datetime')){	
+	function get_time_from_datetime( $datetime ){
+		$time=strtotime($datetime);
+		return date("H:i", $time);
+	}
+}
+
+if(! function_exists('get_date_from_datetime')){	
+	function get_date_from_datetime( $datetime ){
+		$time=strtotime($datetime);
+		return date("d M Y", $time);
+	}
+}
+
+if(! function_exists('get_total_working_time')){	
+	function get_total_working_time( $args ){
+		echo "<pre>";
+		// var_export( $args );
+		// $diff_travel1 = time_diff( $args['traveltime_1_start'] , $args['traveltime_1_stop'] );
+		$diff_travel2 = time_diff( $args['traveltime_2_start'] , $args['traveltime_2_stop'] );
+		// $diff_construct = 
+		// $diff_dismantel = 
+	}
+}
+
+function time_diff( $time1, $time2 ){
+	$datetime1 = date_create( $time1 );
+	$datetime2 = date_create( $time2 );
+	$interval = date_diff($datetime1, $datetime2);
+	echo $interval->format('%H%I');
+	var_export( $interval );
+}
