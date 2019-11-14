@@ -39,7 +39,7 @@ class User extends CI_Controller{
 
 		$this->form_validation->set_rules('username', get_msg('username'), 'required' );
 		$this->form_validation->set_rules('password', get_msg('password'), 'required' );
-		/* check validation*/
+		# check validation
 		if ( $this->form_validation->run() ){
 			$username = $this->input->post( 'username' );
 			$remember = $this->input->post( 'remember_me' );
