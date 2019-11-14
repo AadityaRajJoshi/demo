@@ -9,11 +9,11 @@
 
 	<div class="luft-form-wrapper <?php echo 'own' == $mode ? "own-template" : '' ?> ">
 		<div class="luft-form-row"  >
-			<?php echo form_label( get_msg('name'), 'name' );
+			<?php echo form_label( get_msg('label_name'), 'name' );
 				echo form_input( array(
 				'name' => 'name',
 				'value'=> $user->username,
-				'placeholder' => get_msg( 'name_placeholder' ),
+				'placeholder' => get_msg( 'placeholder_name' ),
 				'id' => 'name',
 			) ); 
 			?>
@@ -21,23 +21,23 @@
 		<div class="luft-inline-input">
 		<div class="luft-form-row">
 			<?php 
-			echo form_label( get_msg( 'email' ), 'email' );
+			echo form_label( get_msg( 'label_email' ), 'email' );
 			echo form_input( array(
 				'name' => 'email',
 				'value' => $user->email,
-				'placeholder' => get_msg( 'email_placeholder' ),
+				'placeholder' => get_msg( 'placeholder_email' ),
 				'id' => 'email',
 				'type' => 'email',
 			) ); ?>
 	    </div>
 
 		<div class="luft-form-row">
-			<?php echo form_label( get_msg( 'number' ), 'number' );
+			<?php echo form_label( get_msg( 'label_phone_number' ), 'number' );
 			echo form_input( array(
 				'name' => 'number',
 				'type'=>'tel',
 				'value' => $user->phone_number,
-				'placeholder' => get_msg( 'number_placeholder' ),
+				'placeholder' => get_msg( 'placeholder_phone_number' ),
 				'id' => 'phone',
 			) ); ?>
 		</div>

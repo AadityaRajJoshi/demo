@@ -32,8 +32,8 @@ class User extends MY_Controller{
 
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('username', get_msg('username'), 'required' );
-		$this->form_validation->set_rules('password', get_msg('password'), 'required' );
+		$this->form_validation->set_rules('username', get_msg('label_username'), 'required');
+		$this->form_validation->set_rules('password', get_msg('label_password'), 'required');
 		# check validation
 		if ( $this->form_validation->run() ){
 			$username = $this->input->post( 'username' );
@@ -76,11 +76,9 @@ class User extends MY_Controller{
 	}
 
 	public function forgot(){
-		$data = array(
-			'meta' => get_msg('meta_forgot'),
-			'page' => 'forgot_v'
-		);
-		$this->load->view( 'login_template_v', $data );
+		$this->data['meta'] = get_msg('meta_forgot');
+		$this->data['page'] = 'forgot_v';
+		$this->load->view( 'login_template_v', $this->data );
 	}
 
 	public function logout() {
@@ -173,11 +171,12 @@ class User extends MY_Controller{
 	public function save($id=false){
 
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('name', 'Username', 'required' );
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email' );
-		$this->form_validation->set_rules('number', 'phone number', 'required' );
+		$this->form_validation->set_rules('name', get_msg('label_name'), 'trim|required' );
+		$this->form_validation->set_rules('email', get_msg('label_email'), 'trim|required|valid_email' );
+		$this->form_validation->set_rules('number', get_msg('label_phone_number'), 'required|regex_match[/^[0-9]{10}$/]' );
+
 		if(! $id)
-			$this->form_validation->set_rules('password', 'Password', 'required' );
+			$this->form_validation->set_rules('password', get_msg('label_password'), 'required' );
 		
 		if($this->form_validation->run()){
 			$username = $this->input->post('name');
