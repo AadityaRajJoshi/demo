@@ -142,6 +142,9 @@ class Event extends MY_Controller{
 	}
 
 	public function toggle_status(){
+		if( !is_admin() ){
+			die( get_msg( 'toggle_status_error' ) );
+		}
 		$id = $this->input->post( 'event_id' );
 		$this->load->model( 'event_m' );
 		$event_status = $this->event_m->get( array( 'finished' ), array( 'id' => $id ),1 );

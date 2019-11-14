@@ -13,7 +13,7 @@
       <tr>
         <td><?php echo $key+1; ?></td>
         <td><?php echo $staff->username; ?></td>
-        <td>15hrs</td>
+        <td><?php get_staff_worktime( $staff->id ) ?></td>
         <td class="luft-text-right"><a href="user/edit/<?php echo $staff->id; ?>"  class="luft-user-edit" ><i class="far fa-edit"></i></a>  <a href="#" class="luft-user-download"><i class="fas fa-file-pdf"></i></a> </td>     
       </tr>
   	<?php } ?>

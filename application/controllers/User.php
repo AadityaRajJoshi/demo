@@ -161,7 +161,7 @@ class User extends MY_Controller{
     	if(! is_admin())
     		do_redirect('dashboard');
     	$this->load->model( 'event_m' );
-    	$this->data[ 'meta' ][ 'title' ] = get_msg('meta_add_staff');
+    	$this->data[ 'meta' ] = get_msg('meta_add_staff');
     	$this->data[ 'page' ] = 'add_staff_v';
     	$this->data[ 'current_menu' ] = 'staff';
     	$this->data[ 'breadcrumb' ] = get_msg('breadcrumb_add_staff');

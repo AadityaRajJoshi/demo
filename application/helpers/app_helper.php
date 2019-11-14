@@ -107,6 +107,7 @@ if(! function_exists('get_msg')){
 			'id' => 'ID',
 			'work_time'    => 'Total WorkingTime',
 			'edit_title_m'  => 'Edit Profile',
+			'toggle_status_error' => 'You are not authorized',
 			'edit_staff_title_m' => 'Edit Staff Profile',			
 			'breadcrumb_user_edit_own' => array('MY DETAILS'),
 			'breadcrumb_user_edit_other' => array('Staff', 'Update'),
@@ -402,5 +403,23 @@ if(! function_exists('print_error_msg')){
 		echo '<span class="form-err">';
 		foreach($msg as $m){echo $m;}
 		echo '</span>';
+	}
+}
+
+if(! function_exists('get_staff_worktime')){
+	function get_staff_worktime( $user_id ){
+		$ci = get_instance();
+		$ci->load->model( 'event_m' );
+		// $ci->load->model( 'package_staff_m' );
+		$ci->load->model( 'staff_m' );
+		$staff_releated_event = $ci->staff_m->get( array( 'event_id' ), array( 'user_id' => $user_id ) );
+		if( !$staff_releated_event ){
+			echo "Not assigned on any event";
+		}else{
+			foreach ($staff_releated_event as $value) {
+				$worktime_event = $ci->event_m->get( array( 'total_worktime' ), array( 'id' => $value->event_id ) );
+				var_export( $worktime_event );				
+			}
+		}
 	}
 }
