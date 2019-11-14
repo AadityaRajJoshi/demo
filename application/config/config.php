@@ -525,11 +525,11 @@ $config['proxy_ips'] = '';
 # Role ids
 $config['role'] = array( 'administrator' => 1, 'staff' => 2 );
 
-$config[ 'image' ] = array( 
-	'upload_path' => './uploads/profile_picture',
-	'allowed_types' => 'jpg',
-	'max_size' => 100,
-	'max_width' => 1024,
-	'max_height' => 768,
+$config['profile_picture'] = array( 
+	'upload_path' => './uploads/profile_picture/',
+	'allowed_types' => 'jpg|png',
+	// 'max_size' => 100,
+	// 'max_width' => 1024,
+	// 'max_height' => 768,
 	'overwrite' => true
- 	);
+);

@@ -48,11 +48,11 @@
 			</label>	
 			
 			<div class="luft-forget-password display-on-mobile">
-				<a href="#"> <img src="<?php echo base_url();  ?>assets/image/lock.png" alt="lock" /> <span> Forget Password <span></a>
+				<a href="#"> <img src="assets/image/lock.png" alt="lock" /> <span> Forget Password <span></a>
 			</div>
 
 			<div class="luft-form-row luft-submit-type">
-				<?php echo form_submit('login', get_msg( 'login_m' )); ?>
+				<?php echo form_submit('login', get_msg( 'login' )); ?>
 			</div>	
 		</div>	
 	<?php echo form_close( '' ); ?> 

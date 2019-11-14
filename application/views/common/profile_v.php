@@ -1,12 +1,11 @@
 <?php echo form_open_multipart(); ?>
 
-<?php if( 'own' == $mode ){ ?>
-<input type="file" name="userfile" size="20" />
-		<?php if( file_exists('uploads/profile_picture/'.$user->id.'.jpg') ){?>				
-			<img src="<?php echo base_url().'uploads/profile_picture/'. $user->id .'.jpg' ?>" />
-		<?php } ?>
-<?php } ?>
-	
+<?php if( 'own' == $mode ): ?>
+	<input type="file" name="userfile" size="20" />
+	<?php if(isset($profile_picture)): ?>				
+		<img src="<?php echo $profile_picture; ?>" alt="profile picture" />
+	<?php endif; ?>
+<?php endif; ?>
 
 	<div class="luft-form-wrapper <?php echo 'own' == $mode ? "own-template" : '' ?> ">
 		<div class="luft-form-row"  >

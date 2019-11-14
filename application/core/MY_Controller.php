@@ -5,15 +5,22 @@ class MY_Controller extends CI_Controller{
 
 	protected $data = array(
 		'meta' => array(
-			'title' => 'Admin',
-			'description' => 'Staff Description',
-			'keyword' => 'staff, admin, employee'
-		)
+			'title' => '',
+			'keyword' => '',
+			'description' => ''
+		),
+		'error' => array(),
+		'success' => array()
 	);
 
 	public function __construct(){
 		parent::__construct();
-	    if ( !is_logged_in() ){
+		$exception_methods = array('index', 'login', 'logout', 'forgot');
+		$exception_controllers = array('user');
+		$controller = $this->router->fetch_class();
+		$method = $this->router->fetch_method();
+		# Don't check for log in if controller is "user"
+	    if(!is_logged_in() && !(in_array($controller, $exception_controllers) && in_array($method, $exception_methods))){
 	        do_redirect( 'login' );
 	    }
 
