@@ -207,7 +207,7 @@ span.form-err {
   height: min-content;
   -webkit-animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  z-index: 99;
+  z-index: 999;
   box-shadow: 0 0 6px #adadad; }
   span.form-err p {
     margin: 0;

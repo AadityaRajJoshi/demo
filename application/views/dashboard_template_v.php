@@ -1,7 +1,17 @@
 <?php
-    $role = get_session('role');
-    $error = $this->session->flashdata('error');
-    $success = $this->session->flashdata('success');
+    $flash_error = $this->session->flashdata('error');
+    if(! empty($flash_error)){
+        $error[] = $flash_error;
+    }
+
+    if(validation_errors()){
+        $error[] = validation_errors();
+    }
+
+    $flash_success = $this->session->flashdata('success');
+    if(! empty($flash_success)){
+        $success[] = $flash_success;
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,7 +20,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>
             <?php 
-                $r = 'administrator' == get_session( 'role' ) ? 'Admin' : 'Staff';
+                $r = is_admin() ? 'Admin' : 'Staff';
                 echo $r . ' - ' . $meta['title'];
             ?>
         </title>
@@ -24,18 +34,10 @@
     </head>
     <body class="luft-template-dashboard<?php echo isset($body_class)? ' '.$body_class:''; ?>">
         <div class="luft-content-area">
-            <?php if (!empty($success)): ?>
-                <span class="form-success"><?php echo $success; ?></span>
-            <?php endif; ?>
-
-            <?php if (!empty($error)): ?>
-                <span class="form-err"><?php echo $error; ?></span>
-            <?php endif; ?>
-
-            <?php if (validation_errors()): ?>
-                <span class="form-err"><?php echo validation_errors(); ?></span>
-            <?php endif; ?> 
-
+            <?php 
+                print_success_msg($success); 
+                print_error_msg($error);
+            ?>
             <section class="luft-menu-area animate-menu animate-menu-left">
                 <?php menu($current_menu); ?>
             </section>
@@ -67,7 +69,6 @@
                             </li>
                         </ul>
                     </div>
-
                 </div>
 
                 <div class="breadcrumb">
@@ -83,7 +84,7 @@
                         if(isset($common)){
                            $page = 'common/'.$page;
                         }else{
-                            $page = ('administrator' == $role ? 'admin/' : 'staff/') . $page;
+                            $page = ('administrator' == get_session('role') ? 'admin/' : 'staff/') . $page;
                         }
                         $this->load->view($page); 
                     ?>
