@@ -125,6 +125,7 @@ if(! function_exists('get_msg')){
 			'breadcrumb_all_staff' => array('Staff', 'All Staff'),
 			'breadcrumb_add_staff' => array('Staff','Add Staff'),
 			'no_event_assigned' => 'Not assigned on any event',
+			'breadcrumb_event_edit' => array('Event', 'Edit Event'),
  
 			'meta_login' => array(
 				'title' => 'Login',
@@ -156,6 +157,24 @@ if(! function_exists('get_msg')){
 	        	'description' => 'Event Details',
 	        	'keyword' => 'event'
 	        ),
+	        'meta_event_edit' => array(
+	        	'title' => 'Event Edit',
+	        	'description'=> 'Event Edit',
+	        	'keyword' => 'event'
+	        ),
+
+	        'event_name_label' => 'Event Name',
+	        'event_order_label' => 'Order Number',
+	        'event_date_label' => 'Date',
+	        'event_starttime_label' => 'Event StartTime',
+	        'event_StopTime_label' => 'Event StopTime',
+	        'event_traveltime_1_start_label' => 'TravelTime 1 Start',
+	        'event_traveltime_1_stop_label' => 'TravelTime 1 Stop',
+	        'event_traveltime_2_start_label' => 'TravelTime 2 Stop',
+	        'event_construction_start_label' => 'Construction Start',
+	        'event_construction_stop_label' => 'Construction Stop',
+	        'event_dismantling_start_label' => 'Dismantling Start',
+	        'event_dismantling_stop_label' => 'Dismantling Stop'
 		);
 
 		return $msg[ $key ];
