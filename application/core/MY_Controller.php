@@ -50,6 +50,5 @@ class MY_Controller extends CI_Controller{
 		$this->email->message($message);
 		// echo  "called";die;
 		return $this->email->send();
-
 	}
 }

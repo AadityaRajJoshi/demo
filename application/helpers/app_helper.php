@@ -151,6 +151,11 @@ if(! function_exists('get_msg')){
 	            'description' => 'Edit Profile',
 	            'keyword' => ''
 	        ),
+	        'meta_event_detail' => array(
+	        	'title' => 'Event Details',
+	        	'description' => 'Event Details',
+	        	'keyword' => 'event'
+	        ),
 		);
 
 		return $msg[ $key ];
@@ -440,8 +445,6 @@ if(! function_exists('get_value')){
 			}else{
 				return $default;
 			}
-
-
 		}
 	}
 }
@@ -476,5 +479,12 @@ if( !function_exists('get_profile_picture') ){
     			return $path;
     		}
 		}
+	}
+}
+
+if( !function_exists( 'get_first_letter' ) ){
+	function get_first_letter(){
+		$username = get_session('name');
+		return strtoupper($username[0]);
 	}
 }

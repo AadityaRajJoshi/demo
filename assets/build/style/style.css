@@ -782,6 +782,19 @@ div#luft-main-content {
 .luft-header-area + * {
   margin-top: 75px; }
 
+p.profile-name {
+  border: 2px solid #58B975;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #58B975;
+  color: #fff;
+  font-weight: bold;
+  font-size: 17px; }
+
 .luft-table {
   border-collapse: collapse;
   margin: 0;
