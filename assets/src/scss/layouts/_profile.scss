@@ -7,11 +7,12 @@
 
     .#{$prefix}-profile-image {
         margin-bottom: 20px;
-        height: 200px;
+        height: 140px;
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 200px;
+        width: 140px;
+        background: $color_light_grey;
         // img {
         //     max-width: 300px;
         // }
