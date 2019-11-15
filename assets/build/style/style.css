@@ -89,7 +89,8 @@ img {
       .luft-inline-input.inline-4 .luft-form-row {
         flex: 100%; } }
   .luft-inline-input.inline-2 {
-    max-width: 87%; }
+    max-width: 87%;
+    justify-content: flex-start; }
     @media (max-width: 576px) {
       .luft-inline-input.inline-2 {
         max-width: 100%;
@@ -100,10 +101,12 @@ img {
         .luft-inline-input.inline-2 > .luft-form-row:first-child {
           flex: 100%; } }
     .luft-inline-input.inline-2 > .luft-form-row:last-child {
-      flex: 0 0 40%; }
+      flex: 0 0 28%;
+      padding-left: 25px; }
       @media (max-width: 576px) {
         .luft-inline-input.inline-2 > .luft-form-row:last-child {
-          flex: 100%; } }
+          flex: 100%;
+          padding-left: 0; } }
 
 .luft-form-wrapper {
   max-width: 900px; }
@@ -860,15 +863,23 @@ td.right-text {
 .template-profile .luft-inline-input .luft-form-row {
   flex: 0 0 100%; }
 .template-profile .luft-profile-image {
-  margin-bottom: 20px; }
-  .template-profile .luft-profile-image img {
-    max-width: 300px; }
+  margin-bottom: 20px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 200px; }
 .template-profile .luft-form-row-file {
-  margin-bottom: 20px; }
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center; }
   .template-profile .luft-form-row-file label {
     text-decoration: underline;
     color: #020441;
     cursor: pointer; }
+    .template-profile .luft-form-row-file label + div {
+      font-size: 12px;
+      margin-left: 20px; }
 .template-profile input#profile-image {
   visibility: hidden;
   opacity: -1;
