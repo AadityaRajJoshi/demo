@@ -1,10 +1,10 @@
 <?php echo form_open( 'event/add' ); ?>
 	<div class="luft-form-wrapper">
 		<div class="luft-form-row">
-			<?php echo form_label( 'even name', 'name' ); 
+			<?php echo form_label( get_msg('event_name_label'), 'name' ); 
 			echo form_input( array(
 				'name' => 'name',
-				'placeholder' => 'Enter event name',
+				'placeholder' => get_msg('e_name_placeholder'),
 				'id' => 'name',
 				'value' => get_value($event, 'name')
 				// 'required' => 'required'
@@ -13,10 +13,10 @@
 		<div class="luft-inline-input inline-4">
 			<div class="luft-form-row">
 				<?php
-				echo form_label( 'ordernumber', 'order_number' );
+				echo form_label( get_msg('event_order_label'), 'order_number' );
 				echo form_input( array(
 					'name' => 'order_number',
-					'placeholder' => 'Enter ordernumber',
+					'placeholder' => get_msg('e_order_placeholder'),
 					'id' => 'order_number',
 					'value' => get_value($event, 'order_number'),
 					// 'required' => 'required',
@@ -25,10 +25,10 @@
 			</div>
 			<div class="luft-form-row">
 				<?php
-				echo form_label( 'date', 'date' );
+				echo form_label( get_msg('event_date_label'), 'date' );
 				echo form_input( array(
 					'name' => 'date',
-					'placeholder' => 'Enter date',
+					'placeholder' => get_msg('e_date_placeholder'),
 					'id' => 'date',
 					'required' => 'required',
 					'value' => $date ? $date : date('Y-m-d'),
@@ -37,7 +37,7 @@
 			</div>
 			<div class="luft-form-row">
 				<?php
-				echo form_label( 'Event StartTime', 'start_time' );
+				echo form_label( get_msg('event_starttime_label'), 'start_time' );
 				echo form_input( array(
 					'name' => 'start_time',
 					'id' => 'start_time',
@@ -49,7 +49,7 @@
 			</div>
 			<div class="luft-form-row">
 				<?php
-				echo form_label( 'Event StopTime', 'stop_time' );
+				echo form_label( get_msg('event_StopTime_label'), 'stop_time' );
 				echo form_input( array(
 					'name' => 'stop_time',
 					'id' => 'stop_time',
@@ -61,7 +61,7 @@
 			</div>
 			<div class="luft-form-row">
 				<?php
-				echo form_label( 'traveltime 1 start', 'traveltime_1_start' );
+				echo form_label( get_msg('event_traveltime_1_start_label'), 'traveltime_1_start' );
 				echo form_input( array(
 					'name' => 'traveltime_1_start',
 					'id' => 'traveltime_1_start',
@@ -74,7 +74,7 @@
 			</div>
 			<div class="luft-form-row">
 				<?php
-				echo form_label( 'traveltime 1 stop', 'traveltime_1_stop' );
+				echo form_label( get_msg('event_traveltime_1_stop_label'), 'traveltime_1_stop' );
 				echo form_input( array(
 					'name' => 'traveltime_1_stop',
 					'id' => 'traveltime_1_stop',
@@ -86,7 +86,7 @@
 			</div>
 			<div class="luft-form-row">
 				<?php
-				echo form_label( 'traveltime 2 start', 'traveltime_2_start' );
+				echo form_label( get_msg('event_traveltime_2_start_label'), 'traveltime_2_start' );
 				echo form_input( array(
 					'name' => 'traveltime_2_start',
 					'id' => 'traveltime_2_start',
@@ -98,7 +98,7 @@
 			</div>
 			<div class="luft-form-row">
 				<?php
-				echo form_label( 'traveltime 2 stop', 'traveltime_2_stop' );
+				echo form_label( get_msg('event_traveltime_2_stop_label'), 'traveltime_2_stop' );
 				echo form_input( array(
 					'name' => 'traveltime_2_stop',
 					'id' => 'traveltime_2_stop',
@@ -110,7 +110,7 @@
 			</div>
 			<div class="luft-form-row">
 				<?php
-				echo form_label( 'construction start', 'construction_start' );
+				echo form_label( get_msg('event_construction_start_label'), 'construction_start' );
 				echo form_input( array(
 					'name' => 'construction_start',
 					'id' => 'construction_start',
@@ -122,7 +122,7 @@
 			</div>
 			<div class="luft-form-row">
 				<?php
-				echo form_label( 'construction stop', 'construction_stop' );
+				echo form_label( get_msg('event_construction_stop_label'), 'construction_stop' );
 				echo form_input( array(
 					'name' => 'construction_stop',
 					'id' => 'construction_stop',
@@ -134,7 +134,7 @@
 			</div>
 			<div class="luft-form-row">
 				<?php
-				echo form_label( 'dismantling start', 'dismantling_start' );
+				echo form_label( get_msg('event_dismantling_start_label'), 'dismantling_start' );
 				echo form_input( array(
 					'name' => 'dismantling_start',
 					'id' => 'dismantling_start',
@@ -146,7 +146,7 @@
 			</div>
 			<div class="luft-form-row">
 				<?php
-				echo form_label( 'dismantling stop', 'dismantling_stop' );
+				echo form_label( get_msg('event_dismantling_stop_label'), 'dismantling_stop' );
 				echo form_input( array(
 					'name' => 'dismantling_stop',
 					'id' => 'dismantling_stop',
@@ -160,9 +160,9 @@
 
 		<div class="luft-form-row full-width-row">
 			<?php
-			echo form_label( 'add staff', 'add_staff' );
+			echo form_label( get_msg('event_addstaff_label'), 'add_staff' );
 			echo form_multiselect( array(
-				'name' => 'add_staff[]',
+				'name' => 'add_staff',
 				'id' => 'add_staff',
 				'options' => $staffs,
 				'class' => 'custom-styled-select',
@@ -172,7 +172,7 @@
 		<div class="luft-inline-input inline-2">
 			<div class="luft-form-row">
 				<?php
-				echo form_label( 'add package staff', 'add_package_staff' );
+				echo form_label( get_msg('event_add_packingstaff_label'), 'add_package_staff' );
 				echo form_dropdown( array(
 					'name' => 'add_package_staff',
 					'id' => 'add_package_staff',
@@ -181,10 +181,10 @@
 				) ); ?>
 			</div>
 			<div class="luft-form-row">
-				<?php echo form_label( 'Packing time', 'Packing_time' ); 
+				<?php echo form_label( get_msg('event_packing_time_label'), 'Packing_time' ); 
 				echo form_input( array(
 					'name' => 'packing_time',
-					'placeholder' => 'Enter packing time',
+					'placeholder' => get_msg('e_packing_time_placeholder'),
 					'value' => get_value($event, 'packing_time'),
 					'id' => 'Packing_time'
 					// 'required' => 'required'
@@ -197,10 +197,10 @@
 			<div class="luft-form-row luft-half-row  text-area-row">
 				<div class="text-area-wrapper">
 					<?php
-					echo form_label( 'address', 'address' );
+					echo form_label( get_msg('event_address_label'), 'address' );
 					echo form_textarea( array(
 						'name' => 'address',
-						'placeholder' => 'Enter Address',
+						'placeholder' => get_msg('e_address_placeholder'),
 						'value' => get_value($event, 'address'),
 						'id' => 'address'						
 					) );?>
@@ -208,10 +208,10 @@
 			</div>
 			<div class="luft-half-row">
 				<div class="luft-form-row luft-half-row">
-					<?php echo form_label( 'contactperson', 'contact_person' ); 
+					<?php echo form_label( get_msg('event_Contact_person_label'), 'contact_person' ); 
 					echo form_input( array(
 						'name' => 'contact_person',
-						'placeholder' => 'Your contact person',
+						'placeholder' => get_msg('e_Contact_person_placeholder'),
 						'value' => get_value($event, 'contact_person'),
 						'id' => 'contact_person'
 						// 'required' => 'required'
@@ -220,10 +220,10 @@
 
 				<div class="luft-form-row luft-half-row">
 
-					<?php echo form_label( 'telephone contact person', 'telephone_contact_person' ); 
+					<?php echo form_label( get_msg('event_tele_person'), 'telephone_contact_person' ); 
 					echo form_input( array(
 						'name' => 'telephone_contact_person',
-						'placeholder' => 'Your contact person',
+						'placeholder' => get_msg('e_Contact_person_placeholder'),
 						'id' => 'telephone_contact_person',
 						'value' => get_value($event, 'telephone_contact_person'),
 						// 'required' => 'required'
@@ -232,10 +232,10 @@
 
 
 				<div class="luft-form-row luft-half-row">
-					<?php echo form_label( 'distance to event', 'distance_to_event' ); 
+					<?php echo form_label( get_msg('event_distance_label'), 'distance_to_event' ); 
 					echo form_input( array(
 						'name' => 'distance_to_event',
-						'placeholder' => 'Distance to event',
+						'placeholder' => get_msg('e_distance_placeholder'),
 						'id' => 'distance_to_event',
 						'value' => get_value($event, 'distance_to_event'),
 						// 'required' => 'required'
@@ -243,10 +243,10 @@
 				</div>
 
 				<div class="luft-form-row luft-half-row">
-					<?php echo form_label( 'type of car and wagon', 'type_of_car' ); 
+					<?php echo form_label( get_msg('event_car_wagon_label'), 'type_of_car' ); 
 					echo form_input( array(
 						'name' => 'type_of_car',
-						'placeholder' => 'Enter type of car and wagon',
+						'placeholder' => get_msg('e_car_wagon_placeholder'),
 						'value' => get_value($event, 'type_of_car'),
 						'id' => 'type_of_car'
 						// 'required' => 'required'
@@ -254,10 +254,10 @@
 				</div>
 				
 				<div class="luft-form-row map-link">
-					<?php echo form_label( 'link to google map', 'link_gmap' ); 
+					<?php echo form_label( get_msg('event_link_map_label'), 'link_gmap' ); 
 					echo form_input( array(
 						'name' => 'link_gmap',
-						'placeholder' => 'Enter link to google map',
+						'placeholder' => get_msg('e_link_map_placeholder'),
 						'value' => get_value($event, 'link_gmap'),
 						'id' => 'link_gmap'
 						// 'required' => 'required'
@@ -270,10 +270,10 @@
 		<div class="luft-inline-input section-3">
 			<div class="luft-form-row text-area-wrapper">
 				<?php
-				echo form_label( 'other information', 'other_information' );
+				echo form_label( get_msg('event_other_info_label'), 'other_information' );
 				echo form_textarea( array(
 					'name' => 'other_information',
-					'placeholder' => 'Enter other information',
+					'placeholder' => get_msg('e_other_info_placeholder'),
 					'id' => 'other_information',
 					'value' => get_value($event, 'other_information'),
 					'rows'        => '8',
@@ -282,10 +282,10 @@
 			</div>
 			<div class="luft-form-row text-area-wrapper">
 				<?php
-				echo form_label( 'add products', 'add_products' );
+				echo form_label( get_msg('event_add_product_label'), 'add_products' );
 				echo form_textarea( array(
 					'name' => 'add_products',
-					'placeholder' => 'Add other products',
+					'placeholder' => get_msg('e_add_product_placeholder'),
 					'id' => 'add_product',
 					'value' => get_value($event, 'add_products'),
 					'rows'        => '8',
@@ -294,7 +294,7 @@
 			</div>	
 			
 			<div class="luft-form-row text-area-wrapper">
-				<?php echo form_label( 'Electricity', 'Electricity' );
+				<?php echo form_label( get_msg('event_electricty_label'), 'Electricity' );
 				echo form_textarea( array(
 					'name' => 'electricity',
 					'id' => 'Electricity',
@@ -305,8 +305,8 @@
 			</div>
 		</div>
 		<?php
-			echo form_button( 'preview-event', 'preview Event' );
-			echo form_submit( 'publish-event', 'publish Event' ); ?>
+			echo form_button( 'preview-event', get_msg('event_preview_btn') );
+			echo form_submit( 'publish-event', get_msg('event_publish_btn') ); ?>
 	</div>
 	<?php
 	echo form_close( '' );
