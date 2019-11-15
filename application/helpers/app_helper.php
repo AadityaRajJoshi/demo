@@ -437,13 +437,19 @@ if(! function_exists('get_staff_worktime')){
 	}
 }			
 
-if(! function_exists('get_value')){	
-	function get_value($object, $key){
+if(! function_exists('get_value')){
+	function get_value($object, $key, $default=false){
 		if(is_object($object)){
 			return $object->$key;
 		}else{
 			$ci = get_instance();
-			return $ci->input->post($key);
+			$post = $ci->input->post($key);
+			if($post){
+				return $post;
+			}else{
+				return $default;
+			}
+
 
 		}
 	}
