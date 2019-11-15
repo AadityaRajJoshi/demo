@@ -18,9 +18,9 @@
 			<td>
 				<?php echo get_time_from_datetime( $event->start_time ) . ' - ' . get_time_from_datetime(  $event->stop_time )  ?>							
 			</td>
-			<td><?php echo get_time_from_datetime( $event->total_worktime ) ?></td>
+			<td><?php echo seconds_to_time( $event->total_worktime );?></td>
 			<td class="d-flex-center right-text">
-				<a href="<?php echo $event->id; ?>"  class="luft-user-edit" ><i class="far fa-edit"></i></a>
+				<a href="<?php echo get_route('event_edit').'/'. $event->id; ?>"  class="luft-user-edit" ><i class="far fa-edit"></i></a>
 			<div class="onoffswitch">
 				<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch-<?php echo $event->id ?>"<?php echo $event->finished ? 'checked' : '' ?> data-id = <?php echo $event->id ?> >
 				<label class="onoffswitch-label" for="switch-<?php echo $event->id ?>">
