@@ -150,6 +150,11 @@ if(! function_exists('get_msg')){
 	            'description' => 'Edit Profile',
 	            'keyword' => ''
 	        ),
+	        'meta_event_detail' => array(
+	        	'title' => 'Event Details',
+	        	'description' => 'Event Details',
+	        	'keyword' => 'event'
+	        ),
 		);
 
 		return $msg[ $key ];
@@ -449,8 +454,6 @@ if(! function_exists('get_value')){
 			}else{
 				return $default;
 			}
-
-
 		}
 	}
 }

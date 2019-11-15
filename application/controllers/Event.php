@@ -153,4 +153,13 @@ class Event extends MY_Controller{
 		);
 		$this->event_m->save( $data, array( 'id' => $id ) );
 	}
+
+	public function view(){
+		$this->data['common'] = true;
+		$this->data[ 'meta' ][ 'title' ] = get_msg('meta_event_detail');
+		$this->data['page'] = 'event_detail_v';
+		$this->data['current_menu'] = 'staff';
+		$this->load->view( 'dashboard_template_v', $this->data );
+
+	}
 }
