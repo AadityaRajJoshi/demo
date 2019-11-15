@@ -49,10 +49,15 @@
         <p>På gräsmattan Lea Rauch <br />
         bredvid Hotell Norra Vättern</p>        
     </div>
-    <div class="evt-detail-second">
-        <h4>EVENT ADRESS</h4>
+    <div class="evt-contact-second">
+        <h4>CONTACTPERSON</h4>
         <p>Lea Rauch</p>        
     </div>
+    <div class="evt-contact-third">
+        <h4>Contact phone</h4>
+        <p>0731-472122</p>        
+    </div>
+    
 </div>
 
 <div class="evt-detail-sect">

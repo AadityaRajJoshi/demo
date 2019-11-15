@@ -911,9 +911,13 @@ td.right-text {
   max-width: 650px; }
 
 .luft-evt-header {
-  display: flex; }
+  display: flex;
+  flex-wrap: wrap; }
   .luft-evt-header > div {
     flex: 0 0 50%; }
+    @media (max-width: 576px) {
+      .luft-evt-header > div {
+        flex: 0 0 100%; } }
     .luft-evt-header > div:last-child {
       display: flex;
       justify-content: flex-end;
@@ -956,26 +960,52 @@ td.right-text {
   display: flex;
   justify-content: center;
   margin-top: 40px;
-  margin-bottom: 60px; }
+  margin-bottom: 60px;
+  flex-wrap: wrap; }
+  @media (max-width: 576px) {
+    .evt-time-wrapper {
+      border-top: 1px solid;
+      border-bottom: 1px solid;
+      border-color: #DFDFE5;
+      margin: 30px 0;
+      padding: 30px 0; } }
   .evt-time-wrapper > * {
     text-align: center; }
+    @media (max-width: 576px) {
+      .evt-time-wrapper > * {
+        display: flex;
+        align-items: center; }
+        .evt-time-wrapper > * > * {
+          flex: 0 0 50%;
+          text-align: left; } }
   .evt-time-wrapper .evt-time {
     flex: 0 0 30%; }
     .evt-time-wrapper .evt-time h4 {
       background: #020441;
       color: #fff; }
+    @media (max-width: 576px) {
+      .evt-time-wrapper .evt-time {
+        flex: 0 0 100%; } }
   .evt-time-wrapper .travel-time-1,
   .evt-time-wrapper .travel-time-2 {
     flex: 0 0 15%; }
     .evt-time-wrapper .travel-time-1 h4,
     .evt-time-wrapper .travel-time-2 h4 {
       background: #DFDFE5; }
+    @media (max-width: 576px) {
+      .evt-time-wrapper .travel-time-1,
+      .evt-time-wrapper .travel-time-2 {
+        flex: 0 0 100%; } }
   .evt-time-wrapper .ds-time,
   .evt-time-wrapper .cs-time {
     flex: 0 0 20%; }
     .evt-time-wrapper .ds-time h4,
     .evt-time-wrapper .cs-time h4 {
       background: #F7F7F7; }
+    @media (max-width: 576px) {
+      .evt-time-wrapper .ds-time,
+      .evt-time-wrapper .cs-time {
+        flex: 0 0 100%; } }
   .evt-time-wrapper h4 {
     margin: 0;
     color: #020441;
@@ -983,10 +1013,18 @@ td.right-text {
     padding: 8px 0;
     font-size: 15px;
     font-weight: 600; }
+    @media (max-width: 576px) {
+      .evt-time-wrapper h4 {
+        background: transparent !important;
+        color: #020441 !important;
+        text-align: left; } }
   .evt-time-wrapper p {
     margin: 10px 0;
     font-weight: 600;
     color: #020441; }
+    @media (max-width: 576px) {
+      .evt-time-wrapper p {
+        font-weight: 300; } }
 
 .evt-detail-sect {
   display: flex; }
@@ -1000,7 +1038,7 @@ td.right-text {
   .evt-detail-sect p {
     margin: 0;
     color: #020441;
-    font-size: 13px; }
+    font-size: 14px; }
   .evt-detail-sect .evt-detail-first {
     flex: 0 0 25%; }
   .evt-detail-sect.evt-sect-border {
