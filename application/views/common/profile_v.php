@@ -2,13 +2,17 @@
 
 <?php if( 'own' == $mode ): ?>
 	<div class="luft-profile-image">
-		<?php if(isset($profile_picture)): ?>				
-			<img src="<?php echo $profile_picture; ?>" alt="profile picture" id="uploaded-image" accept=".png, .jpg, .jpeg" />
-		<?php endif; ?>
+		<?php if(isset($profile_picture)){?>
+
+			<img src="<?php echo $profile_picture; ?>" alt="profile picture" id="uploaded-image" />
+		<?php }else{?>
+			<img src="assets/image/placeholder.jpg" alt="profile picture" id="uploaded-image"  />
+		<?php } ?>				
+		
 	</div>
 	<div class="luft-form-row-file">
 		<label for="profile-image">Upload profile picture</label>
-		<input type="file" name="userfile" size="20" id="profile-image" />
+		<input type="file" name="userfile" size="20" id="profile-image" accept=".png, .jpg, .jpeg" />
 	</div>
 <?php endif; ?>
 
