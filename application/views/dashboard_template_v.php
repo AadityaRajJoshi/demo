@@ -54,7 +54,7 @@
                     </div>
                     <div class="luft-user-icon">
                         <ul>
-                            <?php if( is_admin() ){?>
+                            <?php if( 0 && is_admin() ){?>
                             <li class="luft-notification"><a href="#"><i class="far fa-bell"></i> <span>2</span></a>
                                 <ul class="luft-notification-sub">
                                     <li><a href="#"> Integer ante arcu accumsan a </a></li>

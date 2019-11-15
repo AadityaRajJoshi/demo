@@ -471,8 +471,7 @@ if(! function_exists('get_value')){
 		if(is_object($object)){
 			return $object->$key;
 		}else{
-			$ci = get_instance();
-			$post = $ci->input->post($key);
+			$post = set_value($key);
 			if($post){
 				return $post;
 			}else{
