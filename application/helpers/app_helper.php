@@ -192,7 +192,6 @@ if( !function_exists( 'is_staff' ) ){
 		$ci = get_instance();
 		return $ci->session->userdata( 'role' ) == "staff";
 	}
-
 }
 
 if( !function_exists( 'get_session' ) ){
