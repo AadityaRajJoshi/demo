@@ -126,13 +126,7 @@ class User extends MY_Controller{
         if('own' == $mode){
         	# Editing own profile
     		$this->data['meta'] = get_msg('meta_edit_staff');
-    		$config = $this->config->item('profile_picture');
-    		foreach(explode('|',$config['allowed_types']) as $ext){
-    			$path = $config['upload_path'].$user->id. '.' . $ext;
-	    		if(file_exists($path)){
-	    			$this->data['profile_picture'] = $path;
-	    		}
-    		}
+   
 	        $this->data['breadcrumb'] = get_msg('breadcrumb_user_edit_own');
 	        $this->data['body_class'] = 'template-profile';
         	$this->data['current_menu'] = 'dashboard';
