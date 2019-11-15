@@ -48,6 +48,10 @@ if(! function_exists('get_route')){
 				$path = 'event/add';
 			break;
 
+			case 'event_edit':
+				$path = 'event/edit';
+			break;
+
 			case 'profile':
 				$path = 'profile';
 			break;
@@ -124,7 +128,9 @@ if(! function_exists('get_msg')){
 			'breadcrumb_user_edit_other' => array('Staff', 'Update'),
 			'breadcrumb_all_staff' => array('Staff', 'All Staff'),
 			'breadcrumb_add_staff' => array('Staff','Add Staff'),
-
+			'no_event_assigned' => 'Not assigned on any event',
+			'breadcrumb_event_edit' => array('Event', 'Edit Event'),
+ 
 			'meta_login' => array(
 				'title' => 'Login',
 				'description' => 'Login panel',
@@ -150,6 +156,29 @@ if(! function_exists('get_msg')){
 	            'description' => 'Edit Profile',
 	            'keyword' => ''
 	        ),
+	        'meta_event_detail' => array(
+	        	'title' => 'Event Details',
+	        	'description' => 'Event Details',
+	        	'keyword' => 'event'
+	        ),
+	        'meta_event_edit' => array(
+	        	'title' => 'Event Edit',
+	        	'description'=> 'Event Edit',
+	        	'keyword' => 'event'
+	        ),
+
+	        'event_name_label' => 'Event Name',
+	        'event_order_label' => 'Order Number',
+	        'event_date_label' => 'Date',
+	        'event_starttime_label' => 'Event StartTime',
+	        'event_StopTime_label' => 'Event StopTime',
+	        'event_traveltime_1_start_label' => 'TravelTime 1 Start',
+	        'event_traveltime_1_stop_label' => 'TravelTime 1 Stop',
+	        'event_traveltime_2_start_label' => 'TravelTime 2 Stop',
+	        'event_construction_start_label' => 'Construction Start',
+	        'event_construction_stop_label' => 'Construction Stop',
+	        'event_dismantling_start_label' => 'Dismantling Start',
+	        'event_dismantling_stop_label' => 'Dismantling Stop'
 		);
 
 		return $msg[ $key ];
@@ -186,7 +215,6 @@ if( !function_exists( 'is_staff' ) ){
 		$ci = get_instance();
 		return $ci->session->userdata( 'role' ) == "staff";
 	}
-
 }
 
 if( !function_exists( 'get_session' ) ){
@@ -360,6 +388,7 @@ if(! function_exists('get_staffs_dropdown')){
 
 if(! function_exists('get_time_from_datetime')){	
 	function get_time_from_datetime( $datetime ){
+		// return seconds_to_time( $datetime );
 		$time=strtotime($datetime);
 		return date("H:i", $time);
 	}
@@ -372,26 +401,17 @@ if(! function_exists('get_date_from_datetime')){
 	}
 }
 
-if(! function_exists('get_total_working_time')){	
-	function get_total_working_time( $args ){
-		$event_start = strtotime( $args['start_time'] );
-		$event_end = strtotime( $args['stop_time'] );
-		$tt_1_start = strtotime( $args['traveltime_1_start'] );
-		$tt_1_stop = strtotime( $args['traveltime_1_stop'] );
-		$tt_2_start = strtotime( $args['traveltime_2_start'] );
-		$tt_2_stop = strtotime( $args['traveltime_2_stop'] );
-		$construct_start = strtotime( $args['construction_start'] );
-		$construct_stop = strtotime( $args['construction_stop'] );
-		$dismantl_start = strtotime( $args['dismantling_start'] );
-		$dismantl_stop = strtotime( $args['dismantling_stop'] );
+if( !function_exists( 'time_to_sec' ) ){	
+	function time_to_sec($time) {
+	    $sec = 0;
+	    foreach (array_reverse(explode(':', $time)) as $k => $v) $sec += pow(60, $k) * $v;
+	    return $sec;
+	}
+}
 
-		$event_diff = abs( $event_end - $event_start );
-		$tt_1_diff = abs( $tt_1_stop - $tt_1_start) ;  
-		$tt_2_diff = abs( $tt_2_stop - $tt_2_start) ;
-		$construct_diff = abs( $construct_stop - $construct_start) ;
-		$dismantl_diff = abs( $dismantl_stop - $dismantl_start) ;
-
-		return gmdate('H:i:s',$event_diff + $tt_1_diff + $tt_2_diff + $construct_diff + $dismantl_diff);
+if( !function_exists('get_time_diff') ){
+	function get_time_diff($t){
+		return abs(time_to_sec($t[0]) - time_to_sec($t[1]));
 	}
 }
 
@@ -415,36 +435,80 @@ if(! function_exists('print_error_msg')){
 		foreach($msg as $m){echo $m;}
 		echo '</span>';
 	}
+}		
+
+if(! function_exists('get_value')){
+	function get_value($object, $key, $default=false){
+
+		if(is_object($object)){
+			return $object->$key;
+		}else{
+			$ci = get_instance();
+			$post = $ci->input->post($key);
+			if($post){
+				return $post;
+			}else{
+				return $default;
+			}
+		}
+	}
 }
 
 
 if(! function_exists('get_staff_worktime')){
 	function get_staff_worktime( $user_id ){
 		$ci = get_instance();
-		$ci->load->model( 'event_m' );
-		// $ci->load->model( 'package_staff_m' );
-		$ci->load->model( 'staff_m' );
-		$staff_releated_event = $ci->staff_m->get( array( 'event_id' ), array( 'user_id' => $user_id ) );
-		if( !$staff_releated_event ){
-			echo "Not assigned on any event";
-		}else{
-			foreach ($staff_releated_event as $value) {
-				$worktime_event = $ci->event_m->get( array( 'total_worktime' ), array( 'id' => $value->event_id ) );
-				//var_export( $worktime_event );
+		$ci->load->model( 'user_m' );
+		$ci->load->helper('date');
+		$times = $ci->user_m->get_events( $user_id );
+		if($times){
+			$t = 0;
+			foreach($times as $key => $time){
+				$t = $t + $time->total_worktime ;
 			}
-			echo "15hr";
+			return seconds_to_time( $t );
+		}else{
+			return get_msg( 'no_event_assigned' );
+		}	
+	}
+}
+function seconds_to_time($seconds_time){
+    // if ($seconds_time < 24 * 60 * 60) {
+    //     return gmdate('H:i:s', $seconds_time);
+    // } else {
+        $hours = floor($seconds_time / 3600);
+        $minutes = floor(($seconds_time - $hours * 3600) / 60);
+        $seconds = floor($seconds_time - ($hours * 3600) - ($minutes * 60));
+        $date = '';
+        if( $hours != 0 ){
+        	$date .= $hours.'hr';
+        }
+        if( $minutes != 0  ){
+        	$date .= $minutes.'min';
+        }
+        if( $seconds != 0  ){
+        	$date .= $seconds.'sec';
+        }
+        return $date;
+    // }
+}
+
+if( !function_exists('get_profile_picture') ){
+	function get_profile_picture(){
+		$ci = get_instance();
+		$image = $ci->config->item('profile_picture');
+		foreach(explode('|',$image['allowed_types']) as $ext){
+			$path = $image['upload_path'].get_session('id'). '.' . $ext;
+    		if(file_exists($path)){
+    			return $path;
+    		}
 		}
 	}
-}			
+}
 
-if(! function_exists('get_value')){	
-	function get_value($object, $key){
-		if(is_object($object)){
-			return $object->$key;
-		}else{
-			$ci = get_instance();
-			return $ci->input->post($key);
-
-		}
+if( !function_exists( 'get_first_letter' ) ){
+	function get_first_letter(){
+		$username = get_session('name');
+		return strtoupper($username[0]);
 	}
 }

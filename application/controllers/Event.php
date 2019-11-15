@@ -7,10 +7,10 @@ class Event extends MY_Controller{
 		parent::__construct();
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+		$this->load->model( 'event_m' );
 	}
 
 	public function index(){
-		$this->load->model( 'event_m' );
 		$this->data[ 'meta' ][ 'title' ] = get_msg( 'event' );
 		$this->data[ 'page' ] = 'all_event_v';
 		$this->data[ 'events' ] = $this->event_m->get( '*' );
@@ -23,11 +23,11 @@ class Event extends MY_Controller{
 		if( !is_admin() ){
 			do_redirect( 'dashboard' );
 		}
-		$this->load->model( 'event_m' );
 		$this->data[ 'meta' ][ 'title' ] = get_msg( 'add_event' );
 		$this->data[ 'page' ] = 'add_event_v';
 		$this->data[ 'current_menu' ] = 'event';
 		$this->data[ 'breadcrumb' ] = array(get_msg( 'event' ),get_msg( 'add_event' ));
+		$this->data[ 'event' ] = false;
 		$this->data[ 'staffs' ] = get_staffs_dropdown();	
 		$this->save();
 		$this->load->view( 'dashboard_template_v', $this->data );
@@ -37,6 +37,7 @@ class Event extends MY_Controller{
 		$this->form_validation->set_rules('name', 'Event Name', 'required' );
 		$this->form_validation->set_rules('order_number', 'Ordernumber', 'required' );
 		$this->form_validation->set_rules('date', 'Date', 'required' );
+
 		$this->form_validation->set_rules('start_time', 'Event Start', 'required' );
 		$this->form_validation->set_rules('stop_time', 'Event Stop', 'required' );
 		$this->form_validation->set_rules('traveltime_1_start', 'First Traveltime Start', 'required' );
@@ -47,32 +48,48 @@ class Event extends MY_Controller{
 		$this->form_validation->set_rules('construction_stop', 'Construction Stop Time', 'required' );
 		$this->form_validation->set_rules('dismantling_start', 'Dismantle Start Time', 'required' );
 		$this->form_validation->set_rules('dismantling_stop', 'Dismantle Stop Time', 'required' );
+
 		$this->form_validation->set_rules('add_staff[]', 'Add Staff', 'required' );
 
-		$ci = $this;
-		$formated_date = function() use($ci){
-			$date = array(
-				'start_time',
-				'stop_time',
-				'traveltime_1_start',
-				'traveltime_1_stop',
-				'traveltime_2_start',
-				'traveltime_2_stop',
-				'construction_start',
-				'construction_stop',
-				'dismantling_start',
-				'dismantling_stop',
-			);
-			$data=array();
-			foreach ($date as $key ) {
-				$data[$key] = $ci->input->post('date'). ' ' .$ci->input->post($key);
-			} 	
-			return $data;
-		};
+		if($this->form_validation->run()){
 
-		if($this->form_validation->run()){		
-			$data = $formated_date();		
-			$data[ 'total_worktime' ] = $this->input->post('date') . ' ' . get_total_working_time( $formated_date() );
+			$input_time = array(
+				array(
+					'start_time',
+					'stop_time',
+				),
+				array(
+					'traveltime_1_start',
+					'traveltime_1_stop',
+				),
+				array(
+					'traveltime_2_start',
+					'traveltime_2_stop',
+				),
+				array(
+					'construction_start',
+					'construction_stop',
+				),
+				array(
+					'dismantling_start',
+					'dismantling_stop',
+				)
+			);
+			
+			$data = array(
+				'total_worktime' => 0
+			);
+
+			$event_date = $this->input->post('date');
+			foreach ($input_time as $pair ) {
+				$temp = [];
+				foreach($pair as $key){
+					$v = $this->input->post($key);
+					$data[$key] = $event_date . ' ' .$v;
+					$temp[] = $v . ':00';
+				}
+				$data['total_worktime'] += get_time_diff($temp);
+			} 
 			$optional_value = array(
 				'name',
 				'order_number',
@@ -96,9 +113,11 @@ class Event extends MY_Controller{
 					$data[ $value ] = $this->input->post( $value );
 				}
 			}
-			$this->load->model( 'event_m' );
-			$this->load->model( 'package_staff_m' );
-			$this->load->model( 'staff_m' );
+
+
+			$this->load->model( 'events_package_staff_m' );
+			$this->load->model( 'events_staff_m' );
+
 			$where_event = $id ? array('id'=>$id) : false;
 			$where_staff = $id ? array('event_id'=>$id) : false;
 
@@ -106,12 +125,13 @@ class Event extends MY_Controller{
 			$event_id = $this->event_m->save( $data, $where_event );
 
 			$event_releated_staff = $this->input->post( 'add_staff' );
+
 			foreach ( $event_releated_staff as  $value) {
 				$insert_staff = array(
 					'user_id' => $value,
 					'event_id' => $event_id
 				);
-				$this->staff_m->save( $insert_staff, $where_staff );
+				$this->events_staff_m->save( $insert_staff, $where_staff );
 			}
 
 			if( $this->input->post( 'add_package_staff' ) ){
@@ -122,7 +142,7 @@ class Event extends MY_Controller{
 				);
 			}
 
-			$this->package_staff_m->save( $insert_package_staff, $where_staff );
+			$this->events_package_staff_m->save( $insert_package_staff, $where_staff );
 
 			if ($this->db->trans_status() === FALSE){
 			    $this->db->trans_rollback();
@@ -137,7 +157,6 @@ class Event extends MY_Controller{
 			    	do_redirect('event');
 			    }
 			}
-
 		}
 	}
 
@@ -146,7 +165,6 @@ class Event extends MY_Controller{
 			die( get_msg( 'toggle_status_error' ) );
 		}
 		$id = $this->input->post( 'event_id' );
-		$this->load->model( 'event_m' );
 		$event_status = $this->event_m->get( array( 'finished' ), array( 'id' => $id ),1 );
 		$status = $event_status->finished;
 		$data = array(
@@ -154,4 +172,26 @@ class Event extends MY_Controller{
 		);
 		$this->event_m->save( $data, array( 'id' => $id ) );
 	}
+
+	public function view(){
+		$this->data['common'] = true;
+		$this->data[ 'meta' ] = get_msg('meta_event_detail');
+		$this->data['page'] = 'event_detail_v';
+		$this->data[ 'staffs' ] = get_staffs_dropdown();
+		$this->data['current_menu'] = 'staff';
+		$this->load->view( 'dashboard_template_v', $this->data );
+	}
+
+	public function edit($id=null){
+		if( !is_admin() ){
+			do_redirect( 'dashboard' );
+		}
+		$this->data[ 'meta' ] = get_msg( 'meta_event_edit' );
+		$this->data[ 'page' ] = 'add_event_v';
+		$this->data[ 'current_menu' ] = 'event';
+		$this->data[ 'breadcrumb' ] = get_msg( 'breadcrumb_event_edit' );
+		$this->data[ 'event' ] = false;
+		$this->data[ 'staffs' ] = get_staffs_dropdown();
+		$this->load->view( 'dashboard_template_v', $this->data );
+	} 
 }

@@ -129,6 +129,20 @@
     }
 }
 
-.luft-header-area + * {
+.#{$prefix}-header-area + * {
     margin-top: 75px;
+}
+
+p.profile-name {
+    border: 2px solid $color_green;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: $color_green;
+    color: #fff;
+    font-weight: bold;
+    font-size: 17px;
 }

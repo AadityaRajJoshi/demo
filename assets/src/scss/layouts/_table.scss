@@ -24,16 +24,22 @@
     }
   
     th, td {
-      padding: 16px;
+      padding: 15px;
       text-align: left;
       color: $color_primary;
       text-transform: capitalize;
+      font-size: 14px;
     }
   
     th {
-        font-size: 17px;
+        font-size: 15px;
         text-transform: capitalize;
         color: $color_primary;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
         &.#{$prefix}-user-id,
         &.#{$prefix}-update-download {
             width: 100px;
