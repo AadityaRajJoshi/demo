@@ -37,6 +37,7 @@ class Event extends MY_Controller{
 		$this->form_validation->set_rules('name', 'Event Name', 'required' );
 		$this->form_validation->set_rules('order_number', 'Ordernumber', 'required' );
 		$this->form_validation->set_rules('date', 'Date', 'required' );
+
 		$this->form_validation->set_rules('start_time', 'Event Start', 'required' );
 		$this->form_validation->set_rules('stop_time', 'Event Stop', 'required' );
 		$this->form_validation->set_rules('traveltime_1_start', 'First Traveltime Start', 'required' );
@@ -47,27 +48,46 @@ class Event extends MY_Controller{
 		$this->form_validation->set_rules('construction_stop', 'Construction Stop Time', 'required' );
 		$this->form_validation->set_rules('dismantling_start', 'Dismantle Start Time', 'required' );
 		$this->form_validation->set_rules('dismantling_stop', 'Dismantle Stop Time', 'required' );
+
 		$this->form_validation->set_rules('add_staff[]', 'Add Staff', 'required' );
 
 		if($this->form_validation->run()){
-			$date = array(
-				'start_time',
-				'stop_time',
-				'traveltime_1_start',
-				'traveltime_1_stop',
-				'traveltime_2_start',
-				'traveltime_2_stop',
-				'construction_start',
-				'construction_stop',
-				'dismantling_start',
-				'dismantling_stop',
+
+			$input_time = array(
+				array(
+					'start_time',
+					'stop_time',
+				),
+				array(
+					'traveltime_1_start',
+					'traveltime_1_stop',
+				),
+				array(
+					'traveltime_2_start',
+					'traveltime_2_stop',
+				),
+				array(
+					'construction_start',
+					'construction_stop',
+				),
+				array(
+					'dismantling_start',
+					'dismantling_stop',
+				)
 			);
-			$data=array();
-			foreach ($date as $key ) {
-				$data[$key] = $ci->input->post('date'). ' ' .$ci->input->post($key);
+			
+			$data=array(
+				'total_worktime' => 0
+			);
+
+			$event_date = $this->input->post('date');
+			foreach ($input_time as $pair ) {
+				$data['total_worktime'] += get_time_diff($pair);
+				foreach($pair as $key){
+					$data[$key] = $event_date . ' ' .$this->input->post($key);
+				}
 			} 
 
-			$data[ 'total_worktime' ] =  get_total_working_time( $date );
 			$optional_value = array(
 				'name',
 				'order_number',
