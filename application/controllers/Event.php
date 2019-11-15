@@ -19,20 +19,6 @@ class Event extends MY_Controller{
 		$this->load->view('dashboard_template_v', $this->data);
 	}
 
-	public function add(){
-		if( !is_admin() ){
-			do_redirect( 'dashboard' );
-		}
-		$this->data[ 'meta' ][ 'title' ] = get_msg( 'add_event' );
-		$this->data[ 'page' ] = 'add_event_v';
-		$this->data[ 'current_menu' ] = 'event';
-		$this->data[ 'breadcrumb' ] = array(get_msg( 'event' ),get_msg( 'add_event' ));
-		$this->data[ 'event' ] = false;
-		$this->data[ 'staffs' ] = get_staffs_dropdown();	
-		$this->save();
-		$this->load->view( 'dashboard_template_v', $this->data );
-	}
-
 	public function save( $id = false ){
 		$this->form_validation->set_rules('name', 'Event Name', 'required' );
 		$this->form_validation->set_rules('order_number', 'Ordernumber', 'required' );
@@ -182,16 +168,61 @@ class Event extends MY_Controller{
 		$this->load->view( 'dashboard_template_v', $this->data );
 	}
 
+	public function add(){
+		if( !is_admin() ){
+			do_redirect( 'dashboard' );
+		}
+		$this->data[ 'meta' ][ 'title' ] = get_msg( 'add_event' );
+		$this->data[ 'page' ] = 'add_event_v';
+		$this->data[ 'current_menu' ] = 'event';
+		$this->data[ 'date' ] = false;
+		$this->data[ 'time' ] = false;
+		$this->data[ 'breadcrumb' ] = array(get_msg( 'event' ),get_msg( 'add_event' ));
+		$this->data[ 'event' ] = false;
+		$this->data[ 'staffs' ] = get_staffs_dropdown();	
+		$this->save();
+		$this->load->view( 'dashboard_template_v', $this->data );
+	}
+
 	public function edit($id=null){
 		if( !is_admin() ){
 			do_redirect( 'dashboard' );
 		}
+
+		if(!$id){
+			do_redirect( 'dashboard' );
+		}
+
+		$event = $this->event_m->get('*', array('id'=>$id ), 1);
+		if(!$event){
+			do_redirect('dashboard');
+		}
+		$date = get_date_from_datetime( $event->start_time, 'Y-m-d' );
+		$arr = array(
+			'start_time',
+			'stop_time',
+			'traveltime_1_start',
+			'traveltime_1_stop',
+			'traveltime_2_start',
+			'traveltime_2_stop',
+			'construction_start',
+			'construction_stop',
+			'dismantling_start',
+			'dismantling_stop',
+		);
+		$time = array();
+		foreach ($arr as $value) {
+			$time[ $value ] = get_time_from_datetime( $event->$value );
+		}
+		$this->data[ 'time' ] = $time;
+		$this->data[ 'date' ] = $date;
 		$this->data[ 'meta' ] = get_msg( 'meta_event_edit' );
 		$this->data[ 'page' ] = 'add_event_v';
 		$this->data[ 'current_menu' ] = 'event';
 		$this->data[ 'breadcrumb' ] = get_msg( 'breadcrumb_event_edit' );
-		$this->data[ 'event' ] = false;
+		$this->data[ 'event' ] = $event;
 		$this->data[ 'staffs' ] = get_staffs_dropdown();
 		$this->load->view( 'dashboard_template_v', $this->data );
+		
 	} 
 }

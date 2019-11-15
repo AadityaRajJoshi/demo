@@ -395,9 +395,9 @@ if(! function_exists('get_time_from_datetime')){
 }
 
 if(! function_exists('get_date_from_datetime')){	
-	function get_date_from_datetime( $datetime ){
+	function get_date_from_datetime( $datetime, $format ){
 		$time=strtotime($datetime);
-		return date("d M Y", $time);
+		return date( $format , $time);
 	}
 }
 
