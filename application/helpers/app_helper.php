@@ -448,3 +448,16 @@ if(! function_exists('get_value')){
 		}
 	}
 }
+
+if( !function_exists('get_profile_picture') ){
+	function get_profile_picture(){
+		$ci = get_instance();
+		$image = $ci->config->item('profile_picture');
+		foreach(explode('|',$image['allowed_types']) as $ext){
+			$path = $image['upload_path'].get_session('id'). '.' . $ext;
+    		if(file_exists($path)){
+    			return $path;
+    		}
+		}
+	}
+}

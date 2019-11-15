@@ -24,6 +24,7 @@ class MY_Controller extends CI_Controller{
 	        do_redirect( 'login' );
 	    }
 
+	    $this->data['profile_picture'] = get_profile_picture();
 	    $this->data['menu'] = get_menu();
 	}
 
