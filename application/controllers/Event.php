@@ -97,8 +97,8 @@ class Event extends MY_Controller{
 				}
 			}
 			$this->load->model( 'event_m' );
-			$this->load->model( 'package_staff_m' );
-			$this->load->model( 'staff_m' );
+			$this->load->model( 'events_package_staff_m' );
+			$this->load->model( 'events_staff_m' );
 			$where_event = $id ? array('id'=>$id) : false;
 			$where_staff = $id ? array('event_id'=>$id) : false;
 
@@ -111,7 +111,7 @@ class Event extends MY_Controller{
 					'user_id' => $value,
 					'event_id' => $event_id
 				);
-				$this->staff_m->save( $insert_staff, $where_staff );
+				$this->events_staff_m->save( $insert_staff, $where_staff );
 			}
 
 			if( $this->input->post( 'add_package_staff' ) ){
@@ -122,7 +122,7 @@ class Event extends MY_Controller{
 				);
 			}
 
-			$this->package_staff_m->save( $insert_package_staff, $where_staff );
+			$this->events_package_staff_m->save( $insert_package_staff, $where_staff );
 
 			if ($this->db->trans_status() === FALSE){
 			    $this->db->trans_rollback();

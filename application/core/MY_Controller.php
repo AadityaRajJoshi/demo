@@ -23,7 +23,6 @@ class MY_Controller extends CI_Controller{
 	    if(!is_logged_in() && !(in_array($controller, $exception_controllers) && in_array($method, $exception_methods))){
 	        do_redirect( 'login' );
 	    }
-
 	    $this->data['menu'] = get_menu();
 	}
 

@@ -124,7 +124,8 @@ if(! function_exists('get_msg')){
 			'breadcrumb_user_edit_other' => array('Staff', 'Update'),
 			'breadcrumb_all_staff' => array('Staff', 'All Staff'),
 			'breadcrumb_add_staff' => array('Staff','Add Staff'),
-
+			'no_event_assigned' => 'Not assigned on any event',
+ 
 			'meta_login' => array(
 				'title' => 'Login',
 				'description' => 'Login panel',
@@ -416,27 +417,6 @@ if(! function_exists('print_error_msg')){
 		echo '</span>';
 	}
 }
-
-
-if(! function_exists('get_staff_worktime')){
-	function get_staff_worktime( $user_id ){
-		$ci = get_instance();
-		$ci->load->model( 'event_m' );
-		// $ci->load->model( 'package_staff_m' );
-		$ci->load->model( 'staff_m' );
-		$staff_releated_event = $ci->staff_m->get( array( 'event_id' ), array( 'user_id' => $user_id ) );
-		if( !$staff_releated_event ){
-			echo "Not assigned on any event";
-		}else{
-			foreach ($staff_releated_event as $value) {
-				$worktime_event = $ci->event_m->get( array( 'total_worktime' ), array( 'id' => $value->event_id ) );
-				//var_export( $worktime_event );
-			}
-			echo "15hr";
-		}
-	}
-}			
-
 if(! function_exists('get_value')){	
 	function get_value($object, $key){
 		if(is_object($object)){
@@ -448,3 +428,27 @@ if(! function_exists('get_value')){
 		}
 	}
 }
+
+if(! function_exists('get_staff_worktime')){
+	function get_staff_worktime( $user_id ){
+		$ci = get_instance();
+		$ci->load->model( 'user_m' );
+		$times = $ci->user_m->get_events( $user_id );
+		if($times){
+			$t = 0;
+			foreach($times as $key => $time){
+				// echo $time->total_worktime;
+				echo $time->total_worktime . '=' . strtotime( $time->total_worktime );
+				$t = $t + strtotime( $time->total_worktime );
+				echo "<br>";
+
+				echo 'total='.$t;
+				echo "<br>";
+			}
+			echo 'final ='.$t;
+			// return gmdate('H:i', $t );
+		}else{
+			return get_msg( 'no_event_assigned' );
+		}	
+	}
+}			
