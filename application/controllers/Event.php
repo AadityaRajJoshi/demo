@@ -49,8 +49,7 @@ class Event extends MY_Controller{
 		$this->form_validation->set_rules('dismantling_stop', 'Dismantle Stop Time', 'required' );
 		$this->form_validation->set_rules('add_staff[]', 'Add Staff', 'required' );
 
-		$ci = $this;
-		$formated_date = function() use($ci){
+		if($this->form_validation->run()){
 			$date = array(
 				'start_time',
 				'stop_time',
@@ -66,13 +65,9 @@ class Event extends MY_Controller{
 			$data=array();
 			foreach ($date as $key ) {
 				$data[$key] = $ci->input->post('date'). ' ' .$ci->input->post($key);
-			} 	
-			return $data;
-		};
+			} 
 
-		if($this->form_validation->run()){		
-			$data = $formated_date();		
-			$data[ 'total_worktime' ] = $this->input->post('date') . ' ' . get_total_working_time( $formated_date() );
+			$data[ 'total_worktime' ] =  get_total_working_time( $date );
 			$optional_value = array(
 				'name',
 				'order_number',
