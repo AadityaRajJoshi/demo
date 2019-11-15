@@ -1,7 +1,7 @@
 <?php echo form_open( 'event/add' ); ?>
 	<div class="luft-form-wrapper">
 		<div class="luft-form-row">
-			<?php echo form_label( 'event name', 'name' ); 
+			<?php echo form_label( 'even name', 'name' ); 
 			echo form_input( array(
 				'name' => 'name',
 				'placeholder' => 'Enter event name',
