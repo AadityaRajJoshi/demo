@@ -945,7 +945,8 @@ td.right-text {
 .evt-info {
   margin-top: 25px; }
   .evt-info h4 {
-    margin: 0; }
+    margin: 0;
+    color: #020441; }
     .evt-info h4 b {
       text-transform: uppercase;
       font-size: 14px;
