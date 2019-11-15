@@ -76,18 +76,20 @@ class Event extends MY_Controller{
 				)
 			);
 			
-			$data=array(
+			$data = array(
 				'total_worktime' => 0
 			);
 
 			$event_date = $this->input->post('date');
 			foreach ($input_time as $pair ) {
-				$data['total_worktime'] += get_time_diff($pair);
+				$temp = [];
 				foreach($pair as $key){
-					$data[$key] = $event_date . ' ' .$this->input->post($key);
+					$v = $this->input->post($key);
+					$data[$key] = $event_date . ' ' .$v;
+					$temp[] = $v . ':00';
 				}
+				$data['total_worktime'] += get_time_diff($temp);
 			} 
-
 			$optional_value = array(
 				'name',
 				'order_number',
@@ -123,7 +125,7 @@ class Event extends MY_Controller{
 			$event_id = $this->event_m->save( $data, $where_event );
 
 			$event_releated_staff = $this->input->post( 'add_staff' );
-			var_dump($event_releated_staff); die;
+
 			foreach ( $event_releated_staff as  $value) {
 				$insert_staff = array(
 					'user_id' => $value,
@@ -175,7 +177,21 @@ class Event extends MY_Controller{
 		$this->data['common'] = true;
 		$this->data[ 'meta' ] = get_msg('meta_event_detail');
 		$this->data['page'] = 'event_detail_v';
+		$this->data[ 'staffs' ] = get_staffs_dropdown();
 		$this->data['current_menu'] = 'staff';
 		$this->load->view( 'dashboard_template_v', $this->data );
 	}
+
+	public function edit($id=null){
+		if( !is_admin() ){
+			do_redirect( 'dashboard' );
+		}
+		$this->data[ 'meta' ] = get_msg( 'meta_event_edit' );
+		$this->data[ 'page' ] = 'add_event_v';
+		$this->data[ 'current_menu' ] = 'event';
+		$this->data[ 'breadcrumb' ] = get_msg( 'breadcrumb_event_edit' );
+		$this->data[ 'event' ] = false;
+		$this->data[ 'staffs' ] = get_staffs_dropdown();
+		$this->load->view( 'dashboard_template_v', $this->data );
+	} 
 }
