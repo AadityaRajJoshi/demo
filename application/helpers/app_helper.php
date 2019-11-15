@@ -48,6 +48,10 @@ if(! function_exists('get_route')){
 				$path = 'event/add';
 			break;
 
+			case 'event_edit':
+				$path = 'event/edit';
+			break;
+
 			case 'profile':
 				$path = 'profile';
 			break;
@@ -366,6 +370,7 @@ if(! function_exists('get_staffs_dropdown')){
 
 if(! function_exists('get_time_from_datetime')){	
 	function get_time_from_datetime( $datetime ){
+		// return seconds_to_time( $datetime );
 		$time=strtotime($datetime);
 		return date("H:i", $time);
 	}
@@ -389,30 +394,6 @@ if( !function_exists( 'time_to_sec' ) ){
 if( !function_exists('get_time_diff') ){
 	function get_time_diff($t){
 		return abs(time_to_sec($t[0]) - time_to_sec($t[1]));
-	}
-}
-
-if(! function_exists('get_total_working_time')){	
-	function get_total_working_time( $args ){
-		$event_start = strtotime( $args['start_time'] );
-		$event_end = strtotime( $args['stop_time'] );
-		$tt_1_start = strtotime( $args['traveltime_1_start'] );
-		$tt_1_stop = strtotime( $args['traveltime_1_stop'] );
-		$tt_2_start = strtotime( $args['traveltime_2_start'] );
-		$tt_2_stop = strtotime( $args['traveltime_2_stop'] );
-		$construct_start = strtotime( $args['construction_start'] );
-		$construct_stop = strtotime( $args['construction_stop'] );
-		$dismantl_start = strtotime( $args['dismantling_start'] );
-		$dismantl_stop = strtotime( $args['dismantling_stop'] );
-
-		$event_diff = abs( $event_end - $event_start );
-		$tt_1_diff = abs( $tt_1_stop - $tt_1_start) ;  
-		$tt_2_diff = abs( $tt_2_stop - $tt_2_start) ;
-		$construct_diff = abs( $construct_stop - $construct_start) ;
-		$dismantl_diff = abs( $dismantl_stop - $dismantl_start) ;
-
-		$time = gmdate('H:i:s',$event_diff + $tt_1_diff + $tt_2_diff + $construct_diff + $dismantl_diff);
-		return time_to_sec( $time );
 	}
 }
 
@@ -467,25 +448,31 @@ if(! function_exists('get_staff_worktime')){
 			foreach($times as $key => $time){
 				$t = $t + $time->total_worktime ;
 			}
-			echo "<pre>";
-			$param = get_time_interval( $t );
-			$date = '';
-			if( isset( $param[ 'D' ] ) ){
-				$date = $param[ 'D' ] .'days';
-			}
-			echo $date;
+			return seconds_to_time( $t );
 		}else{
 			return get_msg( 'no_event_assigned' );
 		}	
 	}
 }
-
-if( !function_exists( 'get_time_interval' )){	
-	function get_time_interval($seconds){
-	   $obj = new DateTime();
-	   $obj->setTimeStamp(time()+$seconds);
-	   return (array)$obj->diff(new DateTime());
-	}		
+function seconds_to_time($seconds_time){
+    // if ($seconds_time < 24 * 60 * 60) {
+    //     return gmdate('H:i:s', $seconds_time);
+    // } else {
+        $hours = floor($seconds_time / 3600);
+        $minutes = floor(($seconds_time - $hours * 3600) / 60);
+        $seconds = floor($seconds_time - ($hours * 3600) - ($minutes * 60));
+        $date = '';
+        if( $hours != 0 ){
+        	$date .= $hours.'hr';
+        }
+        if( $minutes != 0  ){
+        	$date .= $minutes.'min';
+        }
+        if( $seconds != 0  ){
+        	$date .= $seconds.'sec';
+        }
+        return $date;
+    // }
 }
 
 if( !function_exists('get_profile_picture') ){
