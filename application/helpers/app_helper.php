@@ -461,3 +461,10 @@ if( !function_exists('get_profile_picture') ){
 		}
 	}
 }
+
+if( !function_exists( 'get_first_letter' ) ){
+	function get_first_letter(){
+		$username = get_session('name');
+		echo strtoupper($username[0]);
+	}
+}
