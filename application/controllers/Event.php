@@ -186,7 +186,7 @@ class Event extends MY_Controller{
 		if( !is_admin() ){
 			do_redirect( 'dashboard' );
 		}
-		$this->data[ 'meta' ][ 'title' ] = get_msg( 'meta_event_edit' );
+		$this->data[ 'meta' ] = get_msg( 'meta_event_edit' );
 		$this->data[ 'page' ] = 'add_event_v';
 		$this->data[ 'current_menu' ] = 'event';
 		$this->data[ 'breadcrumb' ] = get_msg( 'breadcrumb_event_edit' );
