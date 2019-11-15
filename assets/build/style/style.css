@@ -36,6 +36,9 @@ img {
   max-width: 100%;
   height: auto; }
 
+a {
+  text-decoration: none; }
+
 .luft-menu-toggler {
   cursor: pointer; }
   .luft-menu-toggler span {
@@ -803,7 +806,11 @@ div#luft-main-content {
   .luft-table th {
     font-size: 17px;
     text-transform: capitalize;
-    color: #020441; }
+    color: #020441;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
     .luft-table th.luft-user-id, .luft-table th.luft-update-download {
       width: 100px; }
   .luft-table .luft-user-edit {

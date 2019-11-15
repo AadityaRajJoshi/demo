@@ -34,6 +34,11 @@
         font-size: 17px;
         text-transform: capitalize;
         color: $color_primary;
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        
         &.#{$prefix}-user-id,
         &.#{$prefix}-update-download {
             width: 100px;
