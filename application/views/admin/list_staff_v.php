@@ -12,7 +12,7 @@
         <tr>
             <td><?php echo $key+1; ?></td>
             <td><?php echo $staff->username; ?></td>
-            <td> <?php get_staff_worktime( $staff->id ) ?></td>
+            <td> <?php echo get_staff_worktime( $staff->id ) ?></td>
             <td class="luft-text-right">
                 <a href="<?php echo get_route('user_edit') . '/' . $staff->id; ?>" class="luft-user-edit" >
                     <i class="far fa-edit"></i>

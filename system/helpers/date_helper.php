@@ -418,7 +418,7 @@ if ( ! function_exists('unix_to_human'))
 		$r = date('Y', $time).'-'.date('m', $time).'-'.date('d', $time).' ';
 
 		if ($fmt === 'us')
-		{
+		{ 
 			$r .= date('h', $time).':'.date('i', $time);
 		}
 		else

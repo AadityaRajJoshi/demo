@@ -37,6 +37,7 @@ class Event extends MY_Controller{
 		$this->form_validation->set_rules('name', 'Event Name', 'required' );
 		$this->form_validation->set_rules('order_number', 'Ordernumber', 'required' );
 		$this->form_validation->set_rules('date', 'Date', 'required' );
+
 		$this->form_validation->set_rules('start_time', 'Event Start', 'required' );
 		$this->form_validation->set_rules('stop_time', 'Event Stop', 'required' );
 		$this->form_validation->set_rules('traveltime_1_start', 'First Traveltime Start', 'required' );
@@ -47,32 +48,46 @@ class Event extends MY_Controller{
 		$this->form_validation->set_rules('construction_stop', 'Construction Stop Time', 'required' );
 		$this->form_validation->set_rules('dismantling_start', 'Dismantle Start Time', 'required' );
 		$this->form_validation->set_rules('dismantling_stop', 'Dismantle Stop Time', 'required' );
+
 		$this->form_validation->set_rules('add_staff[]', 'Add Staff', 'required' );
 
-		$ci = $this;
-		$formated_date = function() use($ci){
-			$date = array(
-				'start_time',
-				'stop_time',
-				'traveltime_1_start',
-				'traveltime_1_stop',
-				'traveltime_2_start',
-				'traveltime_2_stop',
-				'construction_start',
-				'construction_stop',
-				'dismantling_start',
-				'dismantling_stop',
-			);
-			$data=array();
-			foreach ($date as $key ) {
-				$data[$key] = $ci->input->post('date'). ' ' .$ci->input->post($key);
-			} 	
-			return $data;
-		};
+		if($this->form_validation->run()){
 
-		if($this->form_validation->run()){		
-			$data = $formated_date();		
-			$data[ 'total_worktime' ] = $this->input->post('date') . ' ' . get_total_working_time( $formated_date() );
+			$input_time = array(
+				array(
+					'start_time',
+					'stop_time',
+				),
+				array(
+					'traveltime_1_start',
+					'traveltime_1_stop',
+				),
+				array(
+					'traveltime_2_start',
+					'traveltime_2_stop',
+				),
+				array(
+					'construction_start',
+					'construction_stop',
+				),
+				array(
+					'dismantling_start',
+					'dismantling_stop',
+				)
+			);
+			
+			$data=array(
+				'total_worktime' => 0
+			);
+
+			$event_date = $this->input->post('date');
+			foreach ($input_time as $pair ) {
+				$data['total_worktime'] += get_time_diff($pair);
+				foreach($pair as $key){
+					$data[$key] = $event_date . ' ' .$this->input->post($key);
+				}
+			} 
+
 			$optional_value = array(
 				'name',
 				'order_number',
@@ -96,8 +111,11 @@ class Event extends MY_Controller{
 					$data[ $value ] = $this->input->post( $value );
 				}
 			}
-			$this->load->model( 'package_staff_m' );
-			$this->load->model( 'staff_m' );
+
+
+			$this->load->model( 'events_package_staff_m' );
+			$this->load->model( 'events_staff_m' );
+
 			$where_event = $id ? array('id'=>$id) : false;
 			$where_staff = $id ? array('event_id'=>$id) : false;
 
@@ -111,7 +129,7 @@ class Event extends MY_Controller{
 					'user_id' => $value,
 					'event_id' => $event_id
 				);
-				$this->staff_m->save( $insert_staff, $where_staff );
+				$this->events_staff_m->save( $insert_staff, $where_staff );
 			}
 
 			if( $this->input->post( 'add_package_staff' ) ){
@@ -122,7 +140,7 @@ class Event extends MY_Controller{
 				);
 			}
 
-			$this->package_staff_m->save( $insert_package_staff, $where_staff );
+			$this->events_package_staff_m->save( $insert_package_staff, $where_staff );
 
 			if ($this->db->trans_status() === FALSE){
 			    $this->db->trans_rollback();
