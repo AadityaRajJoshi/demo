@@ -155,7 +155,6 @@ class Event extends MY_Controller{
 			    	do_redirect('event');
 			    }
 			}
-
 		}
 	}
 
@@ -174,10 +173,9 @@ class Event extends MY_Controller{
 
 	public function view(){
 		$this->data['common'] = true;
-		$this->data[ 'meta' ][ 'title' ] = get_msg('meta_event_detail');
+		$this->data[ 'meta' ] = get_msg('meta_event_detail');
 		$this->data['page'] = 'event_detail_v';
 		$this->data['current_menu'] = 'staff';
 		$this->load->view( 'dashboard_template_v', $this->data );
-
 	}
 }
