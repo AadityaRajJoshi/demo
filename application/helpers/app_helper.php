@@ -206,7 +206,6 @@ if(! function_exists('get_msg')){
 	        'e_link_map_placeholder' => 'Enter Link To Google Map',
 	        'e_other_info_placeholder' => 'Enter Other Information',
 	        'e_add_product_placeholder' => 'Add Other Products'
-
 		);
 
 		return $msg[ $key ];
