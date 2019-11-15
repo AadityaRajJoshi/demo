@@ -31,9 +31,8 @@
 					'placeholder' => get_msg('e_date_placeholder'),
 					'id' => 'date',
 					'required' => 'required',
-					'value' => get_value($event, 'date'), 
+					'value' => $date ? $date : date('Y-m-d'),
 					'type' => 'date',
-					'value' => date('Y-m-d')
 				) ); ?>
 			</div>
 			<div class="luft-form-row">
@@ -43,7 +42,8 @@
 					'name' => 'start_time',
 					'id' => 'start_time',
 					'required' => 'required',
-					'value' => get_value($event, 'start_time', '10:00'), 
+					// 'value' => get_value($event, 'start_time', '10:00'),
+					'value' => $time[ 'start_time' ] ? $time[ 'start_time' ] : '10:00' ,
 					'type' => 'time'
 				) ); ?>
 			</div>
@@ -54,7 +54,8 @@
 					'name' => 'stop_time',
 					'id' => 'stop_time',
 					'required' => 'required',
-					'value' => get_value($event, 'stop_time', '16:00'), 
+					// 'value' => get_value($event, 'stop_time', '16:00'),
+					'value' => $time[ 'stop_time' ],	
 					'type' => 'time'
 				) ); ?>
 			</div>
@@ -66,7 +67,8 @@
 					'id' => 'traveltime_1_start',
 					'required' => 'required',
 					'value' => '7:00',
-					'value' => get_value($event, 'traveltime_1_start', '7:00'), 
+					// 'value' => get_value($event, 'traveltime_1_start', '7:00'),
+					'value' => $time[ 'traveltime_1_start' ],
 					'type' => 'time'
 				) ); ?>
 			</div>
@@ -76,7 +78,8 @@
 				echo form_input( array(
 					'name' => 'traveltime_1_stop',
 					'id' => 'traveltime_1_stop',
-					'value' => get_value($event, 'traveltime_1_stop'), 
+					// 'value' => get_value($event, 'traveltime_1_stop'), 
+					'value' => $time[ 'traveltime_1_stop' ],
 					// 'required' => 'required',
 					'type' => 'time'
 				) ); ?>
@@ -87,7 +90,8 @@
 				echo form_input( array(
 					'name' => 'traveltime_2_start',
 					'id' => 'traveltime_2_start',
-					'value' => get_value($event, 'traveltime_2_start'), 
+					// 'value' => get_value($event, 'traveltime_2_start'),
+					'value' => $time[ 'traveltime_2_start' ], 
 					// 'required' => 'required',
 					'type' => 'time'
 				) ); ?>
@@ -98,7 +102,8 @@
 				echo form_input( array(
 					'name' => 'traveltime_2_stop',
 					'id' => 'traveltime_2_stop',
-					'value' => get_value($event, 'traveltime_2_stop'),
+					// 'value' => get_value($event, 'traveltime_2_stop'),
+					'value' => $time[ 'traveltime_2_stop' ], 
 					// 'required' => 'required',
 					'type' => 'time'
 				) ); ?>
@@ -109,7 +114,8 @@
 				echo form_input( array(
 					'name' => 'construction_start',
 					'id' => 'construction_start',
-					'value' => get_value($event, 'construction_start'),
+					// 'value' => get_value($event, 'construction_start'),
+					'value' => $time[ 'construction_start' ], 
 					// 'required' => 'required',
 					'type' => 'time'
 				) ); ?>
@@ -120,7 +126,8 @@
 				echo form_input( array(
 					'name' => 'construction_stop',
 					'id' => 'construction_stop',
-					'value' => get_value($event, 'construction_stop'),
+					// 'value' => get_value($event, 'construction_stop'),
+					'value' => $time[ 'construction_stop' ], 
 					// 'required' => 'required',
 					'type' => 'time'
 				) ); ?>
@@ -131,7 +138,8 @@
 				echo form_input( array(
 					'name' => 'dismantling_start',
 					'id' => 'dismantling_start',
-					'value' => get_value($event, 'dismantling_start'),
+					// 'value' => get_value($event, 'dismantling_start'),
+					'value' => $time[ 'dismantling_start' ], 
 					// 'required' => 'required',
 					'type' => 'time'
 				) ); ?>
@@ -142,7 +150,8 @@
 				echo form_input( array(
 					'name' => 'dismantling_stop',
 					'id' => 'dismantling_stop',
-					'value' => get_value($event, 'dismantling_stop'),
+					// 'value' => get_value($event, 'dismantling_stop'),
+					'value' => $time[ 'dismantling_stop' ], 
 					// 'required' => 'required',
 					'type' => 'time'
 				) ); ?>
