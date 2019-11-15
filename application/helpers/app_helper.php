@@ -417,17 +417,44 @@ if(! function_exists('print_error_msg')){
 		echo '</span>';
 	}
 }
-if(! function_exists('get_value')){	
-	function get_value($object, $key){
+if(! function_exists('get_staff_worktime')){
+	function get_staff_worktime( $user_id ){
+		$ci = get_instance();
+		$ci->load->model( 'event_m' );
+		// $ci->load->model( 'package_staff_m' );
+		$ci->load->model( 'staff_m' );
+		$staff_releated_event = $ci->staff_m->get( array( 'event_id' ), array( 'user_id' => $user_id ) );
+		if( !$staff_releated_event ){
+			echo "Not assigned on any event";
+		}else{
+			foreach ($staff_releated_event as $value) {
+				$worktime_event = $ci->event_m->get( array( 'total_worktime' ), array( 'id' => $value->event_id ) );
+				//var_export( $worktime_event );
+			}
+			echo "15hr";
+		}
+	}
+}			
+
+if(! function_exists('get_value')){
+	function get_value($object, $key, $default=false){
+
 		if(is_object($object)){
 			return $object->$key;
 		}else{
 			$ci = get_instance();
-			return $ci->input->post($key);
+			$post = $ci->input->post($key);
+			if($post){
+				return $post;
+			}else{
+				return $default;
+			}
+
 
 		}
 	}
 }
+
 
 if(! function_exists('get_staff_worktime')){
 	function get_staff_worktime( $user_id ){
@@ -452,3 +479,17 @@ if(! function_exists('get_staff_worktime')){
 		}	
 	}
 }			
+
+if( !function_exists('get_profile_picture') ){
+	function get_profile_picture(){
+		$ci = get_instance();
+		$image = $ci->config->item('profile_picture');
+		foreach(explode('|',$image['allowed_types']) as $ext){
+			$path = $image['upload_path'].get_session('id'). '.' . $ext;
+    		if(file_exists($path)){
+    			return $path;
+    		}
+		}
+	}
+}
+

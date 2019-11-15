@@ -7,17 +7,28 @@
 
     .#{$prefix}-profile-image {
         margin-bottom: 20px;
-        img {
-            max-width: 300px;
-        }
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 200px;
+        // img {
+        //     max-width: 300px;
+        // }
     }
 
     .#{$prefix}-form-row-file {
         margin-bottom: 20px;
+        display: flex;
+        align-items: center;
         label {
             text-decoration: underline;
             color: $color_primary;
             cursor: pointer;
+            + div {
+                font-size: 12px;
+                margin-left: 20px;
+            }
         }
     }
 

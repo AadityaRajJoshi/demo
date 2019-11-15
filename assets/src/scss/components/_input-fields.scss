@@ -58,6 +58,7 @@
  
     &.inline-2 {
         max-width: 87%;
+        justify-content: flex-start;
         @include media(mb) {
             max-width: 100%;
             flex: 100%;
@@ -71,9 +72,12 @@
             }
 
             &:last-child  {
-                flex: 0 0 40%;
+                flex: 0 0 28%;
+                padding-left: 25px;
+
                 @include media(mb) {
                     flex: 100%;
+                    padding-left: 0;
                 }
             }
         }

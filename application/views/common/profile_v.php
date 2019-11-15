@@ -3,7 +3,7 @@
 <?php if( 'own' == $mode ): ?>
 	<div class="luft-profile-image">
 		<?php if(isset($profile_picture)): ?>				
-			<img src="<?php echo $profile_picture; ?>" alt="profile picture" />
+			<img src="<?php echo $profile_picture; ?>" alt="profile picture" id="uploaded-image" accept=".png, .jpg, .jpeg" />
 		<?php endif; ?>
 	</div>
 	<div class="luft-form-row-file">

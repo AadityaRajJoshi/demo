@@ -7,10 +7,10 @@ class Event extends MY_Controller{
 		parent::__construct();
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+		$this->load->model( 'event_m' );
 	}
 
 	public function index(){
-		$this->load->model( 'event_m' );
 		$this->data[ 'meta' ][ 'title' ] = get_msg( 'event' );
 		$this->data[ 'page' ] = 'all_event_v';
 		$this->data[ 'events' ] = $this->event_m->get( '*' );
@@ -23,11 +23,11 @@ class Event extends MY_Controller{
 		if( !is_admin() ){
 			do_redirect( 'dashboard' );
 		}
-		$this->load->model( 'event_m' );
 		$this->data[ 'meta' ][ 'title' ] = get_msg( 'add_event' );
 		$this->data[ 'page' ] = 'add_event_v';
 		$this->data[ 'current_menu' ] = 'event';
 		$this->data[ 'breadcrumb' ] = array(get_msg( 'event' ),get_msg( 'add_event' ));
+		$this->data[ 'event' ] = false;
 		$this->data[ 'staffs' ] = get_staffs_dropdown();	
 		$this->save();
 		$this->load->view( 'dashboard_template_v', $this->data );
@@ -96,9 +96,11 @@ class Event extends MY_Controller{
 					$data[ $value ] = $this->input->post( $value );
 				}
 			}
-			$this->load->model( 'event_m' );
+
+
 			$this->load->model( 'events_package_staff_m' );
 			$this->load->model( 'events_staff_m' );
+
 			$where_event = $id ? array('id'=>$id) : false;
 			$where_staff = $id ? array('event_id'=>$id) : false;
 
@@ -106,6 +108,7 @@ class Event extends MY_Controller{
 			$event_id = $this->event_m->save( $data, $where_event );
 
 			$event_releated_staff = $this->input->post( 'add_staff' );
+			var_dump($event_releated_staff); die;
 			foreach ( $event_releated_staff as  $value) {
 				$insert_staff = array(
 					'user_id' => $value,
@@ -146,7 +149,6 @@ class Event extends MY_Controller{
 			die( get_msg( 'toggle_status_error' ) );
 		}
 		$id = $this->input->post( 'event_id' );
-		$this->load->model( 'event_m' );
 		$event_status = $this->event_m->get( array( 'finished' ), array( 'id' => $id ),1 );
 		$status = $event_status->finished;
 		$data = array(
