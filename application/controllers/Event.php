@@ -7,10 +7,10 @@ class Event extends MY_Controller{
 		parent::__construct();
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+		$this->load->model( 'event_m' );
 	}
 
 	public function index(){
-		$this->load->model( 'event_m' );
 		$this->data[ 'meta' ][ 'title' ] = get_msg( 'event' );
 		$this->data[ 'page' ] = 'all_event_v';
 		$this->data[ 'events' ] = $this->event_m->get( '*' );
@@ -23,7 +23,6 @@ class Event extends MY_Controller{
 		if( !is_admin() ){
 			do_redirect( 'dashboard' );
 		}
-		$this->load->model( 'event_m' );
 		$this->data[ 'meta' ][ 'title' ] = get_msg( 'add_event' );
 		$this->data[ 'page' ] = 'add_event_v';
 		$this->data[ 'current_menu' ] = 'event';
@@ -96,7 +95,6 @@ class Event extends MY_Controller{
 					$data[ $value ] = $this->input->post( $value );
 				}
 			}
-			$this->load->model( 'event_m' );
 			$this->load->model( 'package_staff_m' );
 			$this->load->model( 'staff_m' );
 			$where_event = $id ? array('id'=>$id) : false;
@@ -146,7 +144,6 @@ class Event extends MY_Controller{
 			die( get_msg( 'toggle_status_error' ) );
 		}
 		$id = $this->input->post( 'event_id' );
-		$this->load->model( 'event_m' );
 		$event_status = $this->event_m->get( array( 'finished' ), array( 'id' => $id ),1 );
 		$status = $event_status->finished;
 		$data = array(
