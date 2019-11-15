@@ -63,8 +63,9 @@
                             </li>
                             <?php }  ?>
                             
+                            
                             <li class="luft-user-image">
-                                <a href="#" onclick="return false;"><img src="assets/image/user.png" alt="user" /></a>
+                                <a href="#" onclick="return false;"><img src="" alt="user" /></a>
                                 <ul class="user-info-sub">
                                     <li class="luft-user-sub-link"><a href="<?php echo get_route('profile'); ?>"><i class="fas fa-cog"></i> My details </a></li>
                                     <li class="luft-user-sub-link logout-link "><a href="user/logout"><i class="fas fa-sign-out-alt"></i> Logout </a></li>
