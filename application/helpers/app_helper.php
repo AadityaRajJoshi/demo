@@ -386,6 +386,12 @@ if( !function_exists( 'time_to_sec' ) ){
 	}
 }
 
+if( !function_exists('get_time_diff') ){
+	function get_time_diff($t){
+		return abs(time_to_sec($t[0]) - time_to_sec($t[1]));
+	}
+}
+
 if(! function_exists('get_total_working_time')){	
 	function get_total_working_time( $args ){
 		$event_start = strtotime( $args['start_time'] );
