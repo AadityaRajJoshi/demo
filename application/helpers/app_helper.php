@@ -459,15 +459,28 @@ if(! function_exists('get_staff_worktime')){
 		if($times){
 			$t = 0;
 			foreach($times as $key => $time){
-				echo $time->total_worktime .' = '.gmdate( 'H:i', $time->total_worktime ).'<br>';
 				$t = $t + $time->total_worktime ;
 			}
-			return gmdate( '', $t );
+			echo "<pre>";
+			$param = get_time_interval( $t );
+			$date = '';
+			if( isset( $param[ 'D' ] ) ){
+				$date = $param[ 'D' ] .'days';
+			}
+			echo $date;
 		}else{
 			return get_msg( 'no_event_assigned' );
 		}	
 	}
-}			
+}
+
+if( !function_exists( 'get_time_interval' )){	
+	function get_time_interval($seconds){
+	   $obj = new DateTime();
+	   $obj->setTimeStamp(time()+$seconds);
+	   return (array)$obj->diff(new DateTime());
+	}		
+}
 
 if( !function_exists('get_profile_picture') ){
 	function get_profile_picture(){
