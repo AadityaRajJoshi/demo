@@ -27,6 +27,7 @@ class Event extends MY_Controller{
 		$this->data[ 'page' ] = 'add_event_v';
 		$this->data[ 'current_menu' ] = 'event';
 		$this->data[ 'breadcrumb' ] = array(get_msg( 'event' ),get_msg( 'add_event' ));
+		$this->data[ 'event' ] = false;
 		$this->data[ 'staffs' ] = get_staffs_dropdown();	
 		$this->save();
 		$this->load->view( 'dashboard_template_v', $this->data );
@@ -104,6 +105,7 @@ class Event extends MY_Controller{
 			$event_id = $this->event_m->save( $data, $where_event );
 
 			$event_releated_staff = $this->input->post( 'add_staff' );
+			var_dump($event_releated_staff); die;
 			foreach ( $event_releated_staff as  $value) {
 				$insert_staff = array(
 					'user_id' => $value,
