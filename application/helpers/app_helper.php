@@ -170,11 +170,39 @@ if(! function_exists('get_msg')){
 	        'event_StopTime_label' => 'Event StopTime',
 	        'event_traveltime_1_start_label' => 'TravelTime 1 Start',
 	        'event_traveltime_1_stop_label' => 'TravelTime 1 Stop',
-	        'event_traveltime_2_start_label' => 'TravelTime 2 Stop',
+	        'event_traveltime_2_start_label' => 'TravelTime 2 Start',
+	        'event_traveltime_2_stop_label' => 'TravelTime 2 Stop',
 	        'event_construction_start_label' => 'Construction Start',
 	        'event_construction_stop_label' => 'Construction Stop',
 	        'event_dismantling_start_label' => 'Dismantling Start',
-	        'event_dismantling_stop_label' => 'Dismantling Stop'
+	        'event_dismantling_stop_label' => 'Dismantling Stop',
+	        'event_addstaff_label' => 'Add Staff',
+	        'event_add_packingstaff_label' => 'Add Package Staff',
+	        'event_packing_time_label' => 'Packing Time',
+	        'event_address_label' => 'Address',
+	        'event_Contact_person_label' => 'Contact Person',
+	        'event_tele_person' => 'Telephone Contact Person',
+	        'event_distance_label' => 'Distance To Event',
+	        'event_car_wagon_label' => 'Type Of Car And Wagon',
+	        'event_link_map_label' => 'Link To Google Map',
+	        'event_other_info_label' => 'Other Information',
+	        'event_add_product_label' => 'Add Products',
+	        'event_electricty_label' => 'Electricity',
+	        'event_preview_btn' =>'Preview Event',
+	        'event_publish_btn' => 'Publish Event',
+
+	        'e_name_placeholder' => 'Enter Event Name',
+	        'e_order_placeholder' => 'Enetr Order Number',
+	        'e_date_placeholder' => 'Enter Date',
+	        'e_packing_time_placeholder' => 'Enter Packing Time',
+	        'e_address_placeholder' => 'Enter Address',
+	        'e_Contact_person_placeholder' => 'Your Contact Person',
+	        'e_distance_placeholder' => 'Distance To Event',
+	        'e_car_wagon_placeholder' => 'Enter Type Of Car And Wagon',
+	        'e_link_map_placeholder' => 'Enter Link To Google Map',
+	        'e_other_info_placeholder' => 'Enter Other Information',
+	        'e_add_product_placeholder' => 'Add Other Products'
+
 		);
 
 		return $msg[ $key ];
