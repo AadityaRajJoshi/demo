@@ -57,17 +57,19 @@
 
 <div class="evt-detail-sect">
     <div class="evt-detail-first">
-        <h4>EVENT ADRESS</h4>
-        <p>På gräsmattan Lea Rauch <br />
-        bredvid Hotell Norra Vättern</p>        
+        <h4>PRODUCTS</h4>
+        <p>Megatrack 15 M <br />
+        Hoppborg Safari <br />
+        Zorb med<br />
+        3 bollar</p>        
     </div>
     <div class="evt-contact-second">
-        <h4>EVENT ADRESS</h4>
-        <p>Lea Rauch</p>        
+        <h4>ELECTRICITY</h4>
+        <p>Finns ett uttag på hotellet/resturagen</p>        
     </div>
     <div class="evt-contact-third">
-        <h4>EVENT ADRESS</h4>
-        <p>Lea Rauch</p>        
+        <h4>OTHER INFORMATION</h4>
+        <p>Vi ska städa efter eventet</p>        
     </div>
 </div>
 
