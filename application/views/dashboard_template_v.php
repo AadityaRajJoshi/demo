@@ -67,9 +67,9 @@
                             <li class="luft-user-image">
                                 <a href="#" onclick="return false;"><?php if($profile_picture){?>
                                     <img src=" <?php echo get_profile_picture() ?> ">
-                                    <?php }else{
-                                        echo get_first_letter();
-                                    }  ?>  </a>
+                                    <?php }else{ ?>
+                                        <p class="profile-name"> <?php echo get_first_letter(); ?> </p>
+                                  <?php  }  ?>  </a>
                                 <ul class="user-info-sub">
                                     <li class="luft-user-sub-link"><a href="<?php echo get_route('profile'); ?>"><i class="fas fa-cog"></i> My details </a></li>
                                     <li class="luft-user-sub-link logout-link "><a href="user/logout"><i class="fas fa-sign-out-alt"></i> Logout </a></li>
