@@ -37,3 +37,21 @@ $prefix: luft;
     display: flex;
     align-items: center;    
 }
+
+.has-error {
+    border-color: red !important;
+    + span .select2-selection {
+        border-color: red !important;
+        &:after {
+            border: 1px solid;
+            border-color: red !important; 
+        }
+    }
+}
+
+.f-100{
+    flex: 0 0 100%;
+}
+.pr-5 {
+    padding-right: 50px;
+}

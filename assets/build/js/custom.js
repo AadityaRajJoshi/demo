@@ -11,7 +11,9 @@
             $('body').toggleClass('animate-menu-open')
         })
 
-        $('.custom-styled-select').select2();
+        $('.custom-styled-select').select2({
+            placeholder: "Add staff here",
+        });
 
         function readURL(input) {
 

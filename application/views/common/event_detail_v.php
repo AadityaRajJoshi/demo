@@ -62,9 +62,24 @@
             <p>Lea Rauch</p>        
         </div>
 
-        <div class="evt-contact-third">
+        <div class="evt-contact-third pr-5">
             <h4>Contact phone</h4>
             <p>0731-472122</p>        
+        </div>
+
+        <div class="evt-contact-forth pr-5">
+            <h4>DISTANCE TO EVENT</h4>
+            <p>2hrs</p>        
+        </div>
+
+        <div class="evt-contact-fifth pr-5">
+            <h4>TYPE OF CAR AND WAGON</h4>
+            <p>test text</p>        
+        </div>
+
+        <div class="evt-contact-six f-100">
+            <h4>GOOGLE MAP</h4>
+            <p><a target="_blank" href="https://www.google.com/maps/@27.6704274,85.3239595,3225m/data=!3m1!1e3">https://www.google.com/maps</a></p>        
         </div>
         
     </div>
