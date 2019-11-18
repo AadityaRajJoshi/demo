@@ -214,21 +214,12 @@ class Event extends MY_Controller{
 			$this->invalid_access();
 		}
 
+		if('post' == $this->input->method()){
+			$this->save( $id );
+			$event = $this->event_m->get('*', array('id'=>$id ), 1);
+		}
+
 		$event->date = get_date_from_datetime( $event->start_time, 'Y-m-d' );
-		// select event releted staff
-		$this->load->model( 'events_staff_m' );
-		$this->load->model( 'events_package_staff_m' );
-		$users = $this->events_staff_m->get( 'user_id', array( 'event_id'=> $id ) );
-		$package_user = $this->events_package_staff_m->get( 'user_id', array( 'event_id'=> $id ) );
-
-		$event_package_users = array_map(function($v){
-			return $v->user_id;
-		}, $package_user);
-
-		$event_users = array_map(function($v){
-			return $v->user_id;
-		}, $users);
-		
 		$arr = array(
 			'start_time',
 			'stop_time',
@@ -241,24 +232,24 @@ class Event extends MY_Controller{
 			'dismantling_start',
 			'dismantling_stop',
 		);
-		$time = array();
+
 		foreach ($arr as $value) {
 			$event->$value = get_time_from_datetime( $event->$value );
 		}
 
-		if('post' == $this->input->method()){
-			$update = $this->save( $id );
-			$event = $this->event_m->get('*', array('id'=>$id ), 1);
-		}
-
-		$event->date = get_date_from_datetime( $event->start_time, 'Y-m-d' );
-		// select event releted staff
 		$this->load->model( 'events_staff_m' );
 		$users = $this->events_staff_m->get( 'user_id', array( 'event_id'=> $id ) );
 		
 		$event_users = array_map(function($v){
 			return $v->user_id;
 		}, $users);
+
+		$this->load->model( 'events_package_staff_m' );
+		$package_user = $this->events_package_staff_m->get( 'user_id', array( 'event_id'=> $id ) );
+
+		$event_package_users = array_map(function($v){
+			return $v->user_id;
+		}, $package_user);
 
 		$this->data[ 'meta' ] = get_msg( 'meta_event_edit' );
 		$this->data[ 'page' ] = 'add_event_v';
