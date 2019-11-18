@@ -6,7 +6,7 @@
   		<th class="luft-event-city"><?php echo get_msg( 'city' ); ?> <img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
   		<th class="luft-event-time"><?php echo get_msg( 'eventime' ); ?> <img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
   		<th class="luft-working-time"><?php thead( 'total_worktime' ); ?></th>
-  		<th class="luft-event-status"><?php echo $finished ?></th>
+  		<th class="luft-event-status"><?php echo is_admin() ? get_msg('finished') : '' ?></th>
   	</thead>
   	<tbody>
 
@@ -21,7 +21,7 @@
 			</td>
 			<td><?php echo seconds_to_time( $event->total_worktime );?></td>
 			<td class="d-flex-center right-text">
-			<?php if( $finished) : ?>
+			<?php if( is_admin() ) : ?>
 					<a href="<?php echo get_route('event_edit').'/'. $event->id; ?>"  class="luft-user-edit" ><i class="far fa-edit"></i></a>
 				<div class="onoffswitch">
 					<input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="switch-<?php echo $event->id ?>"<?php echo $event->finished ? 'checked' : '' ?> data-id = <?php echo $event->id ?> >
