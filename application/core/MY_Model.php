@@ -32,7 +32,7 @@ class MY_Model extends CI_Model {
 
 	public function get( $column = '*', $where = false, $limit = false, $order = false ){
 	
-		if($this->data['order_by']){
+		if(!$order){
 			$order = $this->data['order'] ? $this->data['order_by'] . ' ' . $this->data['order'] : false;
 		}
 
