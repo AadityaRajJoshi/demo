@@ -47,40 +47,39 @@
 
     <div class="evt-info">
         <h4><b> PACKED BY </b> <span> Emma </span></h4>
-        <h4><b> PACKING TIME </b> <span> 1hr </span></h4>
+        <h4><b> PACKING TIME </b> <span><?php echo $event->packing_time ?> </span></h4>
     </div>
 
     <div class="evt-detail-sect evt-sect-border">
 
         <div class="evt-detail-first">
             <h4>EVENT ADRESS</h4>
-            <p>På gräsmattan Lea Rauch <br />
-            bredvid Hotell Norra Vättern</p>        
+            <p> <?php echo $event->address ?>  </p>        
         </div>
 
         <div class="evt-contact-second">
             <h4>CONTACTPERSON</h4>
-            <p>Lea Rauch</p>        
+            <p><?php echo $event->contact_person ?></p>        
         </div>
 
         <div class="evt-contact-third pr-5">
             <h4>Contact phone</h4>
-            <p>0731-472122</p>        
+            <p><?php echo $event->telephone_contact_person ?></p>        
         </div>
 
         <div class="evt-contact-forth pr-5">
             <h4>DISTANCE TO EVENT</h4>
-            <p>2hrs</p>        
+            <p><?php echo $event->distance_to_event ?></p>        
         </div>
 
         <div class="evt-contact-fifth pr-5">
             <h4>TYPE OF CAR AND WAGON</h4>
-            <p>test text</p>        
+            <p><?php echo $event->type_of_car ?></p>        
         </div>
 
         <div class="evt-contact-six f-100">
             <h4>GOOGLE MAP</h4>
-            <p><a target="_blank" href="https://www.google.com/maps/@27.6704274,85.3239595,3225m/data=!3m1!1e3">https://www.google.com/maps</a></p>        
+            <p><a target="_blank" href="https://www.google.com/maps/@27.6704274,85.3239595,3225m/data=!3m1!1e3"><?php echo $event->link_gmap ?></a></p>        
         </div>
         
     </div>
@@ -89,20 +88,17 @@
 
         <div class="evt-detail-first">
             <h4>PRODUCTS</h4>
-            <p>Megatrack 15 M <br />
-            Hoppborg Safari <br />
-            Zorb med<br />
-            3 bollar</p>        
+            <p><?php echo $event->add_products ?></p>        
         </div>
 
         <div class="evt-contact-second">
             <h4>ELECTRICITY</h4>
-            <p>Finns ett uttag på hotellet/resturagen</p>        
+            <p><?php echo $event->electricity ?></p>        
         </div>
 
         <div class="evt-contact-third">
             <h4>OTHER INFORMATION</h4>
-            <p>Vi ska städa efter eventet</p>        
+            <p><?php echo $event->other_information ?></p>        
         </div>
         
     </div>

@@ -169,6 +169,10 @@ class Event extends MY_Controller{
 		$this->data['event'] = $query;
 		$this->load->view( 'dashboard_template_v', $this->data );
 
+		// $this->load->model( 'events_package_staff_m' );
+		// $user = $this->events_package_staff_m->get( 'user_id', array('event_id' => $id) );
+		// var_dump($user) ;
+
 	}
 
 	public function add(){
