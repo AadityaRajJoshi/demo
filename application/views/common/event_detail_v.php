@@ -3,7 +3,7 @@
     <div class="luft-evt-header">
         <div class="evt-name">
 
-            <h2>Familjedag</h2>
+            <h2><?php echo $event->name ?></h2>
             <div class="evt-info">
                 <h4><b>DATE </b> <span><?php echo get_date_from_datetime($event->start_time, 'Y-m-d')  ?></span></h4>
                 <h4><b>CITY </b> <span> ktm </span></h4>
