@@ -11,10 +11,17 @@ class Event extends MY_Controller{
 	}
 
 	public function index(){
+		if( is_staff() ){
+			$this->load->model( 'user_m' );
+			$this->data[ 'events' ] = $this->user_m->get_events( get_session( 'id' ), array( 'user_id'=> get_session( 'id' ) ) );
+		}else{
+			$this->data[ 'events' ] = $this->event_m->get( '*' );
+		}
 		$this->data[ 'meta' ][ 'title' ] = get_msg( 'event' );
+		$this->data[ 'finished' ] = is_admin() ? get_msg( 'finished' ) : false;
 		$this->data[ 'page' ] = 'all_event_v';
-		$this->data[ 'events' ] = $this->event_m->get( '*' );
 		$this->data[ 'current_menu' ] = 'event';
+		$this->data[ 'common' ] = true;
 		$this->data[ 'breadcrumb' ] = array( get_msg( 'event' ),get_msg( 'all_event' ) );
 		$this->load->view('dashboard_template_v', $this->data);
 	}
