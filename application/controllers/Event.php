@@ -100,41 +100,41 @@ class Event extends MY_Controller{
 				}
 			}
 
-
 			$this->load->model( 'events_package_staff_m' );
 			$this->load->model( 'events_staff_m' );
 
-			$where_event = $id ? array('id'=>$id) : false;
-			$where_staff = $id ? array('event_id'=>$id) : false;
-
 			$this->db->trans_start();
-			$event_id = $this->event_m->save( $data, $where_event );
+			if( $id ){
+				$this->events_staff_m->delete( array( 'event_id' => $id ) );
+				$this->events_package_staff_m->delete( array('event_id' => $id) );
+				$this->event_m->save( $data, array('id'=>$id) );
+			}else{
+				$id = $this->event_m->save( $data );
+			}
 
 			$event_releated_staff = $this->input->post( 'add_staff' );
 
-			foreach ( $event_releated_staff as  $value) {
+			foreach( $event_releated_staff as  $value){
 				$insert_staff = array(
 					'user_id' => $value,
-					'event_id' => $event_id
+					'event_id' => $id
 				);
-				$this->events_staff_m->save( $insert_staff, $where_staff );
+				$this->events_staff_m->save( $insert_staff );
 			}
 
 			if( $this->input->post( 'add_package_staff' ) ){
 				$event_releated_package_staff = $this->input->post( 'add_package_staff' );
 				$insert_package_staff = array(
 					'user_id' => $this->input->post( 'add_package_staff' ),
-					'event_id' => $event_id
+					'event_id' => $id
 				);
 			}
 
-			$this->events_package_staff_m->save( $insert_package_staff, $where_staff );
+			$this->events_package_staff_m->save( $insert_package_staff );
 
-			if ($this->db->trans_status() === FALSE){
-			    $this->db->trans_rollback();
+			if (!$this->db->trans_complete()){
 			   	$this->session->set_flashdata( 'error', get_msg( 'event_rollback_error' ) );
 			}else{
-			    $this->db->trans_commit();
 			    if( $id ){
 			    	$this->session->set_flashdata( 'success', get_msg( 'event_update' ) );
 			    	do_redirect('event');
@@ -186,6 +186,7 @@ class Event extends MY_Controller{
 		$this->data[ 'time' ] = false;
 		$this->data[ 'breadcrumb' ] = array(get_msg( 'event' ),get_msg( 'add_event' ));
 		$this->data[ 'event' ] = false;
+		$this->data[ 'event_users' ] = [];
 		$this->data[ 'staffs' ] = get_staffs_dropdown();	
 		$this->save();
 		$this->load->view( 'dashboard_template_v', $this->data );
@@ -205,6 +206,14 @@ class Event extends MY_Controller{
 			do_redirect('dashboard');
 		}
 		$event->date = get_date_from_datetime( $event->start_time, 'Y-m-d' );
+		// select event releted staff
+		$this->load->model( 'events_staff_m' );
+		$users = $this->events_staff_m->get( 'user_id', array( 'event_id'=> $id ) );
+		
+		$event_users = array_map(function($v){
+			return $v->user_id;
+		}, $users);
+		
 		$arr = array(
 			'start_time',
 			'stop_time',
@@ -222,11 +231,16 @@ class Event extends MY_Controller{
 			$event->$value = get_time_from_datetime( $event->$value );
 		}
 
+		if('post' == $this->input->method()){
+			$update = $this->save( $id );
+		}
+
 		$this->data[ 'meta' ] = get_msg( 'meta_event_edit' );
 		$this->data[ 'page' ] = 'add_event_v';
 		$this->data[ 'current_menu' ] = 'event';
 		$this->data[ 'breadcrumb' ] = get_msg( 'breadcrumb_event_edit' );
 		$this->data[ 'event' ] = $event;
+		$this->data[ 'event_users' ] = $event_users;
 		$this->data[ 'staffs' ] = get_staffs_dropdown();
 		$this->load->view( 'dashboard_template_v', $this->data );
 		
