@@ -159,13 +159,16 @@ class Event extends MY_Controller{
 		$this->event_m->save( $data, array( 'id' => $id ) );
 	}
 
-	public function view(){
+	public function view( $id ){
 		$this->data['common'] = true;
 		$this->data[ 'meta' ] = get_msg('meta_event_detail');
 		$this->data['page'] = 'event_detail_v';
 		$this->data[ 'staffs' ] = get_staffs_dropdown();
 		$this->data['current_menu'] = 'staff';
+		$query = $this->event_m->get( '*', array( 'id'=>$id ), 1 );
+		$this->data['event'] = $query;
 		$this->load->view( 'dashboard_template_v', $this->data );
+
 	}
 
 	public function add(){

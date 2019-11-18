@@ -9,10 +9,11 @@
   		<th class="luft-event-status"><?php echo get_msg( 'finished' ) ?></th>
   	</thead>
   	<tbody>
+
 		<?php foreach ($events as $event) { ?>
 		<tr>
 			<td><?php echo $event->order_number ?></td>
-			<td><?php echo $event->name ?></td>
+			<td><a href="<?php echo get_route('event_detail')?><?php echo $event->id?> "><?php echo $event->name ?></a></td>
 			<td><?php echo  get_date_from_datetime( $event->start_time, 'd M Y' ); ?></td>
 			<td>Kathmandu</td>
 			<td>
