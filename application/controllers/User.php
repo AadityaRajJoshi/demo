@@ -91,11 +91,6 @@ class User extends MY_Controller{
 		$this->edit(get_session('id'), 'own');
 	}
 
-	public function invalid_access(){
-		$this->session->set_flashdata( 'error', get_msg( 'access' ) );
-	    do_redirect('dashboard');
-	}
-
 	public function edit($id=null, $mode='other'){ 
 
         if((is_staff() && get_session('id') != $id) ||  $id <= 0 ){
