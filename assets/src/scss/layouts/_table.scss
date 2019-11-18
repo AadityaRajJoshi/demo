@@ -29,6 +29,9 @@
       color: $color_primary;
       text-transform: capitalize;
       font-size: 14px;
+      a {
+          color: $color_primary;
+      }
     }
   
     th {

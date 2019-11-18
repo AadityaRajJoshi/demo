@@ -87,6 +87,7 @@ class User extends MY_Controller{
 	}
 
 	public function profile(){
+
 		$this->edit(get_session('id'), 'own');
 	}
 
@@ -107,7 +108,7 @@ class User extends MY_Controller{
         if(! $user){
         	$this->invalid_access();
         }
-        
+
         $id = $this->input->post('id');
         if($id){
         	if($id<=0)
@@ -200,6 +201,7 @@ class User extends MY_Controller{
 					$this->load->library('upload', $config);
 					if($this->upload->do_upload('userfile')){
 						$upload_data = $this->upload->data();
+				
 						foreach(explode('|',$config['allowed_types']) as $ext){
 							$file_name = $id . '.' . $ext;
 							$path = $config['upload_path'] . $file_name;
