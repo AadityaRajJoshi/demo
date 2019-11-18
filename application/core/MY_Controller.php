@@ -3,14 +3,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class MY_Controller extends CI_Controller{
 
-	protected $data = array(
+	public $data = array(
 		'meta' => array(
 			'title' => '',
 			'keyword' => '',
 			'description' => ''
 		),
 		'error' => array(),
-		'success' => array()
+		'success' => array(),
+		'order' => 'desc',
+		'order_by' => 'id'
 	);
 
 	public function __construct(){
@@ -25,6 +27,13 @@ class MY_Controller extends CI_Controller{
 	    }
 
 	    $this->data['profile_picture'] = get_profile_picture();
+
+	    $order_by = $this->uri->segment(3, 0);
+	    if($order_by){
+	    	$order = strtolower($this->uri->segment(4, 0));
+	    	$this->data['order_by'] = $order_by;
+	    	$this->data['order'] = ('asc' == $order || 'desc' == $order) ? $order : false;
+	    }
 
 	    $this->data['menu'] = get_menu();
 	}
