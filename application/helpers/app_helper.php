@@ -134,6 +134,7 @@ if(! function_exists('get_msg')){
 			'breadcrumb_add_staff' => array('Staff','Add Staff'),
 			'no_event_assigned' => 'Not assigned on any event',
 			'breadcrumb_event_edit' => array('Event', 'Edit Event'),
+			'breadcrumb_event_preview' => array('MY Events', 'Preview'),
  
 			'meta_login' => array(
 				'title' => 'Login',

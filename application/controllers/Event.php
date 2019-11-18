@@ -169,12 +169,17 @@ class Event extends MY_Controller{
 	public function view( $id ){
 		$this->data['common'] = true;
 		$this->data[ 'meta' ] = get_msg('meta_event_detail');
+		$this->data['breadcrumb'] = get_msg('breadcrumb_event_preview');
 		$this->data['page'] = 'event_detail_v';
 		$this->data[ 'staffs' ] = get_staffs_dropdown();
 		$this->data['current_menu'] = 'staff';
 		$query = $this->event_m->get( '*', array( 'id'=>$id ), 1 );
 		$this->data['event'] = $query;
 		$this->load->view( 'dashboard_template_v', $this->data );
+
+		// $this->load->model( 'events_package_staff_m' );
+		// $user = $this->events_package_staff_m->get( 'user_id', array('event_id' => $id) );
+		// var_dump($user) ;
 
 	}
 
