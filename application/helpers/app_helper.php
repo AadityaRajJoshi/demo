@@ -99,7 +99,7 @@ if(! function_exists('get_msg')){
 			'city'			=> 'City',
 			'eventime'		=> 'Eventtime',
 			'finished'		=> 'Finished',
-			'ordernumber'	=> 'Ordernumber',
+			'order_number'	=> 'Ordernumber',
 			'total_workingtime' => 'Total Workingtime',
 			'event_rollback_error' => 'Error! Cannot Insert Event',
 
@@ -574,3 +574,17 @@ function _parse_form_attributes($attributes, $default){
 	return $att;
 }
 
+function thead($key, $col_name=false){
+	$ci = get_instance();
+	$col_name = !$col_name ? $key : $col_name;
+	$url = $ci->router->fetch_class() . '/index/'.$col_name.'/';
+	if($ci->data['order']){
+		$url .= 'asc' == $ci->data['order'] ? 'desc' : 'asc';
+	}
+
+	echo sprintf('<a href="%s">%s<img src="%s" alt="filter" class="filter-img" /></a>',
+		$url,
+		get_msg($key),
+		'assets/image/filter.png'
+	);
+}
