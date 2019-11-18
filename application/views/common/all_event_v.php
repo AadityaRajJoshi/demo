@@ -13,7 +13,13 @@
 		<?php foreach ($events as $event) { ?>
 		<tr>
 			<td><?php echo $event->order_number ?></td>
-			<td><a href="<?php echo get_route('event_detail'). $event->id?>"><?php echo $event->name ?></a></td>
+			<td>
+				<?php if( is_admin() ): ?>
+				<a href="<?php echo get_route('event_detail'). $event->id?>"><?php echo $event->name ?></a>
+				<?php else:
+					echo $event->name;
+				endif; ?>				
+			</td>
 			<td><?php echo  get_date_from_datetime( $event->start_time, 'd M Y' ); ?></td>
 			<td>Kathmandu</td>
 			<td>
