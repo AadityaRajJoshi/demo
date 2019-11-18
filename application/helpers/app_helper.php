@@ -100,7 +100,7 @@ if(! function_exists('get_msg')){
 			'eventime'		=> 'Eventtime',
 			'finished'		=> 'Finished',
 			'order_number'	=> 'Ordernumber',
-			'total_workingtime' => 'Total Workingtime',
+			'total_worktime' => 'Total Workingtime',
 			'event_rollback_error' => 'Error! Cannot Insert Event',
 
 			'label_name'         => 'Name',

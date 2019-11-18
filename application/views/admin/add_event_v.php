@@ -1,4 +1,4 @@
-<?php echo form_open( 'event/add' ); ?>
+<?php echo form_open( '' ); ?>
 	<div class="luft-form-wrapper">
 		<div class="luft-form-row">
 			<?php echo form_label( get_msg('event_name_label'), 'name' ); 
@@ -19,7 +19,7 @@
 					'placeholder' => get_msg('e_order_placeholder'),
 					'id' => 'order_number',
 					'value' => get_value($event, 'order_number'),
-					'required' => 'required',
+					// 'required' => 'required',
 					'type' => 'number'
 				) ); ?>
 			</div>
@@ -149,13 +149,13 @@
 
 		<div class="luft-form-row full-width-row">
 			<?php
-			echo form_label( get_msg('event_addstaff_label'), 'add_staff' );
-			echo form_multiselect( array(
-				'name' => 'add_staff[]',
-				'id' => 'add_staff',
-				'options' => $staffs,
-				'class' => 'custom-styled-select',
-			) ); ?>
+				echo form_label( get_msg('event_addstaff_label'), 'add_staff' );
+				echo form_multiselect( array(
+					'name' => 'add_staff[]',
+					'id' => 'add_staff',
+					'class' => 'custom-styled-select',
+				),  $staffs, $event_users ); 
+			?>
 		</div>
 
 		<div class="luft-inline-input inline-2">
@@ -176,7 +176,6 @@
 					'placeholder' => get_msg('e_packing_time_placeholder'),
 					'value' => get_value($event, 'packing_time'),
 					'id' => 'packing_time'
-					// 'required' => 'required'
 				) ); ?>
 			</div>
 		</div>
@@ -203,7 +202,6 @@
 						'placeholder' => get_msg('e_Contact_person_placeholder'),
 						'value' => get_value($event, 'contact_person'),
 						'id' => 'contact_person'
-						// 'required' => 'required'
 					) ); ?>
 				</div>
 
@@ -215,7 +213,6 @@
 						'placeholder' => get_msg('e_Contact_person_placeholder'),
 						'id' => 'telephone_contact_person',
 						'value' => get_value($event, 'telephone_contact_person'),
-						// 'required' => 'required'
 					) ); ?>
 				</div>
 
@@ -227,7 +224,6 @@
 						'placeholder' => get_msg('e_distance_placeholder'),
 						'id' => 'distance_to_event',
 						'value' => get_value($event, 'distance_to_event'),
-						// 'required' => 'required'
 					) ); ?>
 				</div>
 
@@ -238,7 +234,6 @@
 						'placeholder' => get_msg('e_car_wagon_placeholder'),
 						'value' => get_value($event, 'type_of_car'),
 						'id' => 'type_of_car'
-						// 'required' => 'required'
 					) ); ?>
 				</div>
 				
@@ -249,7 +244,6 @@
 						'placeholder' => get_msg('e_link_map_placeholder'),
 						'value' => get_value($event, 'link_gmap'),
 						'id' => 'link_gmap'
-						// 'required' => 'required'
 					) ); ?>
 				</div>
 			</div>	
