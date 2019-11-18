@@ -6,8 +6,8 @@
 				'name' => 'name',
 				'placeholder' => get_msg('e_name_placeholder'),
 				'id' => 'name',
-				'value' => get_value($event, 'name')
-				// 'required' => 'required'
+				'value' => get_value($event, 'name'),
+				'required' => 'required'
 			) ); ?>
 		</div>
 		<div class="luft-inline-input inline-4">
@@ -19,7 +19,7 @@
 					'placeholder' => get_msg('e_order_placeholder'),
 					'id' => 'order_number',
 					'value' => get_value($event, 'order_number'),
-					// 'required' => 'required',
+					'required' => 'required',
 					'type' => 'number'
 				) ); ?>
 			</div>
@@ -31,7 +31,7 @@
 					'placeholder' => get_msg('e_date_placeholder'),
 					'id' => 'date',
 					'required' => 'required',
-					'value' => get_value($event, 'date'),
+					'value' => get_value($event, 'date', date( 'Y-m-d' )),
 					'type' => 'date',
 				) ); ?>
 			</div>
@@ -64,7 +64,7 @@
 					'name' => 'traveltime_1_start',
 					'id' => 'traveltime_1_start',
 					'required' => 'required',
-					'value' => get_value($event, 'traveltime_1_start', '7:00'),
+					'value' => get_value($event, 'traveltime_1_start', '07:00'),
 					'type' => 'time'
 				) ); ?>
 			</div>
@@ -74,8 +74,8 @@
 				echo form_input( array(
 					'name' => 'traveltime_1_stop',
 					'id' => 'traveltime_1_stop',
-					'value' => get_value($event, 'traveltime_1_stop'), 
-					// 'required' => 'required',
+					'value' => get_value($event, 'traveltime_1_stop', '08:00'), 
+					'required' => 'required',
 					'type' => 'time'
 				) ); ?>
 			</div>
@@ -85,7 +85,7 @@
 				echo form_input( array(
 					'name' => 'traveltime_2_start',
 					'id' => 'traveltime_2_start',
-					'value' => get_value($event, 'traveltime_2_start'),
+					'value' => get_value($event, 'traveltime_2_start', '18:00'),
 					// 'required' => 'required',
 					'type' => 'time'
 				) ); ?>
@@ -96,8 +96,8 @@
 				echo form_input( array(
 					'name' => 'traveltime_2_stop',
 					'id' => 'traveltime_2_stop',
-					'value' => get_value($event, 'traveltime_2_stop'),
-					// 'required' => 'required',
+					'value' => get_value($event, 'traveltime_2_stop', '19:00'),
+					'required' => 'required',
 					'type' => 'time'
 				) ); ?>
 			</div>
@@ -107,8 +107,8 @@
 				echo form_input( array(
 					'name' => 'construction_start',
 					'id' => 'construction_start',
-					'value' => get_value($event, 'construction_start'),
-					// 'required' => 'required',
+					'value' => get_value($event, 'construction_start', '08:00'),
+					'required' => 'required',
 					'type' => 'time'
 				) ); ?>
 			</div>
@@ -118,8 +118,8 @@
 				echo form_input( array(
 					'name' => 'construction_stop',
 					'id' => 'construction_stop',
-					'value' => get_value($event, 'construction_stop'),
-					// 'required' => 'required',
+					'value' => get_value($event, 'construction_stop', '10:00'),
+					'required' => 'required',
 					'type' => 'time'
 				) ); ?>
 			</div>
@@ -129,8 +129,8 @@
 				echo form_input( array(
 					'name' => 'dismantling_start',
 					'id' => 'dismantling_start',
-					'value' => get_value($event, 'dismantling_start'),
-					// 'required' => 'required',
+					'value' => get_value($event, 'dismantling_start', '16:00'),
+					'required' => 'required',
 					'type' => 'time'
 				) ); ?>
 			</div>
@@ -140,8 +140,8 @@
 				echo form_input( array(
 					'name' => 'dismantling_stop',
 					'id' => 'dismantling_stop',
-					'value' => get_value($event, 'dismantling_stop'),
-					// 'required' => 'required',
+					'value' => get_value($event, 'dismantling_stop', '18:00'),
+					'required' => 'required',
 					'type' => 'time'
 				) ); ?>
 			</div>

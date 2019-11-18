@@ -29,7 +29,7 @@
         $("#profile-image").change(function () {
             readURL(this);
         });
-
+        
         //status yes no toggle script
         $(document).on('click', '.onoffswitch-checkbox', function () {
             var id = $(this).data('id');
