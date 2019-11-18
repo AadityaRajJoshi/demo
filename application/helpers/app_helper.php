@@ -63,6 +63,10 @@ if(! function_exists('get_route')){
 			case 'event_toggle_status':
 				$path = 'event/toggle_status';
 			break;
+
+			case 'event_detail':
+				$path = 'event/view/';
+			break;	
 		}
 		return $path;
 	}
@@ -587,4 +591,8 @@ function thead($key, $col_name=false){
 		get_msg($key),
 		'assets/image/filter.png'
 	);
+}
+
+function get_start_end_time( $starttime, $endtime ){
+	 return get_time_from_datetime( $starttime ) . ' - ' . get_time_from_datetime(  $endtime );  
 }
