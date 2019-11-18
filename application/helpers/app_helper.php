@@ -106,6 +106,7 @@ if(! function_exists('get_msg')){
 			'order_number'	=> 'Ordernumber',
 			'total_worktime' => 'Total Workingtime',
 			'event_rollback_error' => 'Error! Cannot Insert Event',
+			'more_event'	=> 'More',
 
 			'label_name'         => 'Name',
 			'label_email'        => 'Email',

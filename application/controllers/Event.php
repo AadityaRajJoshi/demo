@@ -216,8 +216,14 @@ class Event extends MY_Controller{
 		$event->date = get_date_from_datetime( $event->start_time, 'Y-m-d' );
 		// select event releted staff
 		$this->load->model( 'events_staff_m' );
+		$this->load->model( 'events_package_staff_m' );
 		$users = $this->events_staff_m->get( 'user_id', array( 'event_id'=> $id ) );
-		
+		$package_user = $this->events_package_staff_m->get( 'user_id', array( 'event_id'=> $id ) );
+
+		$event_package_users = array_map(function($v){
+			return $v->user_id;
+		}, $package_user);
+
 		$event_users = array_map(function($v){
 			return $v->user_id;
 		}, $users);
@@ -248,6 +254,7 @@ class Event extends MY_Controller{
 		$this->data[ 'current_menu' ] = 'event';
 		$this->data[ 'breadcrumb' ] = get_msg( 'breadcrumb_event_edit' );
 		$this->data[ 'event' ] = $event;
+		$this->data[ 'event_package_users' ] = $event_package_users[0];
 		$this->data[ 'event_users' ] = $event_users;
 		$this->data[ 'staffs' ] = get_staffs_dropdown();
 		$this->load->view( 'dashboard_template_v', $this->data );
