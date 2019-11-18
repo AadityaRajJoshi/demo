@@ -466,16 +466,10 @@ if(! function_exists('print_error_msg')){
 
 if(! function_exists('get_value')){
 	function get_value($object, $key, $default=false){
-
 		if(is_object($object)){
 			return $object->$key;
 		}else{
-			$post = set_value($key);
-			if($post){
-				return $post;
-			}else{
-				return $default;
-			}
+			return set_value($key, $default);
 		}
 	}
 }
@@ -533,8 +527,50 @@ if( !function_exists('get_profile_picture') ){
 }
 
 if( !function_exists( 'get_first_letter' ) ){
-	function get_first_letter(){
-		$username = get_session('name');
+	function get_first_letter($str=false){
+		$username = $str ? $str : get_session('name');
 		return strtoupper($username[0]);
 	}
 }
+
+# override default function to set error class if field is invalid
+function _parse_form_attributes($attributes, $default){
+
+	if (is_array($attributes)){
+
+		if(isset($attributes['name']) && form_error($attributes['name'])){
+			$cls = 'has-error';
+			if(isset($attributes['class'])){
+				$cls .= ' ' . $attributes['class'];
+			}
+			$attributes['class'] = $cls;		
+		}
+
+		foreach ($default as $key => $val){
+			if (isset($attributes[$key])){
+				$default[$key] = $attributes[$key];
+				unset($attributes[$key]);
+			}
+		}
+
+		if (count($attributes) > 0){
+			$default = array_merge($default, $attributes);
+		}
+	}
+
+	$att = '';
+
+	foreach ($default as $key => $val){
+		if ($key === 'value'){
+			$val = html_escape($val);
+		}
+		elseif ($key === 'name' && ! strlen($default['name'])){
+			continue;
+		}
+
+		$att .= $key.'="'.$val.'" ';
+	}
+
+	return $att;
+}
+

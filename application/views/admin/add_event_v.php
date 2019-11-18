@@ -151,7 +151,7 @@
 			<?php
 			echo form_label( get_msg('event_addstaff_label'), 'add_staff' );
 			echo form_multiselect( array(
-				'name' => 'add_staff',
+				'name' => 'add_staff[]',
 				'id' => 'add_staff',
 				'options' => $staffs,
 				'class' => 'custom-styled-select',
@@ -175,7 +175,7 @@
 					'name' => 'packing_time',
 					'placeholder' => get_msg('e_packing_time_placeholder'),
 					'value' => get_value($event, 'packing_time'),
-					'id' => 'Packing_time'
+					'id' => 'packing_time'
 					// 'required' => 'required'
 				) ); ?>
 			</div>
