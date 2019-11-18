@@ -316,6 +316,7 @@ if( !function_exists( 'get_menu' ) ){
 		 			'icon' => 'fas fa-home'
 		 		),
 		 		'event' => array(
+		 			'route' => 'event',
 		 			'title' => get_msg( 'my_event' ),
 		 			'icon' => 'far fa-calendar-times'
 		 		),
