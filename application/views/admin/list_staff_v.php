@@ -1,8 +1,8 @@
 <table class="luft-table">
     <thead>
         <tr>
-          <th class="luft-user-id"><?php echo get_msg('id') ?> <img src='assets/image/filter.png' alt="filter" class="filter-img" /> </th>
-          <th><?php echo get_msg('label_name') ?> <img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
+          <th class="luft-user-id"><?php thead('id'); ?>  </th>
+          <th><?php thead('label_name', 'username'); ?></th>
           <th><?php echo get_msg( 'work_time' ) ?></th>
           <th class="luft-update-download"></th>
         </tr>
