@@ -289,7 +289,8 @@
 		</div>
 		<?php
 			echo form_button( 'preview-event', get_msg('event_preview_btn') );
-			echo form_submit( 'publish-event', get_msg('event_publish_btn') ); ?>
+			echo form_submit( 'publish-event', get_msg('event_publish_btn') ); 
+		?>
 	</div>
 	<?php
 	echo form_close( '' );
