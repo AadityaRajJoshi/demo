@@ -197,7 +197,7 @@ class Event extends MY_Controller{
 		if(!$event){
 			do_redirect('dashboard');
 		}
-		$date = get_date_from_datetime( $event->start_time, 'Y-m-d' );
+		$event->date = get_date_from_datetime( $event->start_time, 'Y-m-d' );
 		$arr = array(
 			'start_time',
 			'stop_time',
@@ -212,10 +212,9 @@ class Event extends MY_Controller{
 		);
 		$time = array();
 		foreach ($arr as $value) {
-			$time[ $value ] = get_time_from_datetime( $event->$value );
+			$event->$value = get_time_from_datetime( $event->$value );
 		}
-		$this->data[ 'time' ] = $time;
-		$this->data[ 'date' ] = $date;
+
 		$this->data[ 'meta' ] = get_msg( 'meta_event_edit' );
 		$this->data[ 'page' ] = 'add_event_v';
 		$this->data[ 'current_menu' ] = 'event';
