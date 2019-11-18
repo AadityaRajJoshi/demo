@@ -38,6 +38,11 @@ class MY_Controller extends CI_Controller{
 	    $this->data['menu'] = get_menu();
 	}
 
+	public function invalid_access(){
+		$this->session->set_flashdata( 'error', get_msg( 'access' ) );
+	    do_redirect('dashboard');
+	}
+
 	public function sendMail(){
 		$config = array(
 			'protocol' => 'smtp',

@@ -114,8 +114,10 @@ class Event extends MY_Controller{
 				$this->events_staff_m->delete( array( 'event_id' => $id ) );
 				$this->events_package_staff_m->delete( array('event_id' => $id) );
 				$this->event_m->save( $data, array('id'=>$id) );
+				$is_update = true;
 			}else{
 				$id = $this->event_m->save( $data );
+				$is_update = false;
 			}
 
 			$event_releated_staff = $this->input->post( 'add_staff' );
@@ -140,10 +142,10 @@ class Event extends MY_Controller{
 
 			if (!$this->db->trans_complete()){
 			   	$this->session->set_flashdata( 'error', get_msg( 'event_rollback_error' ) );
+			   	do_redirect('event');
 			}else{
-			    if( $id ){
-			    	$this->session->set_flashdata( 'success', get_msg( 'event_update' ) );
-			    	do_redirect('event');
+			    if( $is_update ){
+			    	$this->data['success'][] = get_msg( 'event_update' );
 			    }else{
 			    	$this->session->set_flashdata( 'success', get_msg( 'event_added' ) );
 			    	do_redirect('event');
@@ -185,8 +187,9 @@ class Event extends MY_Controller{
 
 	public function add(){
 		if( !is_admin() ){
-			do_redirect( 'dashboard' );
+			$this->invalid_access();
 		}
+
 		$this->data[ 'meta' ][ 'title' ] = get_msg( 'add_event' );
 		$this->data[ 'page' ] = 'add_event_v';
 		$this->data[ 'current_menu' ] = 'event';
@@ -201,18 +204,16 @@ class Event extends MY_Controller{
 	}
 
 	public function edit($id=null){
-		if( !is_admin() ){
-			do_redirect( 'dashboard' );
-		}
 
-		if(!$id){
-			do_redirect( 'dashboard' );
+		if( !is_admin() || !$id ){
+			$this->invalid_access();
 		}
 
 		$event = $this->event_m->get('*', array('id'=>$id ), 1);
 		if(!$event){
-			do_redirect('dashboard');
+			$this->invalid_access();
 		}
+
 		$event->date = get_date_from_datetime( $event->start_time, 'Y-m-d' );
 		// select event releted staff
 		$this->load->model( 'events_staff_m' );
@@ -247,7 +248,17 @@ class Event extends MY_Controller{
 
 		if('post' == $this->input->method()){
 			$update = $this->save( $id );
+			$event = $this->event_m->get('*', array('id'=>$id ), 1);
 		}
+
+		$event->date = get_date_from_datetime( $event->start_time, 'Y-m-d' );
+		// select event releted staff
+		$this->load->model( 'events_staff_m' );
+		$users = $this->events_staff_m->get( 'user_id', array( 'event_id'=> $id ) );
+		
+		$event_users = array_map(function($v){
+			return $v->user_id;
+		}, $users);
 
 		$this->data[ 'meta' ] = get_msg( 'meta_event_edit' );
 		$this->data[ 'page' ] = 'add_event_v';
