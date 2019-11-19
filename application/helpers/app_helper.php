@@ -85,11 +85,9 @@ if(! function_exists('get_msg')){
 			'user_updated'	=> 'Staff Upadted Successfully',
 			'user_update_failed' => 'Error! Staff Not Upadted',
 			'dashboard'		=> 'Dashboard',
-<<<<<<< HEAD
 			'event'         => 'Event',
-=======
+			'all_event'    => 'All Event',
 
->>>>>>> 921739bbcdfb0c01d50e6010f0b7a036b00f53cc
 			'add_event'		=> 'Add Event',
 
 			'all_staff'     => 'All Staff',
@@ -140,7 +138,7 @@ if(! function_exists('get_msg')){
 			'breadcrumb_add_staff' => array('Staff','Add Staff'),
 			'no_event_assigned' => 'Not assigned on any event',
 
-			'breadcrumb_event_list' => array('Event', 'All Event'),
+			
 			'breadcrumb_event_edit' => array('Event', 'Edit Event'),
 			'breadcrumb_event_preview' => array('MY Events'),
 			'breadcrumb_all_event' => array('Event', 'All Event'),
