@@ -189,8 +189,6 @@ if(! function_exists('get_msg')){
 	        'label_event_addstaff' => 'Add Staff',
 	        'label_event_add_packingstaff' => 'Add Package Staff',
 	        'label_event_packing_time' => 'Packing Time',
-	        
-
 	        'label_event_address' => 'Address',
 	        'label_event_Contact_person' => 'Contact Person',
 	        'label_event_tele_person' => 'Telephone Contact Person',
@@ -200,6 +198,7 @@ if(! function_exists('get_msg')){
 	        'label_event_other_info' => 'Other Information',
 	        'label_event_add_product' => 'Add Products',
 	        'label_event_electricty' => 'Electricity',
+	        
 	        'event_preview_btn' =>'Preview Event',
 	        'event_publish_btn' => 'Publish Event',
 
@@ -208,8 +207,6 @@ if(! function_exists('get_msg')){
 	        'placeholder_event_date' => 'Enter Date',
 	        'placeholder_event_packing_time' => 'Enter Packing Time',
 	        'placeholder_event_address' => 'Enter Address',
-
-
 	        'placeholder_event_Contact_person' => 'Your Contact Person',
 	        'placeholder_event_tele_Contact_person' => 'Contact Person Number',
 	        'placeholder_event_distance' => 'Distance To Event',
