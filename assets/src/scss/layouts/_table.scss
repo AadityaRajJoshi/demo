@@ -66,4 +66,13 @@
     }
 
 }
-  
+
+img.filter-img{
+    transition: all .3s;
+}
+
+.desc {
+    img.filter-img {
+        transform: rotateX(180deg);
+    }
+}
