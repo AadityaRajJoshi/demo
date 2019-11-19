@@ -244,14 +244,13 @@
 					echo form_input( array(
 						'name' => 'link_gmap',
 						'placeholder' => get_msg('placeholder_event_link_map'),
+						'type' => 'url',
 						'value' => get_value($event, 'link_gmap'),
 						'id' => 'link_gmap'
 					) ); ?>
 				</div>
-			</div>	
-
+			</div>
 		</div>
-
 		<div class="luft-inline-input section-3">
 			<div class="luft-form-row text-area-wrapper">
 				<?php
