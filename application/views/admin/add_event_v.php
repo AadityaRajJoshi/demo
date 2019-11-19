@@ -162,17 +162,11 @@
 			<div class="luft-form-row">
 				<?php
 				echo form_label( get_msg('event_add_packingstaff_label'), 'add_package_staff' );
-/*				echo form_dropdown( array(
-					'name' => 'add_package_staff',
-					'id' => 'add_package_staff',
-					'options' => $staffs,
-					'class' => 'custom-styled-select',
-				) ); */
 				echo form_dropdown( array(
 					'name' => 'add_package_staff',
 					'id' => 'add_package_staff',
 					'class' => 'custom-styled-select',
-				), $staffs, $event_package_users ); 
+				), $staffs, isset( $event_package_users ) ? $event_package_users : false ); 
 				?>
 			</div>
 			<div class="luft-form-row">

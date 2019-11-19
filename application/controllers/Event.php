@@ -225,9 +225,9 @@ class Event extends MY_Controller{
 			return $v->user_id;
 		}, $package_user);
 
-		$event_users = array_map(function($v){
-			return $v->user_id;
-		}, $users);
+		// $event_users = array_map(function($v){
+		// 	return $v->user_id;
+		// }, $users);
 		
 		$arr = array(
 			'start_time',
