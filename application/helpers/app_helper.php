@@ -85,9 +85,9 @@ if(! function_exists('get_msg')){
 			'user_updated'	=> 'Staff Upadted Successfully',
 			'user_update_failed' => 'Error! Staff Not Upadted',
 			'dashboard'		=> 'Dashboard',
-			'event'			=> 'Event',
+
 			'add_event'		=> 'Add Event',
-			'all_event'		=> 'All Event',
+
 			'all_staff'     => 'All Staff',
 			'staff'         => 'Staff',
 			'my_details'    => 'My Details', 			
@@ -135,6 +135,8 @@ if(! function_exists('get_msg')){
 			'breadcrumb_all_staff' => array('Staff', 'All Staff'),
 			'breadcrumb_add_staff' => array('Staff','Add Staff'),
 			'no_event_assigned' => 'Not assigned on any event',
+
+			'breadcrumb_event_list' => array('Event', 'All Event'),
 			'breadcrumb_event_edit' => array('Event', 'Edit Event'),
 			'breadcrumb_event_preview' => array('MY Events'),
  
@@ -589,14 +591,14 @@ function thead($key, $col_name=false){
 	$ci = get_instance();
 	$col_name = !$col_name ? $key : $col_name;
 	$url = $ci->router->fetch_class() . '/index/'.$col_name.'/';
-	if($ci->data['order']){
-		$url .= 'asc' == $ci->data['order'] ? 'desc' : 'asc';
-	}
+	
+	$url .= 'asc' == $ci->data['order'] ? 'desc' : 'asc';
 
-	echo sprintf('<a href="%s">%s<img src="%s" alt="filter" class="filter-img" /></a>',
+	echo sprintf('<a href="%s">%s<img src="%s" alt="filter" class="filter-img %s" /></a>',
 		$url,
 		get_msg($key),
-		'assets/image/filter.png'
+		'assets/image/filter.png',
+		$ci->data['order']
 	);
 }
 

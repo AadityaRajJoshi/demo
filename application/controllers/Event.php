@@ -21,7 +21,7 @@ class Event extends MY_Controller{
 		$this->data[ 'page' ] = 'all_event_v';
 		$this->data[ 'current_menu' ] = 'event';
 		$this->data[ 'common' ] = true;
-		$this->data[ 'breadcrumb' ] = array( get_msg( 'event' ),get_msg( 'all_event' ) );
+		$this->data[ 'breadcrumb' ] = get_msg('breadcrumb_event_list');
 		$this->load->view('dashboard_template_v', $this->data);
 	}
 
