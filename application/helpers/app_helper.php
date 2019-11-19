@@ -618,5 +618,5 @@ function thead($key, $col_name=false){
 }
 
 function get_start_end_time( $starttime, $endtime ){
-	 return get_time_from_datetime( $starttime ) . ' - ' . get_time_from_datetime(  $endtime );  
+	return get_time_from_datetime( $starttime ) . ' - ' . get_time_from_datetime(  $endtime );  
 }

@@ -18,7 +18,7 @@ class Event extends MY_Controller{
 			$this->data[ 'events' ] = $this->event_m->get( '*' );
 		}
 		$this->data[ 'meta' ] = get_msg( 'meta_event' );
-		$this->data[ 'page' ] = 'all_event_v';
+		$this->data[ 'page' ] = 'event_list_v';
 		$this->data[ 'current_menu' ] = 'event';
 		$this->data[ 'common' ] = true;
 
@@ -188,18 +188,33 @@ class Event extends MY_Controller{
 		$this->data['breadcrumb'] = get_msg('breadcrumb_event_preview');
 		$this->data['page'] = 'event_detail_v';
 		$this->data['current_menu'] = 'event';
+		
 		$query = $this->event_m->get( '*', array( 'id'=>$id ), 1 );
+
 		if(!$query){
 			$this->invalid_access();
 		}
+
+		if(is_staff()){
+			$users = $this->event->get_users($query->id);
+		}
+
 		$this->data['event'] = $query;
+
+		$staff = $this->event_m->get_users( $id );
+		$event_package_staff = '';
+		$event_staff = '';
+		foreach ($staff as $value) {
+			if( $value->type == 'event_staff' ){
+				$event_staff .= ucfirst($value->username).', ';
+			}else{
+				$event_package_staff =  ucfirst($value->username);
+			}
+		}
+		$this->data[ 'event_package_staff' ] = $event_package_staff."<br>";
+		$this->data[ 'event_staff' ] = rtrim( $event_staff, ', ' );
 		$this->data['breadcrumb'][] = $query->name;
 		$this->load->view( 'dashboard_template_v', $this->data );
-
-		// $this->load->model( 'events_package_staff_m' );
-		// $user = $this->events_package_staff_m->get( 'user_id', array('event_id' => $id) );
-		// var_dump($user) ;
-
 	}
 
 	public function add(){
@@ -208,7 +223,7 @@ class Event extends MY_Controller{
 		}
 
 		$this->data[ 'meta' ] = get_msg( 'meta_add_event' );
-		$this->data[ 'page' ] = 'add_event_v';
+		$this->data[ 'page' ] = 'event_add_v';
 		$this->data[ 'current_menu' ] = 'event';
 		$this->data[ 'date' ] = false;
 		$this->data[ 'time' ] = false;
@@ -234,11 +249,7 @@ class Event extends MY_Controller{
 		if('post' == $this->input->method()){
 			$this->save( $id );
 			$event = $this->event_m->get('*', array('id'=>$id ), 1);
-		}
-
-		// $event_users = array_map(function($v){
-		// 	return $v->user_id;
-		// }, $users);		
+		}	
 
 		$event->date = get_date_from_datetime( $event->start_time, 'Y-m-d' );
 
@@ -274,7 +285,7 @@ class Event extends MY_Controller{
 		}, $package_user);
 
 		$this->data[ 'meta' ] = get_msg( 'meta_event_edit' );
-		$this->data[ 'page' ] = 'add_event_v';
+		$this->data[ 'page' ] = 'event_add_v';
 		$this->data[ 'current_menu' ] = 'event';
 		$this->data[ 'breadcrumb' ] = get_msg( 'breadcrumb_event_edit' );
 		$this->data[ 'event' ] = $event;
