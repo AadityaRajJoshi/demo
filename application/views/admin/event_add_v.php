@@ -198,10 +198,10 @@
 			</div>
 			<div class="luft-half-row">
 				<div class="luft-form-row luft-half-row">
-					<?php echo form_label( get_msg('label_event_Contact_person'), 'contact_person' ); 
+					<?php echo form_label( get_msg('label_event_contact_person'), 'contact_person' ); 
 					echo form_input( array(
 						'name' => 'contact_person',
-						'placeholder' => get_msg('placeholder_event_Contact_person'),
+						'placeholder' => get_msg('placeholder_event_contact_person'),
 						'value' => get_value($event, 'contact_person'),
 						'id' => 'contact_person'
 					) ); ?>
@@ -212,7 +212,7 @@
 					<?php echo form_label( get_msg('label_event_tele_person'), 'telephone_contact_person' ); 
 					echo form_input( array(
 						'name' => 'telephone_contact_person',
-						'placeholder' => get_msg('placeholder_event_tele_Contact_person'),
+						'placeholder' => get_msg('placeholder_event_tele_contact_person'),
 						'id' => 'telephone_contact_person',
 						'value' => get_value($event, 'telephone_contact_person'),
 					) ); ?>
