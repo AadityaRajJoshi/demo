@@ -196,7 +196,7 @@ class Event extends MY_Controller{
 		}
 
 		if(is_staff()){
-			$users = $this->event->get_users($query->id);
+			$users = $this->event_m->get_users($query->id);
 		}
 
 		$this->data['event'] = $query;
