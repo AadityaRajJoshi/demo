@@ -1,4 +1,4 @@
-<?php echo form_open( '' ); ?>
+<?php echo form_open( '', array('id'=>'my-form') ); ?>
 	<div class="luft-form-wrapper">
 		<div class="luft-form-row">
 			<?php echo form_label( get_msg('label_event_name'), 'name' ); 
@@ -289,7 +289,7 @@
 				) );?>
 			</div>
 		</div>
-		<a href="#preview-modal" rel="modal:open" class="preview-modal"> preview-event </a>
+		<a href="#preview-modal" rel="modal:open" class="preview-modal"  id="preview-btn"> preview-event </a>
 		<?php
 			echo form_submit( 'publish-event', $mode == 'add' ? get_msg('event_publish_btn') : get_msg('event_update_btn') ); ?>
 	</div>
