@@ -140,31 +140,44 @@ class Event extends MY_Controller{
 
 			$this->events_package_staff_m->save( $insert_package_staff );
 
-			if (!$this->db->trans_complete()){
-			   	$this->session->set_flashdata( 'error', get_msg( 'event_rollback_error' ) );
-			   	do_redirect('event');
-			}else{
+			if ($this->db->trans_complete()){
 			    if( $is_update ){
 			    	$this->data['success'][] = get_msg( 'event_update' );
 			    }else{
 			    	$this->session->set_flashdata( 'success', get_msg( 'event_added' ) );
 			    	do_redirect('event');
 			    }
+			}else{
+			   	$this->session->set_flashdata( 'error', get_msg( 'event_rollback_error' ) );
+			   	do_redirect('event');
 			}
 		}
 	}
 
 	public function toggle_status(){
-		if( !is_admin() ){
-			die( get_msg( 'toggle_status_error' ) );
-		}
-		$id = $this->input->post( 'event_id' );
-		$event_status = $this->event_m->get( array( 'finished' ), array( 'id' => $id ),1 );
-		$status = $event_status->finished;
+
 		$data = array(
-			'finished' => $status ? false : true,
+			'status' => 500,
+			'message' => get_msg( 'toggle_status_error' )
 		);
-		$this->event_m->save( $data, array( 'id' => $id ) );
+
+		if( is_admin() ){
+			$id = $this->input->post( 'event_id' );
+			$query = $this->event_m->get(array('finished'), array('id' => $id), 1);
+			if($query){
+				$status = $query->finished;
+				$data = array(
+					'finished' => $status ? false : true,
+				);
+				$updated = $this->event_m->save( $data, array( 'id' => $id ) );
+				if($updated){
+					$data['status'] = 200;
+					$data['message'] = get_msg('toggle_status_success');
+				}
+			}
+		}
+
+		echo json_encode($data);
 	}
 
 	public function view( $id ){
