@@ -258,7 +258,7 @@
 				echo form_label( get_msg('label_event_other_info'), 'other_information' );
 				echo form_textarea( array(
 					'name' => 'other_information',
-					'placeholder' => get_msg('placeholder_e_other_info'),
+					'placeholder' => get_msg('placeholder_event_other_info'),
 					'id' => 'other_information',
 					'value' => get_value($event, 'other_information'),
 					'rows'        => '8',
