@@ -31,8 +31,10 @@ class MY_Controller extends CI_Controller{
 	    $order_by = $this->uri->segment(3, 0);
 	    if($order_by){
 	    	$order = strtolower($this->uri->segment(4, 0));
-	    	$this->data['order_by'] = $order_by;
-	    	$this->data['order'] = ('asc' == $order || 'desc' == $order) ? $order : false;
+	    	if('asc' == $order || 'desc' == $order){
+	    		$this->data['order_by'] = $order_by;
+	    		$this->data['order'] = $order;
+	    	}
 	    }
 
 	    $this->data['menu'] = get_menu();

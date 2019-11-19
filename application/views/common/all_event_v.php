@@ -37,7 +37,7 @@
 					</label>
 				</div>
 			<?php else: ?>
-				<a href="<?php echo get_route( 'event_detail' ) . $event->id ?>"><?php echo get_msg( 'more_event' ); ?></a>
+				<a class="luft-view-more" href="<?php echo get_route( 'event_detail' ) . $event->id ?>"><?php echo get_msg( 'more_event' ); ?></a>
 			<?php endif; ?>
 			</td>
 		</tr>
