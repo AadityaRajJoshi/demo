@@ -182,12 +182,14 @@ class Event extends MY_Controller{
 
 	public function view( $id ){
 		$this->data['common'] = true;
-		$this->data[ 'meta' ] = get_msg('meta_event_detail');
+		$this->data['meta'] = get_msg('meta_event_detail');
 		$this->data['breadcrumb'] = get_msg('breadcrumb_event_preview');
 		$this->data['page'] = 'event_detail_v';
-		$this->data[ 'staffs' ] = get_staffs_dropdown();
-		$this->data['current_menu'] = 'staff';
+		$this->data['current_menu'] = 'event';
 		$query = $this->event_m->get( '*', array( 'id'=>$id ), 1 );
+		if(!$query){
+			$this->invalid_access();
+		}
 		$this->data['event'] = $query;
 		$this->data['breadcrumb'][] = $query->name;
 		$this->load->view( 'dashboard_template_v', $this->data );

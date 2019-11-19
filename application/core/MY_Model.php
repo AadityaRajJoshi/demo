@@ -31,7 +31,7 @@ class MY_Model extends CI_Model {
 	}
 
 	public function get( $column = '*', $where = false, $limit = false, $order = false ){
-	
+		
 		$order = $order ? $order : $this->data['order_by'] . ' ' . $this->data['order'];
 
 	    $this->db->select( $column, false );
@@ -48,10 +48,12 @@ class MY_Model extends CI_Model {
 	    	}
 	    }
 
-	    if ($order){
-	        $this->db->order_by( $order );
-	    }else{
-	        $this->db->order_by( 'id', $this->order );
+	    if($limit != 1){
+		    if ($order){
+		        $this->db->order_by( $order );
+		    }else{
+		        $this->db->order_by( 'id', $this->order );
+		    }
 	    }
 
 	    $this->db->from( $this->table, false );
