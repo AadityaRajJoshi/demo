@@ -18,7 +18,7 @@ class Event extends MY_Controller{
 			$this->data[ 'events' ] = $this->event_m->get( '*' );
 		}
 		$this->data[ 'meta' ] = get_msg( 'meta_event' );
-		$this->data[ 'page' ] = 'all_event_v';
+		$this->data[ 'page' ] = 'event_list_v';
 		$this->data[ 'current_menu' ] = 'event';
 		$this->data[ 'common' ] = true;
 
@@ -223,7 +223,7 @@ class Event extends MY_Controller{
 		}
 
 		$this->data[ 'meta' ] = get_msg( 'meta_add_event' );
-		$this->data[ 'page' ] = 'add_event_v';
+		$this->data[ 'page' ] = 'event_add_v';
 		$this->data[ 'current_menu' ] = 'event';
 		$this->data[ 'date' ] = false;
 		$this->data[ 'time' ] = false;
@@ -285,7 +285,7 @@ class Event extends MY_Controller{
 		}, $package_user);
 
 		$this->data[ 'meta' ] = get_msg( 'meta_event_edit' );
-		$this->data[ 'page' ] = 'add_event_v';
+		$this->data[ 'page' ] = 'event_add_v';
 		$this->data[ 'current_menu' ] = 'event';
 		$this->data[ 'breadcrumb' ] = get_msg( 'breadcrumb_event_edit' );
 		$this->data[ 'event' ] = $event;
