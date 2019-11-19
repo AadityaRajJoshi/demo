@@ -31,7 +31,7 @@
         $("#profile-image").change(function () {
             readURL(this);
         });
-        
+
         //status yes no toggle script
         $(document).on('click', '.onoffswitch-checkbox', function () {
             var id = $(this).data('id');
@@ -40,8 +40,8 @@
                 type: 'POST',
                 data: { event_id: id },
                 dataType: 'json',
-                success: function(res){
-                    if(200 != res.status){
+                success: function (res) {
+                    if (200 != res.status) {
                         alert(res.message);
                         location.reload();
                     }
@@ -49,9 +49,9 @@
             });
         });
 
-        
+
         var preview = $('#preview-btn');
-        preview.click(function() {
+        preview.click(function () {
             var inputs = $('#my-form').serializeArray();
             $.ajax({
                 url: LUFTLEK.ajax_url + LUFTLEK.route.event_process_data,
@@ -72,7 +72,7 @@
     /* DOM ready event */
     $(document).ready(documentReadyCallbackFunc);
 
-  
+
 
 })(jQuery);
 
