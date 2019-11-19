@@ -17,29 +17,29 @@ class Event extends MY_Controller{
 		}else{
 			$this->data[ 'events' ] = $this->event_m->get( '*' );
 		}
-		$this->data[ 'meta' ][ 'title' ] = get_msg( 'event' );
+		$this->data[ 'meta' ] = get_msg( 'meta_event' );
 		$this->data[ 'page' ] = 'all_event_v';
 		$this->data[ 'current_menu' ] = 'event';
 		$this->data[ 'common' ] = true;
-		$this->data[ 'breadcrumb' ] = array( get_msg( 'event' ),get_msg( 'all_event' ) );
+		$this->data[ 'breadcrumb' ] = get_msg('breadcrumb_all_event');
 		$this->load->view('dashboard_template_v', $this->data);
 	}
 
 	public function save( $id = false ){
-		$this->form_validation->set_rules('name', 'Event Name', 'required' );
-		$this->form_validation->set_rules('order_number', 'Ordernumber', 'required' );
-		$this->form_validation->set_rules('date', 'Date', 'required' );
+		$this->form_validation->set_rules('name', get_msg('label_event_name'), 'required' );
+		$this->form_validation->set_rules('order_number', get_msg('label_event_order'), 'required' );
+		$this->form_validation->set_rules('date', get_msg('label_event_date'), 'required' );
 
-		$this->form_validation->set_rules('start_time', 'Event Start', 'required' );
-		$this->form_validation->set_rules('stop_time', 'Event Stop', 'required' );
-		$this->form_validation->set_rules('traveltime_1_start', 'First Traveltime Start', 'required' );
-		$this->form_validation->set_rules('traveltime_1_stop', 'First Traveltime Stop', 'required' );
-		$this->form_validation->set_rules('traveltime_2_start', 'Second Traveltime Start', 'required' );
-		$this->form_validation->set_rules('traveltime_2_stop', 'Second Traveltime Stop', 'required' );
-		$this->form_validation->set_rules('construction_start', 'Construction Start Time', 'required' );
-		$this->form_validation->set_rules('construction_stop', 'Construction Stop Time', 'required' );
-		$this->form_validation->set_rules('dismantling_start', 'Dismantle Start Time', 'required' );
-		$this->form_validation->set_rules('dismantling_stop', 'Dismantle Stop Time', 'required' );
+		$this->form_validation->set_rules('start_time', get_msg('label_event_starttime'), 'required' );
+		$this->form_validation->set_rules('stop_time', get_msg('label_event_stoptime'), 'required' );
+		$this->form_validation->set_rules('traveltime_1_start', get_msg('label_event_traveltime_1_start'), 'required' );
+		$this->form_validation->set_rules('traveltime_1_stop', get_msg('label_event_traveltime_1_stop'), 'required' );
+		$this->form_validation->set_rules('traveltime_2_start', get_msg('label_event_traveltime_2_start'), 'required' );
+		$this->form_validation->set_rules('traveltime_2_stop', get_msg('label_event_traveltime_2_stop'), 'required' );
+		$this->form_validation->set_rules('construction_start', get_msg('label_event_construction_start'), 'required' );
+		$this->form_validation->set_rules('construction_stop', get_msg('label_event_construction_stop'), 'required' );
+		$this->form_validation->set_rules('dismantling_start', get_msg('label_event_dismantling_start'), 'required' );
+		$this->form_validation->set_rules('dismantling_stop', get_msg('label_event_dismantling_stop'), 'required' );
 
 		$this->form_validation->set_rules('add_staff[]', 'Add Staff', 'required' );
 
@@ -203,12 +203,12 @@ class Event extends MY_Controller{
 			$this->invalid_access();
 		}
 
-		$this->data[ 'meta' ][ 'title' ] = get_msg( 'add_event' );
+		$this->data[ 'meta' ] = get_msg( 'meta_add_event' );
 		$this->data[ 'page' ] = 'add_event_v';
 		$this->data[ 'current_menu' ] = 'event';
 		$this->data[ 'date' ] = false;
 		$this->data[ 'time' ] = false;
-		$this->data[ 'breadcrumb' ] = array(get_msg( 'event' ),get_msg( 'add_event' ));
+		$this->data[ 'breadcrumb' ] = get_msg('breadcrumb_add_event');
 		$this->data[ 'event' ] = false;
 		$this->data[ 'event_users' ] = [];
 		$this->data[ 'staffs' ] = get_staffs_dropdown();	

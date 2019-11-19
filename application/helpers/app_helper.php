@@ -85,7 +85,7 @@ if(! function_exists('get_msg')){
 			'user_updated'	=> 'Staff Upadted Successfully',
 			'user_update_failed' => 'Error! Staff Not Upadted',
 			'dashboard'		=> 'Dashboard',
-			'event'			=> 'Event',
+			'event'         => 'Event',
 			'add_event'		=> 'Add Event',
 			'all_event'		=> 'All Event',
 			'all_staff'     => 'All Staff',
@@ -137,6 +137,9 @@ if(! function_exists('get_msg')){
 			'no_event_assigned' => 'Not assigned on any event',
 			'breadcrumb_event_edit' => array('Event', 'Edit Event'),
 			'breadcrumb_event_preview' => array('MY Events'),
+			'breadcrumb_all_event' => array('Event', 'All Event'),
+			'breadcrumb_add_event' => array('Event', 'Add Event'),
+
  
 			'meta_login' => array(
 				'title' => 'Login',
@@ -172,6 +175,16 @@ if(! function_exists('get_msg')){
 	        	'title' => 'Event Edit',
 	        	'description'=> 'Event Edit',
 	        	'keyword' => 'event'
+	        ),
+	        'meta_event' => array(
+	        	'title'=> 'Event',
+	        	'description' => 'Event',
+	        	'keyword'=> 'event'
+	        ),
+	        'meta_add_event' => array(
+	        	'title' => 'Add Event',
+	        	'description' => 'Add Event',
+	        	'keyword' => 'add event'
 	        ),
 
 	        'label_event_name' => 'Event Name',
@@ -209,7 +222,6 @@ if(! function_exists('get_msg')){
 	        'placeholder_event_date' => 'Enter Date',
 	        'placeholder_event_packing_time' => 'Enter Packing Time',
 	        'placeholder_event_address' => 'Enter Address',
-
 	        'placeholder_event_Contact_person' => 'Your Contact Person',
 	        'placeholder_event_tele_Contact_person' => 'Contact Person Number',
 	        'placeholder_event_distance' => 'Distance To Event',
