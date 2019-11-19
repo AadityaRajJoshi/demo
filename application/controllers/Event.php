@@ -200,13 +200,21 @@ class Event extends MY_Controller{
 		}
 
 		$this->data['event'] = $query;
+
+		$staff = $this->event_m->get_users( $id );
+		$event_package_staff = '';
+		$event_staff = '';
+		foreach ($staff as $value) {
+			if( $value->type == 'event_staff' ){
+				$event_staff .= ucfirst($value->username).', ';
+			}else{
+				$event_package_staff =  ucfirst($value->username);
+			}
+		}
+		$this->data[ 'event_package_staff' ] = $event_package_staff."<br>";
+		$this->data[ 'event_staff' ] = rtrim( $event_staff, ', ' );
 		$this->data['breadcrumb'][] = $query->name;
 		$this->load->view( 'dashboard_template_v', $this->data );
-
-		// $this->load->model( 'events_package_staff_m' );
-		// $user = $this->events_package_staff_m->get( 'user_id', array('event_id' => $id) );
-		// var_dump($user) ;
-
 	}
 
 	public function add(){
