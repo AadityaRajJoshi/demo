@@ -53,10 +53,19 @@
         var preview = $('#preview-btn');
         preview.click(function() {
             var inputs = $('#my-form').serializeArray();
-            $.each(inputs, function (i, input) {
-                 $('#preview_' + input.name).html(input.value);
-
-            });
+            $.ajax({
+                url: LUFTLEK.ajax_url + LUFTLEK.route.event_process_data,
+                type: 'POST',
+                data: inputs,
+                dataType: 'json',
+                success: function(res){
+                    if(200 == res.status){
+                        $.each(res.data, function (name, input) {
+                            $('#preview_' + name).html(input);
+                        });
+                    }
+                }
+            })
         });
     };
 
