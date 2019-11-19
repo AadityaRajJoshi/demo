@@ -3,7 +3,10 @@
 }
 
 div#preview-modal {
-    max-width: 1300px;
+    max-width: 1360px;
     padding: 50px;
     border-radius: 0;
+    @include media(mb) {
+        padding: 30px 10px;
+    }
 }
