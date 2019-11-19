@@ -147,7 +147,7 @@ class User extends MY_Controller{
     public function add(){
     	
     	if(! is_admin())
-    	$this->invalid_access();
+    		$this->invalid_access();
 
     	$this->data[ 'meta' ] = get_msg('meta_add_staff');
     	$this->data['page'] = 'profile_v';
