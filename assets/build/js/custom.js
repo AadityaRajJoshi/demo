@@ -79,10 +79,9 @@
         // let otherInfo = $('#other_information');
 
         
-        var preview = $('#kk');
+        var preview = $('#preview-btn');
         preview.click(function() {
             var inputs = $('#my-form').serializeArray();
-            console.log( inputs );
             $.each(inputs, function (i, input) {
                  $('#preview_' + input.name).html(input.value);
 

@@ -289,7 +289,7 @@
 				) );?>
 			</div>
 		</div>
-		<a href="#preview-modal" rel="modal:open" class="preview-modal"  id="kk"> preview-event </a>
+		<a href="#preview-modal" rel="modal:open" class="preview-modal"  id="preview-btn"> preview-event </a>
 		<?php
 			// echo form_button( 'preview-event', get_msg('event_preview_btn') );
 			echo form_submit( 'publish-event', get_msg('event_publish_btn') ); ?>
