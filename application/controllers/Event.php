@@ -189,12 +189,9 @@ class Event extends MY_Controller{
 		$this->data['current_menu'] = 'staff';
 		$query = $this->event_m->get( '*', array( 'id'=>$id ), 1 );
 		$this->data['event'] = $query;
+		$staff = $this->event_m->get_users( 36 );
 		$this->data['breadcrumb'][] = $query->name;
 		$this->load->view( 'dashboard_template_v', $this->data );
-
-		// $this->load->model( 'events_package_staff_m' );
-		// $user = $this->events_package_staff_m->get( 'user_id', array('event_id' => $id) );
-		// var_dump($user) ;
 
 	}
 
