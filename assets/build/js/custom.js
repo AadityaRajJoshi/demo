@@ -50,10 +50,20 @@
         });
 
 
+        var preview = $('#preview-btn');
+        preview.click(function () {
+            var inputs = $('#my-form').serializeArray();
+            $.each(inputs, function (i, input) {
+                $('#preview_' + input.name).html(input.value);
+
+            });
+        });
     };
 
     /* DOM ready event */
     $(document).ready(documentReadyCallbackFunc);
+
+
 
 })(jQuery);
 

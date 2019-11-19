@@ -1,4 +1,4 @@
-<?php echo form_open( '' ); ?>
+<?php echo form_open( '', array('id'=>'my-form') ); ?>
 	<div class="luft-form-wrapper">
 		<div class="luft-form-row">
 			<?php echo form_label( get_msg('label_event_name'), 'name' ); 
@@ -31,7 +31,7 @@
 					'placeholder' => get_msg('placeholder_event_date'),
 					'id' => 'date',
 					'required' => 'required',
-					'value' => get_value($event, 'date', date( 'Y-m-d' )),
+					'value' => get_value($event, 'date'),
 					'type' => 'date',
 				) ); ?>
 			</div>
@@ -42,7 +42,7 @@
 					'name' => 'start_time',
 					'id' => 'start_time',
 					'required' => 'required',
-					'value' => get_value($event, 'start_time', '10:00'),
+					'value' => get_value($event, 'start_time' ),
 					'type' => 'time'
 				) ); ?>
 			</div>
@@ -53,7 +53,7 @@
 					'name' => 'stop_time',
 					'id' => 'stop_time',
 					'required' => 'required',
-					'value' => get_value($event, 'stop_time', '16:00'),
+					'value' => get_value($event, 'stop_time'),
 					'type' => 'time'
 				) ); ?>
 			</div>
@@ -64,7 +64,7 @@
 					'name' => 'traveltime_1_start',
 					'id' => 'traveltime_1_start',
 					'required' => 'required',
-					'value' => get_value($event, 'traveltime_1_start', '07:00'),
+					'value' => get_value($event, 'traveltime_1_start'),
 					'type' => 'time'
 				) ); ?>
 			</div>
@@ -74,7 +74,7 @@
 				echo form_input( array(
 					'name' => 'traveltime_1_stop',
 					'id' => 'traveltime_1_stop',
-					'value' => get_value($event, 'traveltime_1_stop', '08:00'), 
+					'value' => get_value($event, 'traveltime_1_stop'), 
 					'required' => 'required',
 					'type' => 'time'
 				) ); ?>
@@ -85,7 +85,7 @@
 				echo form_input( array(
 					'name' => 'traveltime_2_start',
 					'id' => 'traveltime_2_start',
-					'value' => get_value($event, 'traveltime_2_start', '18:00'),
+					'value' => get_value($event, 'traveltime_2_start'),
 					// 'required' => 'required',
 					'type' => 'time'
 				) ); ?>
@@ -96,7 +96,7 @@
 				echo form_input( array(
 					'name' => 'traveltime_2_stop',
 					'id' => 'traveltime_2_stop',
-					'value' => get_value($event, 'traveltime_2_stop', '19:00'),
+					'value' => get_value($event, 'traveltime_2_stop'),
 					'required' => 'required',
 					'type' => 'time'
 				) ); ?>
@@ -107,7 +107,7 @@
 				echo form_input( array(
 					'name' => 'construction_start',
 					'id' => 'construction_start',
-					'value' => get_value($event, 'construction_start', '08:00'),
+					'value' => get_value($event, 'construction_start'),
 					'required' => 'required',
 					'type' => 'time'
 				) ); ?>
@@ -118,7 +118,7 @@
 				echo form_input( array(
 					'name' => 'construction_stop',
 					'id' => 'construction_stop',
-					'value' => get_value($event, 'construction_stop', '10:00'),
+					'value' => get_value($event, 'construction_stop'),
 					'required' => 'required',
 					'type' => 'time'
 				) ); ?>
@@ -129,7 +129,7 @@
 				echo form_input( array(
 					'name' => 'dismantling_start',
 					'id' => 'dismantling_start',
-					'value' => get_value($event, 'dismantling_start', '16:00'),
+					'value' => get_value($event, 'dismantling_start'),
 					'required' => 'required',
 					'type' => 'time'
 				) ); ?>
@@ -140,7 +140,7 @@
 				echo form_input( array(
 					'name' => 'dismantling_stop',
 					'id' => 'dismantling_stop',
-					'value' => get_value($event, 'dismantling_stop', '18:00'),
+					'value' => get_value($event, 'dismantling_stop'),
 					'required' => 'required',
 					'type' => 'time'
 				) ); ?>
@@ -198,10 +198,10 @@
 			</div>
 			<div class="luft-half-row">
 				<div class="luft-form-row luft-half-row">
-					<?php echo form_label( get_msg('label_event_Contact_person'), 'contact_person' ); 
+					<?php echo form_label( get_msg('label_event_contact_person'), 'contact_person' ); 
 					echo form_input( array(
 						'name' => 'contact_person',
-						'placeholder' => get_msg('placeholder_event_Contact_person'),
+						'placeholder' => get_msg('placeholder_event_contact_person'),
 						'value' => get_value($event, 'contact_person'),
 						'id' => 'contact_person'
 					) ); ?>
@@ -212,7 +212,7 @@
 					<?php echo form_label( get_msg('label_event_tele_person'), 'telephone_contact_person' ); 
 					echo form_input( array(
 						'name' => 'telephone_contact_person',
-						'placeholder' => get_msg('placeholder_event_tele_Contact_person'),
+						'placeholder' => get_msg('placeholder_event_tele_contact_person'),
 						'id' => 'telephone_contact_person',
 						'value' => get_value($event, 'telephone_contact_person'),
 					) ); ?>
@@ -244,14 +244,13 @@
 					echo form_input( array(
 						'name' => 'link_gmap',
 						'placeholder' => get_msg('placeholder_event_link_map'),
+						'type' => 'url',
 						'value' => get_value($event, 'link_gmap'),
 						'id' => 'link_gmap'
 					) ); ?>
 				</div>
-			</div>	
-
+			</div>
 		</div>
-
 		<div class="luft-inline-input section-3">
 			<div class="luft-form-row text-area-wrapper">
 				<?php
@@ -289,11 +288,13 @@
 				) );?>
 			</div>
 		</div>
-		<a href="#preview-modal" rel="modal:open" class="preview-modal"> preview-event </a>
+		<a href="#preview-modal" rel="modal:open" class="preview-modal"  id="preview-btn"> preview-event </a>
 		<?php
 			// echo form_button( 'preview-event', get_msg('event_preview_btn') );
-			echo form_submit( 'publish-event', get_msg('event_publish_btn') ); ?>
+			//echo form_submit( 'publish-event', get_msg('event_publish_btn') ); ?>
 
+			
+			<?php echo form_submit( 'publish-event', $mode == 'add' ? get_msg('event_publish_btn') : get_msg('event_update_btn') ); ?>
 			<div class="display-on-mobile">
 				<a href="#"  class="go-back-btn"> Go back </a>
 			</div>
