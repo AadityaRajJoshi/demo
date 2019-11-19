@@ -123,17 +123,18 @@
             <section class="luft-evt-detail-wrapper">
                 <div class="luft-evt-header">
                     <div class="evt-name">
-                        <h2>Vinay Event</h2>
+                        <h2></h2>
                         <div class="evt-info">
-                            <h4><b>DATE </b> <span>1979-12-14</span></h4>
-                            <h4><b>CITY </b> <span> ktm </span></h4>
-                            <h4> <b>STAFF </b> <span></span></h4>
+                            <h4><b>DATE </b> <span class="date"></span></h4>
+                            <h4><b>CITY </b> <span class="city"> ktm </span></h4>
+                            <h4> <b>STAFF </b> <span class="staffs"></span></h4>
                         </div>
+
                     </div>
 
                     <div class="evt-order-number">
-                        <h5>ORDERNUMBER <span><span> 931 </span></span></h5>
-                        <h5>TOTAL WORKINGTIME <span><span> 29hr</span></span></h5>
+                        <h5>ORDERNUMBER <span class="orderNum"> </span></h5>
+                        <h5>TOTAL WORKINGTIME <span> </span></h5>
                     </div>
                 </div>
 
@@ -141,60 +142,60 @@
 
                     <div class="travel-time-1">
                         <h4>TRAVELTIME 1</h4>
-                        <p> 18:25 - 06:29  </p>
+                        <p> </p>
                     </div>
 
                     <div class="cs-time">
                         <h4>CONSTRUCTION Time</h4>
-                        <p>20:30 - 16:46</p>
+                        <p></p>
                     </div>
 
                     <div class="evt-time">
                         <h4>EVENT TIME</h4>
-                        <p>07:49 - 13:31</p>
+                        <p></p>
                     </div>
 
                     <div class="ds-time">
                         <h4> DISMANTALING TIME</h4>
-                        <p>06:47 - 06:10</p>
+                        <p></p>
                     </div>
 
                     <div class="travel-time-2">
                         <h4>TRAVELTIME 2</h4>
-                        <p>12:44 - 05:43</p>
+                        <p></p>
                     </div>
                 </div>
 
                 <div class="evt-info">
-                    <h4><b> PACKED BY </b> <span> Emma </span></h4>
-                    <h4><b> PACKING TIME </b> <span>Necessitat </span></h4>
+                    <h4><b> PACKED BY </b> <span class="evt-info-package-staff"> </span></h4>
+                    <h4><b> PACKING TIME </b> <span class="evt-info-package-time">  </span></h4>
                 </div>
 
                 <div class="evt-detail-sect evt-sect-border">
 
                     <div class="evt-detail-first">
                         <h4>EVENT ADRESS</h4>
-                        <p> Dolor libero volupta  </p>        
+                        <p>  </p>        
                     </div>
 
                     <div class="evt-contact-second">
                         <h4>CONTACTPERSON</h4>
-                        <p>Aut culpa exercitati</p>        
+                        <p></p>        
                     </div>
 
                     <div class="evt-contact-third pr-5">
                         <h4>Contact phone</h4>
-                        <p>+1 (702) 539-3104</p>        
+                        <p></p>        
                     </div>
 
                     <div class="evt-contact-forth pr-5">
                         <h4>DISTANCE TO EVENT</h4>
-                        <p>Dolor consequatur E</p>        
+                        <p></p>        
                     </div>
 
                     <div class="evt-contact-fifth pr-5">
                         <h4>TYPE OF CAR AND WAGON</h4>
-                        <p>In velit animi qui </p>        
+                        <p> </p>        
                     </div>
 
                     <div class="evt-contact-six f-100">
@@ -208,17 +209,17 @@
 
                     <div class="evt-detail-first">
                         <h4>PRODUCTS</h4>
-                        <p>Est eius eu eum numq</p>        
+                        <p class="evt-detail-product">Est eius eu eum numq</p>        
                     </div>
 
                     <div class="evt-contact-second">
                         <h4>ELECTRICITY</h4>
-                        <p>Irure rem quod non v</p>        
+                        <p class="evt-detail-electricity">Irure rem quod non v</p>        
                     </div>
 
                     <div class="evt-contact-third">
                         <h4>OTHER INFORMATION</h4>
-                        <p>Magnam optio ut con</p>        
+                        <p class="evt-detail-otherInfo" >Magnam optio ut con</p>        
                     </div>
                     
                 </div>

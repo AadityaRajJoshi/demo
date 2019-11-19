@@ -222,7 +222,7 @@ if(! function_exists('get_msg')){
 	        'event_publish_btn' => 'Publish Event',
 
 	        'placeholder_event_name' => 'Enter Event Name',
-	        'placeholder_event_order' => 'Enetr Order Number',
+	        'placeholder_event_order' => 'Enter Order Number',
 	        'placeholder_event_date' => 'Enter Date',
 	        'placeholder_event_packing_time' => 'Enter Packing Time',
 	        'placeholder_event_address' => 'Enter Address',
