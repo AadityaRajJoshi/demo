@@ -217,6 +217,7 @@ if(! function_exists('get_msg')){
 	        
 	        'event_preview_btn' =>'Preview Event',
 	        'event_publish_btn' => 'Publish Event',
+	        'event_update_btn'  => 'Update Event',
 
 	        'placeholder_event_name'		=> 'Enter Event Name',
 	        'placeholder_event_order'		=> 'Enetr Order Number',

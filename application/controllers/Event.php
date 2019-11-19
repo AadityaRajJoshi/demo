@@ -232,6 +232,7 @@ class Event extends MY_Controller{
 		$this->data[ 'event_users' ] = [];
 		$this->data[ 'staffs' ] = get_staffs_dropdown();	
 		$this->save();
+		$this->data[ 'mode' ] = 'add';
 		$this->load->view( 'dashboard_template_v', $this->data );
 	}
 
@@ -289,10 +290,10 @@ class Event extends MY_Controller{
 		$this->data[ 'current_menu' ] = 'event';
 		$this->data[ 'breadcrumb' ] = get_msg( 'breadcrumb_event_edit' );
 		$this->data[ 'event' ] = $event;
+		$this->data[ 'mode' ] = 'edit';
 		$this->data[ 'event_package_users' ] = $event_package_users[0];
 		$this->data[ 'event_users' ] = $event_users;
 		$this->data[ 'staffs' ] = get_staffs_dropdown();
-		$this->load->view( 'dashboard_template_v', $this->data );
-		
-	} 
+		$this->load->view( 'dashboard_template_v', $this->data );		
+	}
 }

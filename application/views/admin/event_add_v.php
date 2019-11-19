@@ -291,8 +291,7 @@
 		</div>
 		<a href="#preview-modal" rel="modal:open" class="preview-modal"> preview-event </a>
 		<?php
-			// echo form_button( 'preview-event', get_msg('event_preview_btn') );
-			echo form_submit( 'publish-event', get_msg('event_publish_btn') ); ?>
+			echo form_submit( 'publish-event', $mode == 'add' ? get_msg('event_publish_btn') : get_msg('event_update_btn') ); ?>
 	</div>
 	<?php
 	echo form_close( '' );
