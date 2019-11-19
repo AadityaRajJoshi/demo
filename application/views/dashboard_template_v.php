@@ -31,6 +31,7 @@
         <link rel="stylesheet" type="text/css" href="assets/build/style/style.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" />
         <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+        <link href="assets/build/style/jquery-modal.css" rel="stylesheet" />
     </head>
     <body class="luft-template-dashboard<?php echo isset($body_class)? ' '.$body_class:''; ?>">
         <div class="luft-content-area">
@@ -104,6 +105,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
         <script src="assets/build/js/slideout-menu.js"></script>
+        <script src="assets/build/js/jquery-modal.min.js"></script>
+
         <script type="text/javascript">
             var LUFTLEK = {
                 'ajax_url': '<?php echo base_url(); ?>',
@@ -112,6 +115,114 @@
                 }
             };
         </script>
-        <script src="assets/build/js/custom.js"></script>       
+        <script src="assets/build/js/custom.js"></script>      
+        
+        
+        <!-- Modal -->
+        <div id="preview-modal" class="modal">
+            <section class="luft-evt-detail-wrapper">
+                <div class="luft-evt-header">
+                    <div class="evt-name">
+                        <h2>Vinay Event</h2>
+                        <div class="evt-info">
+                            <h4><b>DATE </b> <span>1979-12-14</span></h4>
+                            <h4><b>CITY </b> <span> ktm </span></h4>
+                            <h4> <b>STAFF </b> <span></span></h4>
+                        </div>
+                    </div>
+
+                    <div class="evt-order-number">
+                        <h5>ORDERNUMBER <span><span> 931 </span></span></h5>
+                        <h5>TOTAL WORKINGTIME <span><span> 29hr</span></span></h5>
+                    </div>
+                </div>
+
+                <div class="evt-time-wrapper">
+
+                    <div class="travel-time-1">
+                        <h4>TRAVELTIME 1</h4>
+                        <p> 18:25 - 06:29  </p>
+                    </div>
+
+                    <div class="cs-time">
+                        <h4>CONSTRUCTION Time</h4>
+                        <p>20:30 - 16:46</p>
+                    </div>
+
+                    <div class="evt-time">
+                        <h4>EVENT TIME</h4>
+                        <p>07:49 - 13:31</p>
+                    </div>
+
+                    <div class="ds-time">
+                        <h4> DISMANTALING TIME</h4>
+                        <p>06:47 - 06:10</p>
+                    </div>
+
+                    <div class="travel-time-2">
+                        <h4>TRAVELTIME 2</h4>
+                        <p>12:44 - 05:43</p>
+                    </div>
+                </div>
+
+                <div class="evt-info">
+                    <h4><b> PACKED BY </b> <span> Emma </span></h4>
+                    <h4><b> PACKING TIME </b> <span>Necessitat </span></h4>
+                </div>
+
+                <div class="evt-detail-sect evt-sect-border">
+
+                    <div class="evt-detail-first">
+                        <h4>EVENT ADRESS</h4>
+                        <p> Dolor libero volupta  </p>        
+                    </div>
+
+                    <div class="evt-contact-second">
+                        <h4>CONTACTPERSON</h4>
+                        <p>Aut culpa exercitati</p>        
+                    </div>
+
+                    <div class="evt-contact-third pr-5">
+                        <h4>Contact phone</h4>
+                        <p>+1 (702) 539-3104</p>        
+                    </div>
+
+                    <div class="evt-contact-forth pr-5">
+                        <h4>DISTANCE TO EVENT</h4>
+                        <p>Dolor consequatur E</p>        
+                    </div>
+
+                    <div class="evt-contact-fifth pr-5">
+                        <h4>TYPE OF CAR AND WAGON</h4>
+                        <p>In velit animi qui </p>        
+                    </div>
+
+                    <div class="evt-contact-six f-100">
+                        <h4>GOOGLE MAP</h4>
+                        <p><a target="_blank" href="https://www.google.com/maps/@27.6704274,85.3239595,3225m/data=!3m1!1e3">In minim at ipsum mi</a></p>        
+                    </div>
+                    
+                </div>
+
+                <div class="evt-detail-sect">
+
+                    <div class="evt-detail-first">
+                        <h4>PRODUCTS</h4>
+                        <p>Est eius eu eum numq</p>        
+                    </div>
+
+                    <div class="evt-contact-second">
+                        <h4>ELECTRICITY</h4>
+                        <p>Irure rem quod non v</p>        
+                    </div>
+
+                    <div class="evt-contact-third">
+                        <h4>OTHER INFORMATION</h4>
+                        <p>Magnam optio ut con</p>        
+                    </div>
+                    
+                </div>
+            </section>       
+        </div>
     </body>
 </html>

@@ -87,6 +87,7 @@ if(! function_exists('get_msg')){
 			'dashboard'		=> 'Dashboard',
 			'event' => 'Event',
 			'all_event' => 'All Event',
+
 			'add_event'		=> 'Add Event',
 
 			'all_staff'     => 'All Staff',
@@ -137,9 +138,12 @@ if(! function_exists('get_msg')){
 			'breadcrumb_add_staff' => array('Staff','Add Staff'),
 			'no_event_assigned' => 'Not assigned on any event',
 
-			'breadcrumb_event_list' => array('Event', 'All Event'),
+			
 			'breadcrumb_event_edit' => array('Event', 'Edit Event'),
 			'breadcrumb_event_preview' => array('MY Events'),
+			'breadcrumb_all_event' => array('Event', 'All Event'),
+			'breadcrumb_add_event' => array('Event', 'Add Event'),
+
  
 			'meta_login' => array(
 				'title' => 'Login',
@@ -176,6 +180,16 @@ if(! function_exists('get_msg')){
 	        	'description'=> 'Event Edit',
 	        	'keyword' => 'event'
 	        ),
+	        'meta_event' => array(
+	        	'title'=> 'Event',
+	        	'description' => 'Event',
+	        	'keyword'=> 'event'
+	        ),
+	        'meta_add_event' => array(
+	        	'title' => 'Add Event',
+	        	'description' => 'Add Event',
+	        	'keyword' => 'add event'
+	        ),
 
 	        'label_event_name' => 'Event Name',
 	        'label_event_order' => 'Order Number',
@@ -193,7 +207,7 @@ if(! function_exists('get_msg')){
 	        'label_event_addstaff' => 'Add Staff',
 	        'label_event_add_packingstaff' => 'Add Package Staff',
 	        'label_event_packing_time' => 'Packing Time',
-	        
+
 	        'label_event_address' => 'Address',
 	        'label_event_Contact_person' => 'Contact Person',
 	        'label_event_tele_person' => 'Telephone Contact Person',
@@ -203,6 +217,7 @@ if(! function_exists('get_msg')){
 	        'label_event_other_info' => 'Other Information',
 	        'label_event_add_product' => 'Add Products',
 	        'label_event_electricty' => 'Electricity',
+	        
 	        'event_preview_btn' =>'Preview Event',
 	        'event_publish_btn' => 'Publish Event',
 
@@ -211,13 +226,12 @@ if(! function_exists('get_msg')){
 	        'placeholder_event_date' => 'Enter Date',
 	        'placeholder_event_packing_time' => 'Enter Packing Time',
 	        'placeholder_event_address' => 'Enter Address',
-
 	        'placeholder_event_Contact_person' => 'Your Contact Person',
 	        'placeholder_event_tele_Contact_person' => 'Contact Person Number',
 	        'placeholder_event_distance' => 'Distance To Event',
 	        'placeholder_event_car_wagon' => 'Enter Type Of Car And Wagon',
 	        'placeholder_event_link_map' => 'Enter Link To Google Map',
-	        'placeholder_e_other_info' => 'Enter Other Information',
+	        'placeholder_event_other_info' => 'Enter Other Information',
 	        'placeholder_event_add_product' => 'Add Other Products'
 		);
 

@@ -835,6 +835,8 @@ p.profile-name {
     color: #020441;
     text-transform: capitalize;
     font-size: 14px; }
+    .luft-table th a, .luft-table td a {
+      color: #020441; }
   .luft-table th {
     font-size: 15px;
     text-transform: capitalize;
@@ -856,6 +858,12 @@ p.profile-name {
     max-width: 13px;
     margin-left: 7px; }
 
+img.filter-img {
+  transition: all .3s; }
+
+.desc img.filter-img {
+  transform: rotateX(180deg); }
+
 .second-section {
   margin: 20px 0;
   border-top: 1px solid #DFDFE5;
@@ -868,7 +876,7 @@ p.profile-name {
   .section-3 > div {
     flex: 0 0 48% !important; }
 
-.luft-form-wrapper button {
+.luft-form-wrapper .preview-modal {
   margin-right: 10px;
   background: #DFDFE5;
   border: none;
@@ -880,8 +888,11 @@ p.profile-name {
   cursor: pointer;
   transition: all .3s;
   text-transform: uppercase;
-  font-size: 16px; }
-  .luft-form-wrapper button:hover {
+  font-size: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center; }
+  .luft-form-wrapper .preview-modal:hover {
     background: #F7F7F7; }
 
 th.luft-event-date, th.luft-event-time {
@@ -898,6 +909,19 @@ th.luft-event-name {
 td.right-text {
   padding-right: 10px;
   justify-content: flex-end; }
+
+.luft-view-more {
+  background: #020441;
+  color: #fff !important;
+  border-radius: 25px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 75px;
+  transition: all .3s; }
+  .luft-view-more:hover {
+    background: #58B975; }
 
 .template-profile .luft-inline-input .luft-form-row {
   flex: 0 0 100%; }
@@ -1075,5 +1099,13 @@ td.right-text {
   .evt-contact-six a {
     text-decoration: underline;
     color: #58B975; }
+
+.blocker {
+  z-index: 9999 !important; }
+
+div#preview-modal {
+  max-width: 1300px;
+  padding: 50px;
+  border-radius: 0; }
 
 /*# sourceMappingURL=style.css.map */
