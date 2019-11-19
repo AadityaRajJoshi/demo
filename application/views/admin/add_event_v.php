@@ -170,8 +170,6 @@
 					'class' => 'custom-styled-select',
 				), $staffs, isset( $event_package_users ) ? $event_package_users : false ); 
 				?>
-
-				) ); ?>
 			</div>
 			<div class="luft-form-row">
 				<?php echo form_label( get_msg('label_event_packing_time'), 'Packing_time' ); 
