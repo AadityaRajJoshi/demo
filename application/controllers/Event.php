@@ -232,7 +232,12 @@ class Event extends MY_Controller{
 			$event = $this->event_m->get('*', array('id'=>$id ), 1);
 		}
 
+		// $event_users = array_map(function($v){
+		// 	return $v->user_id;
+		// }, $users);		
+
 		$event->date = get_date_from_datetime( $event->start_time, 'Y-m-d' );
+
 		$arr = array(
 			'start_time',
 			'stop_time',
