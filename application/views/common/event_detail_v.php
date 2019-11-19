@@ -7,7 +7,7 @@
             <div class="evt-info">
                 <h4><b>DATE </b> <span><?php echo get_date_from_datetime($event->start_time, 'Y-m-d')  ?></span></h4>
                 <h4><b>CITY </b> <span> ktm </span></h4>
-                <h4> <b>STAFF </b> <span></span></span></h4>
+                <h4> <b>STAFF </b> <span><?php echo $event_staff ?></span></h4>
             </div>
         </div>
 
@@ -46,7 +46,7 @@
     </div>
 
     <div class="evt-info">
-        <h4><b> PACKED BY </b> <span> Emma </span></h4>
+        <h4><b> PACKED BY </b> <span> <?php echo $event_package_staff ?> </span></h4>
         <h4><b> PACKING TIME </b> <span><?php echo $event->packing_time ?> </span></h4>
     </div>
 

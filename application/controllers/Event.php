@@ -193,7 +193,18 @@ class Event extends MY_Controller{
 			$this->invalid_access();
 		}
 		$this->data['event'] = $query;
-		$staff = $this->event_m->get_users( 36 );
+		$staff = $this->event_m->get_users( $id );
+		$event_package_staff = '';
+		$event_staff = '';
+		foreach ($staff as $value) {
+			if( $value->type == 'event_staff' ){
+				$event_staff .= ucfirst($value->username).', ';
+			}else{
+				$event_package_staff =  ucfirst($value->username);
+			}
+		}
+		$this->data[ 'event_package_staff' ] = $event_package_staff."<br>";
+		$this->data[ 'event_staff' ] = rtrim( $event_staff, ', ' );
 		$this->data['breadcrumb'][] = $query->name;
 		$this->load->view( 'dashboard_template_v', $this->data );
 
@@ -231,11 +242,7 @@ class Event extends MY_Controller{
 		if('post' == $this->input->method()){
 			$this->save( $id );
 			$event = $this->event_m->get('*', array('id'=>$id ), 1);
-		}
-
-		// $event_users = array_map(function($v){
-		// 	return $v->user_id;
-		// }, $users);		
+		}	
 
 		$event->date = get_date_from_datetime( $event->start_time, 'Y-m-d' );
 
