@@ -82,8 +82,10 @@
         var preview = $('#kk');
         preview.click(function() {
             var inputs = $('#my-form').serializeArray();
+            console.log( inputs );
             $.each(inputs, function (i, input) {
-                $('#preview_' + input.name).html(input.value);
+                 $('#preview_' + input.name).html(input.value);
+
             });
             // $(".evt-name h2").html(name.val());
             // $(".date").html(date.val());
