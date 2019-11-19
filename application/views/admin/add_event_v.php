@@ -161,22 +161,17 @@
 		<div class="luft-inline-input inline-2">
 			<div class="luft-form-row">
 				<?php
-<<<<<<< HEAD
-				echo form_label( get_msg('event_add_packingstaff_label'), 'add_package_staff' );
-=======
+
 				echo form_label( get_msg('label_event_add_packingstaff'), 'add_package_staff' );
->>>>>>> 4d277f4204dde1ea245eefe7eecbab41740f8a7e
 				echo form_dropdown( array(
 					'name' => 'add_package_staff',
 					'id' => 'add_package_staff',
 					'options' => $staffs,
 					'class' => 'custom-styled-select',
-<<<<<<< HEAD
 				), $staffs, isset( $event_package_users ) ? $event_package_users : false ); 
 				?>
-=======
+
 				) ); ?>
->>>>>>> 4d277f4204dde1ea245eefe7eecbab41740f8a7e
 			</div>
 			<div class="luft-form-row">
 				<?php echo form_label( get_msg('label_event_packing_time'), 'Packing_time' ); 
