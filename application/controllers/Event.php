@@ -188,14 +188,24 @@ class Event extends MY_Controller{
 		$this->data['breadcrumb'] = get_msg('breadcrumb_event_preview');
 		$this->data['page'] = 'event_detail_v';
 		$this->data['current_menu'] = 'event';
+		
 		$query = $this->event_m->get( '*', array( 'id'=>$id ), 1 );
+
 		if(!$query){
 			$this->invalid_access();
 		}
+
+		if(is_staff()){
+			$users = $this->event->get_users($query->id);
+		}
+
 		$this->data['event'] = $query;
-		$staff = $this->event_m->get_users( 36 );
 		$this->data['breadcrumb'][] = $query->name;
 		$this->load->view( 'dashboard_template_v', $this->data );
+
+		// $this->load->model( 'events_package_staff_m' );
+		// $user = $this->events_package_staff_m->get( 'user_id', array('event_id' => $id) );
+		// var_dump($user) ;
 
 	}
 
@@ -231,11 +241,7 @@ class Event extends MY_Controller{
 		if('post' == $this->input->method()){
 			$this->save( $id );
 			$event = $this->event_m->get('*', array('id'=>$id ), 1);
-		}
-
-		// $event_users = array_map(function($v){
-		// 	return $v->user_id;
-		// }, $users);		
+		}	
 
 		$event->date = get_date_from_datetime( $event->start_time, 'Y-m-d' );
 
