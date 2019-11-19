@@ -39,6 +39,13 @@
                 url: LUFTLEK.ajax_url + LUFTLEK.route.event_toggle_status,
                 type: 'POST',
                 data: { event_id: id },
+                dataType: 'json',
+                success: function(res){
+                    if(200 != res.status){
+                        alert(res.message);
+                        location.reload();
+                    }
+                }
             });
         });
 
