@@ -188,11 +188,19 @@ class Event extends MY_Controller{
 		$this->data['breadcrumb'] = get_msg('breadcrumb_event_preview');
 		$this->data['page'] = 'event_detail_v';
 		$this->data['current_menu'] = 'event';
+		
 		$query = $this->event_m->get( '*', array( 'id'=>$id ), 1 );
+
 		if(!$query){
 			$this->invalid_access();
 		}
+
+		if(is_staff()){
+			$users = $this->event->get_users($query->id);
+		}
+
 		$this->data['event'] = $query;
+
 		$staff = $this->event_m->get_users( $id );
 		$event_package_staff = '';
 		$event_staff = '';
@@ -207,7 +215,6 @@ class Event extends MY_Controller{
 		$this->data[ 'event_staff' ] = rtrim( $event_staff, ', ' );
 		$this->data['breadcrumb'][] = $query->name;
 		$this->load->view( 'dashboard_template_v', $this->data );
-
 	}
 
 	public function add(){
