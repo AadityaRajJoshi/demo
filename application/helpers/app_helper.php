@@ -83,13 +83,10 @@ if(! function_exists('get_msg')){
 			'staff_delete'	=> 'Staff Deleted Successfully',
 			'staff_delete_e'=> 'Error! Staff Not Deleted',
 			'user_updated'	=> 'Staff Upadted Successfully',
-			'user_update_failed' => 'Error! Staff Not Upadted',
 			'dashboard'		=> 'Dashboard',
-			'event' => 'Event',
-			'all_event' => 'All Event',
-
+			'event'			=> 'Event',
+			'all_event' 	=> 'All Event',
 			'add_event'		=> 'Add Event',
-
 			'all_staff'     => 'All Staff',
 			'staff'         => 'Staff',
 			'my_details'    => 'My Details', 			
@@ -106,9 +103,10 @@ if(! function_exists('get_msg')){
 			'eventime'		=> 'Eventtime',
 			'finished'		=> 'Finished',
 			'order_number'	=> 'Order Number',
-			'total_worktime' => 'Total Workingtime',
-			'event_rollback_error' => 'Error! Cannot Insert Event',
+			'total_worktime'=> 'Total Workingtime',
 			'more_event'	=> 'More',
+			'user_update_failed'   => 'Error! Staff Not Upadted',
+			'event_rollback_error' => 'Error! Cannot Insert Event',
 
 			'label_name'         => 'Name',
 			'label_email'        => 'Email',
@@ -116,125 +114,145 @@ if(! function_exists('get_msg')){
 			'label_phone_number' => 'Number',
 			'label_username'     => 'User Name',
 
-			'placeholder_name' => 'Enter Name',
-			'placeholder_email' => 'Enter Email',
-			'placeholder_phone_number' => 'Enter Phone Number',
-			'placeholder_password' => 'Enter Password',
-			'placeholder_username' => 'Enter Username Or Email',
+			'placeholder_name' 			=> 'Enter Name',
+			'placeholder_email' 		=> 'Enter Email',
+			'placeholder_phone_number' 	=> 'Enter Phone Number',
+			'placeholder_password' 		=> 'Enter Password',
+			'placeholder_username' 		=> 'Enter Username Or Email',
 
+			'id' => 'ID',
 			'save_details'  => 'UPDATE DETAILS',
 			'update_staff'  => 'UPDATE STAFF',
-			'remember'     => 'Remember me',
-			'forget_pass'  => 'Forget Password',
-			'id' => 'ID',
-			'work_time'    => 'Total WorkingTime',
+			'remember'      => 'Remember me',
+			'forget_pass'   => 'Forget Password',
+			'work_time'     => 'Total WorkingTime',
 			'edit_title_m'  => 'Edit Profile',
-			'toggle_status_error' => 'You are not authorized.',
+			'toggle_status_error' 	=> 'You are not authorized.',
 			'toggle_status_success' => 'Status changed successfully.',
-			'edit_staff_title_m' => 'Edit Staff Profile',			
-			'breadcrumb_user_edit_own' => array('MY DETAILS'),
-			'breadcrumb_user_edit_other' => array('Staff', 'Update'),
-			'breadcrumb_all_staff' => array('Staff', 'All Staff'),
-			'breadcrumb_add_staff' => array('Staff','Add Staff'),
-			'no_event_assigned' => 'Not assigned on any event',
+			'edit_staff_title_m' 	=> 'Edit Staff Profile',		
+			'no_event_assigned' 	=> 'Not assigned on any event',
 
-			
-			'breadcrumb_event_edit' => array('Event', 'Edit Event'),
-			'breadcrumb_event_preview' => array('MY Events'),
-			'breadcrumb_all_event' => array('Event', 'All Event'),
-			'breadcrumb_add_event' => array('Event', 'Add Event'),
+			'breadcrumb_user_edit_own' 	=> array('MY DETAILS'),
+			'breadcrumb_user_edit_other'=> array('Staff', 'Update'),
+			'breadcrumb_all_staff' 		=> array('Staff', 'All Staff'),
+			'breadcrumb_add_staff' 		=> array('Staff','Add Staff'),			
+			'breadcrumb_event_edit' 	=> array('Event', 'Edit Event'),
+			'breadcrumb_event_preview'	=> array('MY Events'),
+			'breadcrumb_all_event'		=> array('Event', 'All Event'),
+			'breadcrumb_add_event'		=> array('Event', 'Add Event'),
 
  
 			'meta_login' => array(
-				'title' => 'Login',
+				'title' 	  => 'Login',
 				'description' => 'Login panel',
-				'keyword' => 'staff, admin, employee'
+				'keyword' 	  => 'staff, admin, employee'
 			),
 			'meta_forgot' => array(
-				'title' => 'Forgot Password',
+				'title' 	  => 'Forgot Password',
 				'description' => '',
-				'keyword' => ''
+				'keyword' 	  => ''
 			),
 			'meta_add_staff' => array(
-    			'title' => 'Add Staff',
+    			'title'		  => 'Add Staff',
     			'description' => '',
-    			'keyword' => ''
+    			'keyword' 	  => ''
     		),
 			'meta_edit_staff' => array(
-	            'title' => 'Edit Profile',
+	            'title'		  => 'Edit Profile',
 	            'description' => 'Edit Profile',
-	            'keyword' => ''
+	            'keyword'	  => ''
 	        ),
 	        'meta_edit_profile' => array(
-	            'title' => 'Edit Staff Profile',
+	            'title' 	  => 'Edit Staff Profile',
 	            'description' => 'Edit Profile',
-	            'keyword' => ''
+	            'keyword' 	  => ''
 	        ),
 	        'meta_event_detail' => array(
-	        	'title' => 'Event Details',
+	        	'title' 	  => 'Event Details',
 	        	'description' => 'Event Details',
-	        	'keyword' => 'event'
+	        	'keyword'     => 'event'
 	        ),
 	        'meta_event_edit' => array(
-	        	'title' => 'Event Edit',
-	        	'description'=> 'Event Edit',
-	        	'keyword' => 'event'
+	        	'title'		  => 'Event Edit',
+	        	'description' => 'Event Edit',
+	        	'keyword' 	  => 'event'
 	        ),
 	        'meta_event' => array(
-	        	'title'=> 'Event',
+	        	'title'		  => 'Event',
 	        	'description' => 'Event',
-	        	'keyword'=> 'event'
+	        	'keyword'	  => 'event'
 	        ),
 	        'meta_add_event' => array(
-	        	'title' => 'Add Event',
+	        	'title' 	  => 'Add Event',
 	        	'description' => 'Add Event',
-	        	'keyword' => 'add event'
+	        	'keyword'	  => 'add event'
 	        ),
 
-	        'label_event_name' => 'Event Name',
+	        'label_event_name' 	=> 'Event Name',
 	        'label_event_order' => 'Order Number',
-	        'label_event_date' => 'Date',
+	        'label_event_date' 	=> 'Date',
+	        'label_event_addstaff'  => 'Add Staff',
 	        'label_event_starttime' => 'Event StartTime',
-	        'label_event_stoptime' => 'Event StopTime',
+	        'label_event_stoptime'  => 'Event StopTime',
 	        'label_event_traveltime_1_start' => 'TravelTime 1 Start',
-	        'label_event_traveltime_1_stop' => 'TravelTime 1 Stop',
+	        'label_event_traveltime_1_stop'  => 'TravelTime 1 Stop',
 	        'label_event_traveltime_2_start' => 'TravelTime 2 Start',
-	        'label_event_traveltime_2_stop' => 'TravelTime 2 Stop',
+	        'label_event_traveltime_2_stop'  => 'TravelTime 2 Stop',
 	        'label_event_construction_start' => 'Construction Start',
-	        'label_event_construction_stop' => 'Construction Stop',
-	        'label_event_dismantling_start' => 'Dismantling Start',
-	        'label_event_dismantling_stop' => 'Dismantling Stop',
-	        'label_event_addstaff' => 'Add Staff',
-	        'label_event_add_packingstaff' => 'Add Package Staff',
-	        'label_event_packing_time' => 'Packing Time',
+	        'label_event_construction_stop'  => 'Construction Stop',
+	        'label_event_dismantling_start'  => 'Dismantling Start',
+	        'label_event_dismantling_stop'   => 'Dismantling Stop',
+	        'label_event_add_packingstaff'   => 'Add Package Staff',
+	        'label_event_packing_time'		 => 'Packing Time',
 
-	        'label_event_address' => 'Address',
-	        'label_event_Contact_person' => 'Contact Person',
-	        'label_event_tele_person' => 'Telephone Contact Person',
-	        'label_event_distance' => 'Distance To Event',
-	        'label_event_car_wagon' => 'Type Of Car And Wagon',
-	        'label_event_link_map' => 'Link To Google Map',
-	        'label_event_other_info' => 'Other Information',
+	        'label_event_address'     => 'Address',
+	        'label_event_distance'    => 'Distance To Event',
+	        'label_event_car_wagon'	  => 'Type Of Car And Wagon',
+	        'label_event_link_map'    => 'Link To Google Map',
+	        'label_event_other_info'  => 'Other Information',
 	        'label_event_add_product' => 'Add Products',
-	        'label_event_electricty' => 'Electricity',
+	        'label_event_electricty'  => 'Electricity',
+	        'label_event_tele_person' => 'Telephone Contact Person',
+	        'label_event_Contact_person' => 'Contact Person',
 	        
 	        'event_preview_btn' =>'Preview Event',
 	        'event_publish_btn' => 'Publish Event',
 
-	        'placeholder_event_name' => 'Enter Event Name',
-	        'placeholder_event_order' => 'Enetr Order Number',
-	        'placeholder_event_date' => 'Enter Date',
-	        'placeholder_event_packing_time' => 'Enter Packing Time',
-	        'placeholder_event_address' => 'Enter Address',
-	        'placeholder_event_Contact_person' => 'Your Contact Person',
+	        'placeholder_event_name'		=> 'Enter Event Name',
+	        'placeholder_event_order'		=> 'Enetr Order Number',
+	        'placeholder_event_date'		=> 'Enter Date',
+	        'placeholder_event_address'		=> 'Enter Address',
+	        'placeholder_event_distance'	=> 'Distance To Event',
+	        'placeholder_event_car_wagon'	=> 'Enter Type Of Car And Wagon',
+	        'placeholder_event_link_map'	=> 'Enter Link To Google Map',
+	        'placeholder_event_other_info'	=> 'Enter Other Information',
+	        'placeholder_event_add_product'	=> 'Add Other Products',
+	        'placeholder_event_packing_time'=> 'Enter Packing Time',
+	        'placeholder_event_Contact_person' 		=> 'Your Contact Person',
 	        'placeholder_event_tele_Contact_person' => 'Contact Person Number',
-	        'placeholder_event_distance' => 'Distance To Event',
-	        'placeholder_event_car_wagon' => 'Enter Type Of Car And Wagon',
-	        'placeholder_event_link_map' => 'Enter Link To Google Map',
-	        'placeholder_event_other_info' => 'Enter Other Information',
-	        'placeholder_event_add_product' => 'Add Other Products'
-		);
 
+	        'preview_date'	=> 'DATE',
+	        'preview_city'	=> 'CITY',
+	        'preview_staff'	=> 'STAFF',
+	        'preview_gmap'  => 'GOOGLE MAP',
+	        'preview_ordernumber'	=> 'ORDERNUMBER',
+	        'preview_traveltime_1'	=> 'TRAVELTIME 1',
+	        'preview_event_time'	=> 'EVENT TIME',
+	        'preview_traveltime_2'	=> 'TRAVELTIME 2',
+	        'preview_packed_by'		=> 'PACKED BY',
+	        'preview_packing_time'	=> 'PACKING TIME',
+	        'preview_event_address'	=> 'EVENT ADRESS',
+	        'preview_contactperson'	=> 'CONTACTPERSON',
+	        'preview_contact_phone'	=> 'CONTACT PHONE',
+	        'preview_type_of_car'	=> 'TYPE OF CAR AND WAGON',
+	        'preview_products'		=> 'PRODUCTS',
+	        'preview_electricity'	=> 'ELECTRICITY',
+	        'preview_other_info'	=> 'OTHER INFORMATION',
+	        'preview_construct_time'  => 'CONSTRUCTION TIME',
+	        'preview_distance_event'  => 'dISTANCE TO EVENT',
+	        'preview_total_worktime'  => 'TOTAL WORKINGTIME',
+	        'preview_dismantling_time'=> 'DISMANTALING TIME',
+		);
 		return $msg[ $key ];
 	}
 }
