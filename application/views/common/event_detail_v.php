@@ -10,7 +10,7 @@
                 </h4>
                 <h4>
                     <b><?php echo get_msg('preview_city'); ?> </b> 
-                    <span> ktm </span>
+                    <span id="preview_city"> <?php echo ucfirst($event->city) ?> </span>
                 </h4>
                 <h4> 
                     <b><?php echo get_msg('preview_staff'); ?> </b> 

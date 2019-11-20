@@ -57,7 +57,7 @@
 
         var preview = $('#preview-btn');
         preview.click(function () {
-            var inputs = $('#my-form').serializeArray();
+            var inputs = $('#my-form').serializeArray(); console.log(inputs);
             $.ajax({
                 url: LUFTLEK.ajax_url + LUFTLEK.route.event_process_data,
                 type: 'POST',
