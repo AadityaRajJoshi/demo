@@ -226,7 +226,18 @@ class Event extends MY_Controller{
 		$this->data['breadcrumb'] = get_msg('breadcrumb_event_preview');
 		$this->data['page'] = 'event_detail_v';
 		$this->data['current_menu'] = 'event';
-		
+
+		if(is_staff()){		
+			$session_user = $this->session->userdata('name');
+			$users = $this->event_m->get_users($id);
+			$available_user = array_map(function($v){
+				return $v->username;
+			}, $users);
+			if( !in_array($session_user, $available_user) ){
+				$this->invalid_access();
+			}
+		}
+			
 		$query = $this->event_m->get( '*', array( 'id'=>$id ), 1 );
 		if(!$query){
 			$this->invalid_access();
