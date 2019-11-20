@@ -334,6 +334,7 @@ class Event extends MY_Controller{
 		$this->data[ 'event_staff' ] = '';
 		$this->load->view( 'dashboard_template_v', $this->data );		
 	}
+
 	public function sendMail(){
 
 		$config = array(

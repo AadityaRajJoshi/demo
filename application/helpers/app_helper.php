@@ -38,6 +38,10 @@ if(! function_exists('get_route')){
 
 			case 'user_edit':
 				$path = 'user/edit';
+			break;			
+
+			case 'download_pdf':
+				$path = 'staff/download_pdf';
 			break;
 
 			case 'all_event':
