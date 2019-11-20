@@ -27,7 +27,7 @@ class Event extends MY_Controller{
 		$this->load->view('dashboard_template_v', $this->data);
 	}
 
-	public function saving_process($api=true){
+	public function get_formatted_inputs($api=true){
 
 		$input_time = array(
 			array(
@@ -81,20 +81,19 @@ class Event extends MY_Controller{
 			'add_products',
 			'electricity'
 		);
-		if( !$id ){
-			$data[ 'finished' ] = false;
-		}
-
+		
 		foreach ( $optional_value as $key => $value) {
 			if( $this->input->post( $value )){
 				$data[ $value ] = $this->input->post( $value );
 			}
 		}
+		
+		$data[ 'finished' ] = false;
 
 		if($api){
 			echo json_encode(array(
 				'status' => 200,
-				'data' => $this->format_time( $data )
+				'data' => $this->get_formatted_time( $data )
 			));
 
 			return;
@@ -103,10 +102,10 @@ class Event extends MY_Controller{
 	}
 
 	public function save( $id = false ){
+
 		$this->form_validation->set_rules('name', get_msg('label_event_name'), 'required' );
 		$this->form_validation->set_rules('order_number', get_msg('label_event_order'), 'required' );
 		$this->form_validation->set_rules('date', get_msg('label_event_date'), 'required' );
-
 		$this->form_validation->set_rules('start_time', get_msg('label_event_starttime'), 'required' );
 		$this->form_validation->set_rules('stop_time', get_msg('label_event_stoptime'), 'required' );
 		$this->form_validation->set_rules('traveltime_1_start', get_msg('label_event_traveltime_1_start'), 'required' );
@@ -117,12 +116,11 @@ class Event extends MY_Controller{
 		$this->form_validation->set_rules('construction_stop', get_msg('label_event_construction_stop'), 'required' );
 		$this->form_validation->set_rules('dismantling_start', get_msg('label_event_dismantling_start'), 'required' );
 		$this->form_validation->set_rules('dismantling_stop', get_msg('label_event_dismantling_stop'), 'required' );
-
 		$this->form_validation->set_rules('add_staff[]', 'Add Staff', 'required' );
 
 		if($this->form_validation->run()){
 
-			$data = $this->saving_process(false);
+			$data = $this->get_formatted_inputs(false);
 
 			$this->load->model( 'events_package_staff_m' );
 			$this->load->model( 'events_staff_m' );
@@ -198,7 +196,7 @@ class Event extends MY_Controller{
 		echo json_encode($data);
 	}
 
-	public function format_time($event){
+	public function get_formatted_time($event){
 
 		if(is_array($event)){
 			$event = (object) $event;
@@ -216,6 +214,7 @@ class Event extends MY_Controller{
 	}
 
 	public function view( $id ){
+
 		$this->data['common'] = true;
 		$this->data['meta'] = get_msg('meta_event_detail');
 		$this->data['breadcrumb'] = get_msg('breadcrumb_event_preview');
@@ -223,7 +222,6 @@ class Event extends MY_Controller{
 		$this->data['current_menu'] = 'event';
 		
 		$query = $this->event_m->get( '*', array( 'id'=>$id ), 1 );
-
 		if(!$query){
 			$this->invalid_access();
 		}
@@ -232,7 +230,7 @@ class Event extends MY_Controller{
 			$users = $this->event_m->get_users($query->id);
 		}
 
-		$this->data['event'] = $this->format_time($query);
+		$this->data['event'] = $this->get_formatted_time($query);
 
 		$staff = $this->event_m->get_users( $id );
 		$event_package_staff = '';

@@ -10,7 +10,7 @@
                     <span id='preview_date'><?php echo $event->date ?></span>
                 </h4>
                 <h4><b><?php echo get_msg('preview_city'); ?> </b> <span> ktm </span></h4>
-                <h4> <b><?php echo get_msg('preview_staff'); ?> </b> <span><?php echo $event_staff ?></span></h4>
+                <h4> <b><?php echo get_msg('preview_staff'); ?> </b> <span id="preview_staff"><?php echo $event_staff ?></span></h4>
             </div>
         </div>
 
@@ -54,7 +54,7 @@
     </div>
 
     <div class="evt-info">
-        <h4><b><?php echo get_msg('preview_packed_by'); ?></b> <span id="preview_add_package_staff"> <?php echo $event_package_staff ?> </span></h4>
+        <h4><b><?php echo get_msg('preview_packed_by'); ?></b> <span id="preview_package_staff"> <?php echo $event_package_staff ?> </span></h4>
         <h4><b> <?php echo get_msg('preview_packing_time'); ?> </b> <span id='preview_packing_time'><?php echo $event->packing_time ?> </span></h4>
     </div>
 
