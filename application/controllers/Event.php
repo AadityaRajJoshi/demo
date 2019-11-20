@@ -230,10 +230,10 @@ class Event extends MY_Controller{
 		if(is_staff()){		
 			$session_user = $this->session->userdata('name');
 			$users = $this->event_m->get_users($id);
-			$related_user = array_map(function($v){
+			$available_user = array_map(function($v){
 				return $v->username;
 			}, $users);
-			if( !in_array($session_user, $related_user) ){
+			if( !in_array($session_user, $available_user) ){
 				$this->invalid_access();
 			}
 		}
