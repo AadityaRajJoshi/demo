@@ -1,18 +1,18 @@
 <table class="luft-table">
   	<thead>
-  		<th class="luft-event-id"><?php thead('order_number'); ?></th>
+  		<th class="luft-event-id hide-on-mobile"><?php thead('order_number'); ?></th>
   		<th class="luft-event-name"><?php thead('event', 'name'); ?></th>
-  		<th class="luft-event-date"><?php thead('date', 'start_time'); ?></th>
-  		<th class="luft-event-city"><?php echo get_msg( 'city' ); ?> <img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
+  		<th class="luft-event-date hide-on-mobile"><?php thead('date', 'start_time'); ?></th>
+  		<th class="luft-event-city hide-on-mobile"><?php echo get_msg( 'city' ); ?> <img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
   		<th class="luft-event-time"><?php echo get_msg( 'eventime' ); ?> <img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
-  		<th class="luft-working-time"><?php thead( 'total_worktime' ); ?></th>
+  		<th class="luft-working-time hide-on-mobile"><?php thead( 'total_worktime' ); ?></th>
   		<th class="luft-event-status"><?php echo is_admin() ? get_msg('finished') : '' ?></th>
   	</thead>
   	<tbody>
 
 		<?php foreach ($events as $event) { ?>
 		<tr>
-			<td><?php echo $event->order_number ?></td>
+			<td class="hide-on-mobile"><?php echo $event->order_number ?></td>
 			<td>
 				<?php if( is_admin() ): ?>
 				<a href="<?php echo get_route('event_detail'). $event->id?>"><?php echo $event->name ?></a>
@@ -21,11 +21,11 @@
 				endif; ?>				
 			</td>
 			<td><?php echo  get_date_from_datetime( $event->start_time, 'd M Y' ); ?></td>
-			<td>Kathmandu</td>
-			<td>
+			<td class="hide-on-mobile">Kathmandu</td>
+			<td class="hide-on-mobile" >
 				<?php echo get_start_end_time($event->start_time,$event->stop_time); ?>							
 			</td>
-			<td><?php echo seconds_to_time( $event->total_worktime );?></td>
+			<td class="hide-on-mobile" ><?php echo seconds_to_time( $event->total_worktime );?></td>
 			<td class="d-flex-center right-text">
 			<?php if( is_admin() ) : ?>
 					<a href="<?php echo get_route('event_edit').'/'. $event->id; ?>"  class="luft-user-edit" ><i class="far fa-edit"></i></a>
