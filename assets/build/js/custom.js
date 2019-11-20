@@ -75,7 +75,9 @@
 
                         $('#preview_staff').html(staff);
                         var package_staff = $('#add_package_staff option:selected').text();
-                         $('#preview_package_staff').html(capitalize(package_staff));
+                        $('#preview_package_staff').html(capitalize(package_staff));
+                        var city = $('#city').val();
+                        $('#preview_city').html(capitalize(city));
                     }
                 }
             })

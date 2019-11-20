@@ -209,6 +209,7 @@ if(! function_exists('get_msg')){
 	        'label_event_add_packingstaff'   => 'Add Package Staff',
 	        'label_event_packing_time'		 => 'Packing Time',
 
+	        'label_event_city'		  => 'City',
 	        'label_event_address'     => 'Address',
 	        'label_event_distance'    => 'Distance To Event',
 	        'label_event_car_wagon'	  => 'Type Of Car And Wagon',
@@ -224,6 +225,7 @@ if(! function_exists('get_msg')){
 	        'event_update_btn'  => 'Update Event',
 
 	        'placeholder_event_name'		=> 'Enter Event Name',
+	        'placeholder_event_car'			=> 'Enter City',
 	        'placeholder_event_order'		=> 'Enetr Order Number',
 	        'placeholder_event_date'		=> 'Enter Date',
 	        'placeholder_event_address'		=> 'Enter Address',

@@ -208,7 +208,6 @@
 			</div>
 
 			<div class="luft-form-row luft-half-row">
-
 				<?php echo form_label( get_msg('label_event_tele_person'), 'telephone_contact_person' ); 
 				echo form_input( array(
 					'name' => 'telephone_contact_person',
@@ -217,7 +216,6 @@
 					'value' => get_value($event, 'telephone_contact_person'),
 				) ); ?>
 			</div>
-
 
 			<div class="luft-form-row luft-half-row">
 				<?php echo form_label( get_msg('label_event_distance'), 'distance_to_event' ); 
@@ -236,6 +234,16 @@
 					'placeholder' => get_msg('placeholder_event_car_wagon'),
 					'value' => get_value($event, 'type_of_car'),
 					'id' => 'type_of_car'
+				) ); ?>
+			</div>
+			
+			<div class="luft-form-row luft-half-row">
+				<?php echo form_label( get_msg('label_event_city'), 'city' ); 
+				echo form_input( array(
+					'name' => 'city',
+					'placeholder' => get_msg('placeholder_event_car'),
+					'value' => get_value($event, 'city'),
+					'id' => 'city'
 				) ); ?>
 			</div>
 			
