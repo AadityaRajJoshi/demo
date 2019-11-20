@@ -27,11 +27,85 @@ class Event extends MY_Controller{
 		$this->load->view('dashboard_template_v', $this->data);
 	}
 
+	public function get_formatted_inputs($api=true){
+
+		$input_time = array(
+			array(
+				'start_time',
+				'stop_time',
+			),
+			array(
+				'traveltime_1_start',
+				'traveltime_1_stop',
+			),
+			array(
+				'traveltime_2_start',
+				'traveltime_2_stop',
+			),
+			array(
+				'construction_start',
+				'construction_stop',
+			),
+			array(
+				'dismantling_start',
+				'dismantling_stop',
+			)
+		);
+		
+		$data = array(
+			'total_worktime' => 0
+		);
+
+		$event_date = $this->input->post('date');
+		foreach ($input_time as $pair ) {
+			$temp = [];
+			foreach($pair as $key){
+				$v = $this->input->post($key);
+				$data[$key] = $event_date . ' ' .$v;
+				$temp[] = $v . ':00';
+			}
+			$data['total_worktime'] += get_time_diff($temp);
+		}
+
+		$optional_value = array(
+			'name',
+			'order_number',
+			'packing_time',
+			'address',
+			'contact_person',
+			'telephone_contact_person',
+			'distance_to_event',
+			'type_of_car',
+			'link_gmap',
+			'other_information',
+			'add_products',
+			'electricity'
+		);
+		
+		foreach ( $optional_value as $key => $value) {
+			if( $this->input->post( $value )){
+				$data[ $value ] = $this->input->post( $value );
+			}
+		}
+		
+		$data[ 'finished' ] = false;
+
+		if($api){
+			echo json_encode(array(
+				'status' => 200,
+				'data' => $this->get_formatted_time( $data )
+			));
+
+			return;
+		}
+		return $data;
+	}
+
 	public function save( $id = false ){
+
 		$this->form_validation->set_rules('name', get_msg('label_event_name'), 'required' );
 		$this->form_validation->set_rules('order_number', get_msg('label_event_order'), 'required' );
 		$this->form_validation->set_rules('date', get_msg('label_event_date'), 'required' );
-
 		$this->form_validation->set_rules('start_time', get_msg('label_event_starttime'), 'required' );
 		$this->form_validation->set_rules('stop_time', get_msg('label_event_stoptime'), 'required' );
 		$this->form_validation->set_rules('traveltime_1_start', get_msg('label_event_traveltime_1_start'), 'required' );
@@ -42,71 +116,11 @@ class Event extends MY_Controller{
 		$this->form_validation->set_rules('construction_stop', get_msg('label_event_construction_stop'), 'required' );
 		$this->form_validation->set_rules('dismantling_start', get_msg('label_event_dismantling_start'), 'required' );
 		$this->form_validation->set_rules('dismantling_stop', get_msg('label_event_dismantling_stop'), 'required' );
-
 		$this->form_validation->set_rules('add_staff[]', 'Add Staff', 'required' );
 
 		if($this->form_validation->run()){
 
-			$input_time = array(
-				array(
-					'start_time',
-					'stop_time',
-				),
-				array(
-					'traveltime_1_start',
-					'traveltime_1_stop',
-				),
-				array(
-					'traveltime_2_start',
-					'traveltime_2_stop',
-				),
-				array(
-					'construction_start',
-					'construction_stop',
-				),
-				array(
-					'dismantling_start',
-					'dismantling_stop',
-				)
-			);
-			
-			$data = array(
-				'total_worktime' => 0
-			);
-
-			$event_date = $this->input->post('date');
-			foreach ($input_time as $pair ) {
-				$temp = [];
-				foreach($pair as $key){
-					$v = $this->input->post($key);
-					$data[$key] = $event_date . ' ' .$v;
-					$temp[] = $v . ':00';
-				}
-				$data['total_worktime'] += get_time_diff($temp);
-			} 
-			$optional_value = array(
-				'name',
-				'order_number',
-				'packing_time',
-				'address',
-				'contact_person',
-				'telephone_contact_person',
-				'distance_to_event',
-				'type_of_car',
-				'link_gmap',
-				'other_information',
-				'add_products',
-				'electricity'
-			);
-			if( !$id ){
-				$data[ 'finished' ] = false;
-			}
-
-			foreach ( $optional_value as $key => $value) {
-				if( $this->input->post( $value )){
-					$data[ $value ] = $this->input->post( $value );
-				}
-			}
+			$data = $this->get_formatted_inputs(false);
 
 			$this->load->model( 'events_package_staff_m' );
 			$this->load->model( 'events_staff_m' );
@@ -182,7 +196,25 @@ class Event extends MY_Controller{
 		echo json_encode($data);
 	}
 
+	public function get_formatted_time($event){
+
+		if(is_array($event)){
+			$event = (object) $event;
+		}
+
+		$event->date = get_date_from_datetime($event->start_time, 'Y-m-d');
+		$event->total_worktime = seconds_to_time($event->total_worktime);
+		$event->traveltime_1 = get_start_end_time($event->traveltime_1_start, $event->traveltime_1_stop);
+		$event->construction_time = get_start_end_time($event->construction_start, $event->construction_stop);
+		$event->event_time = get_start_end_time($event->start_time,$event->stop_time);
+		$event->dismantling_time = get_start_end_time($event->dismantling_start, $event->dismantling_stop);
+		$event->traveltime_2 = get_start_end_time($event->traveltime_2_start, $event->traveltime_2_stop);
+
+		return $event;
+	}
+
 	public function view( $id ){
+
 		$this->data['common'] = true;
 		$this->data['meta'] = get_msg('meta_event_detail');
 		$this->data['breadcrumb'] = get_msg('breadcrumb_event_preview');
@@ -190,7 +222,6 @@ class Event extends MY_Controller{
 		$this->data['current_menu'] = 'event';
 		
 		$query = $this->event_m->get( '*', array( 'id'=>$id ), 1 );
-
 		if(!$query){
 			$this->invalid_access();
 		}
@@ -199,7 +230,7 @@ class Event extends MY_Controller{
 			$users = $this->event_m->get_users($query->id);
 		}
 
-		$this->data['event'] = $query;
+		$this->data['event'] = $this->get_formatted_time($query);
 
 		$staff = $this->event_m->get_users( $id );
 		$event_package_staff = '';
@@ -211,7 +242,7 @@ class Event extends MY_Controller{
 				$event_package_staff =  ucfirst($value->username);
 			}
 		}
-		$this->data[ 'event_package_staff' ] = $event_package_staff."<br>";
+		$this->data[ 'event_package_staff' ] = $event_package_staff;
 		$this->data[ 'event_staff' ] = rtrim( $event_staff, ', ' );
 		$this->data['breadcrumb'][] = $query->name;
 		$this->load->view( 'dashboard_template_v', $this->data );
@@ -295,5 +326,33 @@ class Event extends MY_Controller{
 		$this->data[ 'event_users' ] = $event_users;
 		$this->data[ 'staffs' ] = get_staffs_dropdown();
 		$this->load->view( 'dashboard_template_v', $this->data );		
+	}
+	public function sendMail(){
+
+		$config = array(
+			'protocol' => 'sendmail',
+			'smtp_host' => 'ssl://smtp.gmail.com',
+			'smtp_port' => 465,
+			'smtp_user' => 'cloudprazol@gmail.com',
+			'smtp_pass' => 'cloud_prajwol',
+			'mailtype'  => 'html', 
+			'charset'   => 'iso-8859-1'
+		);
+
+		$message = 'This is Test email';
+		$this->load->library('email', $config);
+		$this->email->clear();
+		$this->email->set_newline("\r\n");
+		$this->email->from('cloudprazol@gmail.com'); // change it to yours
+		$this->email->to('cloudaaditya@gmail.com');// change it to yours
+		$this->email->subject('Resume from JobsBuddy for your Job posting');
+		$this->email->message($message);
+		// echo  "called";die;
+		if( $this->email->send() ){
+			echo "mail sent";
+		}else{
+			echo "error";
+			var_export( $this->email->print_debugger() );
+		}
 	}
 }

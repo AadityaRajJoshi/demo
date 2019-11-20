@@ -64,6 +64,10 @@ if(! function_exists('get_route')){
 				$path = 'event/toggle_status';
 			break;
 
+			case 'event_process_data':
+				$path = 'event/get_formatted_inputs';
+			break;
+
 			case 'event_detail':
 				$path = 'event/view/';
 			break;	

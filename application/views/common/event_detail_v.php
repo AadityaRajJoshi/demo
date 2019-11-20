@@ -3,17 +3,25 @@
     <div class="luft-evt-header">
         <div class="evt-name">
 
-            <h2 id = 'preview_name'><?php echo $event->name ?></h2>
+            <h2 id='preview_name'><?php echo $event->name ?></h2>
             <div class="evt-info">
-                <h4><b><?php echo get_msg('preview_date'); ?> </b> <span id='preview_date'><?php echo get_date_from_datetime($event->start_time, 'Y-m-d')  ?></span></h4>
+                <h4>
+                    <b><?php echo get_msg('preview_date'); ?> </b> 
+                    <span id='preview_date'><?php echo $event->date ?></span>
+                </h4>
                 <h4><b><?php echo get_msg('preview_city'); ?> </b> <span> ktm </span></h4>
-                <h4> <b><?php echo get_msg('preview_staff'); ?> </b> <span><?php echo $event_staff ?></span></h4>
+                <h4> <b><?php echo get_msg('preview_staff'); ?> </b> <span id="preview_staff"><?php echo $event_staff ?></span></h4>
             </div>
         </div>
 
         <div class="evt-order-number">
-            <h5> <span><?php echo get_msg('preview_ordernumber'); ?><span id='preview_order_number'> <?php echo $event->order_number ?> </h5>
-            <h5><?php echo get_msg('preview_total_worktime'); ?><span><span> <?php echo seconds_to_time($event->total_worktime ) ?></h5>
+            <h5>
+                <span>
+                    <?php echo get_msg('preview_ordernumber'); ?>
+                    <span id='preview_order_number'> <?php echo $event->order_number ?> </span>
+                </span>
+            </h5>
+            <h5><?php echo get_msg('preview_total_worktime'); ?><span><span id="preview_total_worktime"> <?php echo $event->total_worktime; ?></h5>
         </div>
     </div>
 
@@ -21,32 +29,32 @@
 
         <div class="travel-time-1">
             <h4><?php echo get_msg('preview_traveltime_1'); ?></h4>
-            <p><?php echo get_start_end_time( $event->traveltime_1_start, $event->traveltime_1_stop ) ?>  </p>
+            <p id="preview_traveltime_1"><?php echo $event->traveltime_1; ?>  </p>
         </div>
 
         <div class="cs-time">
             <h4><?php echo get_msg('preview_construct_time'); ?></h4>
-            <p><?php echo get_start_end_time( $event->construction_start, $event->construction_stop ) ?></p>
+            <p id="preview_construction_time"><?php echo $event->construction_time; ?></p>
         </div>
 
         <div class="evt-time">
             <h4><?php echo get_msg('preview_event_time'); ?></h4>
-            <p><?php echo get_start_end_time( $event->start_time,$event->stop_time ) ?></p>
+            <p id="preview_event_time"><?php echo $event->event_time; ?></p>
         </div>
 
         <div class="ds-time">
             <h4><?php echo get_msg('preview_dismantling_time'); ?></h4>
-            <p><?php echo get_start_end_time( $event->dismantling_start, $event->dismantling_stop ) ?></p>
+            <p id="preview_dismantling_time"><?php echo $event->dismantling_time; ?></p>
         </div>
 
         <div class="travel-time-2">
             <h4><?php echo get_msg('preview_traveltime_2'); ?></h4>
-            <p><?php echo get_start_end_time($event->traveltime_2_start, $event->traveltime_2_stop) ?></p>
+            <p id="preview_traveltime_2"><?php echo $event->traveltime_2; ?></p>
         </div>
     </div>
 
     <div class="evt-info">
-        <h4><b><?php echo get_msg('preview_packed_by'); ?></b> <span id="preview_add_package_staff"> <?php echo $event_package_staff ?> </span></h4>
+        <h4><b><?php echo get_msg('preview_packed_by'); ?></b> <span id="preview_package_staff"> <?php echo $event_package_staff ?> </span></h4>
         <h4><b> <?php echo get_msg('preview_packing_time'); ?> </b> <span id='preview_packing_time'><?php echo $event->packing_time ?> </span></h4>
     </div>
 

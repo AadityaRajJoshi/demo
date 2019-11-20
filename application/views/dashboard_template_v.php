@@ -111,12 +111,12 @@
             var LUFTLEK = {
                 'ajax_url': '<?php echo base_url(); ?>',
                 'route': {
-                    'event_toggle_status': '<?php echo get_route('event_toggle_status'); ?>'
+                    'event_toggle_status': '<?php echo get_route('event_toggle_status'); ?>',
+                    'event_process_data': '<?php echo get_route('event_process_data'); ?>'
                 }
             };
         </script>
         <script src="assets/build/js/custom.js"></script>      
-        
         
         <!-- Modal -->
         <div id="preview-modal" class="modal">

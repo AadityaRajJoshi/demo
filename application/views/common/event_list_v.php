@@ -2,10 +2,10 @@
   	<thead>
   		<th class="luft-event-id hide-on-mobile"><?php thead('order_number'); ?></th>
   		<th class="luft-event-name"><?php thead('event', 'name'); ?></th>
-  		<th class="luft-event-date hide-on-mobile"><?php thead('date', 'start_time'); ?></th>
-  		<th class="luft-event-city hide-on-mobile"><?php echo get_msg( 'city' ); ?> <img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
-  		<th class="luft-event-time"><?php echo get_msg( 'eventime' ); ?> <img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
-  		<th class="luft-working-time hide-on-mobile"><?php thead( 'total_worktime' ); ?></th>
+  		<th class="luft-event-date"><?php thead('date', 'start_time'); ?></th>
+  		<th class="luft-event-city"><?php echo get_msg( 'city' ); ?> <img src='assets/image/filter.png' alt="filter" class="filter-img" /></th>
+  		<th class="luft-event-time"><?php echo get_msg( 'eventime' ); ?></th>
+  		<th class="luft-working-time"><?php thead( 'total_worktime' ); ?></th>
   		<th class="luft-event-status"><?php echo is_admin() ? get_msg('finished') : '' ?></th>
   	</thead>
   	<tbody>
