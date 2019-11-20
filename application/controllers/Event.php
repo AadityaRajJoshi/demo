@@ -227,14 +227,15 @@ class Event extends MY_Controller{
 		$this->data['page'] = 'event_detail_v';
 		$this->data['current_menu'] = 'event';
 
-
-		$session_user = $this->session->userdata('name');
-		$users = $this->event_m->get_users($id);
-		$related_user = array_map(function($v){
-			return $v->username;
-		}, $users);
-		if( !in_array($session_user, $related_user) ){
-			$this->invalid_access();
+		if(is_staff()){		
+			$session_user = $this->session->userdata('name');
+			$users = $this->event_m->get_users($id);
+			$related_user = array_map(function($v){
+				return $v->username;
+			}, $users);
+			if( !in_array($session_user, $related_user) ){
+				$this->invalid_access();
+			}
 		}
 			
 		$query = $this->event_m->get( '*', array( 'id'=>$id ), 1 );
