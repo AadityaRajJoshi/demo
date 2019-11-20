@@ -106,7 +106,7 @@ class Event extends MY_Controller{
 		return $data;
 	}
 
-	public function save( $id = false ){
+	public function save( $is_update = false ){
 
 		$this->form_validation->set_rules('name', get_msg('label_event_name'), 'required' );
 		$this->form_validation->set_rules('order_number', get_msg('label_event_order'), 'required' );
@@ -130,33 +130,48 @@ class Event extends MY_Controller{
 
 			$this->load->model( 'events_package_staff_m' );
 			$this->load->model( 'events_staff_m' );
+			$this->load->model( 'user_m' );
 
 			$this->db->trans_start();
-			if( $id ){
-				$this->events_staff_m->delete( array( 'event_id' => $id ) );
-				$this->events_package_staff_m->delete( array('event_id' => $id) );
-				$this->event_m->save( $data, array('id'=>$id) );
-				$is_update = true;
+
+			if( $is_update ){
+				$event_id = $is_update;
+				$this->events_staff_m->delete( array( 'event_id' => $event_id ) );
+				$this->events_package_staff_m->delete( array('event_id' => $event_id) );
+				$this->event_m->save( $data, array('id'=>$event_id) );
 			}else{
-				$id = $this->event_m->save( $data );
-				$is_update = false;
+				$event_id = $this->event_m->save( $data );
 			}
 
-			$event_releated_staff = $this->input->post( 'add_staff' );
+			$event_staff = $this->input->post( 'add_staff' );
 
-			foreach( $event_releated_staff as  $value){
-				$insert_staff = array(
-					'user_id' => $value,
-					'event_id' => $id
-				);
-				$this->events_staff_m->save( $insert_staff );
+			foreach( $event_staff as  $staff_id){
+				$this->events_staff_m->save(array(
+					'user_id' => $staff_id,
+					'event_id' => $event_id
+				));
+			}
+
+			if($is_update){
+				$t = $this->input->post('old_staff');
+				// var_dump(json_decode( $t )); die;
+			}else{
+				# Send sms to newly added staffs
+				$staffs = $this->user_m->get_by_ids($event_staff);
+				foreach($staffs as $staff){
+					$msg = str_replace('{event}', $data['name'], get_msg('sms_added_to_event'));
+					$this->send_sms(array(
+						'number' => $staff->phone_number,
+						'message' => $msg,
+					));
+				}
 			}
 
 			if( $this->input->post( 'add_package_staff' ) ){
 				$event_releated_package_staff = $this->input->post( 'add_package_staff' );
 				$insert_package_staff = array(
 					'user_id' => $this->input->post( 'add_package_staff' ),
-					'event_id' => $id
+					'event_id' => $event_id
 				);
 			}
 

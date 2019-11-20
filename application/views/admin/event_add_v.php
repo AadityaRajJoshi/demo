@@ -143,7 +143,8 @@
 				'value' => get_value($event, 'dismantling_stop'),
 				'required' => 'required',
 				'type' => 'time'
-			) ); ?>
+			)); 
+			?>
 		</div>
 	</div>
 
@@ -155,6 +156,12 @@
 				'id' => 'add_staff',
 				'class' => 'custom-styled-select',
 			),  $staffs, $event_users ); 
+
+			echo form_input( array(
+				'name' => 'old_staff',
+				'value' => json_encode($event_users),
+				'type' => 'hidden'
+			)); 
 		?>
 	</div>
 

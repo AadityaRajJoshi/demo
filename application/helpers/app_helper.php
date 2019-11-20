@@ -263,6 +263,8 @@ if(! function_exists('get_msg')){
 	        'preview_distance_event'  => 'dISTANCE TO EVENT',
 	        'preview_total_worktime'  => 'TOTAL WORKINGTIME',
 	        'preview_dismantling_time'=> 'DISMANTALING TIME',
+
+	        'sms_added_to_event' => 'You are added in {event} event',
 		);
 		return $msg[ $key ];
 	}
