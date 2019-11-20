@@ -117,10 +117,5 @@
             };
         </script>
         <script src="assets/build/js/custom.js"></script>      
-        
-        <!-- Modal -->
-        <div id="preview-modal" class="modal">
-            <?php $this->load->view('common/event_detail_v'); ?>   
-        </div>
     </body>
 </html>

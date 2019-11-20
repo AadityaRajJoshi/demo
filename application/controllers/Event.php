@@ -87,7 +87,7 @@ class Event extends MY_Controller{
 				$data[ $value ] = $this->input->post( $value );
 			}
 		}
-		
+
 		$data[ 'finished' ] = false;
 
 		if($api){
@@ -242,6 +242,7 @@ class Event extends MY_Controller{
 				$event_package_staff =  ucfirst($value->username);
 			}
 		}
+		
 		$this->data[ 'event_package_staff' ] = $event_package_staff;
 		$this->data[ 'event_staff' ] = rtrim( $event_staff, ', ' );
 		$this->data['breadcrumb'][] = $query->name;
@@ -283,7 +284,7 @@ class Event extends MY_Controller{
 			$event = $this->event_m->get('*', array('id'=>$id ), 1);
 		}	
 
-		$event->date = get_date_from_datetime( $event->start_time, 'Y-m-d' );
+		$event = $this->get_formatted_time($event);
 
 		$arr = array(
 			'start_time',
@@ -325,6 +326,8 @@ class Event extends MY_Controller{
 		$this->data[ 'event_package_users' ] = $event_package_users[0];
 		$this->data[ 'event_users' ] = $event_users;
 		$this->data[ 'staffs' ] = get_staffs_dropdown();
+		$this->data[ 'event_package_staff' ] = '';
+		$this->data[ 'event_staff' ] = '';
 		$this->load->view( 'dashboard_template_v', $this->data );		
 	}
 	public function sendMail(){
