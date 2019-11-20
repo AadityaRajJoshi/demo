@@ -232,10 +232,6 @@ class Event extends MY_Controller{
 			$this->invalid_access();
 		}
 
-		if(is_staff()){
-			$users = $this->event_m->get_users($query->id);
-		}
-
 		$this->data['event'] = $this->get_formatted_time($query);
 
 		$staff = $this->event_m->get_users( $id );

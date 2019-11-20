@@ -560,10 +560,10 @@ function seconds_to_time($seconds_time){
         $seconds = floor($seconds_time - ($hours * 3600) - ($minutes * 60));
         $date = '';
         if( $hours != 0 ){
-        	$date .= $hours.'hr';
+        	$date .= $hours.' hrs ';
         }
         if( $minutes != 0  ){
-        	$date .= $minutes.'min';
+        	$date .= $minutes.' min ';
         }
         if( $seconds != 0  ){
         	$date .= $seconds.'sec';
