@@ -1,5 +1,10 @@
 +(function ($) {
-    const documentReadyCallbackFunc = () => {
+
+    var capitalize = function(text){
+        return text.substr(0,1).toUpperCase()+text.substr(1);
+    };
+
+    var documentReadyCallbackFunc = () => {
 
         $.sidebarMenu($('.sidebar-menu'));
 
@@ -53,6 +58,7 @@
         var preview = $('#preview-btn');
         preview.click(function () {
             var inputs = $('#my-form').serializeArray();
+            console.log(inputs);
             $.ajax({
                 url: LUFTLEK.ajax_url + LUFTLEK.route.event_process_data,
                 type: 'POST',
@@ -63,6 +69,14 @@
                         $.each(res.data, function (name, input) {
                             $('#preview_' + name).html(input);
                         });
+                        var staff = $('#add_staff option:selected').toArray().map(function(item){
+                            return capitalize(item.text);
+                            
+                        }).join(', ');
+
+                        $('#preview_staff').html(staff);
+                        var package_staff = $('#add_package_staff option:selected').text();
+                         $('#preview_package_staff').html(capitalize(package_staff));
                     }
                 }
             })

@@ -65,7 +65,7 @@ if(! function_exists('get_route')){
 			break;
 
 			case 'event_process_data':
-				$path = 'event/saving_process';
+				$path = 'event/get_formatted_inputs';
 			break;
 
 			case 'event_detail':
