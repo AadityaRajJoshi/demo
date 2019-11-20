@@ -238,7 +238,15 @@
 						'id' => 'type_of_car'
 					) ); ?>
 				</div>
-				
+				<div class="luft-form-row luft-half-row">
+					<?php echo form_label( get_msg('label_event_city'), 'city' ); 
+					echo form_input( array(
+						'name' => 'city',
+						'placeholder' => get_msg('placeholder_event_car'),
+						'value' => get_value($event, 'city'),
+						'id' => 'city'
+					) ); ?>
+				</div>
 				<div class="luft-form-row map-link">
 					<?php echo form_label( get_msg('label_event_link_map'), 'link_gmap' ); 
 					echo form_input( array(

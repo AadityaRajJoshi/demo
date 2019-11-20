@@ -76,6 +76,7 @@ class Event extends MY_Controller{
 			'telephone_contact_person',
 			'distance_to_event',
 			'type_of_car',
+			'city',
 			'link_gmap',
 			'other_information',
 			'add_products',
@@ -106,6 +107,7 @@ class Event extends MY_Controller{
 		$this->form_validation->set_rules('name', get_msg('label_event_name'), 'required' );
 		$this->form_validation->set_rules('order_number', get_msg('label_event_order'), 'required' );
 		$this->form_validation->set_rules('date', get_msg('label_event_date'), 'required' );
+		$this->form_validation->set_rules('city', get_msg('label_event_city'), 'required' );
 
 		$this->form_validation->set_rules('start_time', get_msg('label_event_starttime'), 'required' );
 		$this->form_validation->set_rules('stop_time', get_msg('label_event_stoptime'), 'required' );
