@@ -62,10 +62,13 @@ class Event extends MY_Controller{
 			$temp = [];
 			foreach($pair as $key){
 				$v = $this->input->post($key);
+				if(!empty($v)){
+					$temp[] = $v . ':00';
+				}
 				$data[$key] = $event_date . ' ' .$v;
-				$temp[] = $v . ':00';
 			}
-			$data['total_worktime'] += get_time_diff($temp);
+			if(count($temp) == 2)
+				$data['total_worktime'] += get_time_diff($temp);
 		}
 
 		$optional_value = array(

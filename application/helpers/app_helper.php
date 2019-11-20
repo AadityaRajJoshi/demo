@@ -468,7 +468,8 @@ if(! function_exists('get_staffs_dropdown')){
 
 if(! function_exists('get_time_from_datetime')){	
 	function get_time_from_datetime( $datetime ){
-		// return seconds_to_time( $datetime );
+		if(empty(trim($datetime)))
+			return '';
 		$time=strtotime($datetime);
 		return date("H:i", $time);
 	}
@@ -484,7 +485,12 @@ if(! function_exists('get_date_from_datetime')){
 if( !function_exists( 'time_to_sec' ) ){	
 	function time_to_sec($time) {
 	    $sec = 0;
-	    foreach (array_reverse(explode(':', $time)) as $k => $v) $sec += pow(60, $k) * $v;
+	    foreach (array_reverse(explode(':', $time)) as $k => $v){
+	    	$t = pow(60, $k) * $v;
+	    	if(is_numeric($t)){
+	    		$sec += $t;	
+	    	}
+	    } 
 	    return $sec;
 	}
 }
