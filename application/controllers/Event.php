@@ -8,6 +8,7 @@ class Event extends MY_Controller{
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->load->model( 'event_m' );
+
 	}
 
 	public function index(){
@@ -267,6 +268,8 @@ class Event extends MY_Controller{
 		$this->data[ 'staffs' ] = get_staffs_dropdown();	
 		$this->save();
 		$this->data[ 'mode' ] = 'add';
+		$this->data[ 'event_package_staff' ] = '';
+		$this->data[ 'event_staff' ] = '';
 		$this->load->view( 'dashboard_template_v', $this->data );
 	}
 
