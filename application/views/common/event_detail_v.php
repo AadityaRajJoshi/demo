@@ -9,7 +9,7 @@
                     <b><?php echo get_msg('preview_date'); ?> </b> 
                     <span id='preview_date'><?php echo $event->date ?></span>
                 </h4>
-                <h4><b><?php echo get_msg('preview_city'); ?> </b> <span> ktm </span></h4>
+                <h4><b><?php echo get_msg('preview_city'); ?> </b> <span id="preview_city"><?php  echo ucfirst($event->city); ?></span></h4>
                 <h4> <b><?php echo get_msg('preview_staff'); ?> </b> <span id="preview_staff"><?php echo $event_staff ?></span></h4>
             </div>
         </div>
