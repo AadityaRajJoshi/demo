@@ -133,7 +133,7 @@ class User extends MY_Controller{
         		$type = '';
         		foreach ($staff as $s) {
         			if($s->user_id  == $id ){
-        				$type .= $s->type == 'event_staff' ? 'Event' : 'Packaging';
+        				$type .= $s->type == 'event_staff' ? get_msg('event') : get_msg('packaging');
         				$type .=' and ';
         			}
         		}
