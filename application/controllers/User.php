@@ -87,7 +87,6 @@ class User extends MY_Controller{
 	}
 
 	public function profile(){
-
 		$this->edit(get_session('id'), 'own');
 	}
 
@@ -132,7 +131,6 @@ class User extends MY_Controller{
         	$this->data['current_menu'] = 'dashboard';
         }else{
         	# Editing staff profile
-
     		$this->data['meta'] = get_msg('meta_edit_profile');
 	        $this->data[ 'breadcrumb' ] = get_msg('breadcrumb_user_edit_other');
 	        $this->data['body_class'] = 'template-staff-profile';
