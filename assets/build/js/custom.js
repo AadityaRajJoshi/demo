@@ -96,38 +96,38 @@
             })
         });
 
-        $(document).on('click', '.luft-user-download', function (e) {
-            e.preventDefault();
-            var user_id = $(this).data('user_id');
-            $.ajax({
-                url: LUFTLEK.ajax_url + LUFTLEK.route.download_pdf,
-                type: 'POST',
-                data: { user_id: user_id },
-                dataType: 'json',
-                success: function (res) {
-                    if (200 != res.status) {
-                        alert(res.message);
-                        location.reload();
-                    }
-                }
-            });
+        // $(document).on('click', '.luft-user-download', function (e) {
+        //     e.preventDefault();
+        //     var user_id = $(this).data('user_id');
+        //     $.ajax({
+        //         url: LUFTLEK.ajax_url + LUFTLEK.route.download_pdf,
+        //         type: 'POST',
+        //         data: { user_id: user_id },
+        //         dataType: 'json',
+        //         success: function (res) {
+        //             if (200 != res.status) {
+        //                 alert(res.message);
+        //                 location.reload();
+        //             }
+        //         }
+        //     });
 
-            function download(filename, text) {
-                var element = document.createElement('a');
-                element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-                element.setAttribute('download', filename);
+        //     function download(filename, text) {
+        //         var element = document.createElement('a');
+        //         element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+        //         element.setAttribute('download', filename);
 
-                element.style.display = 'none';
-                document.body.appendChild(element);
+        //         element.style.display = 'none';
+        //         document.body.appendChild(element);
 
-                element.click();
+        //         element.click();
 
-                document.body.removeChild(element);
-            }
+        //         document.body.removeChild(element);
+        //     }
 
-            // Start file download.
-            download("hello.txt", "This is the content of my file :)");
-        })
+        //     // Start file download.
+        //     download("hello.txt", "This is the content of my file :)");
+        // });
     };
 
     /* DOM ready event */
