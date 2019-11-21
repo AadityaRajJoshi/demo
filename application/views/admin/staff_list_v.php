@@ -25,16 +25,16 @@
             </td>     
 
             <td class="extend-data">        
-                <div class="user-list-data">
+                <span class="user-list-data">
                     <div>
                         <a href="<?php echo get_route('download_pdf') . '/' . $staff->id; ?>" class="luft-user-download">
                             <i class="fas fa-file-pdf"></i> <span>Ladda ner rapport </span>
                         </a> 
                     </div>
-                    <div>
+                    <span>
                         <a href="<?php echo get_route('user_edit').'/'. $event->id; ?>"  class="luft-user-edit-btn" >Edit</a> 
-                    </div>
-                </div>
+                    </span>
+                </span>
 
             </td>     
 
