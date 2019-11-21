@@ -86,6 +86,7 @@
 </div>
 
 <?php if( $mode == 'other' ){?>
+	<?php if( $events ) : ?>
 	<table class="luft-table">
 	  	<thead>
 	  		
@@ -99,8 +100,7 @@
 	  		
 	  	</thead>
 	  	<tbody>
-
-			<?php foreach ($events as $event) { ?>
+			<?php foreach ($events as $event) : ?>
 			<tr>
 			
 				<td>
@@ -115,8 +115,11 @@
 				<td class="hide-on-mobile"><?php echo $event->city ?></td>				
 				<td class="hide-on-mobile" ><?php echo seconds_to_time( $event->total_worktime );?></td>
 			</tr>
-			<?php } ?>
+			<?php endforeach; ?>
 	  	</tbody>
 	</table>
+	<?php else: ?>
+		<p><?php echo get_msg( 'no_event_assigned' ) ?></p>
+	<?php endif; ?>
 
 <?php } ?>

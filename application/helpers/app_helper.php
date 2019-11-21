@@ -102,6 +102,7 @@ if(! function_exists('get_msg')){
 			'setting'		=> 'Setting',
 			'my_event'		=> 'My Event',
 			'login'         => 'Login',
+			'packaging'		=> 'Packaging',
 			'logout'		=> 'Log Out',
 			'menu'			=> 'Menu',
 			'access'        => 'Cannot access',
