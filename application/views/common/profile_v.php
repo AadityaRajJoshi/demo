@@ -1,5 +1,4 @@
 <?php echo form_open_multipart(); ?>
-
 	<?php if( 'own' == $mode ): ?>
 		<div class="luft-profile-image">
 			<?php if(isset($profile_picture)){?>
@@ -87,6 +86,12 @@
 <?php if( $mode == 'other' &&  $events  ) : ?>
 	<div class="user-detail-table-wrapper">
 		<h2><?php echo get_msg( 'staff_card' ); ?></h2>
+		<?php  
+		echo form_dropdown( array(
+			'name' => 'date',
+			'id' => 'date',
+			'class' => 'custom-styled-select',
+		), $date );?> 
 		<div class="user-table-content">
 				<table class="luft-table">
 					<thead>

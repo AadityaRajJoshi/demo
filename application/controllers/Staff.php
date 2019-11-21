@@ -10,7 +10,6 @@ class Staff extends MY_Controller{
 	} 
 
 	public function index(){
-
 		if(! is_admin() )
 			do_redirect('dashboard');
 
@@ -43,6 +42,7 @@ class Staff extends MY_Controller{
 			}
 		}
 	}
+
 
 	public function download_pdf(){
 		if(!is_admin()){
@@ -82,13 +82,10 @@ class Staff extends MY_Controller{
 	   
 	  
 	    // Set some content to print
-	    $html = <<<EOD
-	    <h1>Welcome to <a href="http://www.tcpdf.org" style="text-decoration:none;background-color:#CC0000;color:black;">&nbsp;<span style="color:black;">TC</span><span style="color:white;">PDF</span>&nbsp;</a>!</h1>
+	    $html = '<h1>Welcome to <a href="http://www.tcpdf.org" style="text-decoration:none;background-color:#CC0000;color:black;">&nbsp;<span style="color:black;">TC</span><span style="color:white;">PDF</span>&nbsp;</a>!</h1>
 	    <i>This is the first example of TCPDF library.</i>
 	    <p>This text is printed using the <i>writeHTMLCell()</i> method but you can also use: <i>Multicell(), writeHTML(), Write(), Cell() and Text()</i>.</p>
-	    <p>Please check the source code documentation and other examples for further information.</p>
-	     
-	EOD;
+	    <p>Please check the source code documentation and other examples for further information.</p>';
 		  
 	    // Print text using writeHTMLCell()
 	    $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);   
@@ -99,4 +96,5 @@ class Staff extends MY_Controller{
 	    // This method has several options, check the source code documentation for more information.
 	    $pdf->Output($pdf_name, 'I'); 
 	}	
+
 }
