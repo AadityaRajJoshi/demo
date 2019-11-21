@@ -14,7 +14,7 @@
             <td class="luft-user-id"><?php echo $key+1; ?></td>
             <td class="luft-user-name"><?php echo $staff->username; ?></td>
             <td class="luft-staff-work-time"> <?php echo $worktime ? $worktime : get_msg( 'no_event_assigned' ) ?></td>
-            <td class="luft-text-right luft-update-download">
+            <td class="luft-update-download">
                 <a href="<?php echo get_route('user_edit') . '/' . $staff->id; ?>" class="luft-user-edit hide-on-mobile" >
                     <i class="far fa-edit"></i>
                 </a> 
