@@ -59,6 +59,9 @@
         &.#{$prefix}-user-id,
         &.#{$prefix}-update-download {
             width: 100px;
+            @include media(mb) {   
+                width: 100%;
+            }
         }
     }
 
@@ -116,6 +119,20 @@ img.filter-img{
                 &.luft-event-date {
                     flex: 0 0 30%;
                     order: 1;
+                }
+
+                &.luft-user-id {                 
+                    flex: 0 0 20%;
+                }
+                &.luft-user-name {
+                    flex: 0 0 28%;
+                }
+                &.luft-staff-work-time {
+                    flex: 0 0 34%;
+                }
+
+                &.luft-update-download {
+                    flex: 0 0 18%;
                 }
             }
 
@@ -177,30 +194,55 @@ img.filter-img{
             border-bottom: 1px solid $color_border;
             padding-bottom: 15px;
             font-size: 18px;
+
             &:last-child {
                 border-bottom: none;
                 padding-bottom: 0;
                 justify-content: flex-end;
-                padding-top: 15px;
+                padding-top: 15px;                
+            }           
 
-                a{
-                    color: $color_white;
-                    background: $color_primary;
-                    padding: 9px 35px;
-                    border-radius: 25px;
-                    transition: all .3s;
-                    &:hover {
-                        background: $color_green;
-                    }
-                }
-            }
-
-            span {
+            > span {
                 flex: 0 0 50%;
                 &:last-child {
                     padding-left: 30px;
                 }
             }
+        }        
+    }
+    
+    .luft-user-edit-btn{
+        color: $color_white;
+        background: $color_primary;
+        padding: 9px 35px;
+        border-radius: 25px;
+        transition: all .3s;
+        &:hover {
+            background: $color_green;
         }
     } 
+    
+    .user-list-data {
+        display: flex;
+        flex-wrap: nowrap !important;
+        align-items: center;
+
+       > div {
+            flex: 0 0 60%;
+
+            span {
+                color: $color_primary;
+                margin-left: 10px;
+            }
+
+            &:last-child {
+                display: flex;
+                justify-content: flex-end;
+                flex: 0 0 40%;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+        }
+    }
 }
+
