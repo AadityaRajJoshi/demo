@@ -365,7 +365,7 @@ class Event extends MY_Controller{
 
 		$config = array(
 			'protocol' => 'sendmail',
-			'smtp_host' => 'ssl://smtp.gmail.com',
+			'smtp_host' => 'smtp.gmail.com',
 			'smtp_port' => 465,
 			'smtp_user' => 'cloudprazol@gmail.com',
 			'smtp_pass' => 'cloud_prajwol',
