@@ -33,4 +33,17 @@ class User_m extends MY_Model{
 		return false;
 	}
 
+	public function get_by_ids($ids){
+
+		$this->db->select( '*', false );
+		$this->db->from( $this->table, false );
+		$this->db->where_in('id', $ids);
+		$query = $this->db->get();
+	    if( $query ){
+	    	return $query->result();
+	    }
+
+	    return false;
+	}
+
 }
