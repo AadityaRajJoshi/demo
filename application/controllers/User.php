@@ -107,7 +107,6 @@ class User extends MY_Controller{
 		$events = $this->user_m->get_events($id);
 		$this->data['events'] = $events;
 		
-		
         $id = $this->input->post('id');
 
         if($id){
