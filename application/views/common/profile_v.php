@@ -110,7 +110,7 @@
 						echo $event->name;
 					endif; ?>				
 				</td>
-				<td><?php echo $event->type ?></td>
+				<td><?php echo $event->event_type; ?></td>
 				<td><?php echo  get_date_from_datetime( $event->start_time, 'd M Y' ); ?></td>
 				<td class="hide-on-mobile"><?php echo $event->city ?></td>				
 				<td class="hide-on-mobile" ><?php echo seconds_to_time( $event->total_worktime );?></td>
