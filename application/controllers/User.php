@@ -91,7 +91,7 @@ class User extends MY_Controller{
 		$this->edit(get_session('id'), 'own');
 	}
 
-	public function edit($id=null, $mode='other'){ 
+	public function edit($id=null, $mode='other'){
 
         if((is_staff() && get_session('id') != $id) ||  $id <= 0 ){
         	$this->invalid_access();
@@ -104,7 +104,12 @@ class User extends MY_Controller{
         	$this->invalid_access();
         }
 
+		$events = $this->user_m->get_events($id);
+		$this->data['events'] = $events;
+		
+		
         $id = $this->input->post('id');
+
         if($id){
         	if($id<=0)
         		$this->invalid_access();
@@ -140,6 +145,10 @@ class User extends MY_Controller{
         $this->data['common'] = true;
         $this->data['page'] = 'profile_v';
         $this->data['current_menu'] = 'dashboard';
+        
+
+      
+        
 
         $this->load->view('dashboard_template_v', $this->data);    
     }

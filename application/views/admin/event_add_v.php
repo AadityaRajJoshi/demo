@@ -1,4 +1,4 @@
-<?php echo form_open( '', array('id'=>'my-form') ); ?>
+<?php echo form_open( '', array('id'=>'my-form') );?>
 <div class="luft-form-wrapper">
 	<div class="luft-form-row">
 		<?php echo form_label( get_msg('label_event_name'), 'name' ); 
@@ -143,7 +143,8 @@
 				'value' => get_value($event, 'dismantling_stop'),
 				'required' => 'required',
 				'type' => 'time'
-			) ); ?>
+			)); 
+			?>
 		</div>
 	</div>
 
@@ -156,6 +157,12 @@
 				'required' => 'required',
 				'class' => 'custom-styled-select',
 			),  $staffs, $event_users ); 
+
+			echo form_input( array(
+				'name' => 'old_staff',
+				'value' => json_encode($event_users),
+				'type' => 'hidden'
+			)); 
 		?>
 	</div>
 
