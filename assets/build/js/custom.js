@@ -4,6 +4,18 @@
         return text.substr(0, 1).toUpperCase() + text.substr(1);
     };
 
+    //hide show table detail content
+    function toggleDetailTable() {
+        $('.extend-data').hide();
+        $('.luft-extend-table').click(function (e) {
+            $(this).parent().next().slideToggle(200);
+            $(this).parent().parent().toggleClass('data-expended');
+            e.preventDefault();
+        });
+        $('.extend-data').slideUp(200);
+    }
+
+
     var documentReadyCallbackFunc = () => {
 
         $.sidebarMenu($('.sidebar-menu'));
@@ -20,13 +32,6 @@
             placeholder: "Add staff here",
         });
 
-        $('.extend-data').hide();
-        $('.luft-extend-table').click(function (e) {
-            $(this).parent().next().slideToggle(200);
-            $(this).parent().parent().toggleClass('data-expended');
-            e.preventDefault();
-        });
-        $('.extend-data').slideUp(200);
 
         function readURL(input) {
 
@@ -91,7 +96,7 @@
             })
         });
 
-        $(document).on('click', '.luft-user-download', function(e){
+        $(document).on('click', '.luft-user-download', function (e) {
             e.preventDefault();
             var user_id = $(this).data('user_id');
             $.ajax({
@@ -108,25 +113,25 @@
             });
 
             function download(filename, text) {
-              var element = document.createElement('a');
-              element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-              element.setAttribute('download', filename);
+                var element = document.createElement('a');
+                element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+                element.setAttribute('download', filename);
 
-              element.style.display = 'none';
-              document.body.appendChild(element);
+                element.style.display = 'none';
+                document.body.appendChild(element);
 
-              element.click();
+                element.click();
 
-              document.body.removeChild(element);
+                document.body.removeChild(element);
             }
 
             // Start file download.
-            download("hello.txt","This is the content of my file :)");
+            download("hello.txt", "This is the content of my file :)");
         })
     };
 
     /* DOM ready event */
-    $(document).ready(documentReadyCallbackFunc);
+    $(document).ready(documentReadyCallbackFunc, toggleDetailTable());
 
 })(jQuery);
 
