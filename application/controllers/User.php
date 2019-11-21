@@ -129,6 +129,10 @@ class User extends MY_Controller{
         }else{
         	$this->load->model( 'event_m' );
         	$this->data['total_worktime'] = get_staff_worktime($id);
+        	$date = array_map( function($v){
+        		return get_date_from_datetime($v->start_time, 'd M Y');
+        	}, $events );
+        	$this->data['date'] = $date;
         	$this->data['events'] = $events;
     		$this->data['meta'] = get_msg('meta_edit_profile');
 	        $this->data[ 'breadcrumb' ] = get_msg('breadcrumb_user_edit_other');
