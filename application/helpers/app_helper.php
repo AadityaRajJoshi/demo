@@ -114,6 +114,8 @@ if(! function_exists('get_msg')){
 			'eventime'		=> 'Eventtime',
 			'finished'		=> 'Finished',
 			'order_number'	=> 'Order Number',
+			'go_back'		=> 'Go Back',
+			'staff_card'	=> 'Staff card',
 			'total_worktime'=> 'Total Workingtime',
 			'more_event'	=> 'More',
 			'user_update_failed'   => 'Error! Staff Not Upadted',
