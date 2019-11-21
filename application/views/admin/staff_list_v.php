@@ -32,12 +32,12 @@
                     <div>
                          <?php if($worktime) :?>
                             <a href="<?php echo get_route('download_pdf') . '/' . $staff->id; ?>" class="luft-user-download">
-                                <i class="fas fa-file-pdf"></i> <span>Ladda ner rapport </span>
+                                <i class="fas fa-file-pdf"></i> <span><?php echo get_msg( 'download_report' ) ?> </span>
                             </a> 
                         <?php endif; ?>
                     </div>
                     <div>
-                        <a href="<?php echo get_route('user_edit').'/'. $staff->id; ?>"  class="luft-user-edit-btn" >Edit</a> 
+                        <a href="<?php echo get_route('user_edit').'/'. $staff->id; ?>"  class="luft-user-edit-btn" ><?php echo get_msg( 'edit' ) ?></a> 
                     </div>
                 </div>
 

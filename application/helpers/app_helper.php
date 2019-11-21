@@ -94,6 +94,7 @@ if(! function_exists('get_msg')){
 			'dashboard'		=> 'Dashboard',
 			'event'			=> 'Event',
 			'hour'			=> 'Hours',
+			'edit'			=> 'Edit',
 			'all_event' 	=> 'All Event',
 			'add_event'		=> 'Add Event',
 			'all_staff'     => 'All Staff',
@@ -119,6 +120,7 @@ if(! function_exists('get_msg')){
 			'total_worktime'=> 'Total Workingtime',
 			'more_event'	=> 'More',
 			'user_update_failed'   => 'Error! Staff Not Upadted',
+			'download_report' 	   => 'Ladda ner rapport',
 			'event_rollback_error' => 'Error! Cannot Insert Event',
 
 			'label_name'         => 'Name',
