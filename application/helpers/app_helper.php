@@ -38,6 +38,10 @@ if(! function_exists('get_route')){
 
 			case 'user_edit':
 				$path = 'user/edit';
+			break;			
+
+			case 'download_pdf':
+				$path = 'staff/download_pdf';
 			break;
 
 			case 'all_event':
@@ -89,6 +93,7 @@ if(! function_exists('get_msg')){
 			'user_updated'	=> 'Staff Upadted Successfully',
 			'dashboard'		=> 'Dashboard',
 			'event'			=> 'Event',
+			'hour'			=> 'Hours',
 			'all_event' 	=> 'All Event',
 			'add_event'		=> 'Add Event',
 			'all_staff'     => 'All Staff',
@@ -259,6 +264,8 @@ if(! function_exists('get_msg')){
 	        'preview_distance_event'  => 'dISTANCE TO EVENT',
 	        'preview_total_worktime'  => 'TOTAL WORKINGTIME',
 	        'preview_dismantling_time'=> 'DISMANTALING TIME',
+
+	        'sms_added_to_event' => 'You are added in {event} event',
 		);
 		return $msg[ $key ];
 	}
@@ -468,7 +475,8 @@ if(! function_exists('get_staffs_dropdown')){
 
 if(! function_exists('get_time_from_datetime')){	
 	function get_time_from_datetime( $datetime ){
-		// return seconds_to_time( $datetime );
+		if(empty(trim($datetime)))
+			return '';
 		$time=strtotime($datetime);
 		return date("H:i", $time);
 	}
@@ -484,7 +492,12 @@ if(! function_exists('get_date_from_datetime')){
 if( !function_exists( 'time_to_sec' ) ){	
 	function time_to_sec($time) {
 	    $sec = 0;
-	    foreach (array_reverse(explode(':', $time)) as $k => $v) $sec += pow(60, $k) * $v;
+	    foreach (array_reverse(explode(':', $time)) as $k => $v){
+	    	$t = pow(60, $k) * $v;
+	    	if(is_numeric($t)){
+	    		$sec += $t;	
+	    	}
+	    } 
 	    return $sec;
 	}
 }
@@ -554,10 +567,10 @@ function seconds_to_time($seconds_time){
         $seconds = floor($seconds_time - ($hours * 3600) - ($minutes * 60));
         $date = '';
         if( $hours != 0 ){
-        	$date .= $hours.'hr';
+        	$date .= $hours.' hrs ';
         }
         if( $minutes != 0  ){
-        	$date .= $minutes.'min';
+        	$date .= $minutes.' min ';
         }
         if( $seconds != 0  ){
         	$date .= $seconds.'sec';

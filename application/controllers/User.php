@@ -87,11 +87,11 @@ class User extends MY_Controller{
 	}
 
 	public function profile(){
-
 		$this->edit(get_session('id'), 'own');
 	}
+ 
 
-	public function edit($id=null, $mode='other'){ 
+	public function edit($id=null, $mode='other'){
 
         if((is_staff() && get_session('id') != $id) ||  $id <= 0 ){
         	$this->invalid_access();
@@ -104,7 +104,12 @@ class User extends MY_Controller{
         	$this->invalid_access();
         }
 
-        $id = $this->input->post('id');
+		$events = $this->user_m->get_events($id);
+		
+		if( $mode == 'own' ){
+        	$id = $this->input->post('id');
+		}
+
         if($id){
         	if($id<=0)
         		$this->invalid_access();
@@ -127,8 +132,19 @@ class User extends MY_Controller{
 	        $this->data['body_class'] = 'template-profile';
         	$this->data['current_menu'] = 'dashboard';
         }else{
-        	# Editing staff profile
-
+        	$this->load->model( 'event_m' );
+        	foreach ($events as $e) {	
+        		$staff = $this->event_m->get_users( $e->id );
+        		$type = '';
+        		foreach ($staff as $s) {
+        			if($s->user_id  == $id ){
+        				$type .= $s->type == 'event_staff' ? 'Event' : 'Packaging';
+        				$type .=' and ';
+        			}
+        		}
+        		$e->type = rtrim( $type, ' and ' );
+        	}
+        	$this->data['events'] = $events;
     		$this->data['meta'] = get_msg('meta_edit_profile');
 	        $this->data[ 'breadcrumb' ] = get_msg('breadcrumb_user_edit_other');
 	        $this->data['body_class'] = 'template-staff-profile';
@@ -153,7 +169,7 @@ class User extends MY_Controller{
     	$this->data['page'] = 'profile_v';
     	$this->data['common'] = true;
     	$this->data['user'] = false;
-    	$this->data['mode'] = 'other';
+    	$this->data['mode'] = 'add';
     	$this->data['breadcrumb'] = get_msg('breadcrumb_add_staff');
     	$this->data['current_menu'] = 'staff';
 

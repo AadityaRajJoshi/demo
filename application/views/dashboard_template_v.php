@@ -112,7 +112,8 @@
                 'ajax_url': '<?php echo base_url(); ?>',
                 'route': {
                     'event_toggle_status': '<?php echo get_route('event_toggle_status'); ?>',
-                    'event_process_data': '<?php echo get_route('event_process_data'); ?>'
+                    'event_process_data': '<?php echo get_route('event_process_data'); ?>',
+                    'download_pdf': '<?php echo get_route('download_pdf'); ?>',
                 }
             };
         </script>

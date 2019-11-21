@@ -17,7 +17,9 @@
                 <a href="<?php echo get_route('user_edit') . '/' . $staff->id; ?>" class="luft-user-edit" >
                     <i class="far fa-edit"></i>
                 </a>  
-                <a href="#" class="luft-user-download"><i class="fas fa-file-pdf"></i></a> 
+                <a href="<?php echo get_route('download_pdf') . '/' . $staff->id; ?>" class="luft-user-download">
+                    <i class="fas fa-file-pdf"></i>
+                </a> 
             </td>     
         </tr>
     <?php endforeach; ?>
