@@ -94,7 +94,7 @@ class User extends MY_Controller{
 
         $this->load->model('user_m');
         $user = $this->user_m->get('*', array('id'=>$id ), 1);
-
+       
         if(! $user){
         	$this->invalid_access();
         }
@@ -133,12 +133,13 @@ class User extends MY_Controller{
         		$type = '';
         		foreach ($staff as $s) {
         			if($s->user_id  == $id ){
-        				$type .= $s->type == 'event_staff' ? 'Event' : 'Packaging';
+        				$type .= $s->type == 'event_staff' ? get_msg('event') : get_msg('packaging');
         				$type .=' and ';
         			}
         		}
         		$e->type = rtrim( $type, ' and ' );
         	}
+        	$this->data['total_worktime'] = get_staff_worktime($id);
         	$this->data['events'] = $events;
     		$this->data['meta'] = get_msg('meta_edit_profile');
 	        $this->data[ 'breadcrumb' ] = get_msg('breadcrumb_user_edit_other');
