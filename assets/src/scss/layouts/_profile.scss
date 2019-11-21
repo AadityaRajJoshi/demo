@@ -46,3 +46,36 @@
         max-width: 650px;
     }
 }
+
+.user-detail-table-wrapper {
+    background: $color_light_grey;
+    width: calc(100% + 60px);
+    margin-left: -30px;
+    margin-top: 30px;
+    padding-top: 40px;
+
+    .user-table-content {
+        padding: 30px 30px 0;
+        background: $color_white;
+    }
+
+    h2 {
+        margin-bottom: 40px;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: $color_primary;
+        font-size: 16px;
+        margin-top: 0;        
+    }
+}
+
+.staff-total-time {
+    background: $color_white !important;
+    td {
+        padding-top: 80px;
+    }
+}
+
+.staff-profile-th {
+    width: auto !important;
+}
