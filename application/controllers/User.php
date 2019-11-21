@@ -128,17 +128,6 @@ class User extends MY_Controller{
         	$this->data['current_menu'] = 'dashboard';
         }else{
         	$this->load->model( 'event_m' );
-        	// foreach ($events as $e) {	
-        	// 	$staff = $this->event_m->get_users( $e->id );
-        	// 	$type = '';
-        	// 	foreach ($staff as $s) {
-        	// 		if($s->user_id  == $id ){
-        	// 			$type .= $s->type == 'event_staff' ? get_msg('event') : get_msg('packaging');
-        	// 			$type .=' and ';
-        	// 		}
-        	// 	}
-        	// 	$e->type = rtrim( $type, ' and ' );
-        	// }
         	$this->data['total_worktime'] = get_staff_worktime($id);
         	$this->data['events'] = $events;
     		$this->data['meta'] = get_msg('meta_edit_profile');
