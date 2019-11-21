@@ -93,8 +93,8 @@
 	  		<th class="luft-event-name"><?php thead('event', 'name'); ?></th>
 	  		<th class="luft-event-name"><?php echo "Type" ?></th>
 	  		
-	  		<th class="luft-event-date"><?php thead('date', 'start_time'); ?></th>
 	  		<th class="luft-event-city"><?php thead('city'); ?></th>
+	  		<th class="luft-event-date"><?php thead('date', 'start_time'); ?></th>
 	  		
 	  		<th class="luft-working-time"><?php thead('hour', 'total_worktime'); ?></th>
 	  		
@@ -111,8 +111,8 @@
 					endif; ?>				
 				</td>
 				<td><?php echo $event->event_type; ?></td>
-				<td><?php echo  get_date_from_datetime( $event->start_time, 'd M Y' ); ?></td>
 				<td class="hide-on-mobile"><?php echo $event->city ?></td>				
+				<td><?php echo  get_date_from_datetime( $event->start_time, 'd M Y' ); ?></td>
 				<td class="hide-on-mobile" ><?php echo seconds_to_time( $event->total_worktime );?></td>
 			</tr>
 			<?php endforeach; ?>
