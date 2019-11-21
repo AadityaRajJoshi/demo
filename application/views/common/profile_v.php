@@ -79,7 +79,7 @@
 	?>
 
 
-
+<?php if( $mode == 'other' ){?>
 	<table class="luft-table">
 	  	<thead>
 	  		
@@ -112,3 +112,5 @@
 			<?php } ?>
 	  	</tbody>
 	</table>
+
+<?php } ?>
