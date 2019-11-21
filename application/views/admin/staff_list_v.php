@@ -37,7 +37,7 @@
                         <?php endif; ?>
                     </div>
                     <div>
-                        <a href="<?php echo get_route('user_edit').'/'. $event->id; ?>"  class="luft-user-edit-btn" >Edit</a> 
+                        <a href="<?php echo get_route('user_edit').'/'. $staff->id; ?>"  class="luft-user-edit-btn" >Edit</a> 
                     </div>
                 </div>
 

@@ -101,8 +101,7 @@
 					</thead>
 					<tbody>
 						<?php foreach ($events as $event) : ?>
-						<tr>
-						
+						<tr>						
 							<td>
 								<?php if( is_admin() ): ?>
 								<a href="<?php echo get_route('event_detail'). $event->id?>"><?php echo $event->name ?></a>
