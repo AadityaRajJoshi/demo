@@ -68,6 +68,7 @@
 	</div>	
 
 
+
 	<?php 
 		$btn_txt = 'own' == $mode ? 'save_details':'update_staff';
 		if($user){
