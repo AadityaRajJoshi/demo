@@ -2,15 +2,24 @@ th {
     &.#{$prefix}-event-date,
     &.#{$prefix}-event-time {
         width: 140px;
+        @include media(mb) {
+            width: auto;
+        }
     }
 
     &.#{$prefix}-event-status,
     &.#{$prefix}-event-city {
         width: 165px;
+        @include media(mb) {
+            width: auto;
+        }
     }
 
     &.#{$prefix}-event-id {
         width: 165px;
+        @include media(mb) {
+            width: auto;
+        }
     }
 
     &.#{$prefix}-event-status {
@@ -19,6 +28,9 @@ th {
 
     &.#{$prefix}-event-name {
         width: 180px;
+        @include media(mb) {
+            width: auto;
+        }
     }
 }
 

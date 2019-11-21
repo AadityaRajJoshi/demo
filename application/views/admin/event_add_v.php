@@ -247,7 +247,7 @@
 				) ); ?>
 			</div>
 			
-			<div class="luft-form-row map-link">
+			<div class="luft-form-row luft-half-row">
 				<?php echo form_label( get_msg('label_event_link_map'), 'link_gmap' ); 
 				echo form_input( array(
 					'name' => 'link_gmap',

@@ -1,10 +1,20 @@
+%text-cut {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .#{$prefix}-table {
     border-collapse: collapse;
     margin: 0;
     padding: 0;
     width: 100%;
     table-layout: fixed;  
-
+    @include media(mb) {
+        width: calc(100% + 30px);
+        margin-left: -15px;
+        margin-right: -15px;
+    }
     thead {
         border-top: 1px solid #707070;
         border-bottom: 1px solid #b7b7b7;
@@ -16,6 +26,11 @@
             background: #F2F2F2;
             &:nth-child(even) {
                 background: $color_white;
+            }
+
+            @include media(mb) {
+                background: $color_white;
+                border-bottom: 1px solid #b7b7b7;
             }
         }  
     }
@@ -39,9 +54,7 @@
         text-transform: capitalize;
         color: $color_primary;
         width: 100%;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+        @extend %text-cut;
 
         &.#{$prefix}-user-id,
         &.#{$prefix}-update-download {
@@ -75,4 +88,119 @@ img.filter-img{
     img.filter-img {
         transform: rotateX(180deg);
     }
+}
+
+.extend-data {
+    display: none;
+}
+
+.#{$prefix}-view-mobile {
+    @include media(mb) {    
+        tr {
+            display: flex;
+            flex-wrap: wrap;
+
+            th,
+            td {
+                flex: 0 0 40%;
+                order: 3;
+                font-size: 18px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                &.luft-event-name {
+                    flex: 0 0 30%;
+                    order: 2;                    
+                }
+                &.luft-event-date {
+                    flex: 0 0 30%;
+                    order: 1;
+                }
+            }
+
+            .extend-data {
+                flex: 0 0 100%;
+            }
+
+            span.plus-minus {
+                background: $color_primary;
+                height: 25px;
+                width: 25px;
+                display: flex;
+                border-radius: 50%;
+                margin-left: 15px;
+                position: relative;
+                align-items: center;
+                justify-content: center;
+
+                &:after {
+                    height: 15px;
+                    width: 4px;
+                    content: "";
+                    background: $color_white;
+                    border-radius: 1px;
+                    transition: all .3s;
+                }
+            
+                &:before {
+                    content: "";
+                    width: 17px;
+                    height: 4px;
+                    position: absolute;
+                    z-index: 99;
+                    background: #fff;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%,-50%);
+                    border-radius: 1px;
+                }
+            }
+
+            &.data-expended {
+                background: $color_light_grey !important;
+                span.plus-minus {
+                    &:after {
+                        opacity: 0;
+                        visibility: hidden;
+                    }
+                }
+            }
+        }
+    }
+
+    .extend-data {
+        > div {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+            border-bottom: 1px solid $color_border;
+            padding-bottom: 15px;
+            font-size: 18px;
+            &:last-child {
+                border-bottom: none;
+                padding-bottom: 0;
+                justify-content: flex-end;
+                padding-top: 15px;
+
+                a{
+                    color: $color_white;
+                    background: $color_primary;
+                    padding: 9px 35px;
+                    border-radius: 25px;
+                    transition: all .3s;
+                    &:hover {
+                        background: $color_green;
+                    }
+                }
+            }
+
+            span {
+                flex: 0 0 50%;
+                &:last-child {
+                    padding-left: 30px;
+                }
+            }
+        }
+    } 
 }
