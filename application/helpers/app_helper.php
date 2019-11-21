@@ -556,14 +556,11 @@ if(! function_exists('get_staff_worktime')){
 			}
 			return seconds_to_time( $t );
 		}else{
-			return get_msg( 'no_event_assigned' );
+			return false;
 		}	
 	}
 }
 function seconds_to_time($seconds_time){
-    // if ($seconds_time < 24 * 60 * 60) {
-    //     return gmdate('H:i:s', $seconds_time);
-    // } else {
         $hours = floor($seconds_time / 3600);
         $minutes = floor(($seconds_time - $hours * 3600) / 60);
         $seconds = floor($seconds_time - ($hours * 3600) - ($minutes * 60));
