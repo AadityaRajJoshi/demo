@@ -94,7 +94,7 @@ class User extends MY_Controller{
 
         $this->load->model('user_m');
         $user = $this->user_m->get('*', array('id'=>$id ), 1);
-
+       
         if(! $user){
         	$this->invalid_access();
         }
