@@ -243,10 +243,11 @@ class Event extends MY_Controller{
 		$this->data['current_menu'] = 'event';
 
 		if(is_staff()){		
-			$session_user = $this->session->userdata('name');
+			$session_user = $this->session->userdata('id');
 			$users = $this->event_m->get_users($id);
+			// var_dump($users);die;
 			$available_user = array_map(function($v){
-				return $v->username;
+				return $v->user_id;
 			}, $users);
 			if( !in_array($session_user, $available_user) ){
 				$this->invalid_access();
