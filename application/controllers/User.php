@@ -139,6 +139,7 @@ class User extends MY_Controller{
         		}
         		$e->type = rtrim( $type, ' and ' );
         	}
+        	$this->data['total_worktime'] = get_staff_worktime($id);
         	$this->data['events'] = $events;
     		$this->data['meta'] = get_msg('meta_edit_profile');
 	        $this->data[ 'breadcrumb' ] = get_msg('breadcrumb_user_edit_other');

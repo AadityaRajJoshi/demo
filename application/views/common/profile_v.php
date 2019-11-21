@@ -116,6 +116,13 @@
 				<td class="hide-on-mobile" ><?php echo seconds_to_time( $event->total_worktime );?></td>
 			</tr>
 			<?php endforeach; ?>
+			<tr>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td><?php echo get_msg( 'summa' ); ?></td>
+				<td><?php echo $total_worktime ?></td>
+			</tr>
 	  	</tbody>
 	</table>
 	<?php else: ?>

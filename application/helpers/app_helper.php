@@ -98,6 +98,7 @@ if(! function_exists('get_msg')){
 			'add_event'		=> 'Add Event',
 			'all_staff'     => 'All Staff',
 			'staff'         => 'Staff',
+			'summa'			=> 'Summa',
 			'my_details'    => 'My Details', 			
 			'setting'		=> 'Setting',
 			'my_event'		=> 'My Event',
