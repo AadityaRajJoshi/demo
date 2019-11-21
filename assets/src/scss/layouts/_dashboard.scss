@@ -33,5 +33,9 @@
         background: #fff;
         padding: 30px;
         margin: 20px;
+        @include media(mb) {
+            margin: 0;
+            padding: 15px;
+        }
     }
 }

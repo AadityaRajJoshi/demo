@@ -19,7 +19,7 @@
 				'placeholder' => get_msg('placeholder_event_order'),
 				'id' => 'order_number',
 				'value' => get_value($event, 'order_number'),
-				// 'required' => 'required',
+				'required' => 'required',
 				'type' => 'number'
 			) ); ?>
 		</div>
@@ -86,7 +86,7 @@
 				'name' => 'traveltime_2_start',
 				'id' => 'traveltime_2_start',
 				'value' => get_value($event, 'traveltime_2_start'),
-				// 'required' => 'required',
+				'required' => 'required',
 				'type' => 'time'
 			) ); ?>
 		</div>
@@ -154,6 +154,7 @@
 			echo form_multiselect( array(
 				'name' => 'add_staff[]',
 				'id' => 'add_staff',
+				'required' => 'required',
 				'class' => 'custom-styled-select',
 			),  $staffs, $event_users ); 
 
@@ -254,7 +255,7 @@
 				) ); ?>
 			</div>
 			
-			<div class="luft-form-row map-link">
+			<div class="luft-form-row luft-half-row">
 				<?php echo form_label( get_msg('label_event_link_map'), 'link_gmap' ); 
 				echo form_input( array(
 					'name' => 'link_gmap',

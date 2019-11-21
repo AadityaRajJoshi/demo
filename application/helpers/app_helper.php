@@ -93,6 +93,7 @@ if(! function_exists('get_msg')){
 			'user_updated'	=> 'Staff Upadted Successfully',
 			'dashboard'		=> 'Dashboard',
 			'event'			=> 'Event',
+			'hour'			=> 'Hours',
 			'all_event' 	=> 'All Event',
 			'add_event'		=> 'Add Event',
 			'all_staff'     => 'All Staff',
