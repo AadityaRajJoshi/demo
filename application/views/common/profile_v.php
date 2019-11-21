@@ -66,6 +66,8 @@
 			?>
 		</div>
 	</div>	
+
+
 	<?php 
 		$btn_txt = 'own' == $mode ? 'save_details':'update_staff';
 		if($user){
@@ -78,6 +80,10 @@
 		echo form_close( '' );
 	?>
 
+	
+<div class="display-on-mobile">
+	<a href="#"  class="go-back-btn"> Go back </a>
+</div>
 
 <?php if( $mode == 'other' ){?>
 	<?php if( $events ) : ?>
