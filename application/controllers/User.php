@@ -144,10 +144,6 @@ class User extends MY_Controller{
         $this->data['common'] = true;
         $this->data['page'] = 'profile_v';
         $this->data['current_menu'] = 'dashboard';
-        
-
-      
-        
 
         $this->load->view('dashboard_template_v', $this->data);    
     }
