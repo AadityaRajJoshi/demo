@@ -241,15 +241,13 @@ class User extends MY_Controller{
 
 	public function download_pdf( $id ){
 
-		if(!is_admin()){
+		if(!is_admin())
 			$this->invalid();
-		}
 
 		$this->load->model( 'user_m' );
 		$user = $this->user_m->get('*',['id' => $id], 1);
-		if(!$user){
+		if(!$user)
 			$this->invalid();
-		}
 
 		$pdf_name = $user->username.'-'.$user->id.'.pdf';
 
