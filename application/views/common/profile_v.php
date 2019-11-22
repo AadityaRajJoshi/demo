@@ -85,17 +85,15 @@
 
 <?php if( $mode == 'other' &&  $events  ) : ?>
 	<div class="user-detail-table-wrapper">
+
 		<h2><?php echo get_msg( 'staff_card' ); ?></h2>	
 
 		<div class="user-table-content">
 
 			<div class="filter-by-date">
-				<?php  
-				echo form_dropdown( array(
-					'name' => 'date',
-					'id' => 'date',
-					'class' => 'custom-styled-select',
-				), $date );?> 
+				
+				
+		<input type="text" name="daterange" value="01/01/2018 - 01/15/2018" />
 			</div>
 
 			<table class="luft-table luft-view-mobile">
