@@ -361,7 +361,6 @@ class Event extends MY_Controller{
 		$this->data[ 'event_package_users' ] = $event_package_staff;
 		$this->data[ 'event_users' ] = $event_staff;
 		$this->data[ 'staffs' ] = get_staffs_dropdown();
-		$this->data[ 'event_package_staff' ] = '';
 		$this->data[ 'event_staff' ] = '';
 		$this->load->view( 'dashboard_template_v', $this->data );		
 	}

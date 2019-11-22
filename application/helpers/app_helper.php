@@ -564,7 +564,7 @@ if(! function_exists('get_staff_worktime')){
 		if($times){
 			$t = 0;
 			foreach($times as $key => $time){
-				$t = $t + $time->total_worktime ;
+				$t = $t + $time->total_worktime;
 			}
 			return seconds_to_time( $t );
 		}else{

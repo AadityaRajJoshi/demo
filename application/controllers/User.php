@@ -86,7 +86,6 @@ class User extends MY_Controller{
 	} 
 
 	public function edit($id=null, $mode='other'){
-		// var_dump($_POST);
 
         if((is_staff() && get_session('id') != $id) ||  $id <= 0 ){
         	$this->invalid_access();
@@ -125,8 +124,6 @@ class User extends MY_Controller{
 	        $this->data['breadcrumb'] = get_msg('breadcrumb_user_edit_own');
 	        $this->data['body_class'] = 'template-profile';
         	$this->data['current_menu'] = 'dashboard';
-        }elseif( 'download' == $mode ){
-        	return array( $events, get_staff_worktime($id, $events), $user );
         }else{
         	$this->load->model( 'event_m' );
         	$this->data['total_worktime'] = get_staff_worktime($id, $events);
@@ -243,71 +240,16 @@ class User extends MY_Controller{
 	}
 
 	public function download_pdf( $id ){
-		if(!is_admin()){
+
+		if(!is_admin())
 			$this->invalid();
-		}
+
 		$this->load->model( 'user_m' );
 		$user = $this->user_m->get('*',['id' => $id], 1);
-		if(!$user){
+		if(!$user)
 			$this->invalid();
-		}
 
 		$pdf_name = $user->username.'-'.$user->id.'.pdf';
-		$events = $this->user_m->get_events($id);
-
-		$events = $this->edit( $id, 'download' );
-
-		$t_front = sprintf(
-		'<img src="%1$s">
-		<p style="font-size:10px;">Name : <b>%2$s</b></p>
-		<p style="font-size:10px;">Email : <b>%3$s</b></p>
-		<p style="font-size:10px;">Number : <b>%4$s</b></p>
-		<table border="1" style="padding: 5px; font-size: 10px; border-color: #efefef;">
-		   <thead>
-		      <tr>
-		         <th><b>%5$s</b></th>
-		         <th><b>%6$s</b></th>
-		         <th><b>%7$s</b></th>
-		         <th><b>%8$s</b></th>
-		         <th><b>%9$s</b></th>		        
-		      </tr>
-		   </thead>
-		   <tbody>',
-		   '',
-		   ucfirst( $events[2]->username),
-		   $events[2]->email,
-		   $events[2]->phone_number,
-		   get_msg( 'event' ),
-		   get_msg( 'type' ),
-		   get_msg( 'date' ),
-		   get_msg( 'city' ),
-		   get_msg( 'hour' )
-		) ;
-
-		  $t_body = '';
-		  foreach ($events[0] as $event) {
-		  	$t_body .= sprintf(
-		  		'<tr>
-			         <td>%1$s</td>
-			         <td>%2$s</td>
-			         <td>%3$s</td>
-			         <td>%4$s</td>
-			         <td>%5$s</td>		         
-		      	</tr>',
-		      	$event->name,
-		      	get_staff_type( $event->type ),
-		      	get_date_from_datetime( $event->start_time, 'd M Y' ),
-		      	$event->city,
-		      	seconds_to_time( $event->total_worktime )
-		  	);
-		  }
-		$t_back = '<tr>
-		         <td colspan="3"></td>
-		         <td><b>Summa</b></td>
-		         <td>'. $events[1] .'</td>
-		      </tr>
-		   </tbody>
-		</table>';
 
 		$this->load->library("Pdf");
 		$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
@@ -331,13 +273,15 @@ class User extends MY_Controller{
 	    $pdf->AddPage(); 
 	   
 	    // Set some content to print
-	    $html = $t_front . $t_body . $t_back;
-		  
+		$this->data['events'] = $this->user_m->get_events($id);
+		$this->data['user'] = $user;
+		ob_start();
+		$this->load->view('pdf', $this->data);
+		$html = ob_get_clean();
 	    // Print text using writeHTMLCell()
 	    $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);   
 	  
 	    // ---------------------------------------------------------    
-	  
 	    // Close and output PDF document
 	    // This method has several options, check the source code documentation for more information.
 	    $pdf->Output($pdf_name, 'I'); 
