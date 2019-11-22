@@ -245,6 +245,9 @@ span.form-err {
     margin: 0;
     padding-bottom: 5px; }
 
+span.form-success + .form-err {
+  top: 50px; }
+
 @-webkit-keyframes slide-in-right {
   0% {
     -webkit-transform: translateX(1000px);
@@ -505,6 +508,37 @@ textarea {
   margin-left: 0; }
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
   right: 0px; }
+
+.filter-by-date {
+  margin-bottom: 30px; }
+  .filter-by-date input {
+    border: 1px solid #DFDFE5;
+    height: 45px;
+    border-radius: 5px;
+    padding: 10px; }
+
+.daterangepicker {
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1); }
+  .daterangepicker td.active, .daterangepicker td.active:hover {
+    background-color: #020441 !important;
+    border-radius: 0 !important; }
+  .daterangepicker .drp-calendar {
+    max-width: 315px !important; }
+  .daterangepicker .calendar-table th,
+  .daterangepicker .calendar-table td {
+    min-width: 40px !important;
+    width: 40px !important;
+    height: 35px !important;
+    line-height: 35px !important;
+    font-size: 14px !important; }
+  .daterangepicker .drp-buttons button {
+    padding: 9px 19px !important;
+    background: #020441;
+    border: 0;
+    color: #fff;
+    cursor: pointer; }
+    .daterangepicker .drp-buttons button:last-child {
+      background: #58B975; }
 
 .luft-template-dashboard {
   background: #F7F7F7; }
@@ -1007,10 +1041,6 @@ img.filter-img {
       flex: 0 0 40%;
       padding: 0 !important;
       margin: 0 !important; }
-
-.filter-by-date {
-  margin-bottom: 30px;
-  max-width: 320px; }
 
 .luft-form-wrapper .preview-modal, .go-back-btn {
   margin-right: 10px;
