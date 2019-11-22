@@ -20,10 +20,15 @@
           $('input[name="daterange"]').daterangepicker({
             opens: 'left'
           }, function(start, end, label) {
-            $('.user-detail-table-wrapper').hide();
+            var start_date = start.format('YYYY-MM-DD');
+            var end_date = end.format('YYYY-MM-DD');
+            // console.log(LUFTLEK.ajax_url + 'user');
+            $.ajax({
+                url = LUFTLEK.ajax_url + 'user',
+            });
           });
         });
-    }
+    }   
 
 
     var documentReadyCallbackFunc = () => {
