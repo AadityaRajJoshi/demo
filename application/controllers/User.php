@@ -128,7 +128,7 @@ class User extends MY_Controller{
         	$this->data['current_menu'] = 'dashboard';
         }else{
         	$this->load->model( 'event_m' );
-        	$this->data['total_worktime'] = get_staff_worktime($id);
+        	$this->data['total_worktime'] = get_staff_worktime($id, $events);
         	$date = array_map( function($v){
         		return get_date_from_datetime($v->start_time, 'd M Y');
         	}, $events );
