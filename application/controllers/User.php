@@ -83,8 +83,7 @@ class User extends MY_Controller{
 
 	public function profile(){
 		$this->edit(get_session('id'), 'own');
-	}
- 
+	} 
 
 	public function edit($id=null, $mode='other'){
 		// var_dump($_POST);
@@ -122,8 +121,7 @@ class User extends MY_Controller{
 
         if('own' == $mode){
         	# Editing own profile
-    		$this->data['meta'] = get_msg('meta_edit_staff');
-   
+    		$this->data['meta'] = get_msg('meta_edit_staff');   
 	        $this->data['breadcrumb'] = get_msg('breadcrumb_user_edit_own');
 	        $this->data['body_class'] = 'template-profile';
         	$this->data['current_menu'] = 'dashboard';
@@ -259,21 +257,32 @@ class User extends MY_Controller{
 
 		$events = $this->edit( $id, 'download' );
 
-		$t_front =
-		'<h3>Name : <b>'.ucfirst( $events[2]->username).'</b></h3>
-		<h3>Email : <b>'. $events[2]->email.'</b></h3>
-		<h3>Number : <b>'. $events[2]->phone_number.'</b></h3>
+		$t_front = sprintf(
+		'<img src="%1$s">
+		<p style="font-size:10px;">Name : <b>%2$s</b></p>
+		<p style="font-size:10px;">Email : <b>%3$s</b></p>
+		<p style="font-size:10px;">Number : <b>%4$s</b></p>
 		<table border="1" style="padding: 5px; font-size: 10px; border-color: #efefef;">
 		   <thead>
 		      <tr>
-		         <th><b>Event</b></th>
-		         <th><b>Type</b></th>
-		         <th><b>Date</b></th>
-		         <th><b>City</b></th>
-		         <th><b>Hours</b></th>		        
+		         <th><b>%5$s</b></th>
+		         <th><b>%6$s</b></th>
+		         <th><b>%7$s</b></th>
+		         <th><b>%8$s</b></th>
+		         <th><b>%9$s</b></th>		        
 		      </tr>
 		   </thead>
-		   <tbody>' ;
+		   <tbody>',
+		   '',
+		   ucfirst( $events[2]->username),
+		   $events[2]->email,
+		   $events[2]->phone_number,
+		   get_msg( 'event' ),
+		   get_msg( 'type' ),
+		   get_msg( 'date' ),
+		   get_msg( 'city' ),
+		   get_msg( 'hour' )
+		) ;
 
 		  $t_body = '';
 		  foreach ($events[0] as $event) {
@@ -286,7 +295,7 @@ class User extends MY_Controller{
 			         <td>%5$s</td>		         
 		      	</tr>',
 		      	$event->name,
-		      	$event->type,
+		      	get_staff_type( $event->type ),
 		      	get_date_from_datetime( $event->start_time, 'd M Y' ),
 		      	$event->city,
 		      	seconds_to_time( $event->total_worktime )
@@ -300,20 +309,16 @@ class User extends MY_Controller{
 		   </tbody>
 		</table>';
 
-		$html = $t_front . $t_body . $t_back;
-
 		$this->load->library("Pdf");
 		$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
 		$pdf->SetCreator(PDF_CREATOR);
-	    $pdf->SetAuthor('Muhammad Saqlain Arif');
-	    $pdf->SetTitle('My Title');
-	    $pdf->SetSubject('TCPDF Tutorial');
-	    $pdf->SetKeywords('TCPDF, PDF, example, test, guide');   
-	  
+	    $pdf->SetAuthor('Eagle Vision IT');
+	    $pdf->SetTitle(get_msg('tcpdf_title'));
+	    $pdf->SetSubject(get_msg('tcpdf_subject'));
+	    $pdf->SetKeywords('TCPDF, PDF, example, test, guide');	  
 		  
 	    // set margins
-	    $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
-	  
+	    $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);	  
 	  
 	    // Set font
 	    // dejavusans is a UTF-8 Unicode font, if you only need to
@@ -325,9 +330,8 @@ class User extends MY_Controller{
 	    // This method has several options, check the source code documentation for more information.
 	    $pdf->AddPage(); 
 	   
-	  
 	    // Set some content to print
-
+	    $html = $t_front . $t_body . $t_back;
 		  
 	    // Print text using writeHTMLCell()
 	    $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);   

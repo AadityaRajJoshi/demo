@@ -17,6 +17,7 @@ class User_m extends MY_Model{
 
 		$query = $this->db->get();
 		if($query){
+			
 			return $query->result();
 		}
 
