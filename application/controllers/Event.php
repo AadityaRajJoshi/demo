@@ -126,7 +126,6 @@ class Event extends MY_Controller{
 
 			$data = $this->get_formatted_inputs(false);
 
-			$this->load->model( 'events_package_staff_m' );
 			$this->load->model( 'events_staff_m' );
 			$this->load->model( 'user_m' );
 
@@ -135,7 +134,6 @@ class Event extends MY_Controller{
 			if( $is_update ){
 				$event_id = $is_update;
 				$this->events_staff_m->delete( array( 'event_id' => $event_id ) );
-				$this->events_package_staff_m->delete( array('event_id' => $event_id) );
 				$this->event_m->save( $data, array('id'=>$event_id) );
 			}else{
 				$event_id = $this->event_m->save( $data );
@@ -144,33 +142,16 @@ class Event extends MY_Controller{
 			$event_staff = $this->input->post( 'add_staff' );
 			$event_package_staff = $this->input->post( 'add_package_staff' );
 
-			echo "<pre>";
+			# add staff to table
 			foreach ($event_staff as $s) {
-				$add_data = array(
+				$add_staff = array(
 					'user_id' => $s,
 					'event_id' => $event_id,
-					'type' =>  $s == $event_package_staff ? 3 : 1
+					'type' =>  $event_package_staff && $s == $event_package_staff ? 3 : 1
 				);
-				var_export( $add_data );
+				$this->events_staff_m->save( $add_staff );
 			}
-			echo "<br>";
-			if( !in_array( $event_package_staff , $event_staff) ){
-				$add_data2 = array(
-					'user_id' => $s,
-					'event_id' => $event_id,
-					'type' =>  2
-				);
-				var_export( $add_data2 );
-			}
-			// var_export( $event_staff );
-			// var_dump( $event_package_staff );
-			die;
-			foreach( $event_staff as  $staff_id){
-				$this->events_staff_m->save(array(
-					'user_id' => $staff_id,
-					'event_id' => $event_id
-				));
-			}
+
 			if($is_update){
 				$t = $this->input->post('old_staff');
 			}else{
@@ -185,15 +166,15 @@ class Event extends MY_Controller{
 				}
 			}
 
-			// if( $this->input->post( 'add_package_staff' ) ){
-			// 	$event_releated_package_staff = $this->input->post( 'add_package_staff' );
-			// 	$insert_package_staff = array(
-			// 		'user_id' => $this->input->post( 'add_package_staff' ),
-			// 		'event_id' => $event_id
-			// 	);
-			// }
-
-			$this->events_package_staff_m->save( $insert_package_staff );
+			# add package staff to table
+			if( $event_package_staff && !in_array( $event_package_staff , $event_staff) ){
+				$add_event_staff = array(
+					'user_id' => $event_package_staff,
+					'event_id' => $event_id,
+					'type' =>  2
+				);
+				$this->events_staff_m->save( $add_event_staff );
+			}
 
 			if ($this->db->trans_complete()){
 			    if( $is_update ){
@@ -279,16 +260,20 @@ class Event extends MY_Controller{
 		$this->data['event'] = $this->get_formatted_time($query);
 
 		$staff = $this->event_m->get_users( $id );
-		$event_package_staff = '';
 		$event_staff = '';
+		$event_package_staff = '';
+		
 		foreach ($staff as $value) {
-			if( $value->type == 'event_staff' ){
+			if( $value->type == 1 ){
 				$event_staff .= ucfirst($value->username).', ';
+			}elseif( $value->type == 2 ){
+				$event_package_staff =  ucfirst($value->username);
 			}else{
+				$event_staff .= ucfirst($value->username).', ';
 				$event_package_staff =  ucfirst($value->username);
 			}
 		}
-		
+
 		$this->data[ 'event_package_staff' ] = $event_package_staff;
 		$this->data[ 'event_staff' ] = rtrim( $event_staff, ', ' );
 		$this->data['breadcrumb'][] = $query->name;
@@ -352,18 +337,20 @@ class Event extends MY_Controller{
 		}
 
 		$this->load->model( 'events_staff_m' );
-		$users = $this->events_staff_m->get( 'user_id', array( 'event_id'=> $id ) );
-		
-		$event_users = array_map(function($v){
-			return $v->user_id;
-		}, $users);
+		$users = $this->events_staff_m->get( array( 'user_id', 'type' ), array( 'event_id'=> $id ) );
 
-		$this->load->model( 'events_package_staff_m' );
-		$package_user = $this->events_package_staff_m->get( 'user_id', array( 'event_id'=> $id ) );
-
-		$event_package_users = array_map(function($v){
-			return $v->user_id;
-		}, $package_user);
+		$event_staff = array();
+		$event_package_staff = false;
+		foreach ($users as $u) {
+			if( $u->type == 3){
+				$event_staff[] = $u->user_id;
+				$event_package_staff = $u->user_id;
+			}elseif( $u->type == 2 ){
+				$event_package_staff = $u->user_id;
+			}else{
+				$event_staff[] = $u->user_id;	
+			}
+		}
 
 		$this->data[ 'meta' ] = get_msg( 'meta_event_edit' );
 		$this->data[ 'page' ] = 'event_add_v';
@@ -371,8 +358,8 @@ class Event extends MY_Controller{
 		$this->data[ 'breadcrumb' ] = get_msg( 'breadcrumb_event_edit' );
 		$this->data[ 'event' ] = $event;
 		$this->data[ 'mode' ] = 'edit';
-		$this->data[ 'event_package_users' ] = $event_package_users[0];
-		$this->data[ 'event_users' ] = $event_users;
+		$this->data[ 'event_package_users' ] = $event_package_staff;
+		$this->data[ 'event_users' ] = $event_staff;
 		$this->data[ 'staffs' ] = get_staffs_dropdown();
 		$this->data[ 'event_package_staff' ] = '';
 		$this->data[ 'event_staff' ] = '';
