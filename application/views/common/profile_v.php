@@ -90,10 +90,8 @@
 
 		<div class="user-table-content">
 
-			<div class="filter-by-date">
-				
-				
-		<input type="text" name="daterange" value="01/01/2018 - 01/15/2018" />
+			<div class="filter-by-date">		
+				<input type="text" name="daterange" />
 			</div>
 
 			<table class="luft-table luft-view-mobile">

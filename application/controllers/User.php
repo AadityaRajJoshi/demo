@@ -83,8 +83,7 @@ class User extends MY_Controller{
 
 	public function profile(){
 		$this->edit(get_session('id'), 'own');
-	}
- 
+	} 
 
 	public function edit($id=null, $mode='other'){
 		// var_dump($_POST);
