@@ -142,17 +142,37 @@ class Event extends MY_Controller{
 			}
 
 			$event_staff = $this->input->post( 'add_staff' );
+			$event_package_staff = $this->input->post( 'add_package_staff' );
 
+			echo "<pre>";
+			foreach ($event_staff as $s) {
+				$add_data = array(
+					'user_id' => $s,
+					'event_id' => $event_id,
+					'type' =>  $s == $event_package_staff ? 3 : 1
+				);
+				var_export( $add_data );
+			}
+			echo "<br>";
+			if( !in_array( $event_package_staff , $event_staff) ){
+				$add_data2 = array(
+					'user_id' => $s,
+					'event_id' => $event_id,
+					'type' =>  2
+				);
+				var_export( $add_data2 );
+			}
+			// var_export( $event_staff );
+			// var_dump( $event_package_staff );
+			die;
 			foreach( $event_staff as  $staff_id){
 				$this->events_staff_m->save(array(
 					'user_id' => $staff_id,
 					'event_id' => $event_id
 				));
 			}
-
 			if($is_update){
 				$t = $this->input->post('old_staff');
-				// var_dump(json_decode( $t )); die;
 			}else{
 				# Send sms to newly added staffs
 				$staffs = $this->user_m->get_by_ids($event_staff);
@@ -165,13 +185,13 @@ class Event extends MY_Controller{
 				}
 			}
 
-			if( $this->input->post( 'add_package_staff' ) ){
-				$event_releated_package_staff = $this->input->post( 'add_package_staff' );
-				$insert_package_staff = array(
-					'user_id' => $this->input->post( 'add_package_staff' ),
-					'event_id' => $event_id
-				);
-			}
+			// if( $this->input->post( 'add_package_staff' ) ){
+			// 	$event_releated_package_staff = $this->input->post( 'add_package_staff' );
+			// 	$insert_package_staff = array(
+			// 		'user_id' => $this->input->post( 'add_package_staff' ),
+			// 		'event_id' => $event_id
+			// 	);
+			// }
 
 			$this->events_package_staff_m->save( $insert_package_staff );
 

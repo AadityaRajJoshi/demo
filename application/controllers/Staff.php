@@ -43,7 +43,6 @@ class Staff extends MY_Controller{
 		}
 	}
 
-
 	public function download_pdf(){
 		if(!is_admin()){
 			$this->invalid();
