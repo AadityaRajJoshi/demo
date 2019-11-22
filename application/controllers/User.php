@@ -128,7 +128,7 @@ class User extends MY_Controller{
 	        $this->data['body_class'] = 'template-profile';
         	$this->data['current_menu'] = 'dashboard';
         }elseif( 'download' == $mode ){
-        	return array( $events, get_staff_worktime($id, $events) );
+        	return array( $events, get_staff_worktime($id, $events), $user );
         }else{
         	$this->load->model( 'event_m' );
         	$this->data['total_worktime'] = get_staff_worktime($id, $events);
@@ -260,7 +260,10 @@ class User extends MY_Controller{
 		$events = $this->edit( $id, 'download' );
 
 		$t_front =
-		'<table border="1" style="padding: 5px; font-size: 10px; border-color: #efefef;">
+		'<h3>Name : <b>'.ucfirst( $events[2]->username).'</b></h3>
+		<h3>Email : <b>'. $events[2]->email.'</b></h3>
+		<h3>Number : <b>'. $events[2]->phone_number.'</b></h3>
+		<table border="1" style="padding: 5px; font-size: 10px; border-color: #efefef;">
 		   <thead>
 		      <tr>
 		         <th><b>Event</b></th>
