@@ -87,7 +87,7 @@ class User extends MY_Controller{
  
 
 	public function edit($id=null, $mode='other'){
-
+		// var_dump($_POST);
 
         if((is_staff() && get_session('id') != $id) ||  $id <= 0 ){
         	$this->invalid_access();
