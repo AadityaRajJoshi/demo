@@ -96,8 +96,8 @@
             })
         });
 
-       $( '#a' ).click( function(){
-        console.log('das');
+       $( '#event-date' ).click( function(){
+           
        });
     };
 
