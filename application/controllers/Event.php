@@ -243,7 +243,6 @@ class Event extends MY_Controller{
 		if(is_staff()){		
 			$session_user = $this->session->userdata('id');
 			$users = $this->event_m->get_users($id);
-			// var_dump($users);die;
 			$available_user = array_map(function($v){
 				return $v->user_id;
 			}, $users);
