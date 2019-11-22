@@ -32,7 +32,6 @@
             placeholder: "Add staff here",
         });
 
-
         function readURL(input) {
 
             if (input.files && input.files[0]) {
