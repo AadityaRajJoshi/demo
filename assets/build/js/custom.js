@@ -96,7 +96,7 @@
             })
         });
 
-       $( '#event-date' ).click( function(){
+       $( '#date' ).click( function(){
            
        });
     };

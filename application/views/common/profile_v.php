@@ -85,48 +85,64 @@
 
 <?php if( $mode == 'other' &&  $events  ) : ?>
 	<div class="user-detail-table-wrapper">
-		<h2><?php echo get_msg( 'staff_card' ); ?></h2>
-		
-		<?php 
-		echo form_dropdown( 'date', $date, $date[0], array(
-			'id' => 'event-date'
-		)  );?> 
-		
+
+		<h2><?php echo get_msg( 'staff_card' ); ?></h2>	
+
 		<div class="user-table-content">
-				<table class="luft-table">
-					<thead>
-						
-						<th class="luft-event-name staff-profile-th"><?php thead('event', 'name'); ?></th>
-						<th class="luft-event-type staff-profile-th"><?php echo "Type" ?></th>
-						
-						<th class="luft-event-date staff-profile-th"><?php thead('date', 'start_time'); ?></th>
-						<th class="luft-event-city staff-profile-th"><?php thead('city'); ?></th>					
-						<th class="luft-working-time staff-profile-th"><?php thead('hour', 'total_worktime'); ?></th>
-						
-					</thead>
-					<tbody>
-						<?php foreach ($events as $event) : ?>
-						<tr>						
-							<td>
-								<?php if( is_admin() ): ?>
-								<a href="<?php echo get_route('event_detail'). $event->id?>"><?php echo $event->name ?></a>
-								<?php else:
-									echo $event->name;
-								endif; ?>				
-							</td>
-							<td><?php echo $event->type ?></td>
-							<td><?php echo  get_date_from_datetime( $event->start_time, 'd M Y' ); ?></td>
-							<td class="hide-on-mobile"><?php echo $event->city ?></td>				
-							<td class="hide-on-mobile" ><?php echo seconds_to_time( $event->total_worktime );?></td>
-						</tr>
-						<?php endforeach; ?>
-						<tr class="staff-total-time">
-							<td colspan="3"></td>
-							<td><b><?php echo get_msg( 'summa' ); ?></b></td>
-							<td><?php echo $total_worktime ?></td>
-						</tr>
-					</tbody>
-				</table>
+
+			<div class="filter-by-date">
+				<?php  
+				echo form_dropdown( array(
+					'name' => 'date',
+					'id' => 'date',
+					'class' => 'custom-styled-select',
+				), $date );?> 
+			</div>
+
+			<table class="luft-table luft-view-mobile">
+				<thead>
+					
+					<th class="luft-event-name staff-profile-th"><?php thead('event', 'name'); ?></th>
+					<th class="luft-event-type staff-profile-th hide-on-mobile"><?php echo "Type" ?></th>						
+					<th class="luft-event-date staff-profile-th"><?php thead('date', 'start_time'); ?></th>
+					<th class="luft-event-city staff-profile-th hide-on-mobile"><?php thead('city'); ?></th>					
+					<th class="luft-working-time staff-profile-th"><?php thead('hour', 'total_worktime'); ?></th>
+					<!-- <th class="display-on-mobile staff-profile-extend"></th> -->
+				</thead>
+				<tbody>
+					<?php foreach ($events as $event) : ?>
+					<tr>						
+						<td class="profile-td">
+							<?php if( is_admin() ): ?>
+							<a href="<?php echo get_route('event_detail'). $event->id?>"><?php echo $event->name ?></a>
+							<?php else:
+								echo $event->name;
+							endif; ?>				
+						</td>
+						<td class="hide-on-mobile"><?php echo $event->type ?></td>
+						<td class="profile-td"><?php echo  get_date_from_datetime( $event->start_time, 'd M Y' ); ?></td>
+						<td class="hide-on-mobile"><?php echo $event->city ?></td>				
+						<td class="profile-td"><?php echo seconds_to_time( $event->total_worktime );?></td>
+						<td class="staff-profile-extend display-on-mobile"> <a href="#" class="luft-extend-table display-on-mobile" ><span class="plus-minus"></span></a></td>
+
+						<td class="extend-data">        
+							<div> 
+								<span> Type </span> <span> <?php echo $event->type ?> </span> 
+							</div>
+							<div> 
+								<span> City </span> <span> <?php echo $event->city ?> </span> 
+							</div>
+						</td>
+
+					</tr>
+					<?php endforeach; ?>
+					<tr class="staff-total-time hide-on-mobile">
+						<td colspan="3"></td>
+						<td><b><?php echo get_msg( 'summa' ); ?></b></td>
+						<td><?php echo $total_worktime ?></td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 <?php endif; ?>

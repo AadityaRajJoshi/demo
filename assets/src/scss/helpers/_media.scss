@@ -29,4 +29,10 @@ $break-mb: 576px !default;
         @content;
       }
     }
+
+    @else if $screen == mbUp{
+        @media(min-width: $break-mb){
+          @content;
+        }
+      }
 } 
