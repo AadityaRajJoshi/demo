@@ -112,6 +112,7 @@ if(! function_exists('get_msg')){
 			'event_update'  => 'Event Updated Successfully',
 			'date'			=> 'Date',
 			'city'			=> 'City',
+			'type'			=> 'Type',
 			'eventime'		=> 'Eventtime',
 			'finished'		=> 'Finished',
 			'order_number'	=> 'Order Number',
@@ -147,6 +148,9 @@ if(! function_exists('get_msg')){
 			'toggle_status_success' => 'Status changed successfully.',
 			'edit_staff_title_m' 	=> 'Edit Staff Profile',		
 			'no_event_assigned' 	=> 'Not assigned on any event',
+			
+			'tcpdf_subject'	=>'List Of Events Releated To Staff With Total Worktime',
+			'tcpdf_title'	=>'Staff Event Detail',
 
 			'breadcrumb_user_edit_own' 	=> array('MY DETAILS'),
 			'breadcrumb_user_edit_other'=> array('Staff', 'Update'),
@@ -662,6 +666,17 @@ function thead($key, $col_name=false){
 	);
 }
 
+
 function get_start_end_time( $starttime, $endtime ){
 	return get_time_from_datetime( $starttime ) . ' - ' . get_time_from_datetime(  $endtime );  
+}
+
+function get_staff_type( $type ){
+	if( $type == 1 ){
+		return 'Event';
+	}elseif( $type == 2 ){
+		return 'Packaging';
+	}else{
+		return 'Event and Packaging';
+	}
 }
