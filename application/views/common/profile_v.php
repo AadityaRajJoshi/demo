@@ -98,7 +98,7 @@
 				<thead>
 					
 					<th class="luft-event-name staff-profile-th"><?php thead('event', 'name'); ?></th>
-					<th class="luft-event-type staff-profile-th hide-on-mobile"><?php echo "Type" ?></th>						
+					<th class="luft-event-type staff-profile-th hide-on-mobile"><?php echo get_msg( 'type' ) ?></th>						
 					<th class="luft-event-date staff-profile-th"><?php thead('date', 'start_time'); ?></th>
 					<th class="luft-event-city staff-profile-th hide-on-mobile"><?php thead('city'); ?></th>					
 					<th class="luft-working-time staff-profile-th"><?php thead('hour', 'total_worktime'); ?></th>
@@ -114,7 +114,7 @@
 								echo $event->name;
 							endif; ?>				
 						</td>
-						<td class="hide-on-mobile"><?php echo $event->type ?></td>
+						<td class="hide-on-mobile"><?php echo get_staff_type( $event->type ); ?></td>
 						<td class="profile-td"><?php echo  get_date_from_datetime( $event->start_time, 'd M Y' ); ?></td>
 						<td class="hide-on-mobile"><?php echo $event->city ?></td>				
 						<td class="profile-td"><?php echo seconds_to_time( $event->total_worktime );?></td>
@@ -122,10 +122,10 @@
 
 						<td class="extend-data">        
 							<div> 
-								<span> Type </span> <span> <?php echo $event->type ?> </span> 
+								<span> <?php echo get_msg( 'type' ) ?> </span> <span> <?php echo get_staff_type( $event->type ); ?> </span> 
 							</div>
 							<div> 
-								<span> City </span> <span> <?php echo $event->city ?> </span> 
+								<span> <?php echo get_msg( 'city' ) ?> </span> <span> <?php echo $event->city ?> </span> 
 							</div>
 						</td>
 
