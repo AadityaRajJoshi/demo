@@ -548,11 +548,14 @@ if(! function_exists('get_value')){
 
 
 if(! function_exists('get_staff_worktime')){
-	function get_staff_worktime( $user_id ){
+	function get_staff_worktime( $user_id, $times=false ){
 		$ci = get_instance();
-		$ci->load->model( 'user_m' );
-		$ci->load->helper('date');
-		$times = $ci->user_m->get_events( $user_id );
+		if(!$times){
+			$ci->load->model( 'user_m' );
+			$ci->load->helper('date');
+			$times = $ci->user_m->get_events( $user_id );
+		}
+		
 		if($times){
 			$t = 0;
 			foreach($times as $key => $time){
