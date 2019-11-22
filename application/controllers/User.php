@@ -132,7 +132,10 @@ class User extends MY_Controller{
         	$date = array_map( function($v){
         		return get_date_from_datetime($v->start_time, 'd M Y');
         	}, $events );
-        	$this->data['date'] = $date;
+
+        	$event_date = array_unique( $date );
+
+        	$this->data['date'] = $event_date;
         	$this->data['events'] = $events;
     		$this->data['meta'] = get_msg('meta_edit_profile');
 	        $this->data[ 'breadcrumb' ] = get_msg('breadcrumb_user_edit_other');

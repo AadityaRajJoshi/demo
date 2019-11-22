@@ -86,12 +86,14 @@
 <?php if( $mode == 'other' &&  $events  ) : ?>
 	<div class="user-detail-table-wrapper">
 		<h2><?php echo get_msg( 'staff_card' ); ?></h2>
-		<?php  
+		<div>	
+		<?php 
 		echo form_dropdown( array(
 			'name' => 'date',
-			'id' => 'date',
+			'id' => 'eventDate',
 			'class' => 'custom-styled-select',
 		), $date );?> 
+		</div>
 		<div class="user-table-content">
 				<table class="luft-table">
 					<thead>
