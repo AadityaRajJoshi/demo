@@ -58,7 +58,7 @@ $prefix: luft;
 
 .hide-on-mobile {
     @include media(mb) {
-        display: none;
+        display: none !important; 
 
     }
 }
