@@ -91,12 +91,9 @@
 		<div class="user-table-content">
 
 			<div class="filter-by-date">
-				<?php  
-				echo form_dropdown( array(
-					'name' => 'date',
-					'id' => 'date',
-					'class' => 'custom-styled-select',
-				), $date );?> 
+				
+				
+		<input type="text" name="daterange" value="01/01/2018 - 01/15/2018" />
 			</div>
 
 			<table class="luft-table luft-view-mobile">

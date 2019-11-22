@@ -15,6 +15,16 @@
         $('.extend-data').slideUp(200);
     }
 
+    function filterByRange(){
+     $(function() {
+          $('input[name="daterange"]').daterangepicker({
+            opens: 'left'
+          }, function(start, end, label) {
+            $('.user-detail-table-wrapper').hide();
+          });
+        });
+    }
+
 
     var documentReadyCallbackFunc = () => {
 
@@ -94,14 +104,10 @@
                 }
             })
         });
-
-       $( '#date' ).click( function(){
-           
-       });
     };
 
     /* DOM ready event */
-    $(document).ready(documentReadyCallbackFunc, toggleDetailTable());
+    $(document).ready(documentReadyCallbackFunc, toggleDetailTable(), filterByRange());
 
 })(jQuery);
 
