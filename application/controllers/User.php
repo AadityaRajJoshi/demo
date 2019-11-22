@@ -126,6 +126,8 @@ class User extends MY_Controller{
 	        $this->data['breadcrumb'] = get_msg('breadcrumb_user_edit_own');
 	        $this->data['body_class'] = 'template-profile';
         	$this->data['current_menu'] = 'dashboard';
+        }elseif( 'download' == $mode ){
+        	return array( $events, get_staff_worktime($id, $events) );
         }else{
         	$this->load->model( 'event_m' );
         	$this->data['total_worktime'] = get_staff_worktime($id, $events);
@@ -243,5 +245,97 @@ class User extends MY_Controller{
 		}else{
 			return false;
 		}
+	}
+
+	public function download_pdf( $id ){
+		if(!is_admin()){
+			$this->invalid();
+		}
+		$this->load->model( 'user_m' );
+		$user = $this->user_m->get('*',['id' => $id], 1);
+		if(!$user){
+			$this->invalid();
+		}
+
+		$pdf_name = $user->username.'-'.$user->id.'.pdf';
+		$events = $this->user_m->get_events($id);
+
+		$events = $this->edit( $id, 'download' );
+
+		$t_front =
+		'<table border="1" style="padding: 5px; font-size: 10px; border-color: #efefef;">
+		   <thead>
+		      <tr>
+		         <th><b>Event</b></th>
+		         <th><b>Type</b></th>
+		         <th><b>Date</b></th>
+		         <th><b>City</b></th>
+		         <th><b>Hours</b></th>		        
+		      </tr>
+		   </thead>
+		   <tbody>' ;
+
+		  $t_body = '';
+		  foreach ($events[0] as $event) {
+		  	$t_body .= sprintf(
+		  		'<tr>
+			         <td>%1$s</td>
+			         <td>%2$s</td>
+			         <td>%3$s</td>
+			         <td>%4$s</td>
+			         <td>%5$s</td>		         
+		      	</tr>',
+		      	$event->name,
+		      	$event->type,
+		      	get_date_from_datetime( $event->start_time, 'd M Y' ),
+		      	$event->city,
+		      	seconds_to_time( $event->total_worktime )
+		  	);
+		  }
+		$t_back = '<tr>
+		         <td colspan="3"></td>
+		         <td><b>Summa</b></td>
+		         <td>'. $events[1] .'</td>
+		      </tr>
+		   </tbody>
+		</table>';
+
+		$html = $t_front . $t_body . $t_back;
+
+		$this->load->library("Pdf");
+		$pdf = new TCPDF(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);
+		$pdf->SetCreator(PDF_CREATOR);
+	    $pdf->SetAuthor('Muhammad Saqlain Arif');
+	    $pdf->SetTitle('My Title');
+	    $pdf->SetSubject('TCPDF Tutorial');
+	    $pdf->SetKeywords('TCPDF, PDF, example, test, guide');   
+	  
+		  
+	    // set margins
+	    $pdf->SetMargins(PDF_MARGIN_LEFT, PDF_MARGIN_TOP, PDF_MARGIN_RIGHT);
+	  
+	  
+	    // Set font
+	    // dejavusans is a UTF-8 Unicode font, if you only need to
+	    // print standard ASCII chars, you can use core fonts like
+	    // helvetica or times to reduce file size.
+	    $pdf->SetFont('dejavusans', '', 14, '', true);   
+	  
+	    // Add a page
+	    // This method has several options, check the source code documentation for more information.
+	    $pdf->AddPage(); 
+	   
+	  
+	    // Set some content to print
+
+		  
+	    // Print text using writeHTMLCell()
+	    $pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);   
+	  
+	    // ---------------------------------------------------------    
+	  
+	    // Close and output PDF document
+	    // This method has several options, check the source code documentation for more information.
+	    $pdf->Output($pdf_name, 'I'); 
 	}
 }

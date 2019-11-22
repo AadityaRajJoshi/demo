@@ -11,7 +11,7 @@
 		</div>
 		
 		<div class="luft-form-row-file">
-			<label for="profile-image">Upload profile picture</label>
+			<label for="profile-image"><?php echo get_msg( 'upload_pp' ); ?></label>
 			<input type="file" name="userfile" size="20" id="profile-image" accept=".png, .jpg, .jpeg" />
 		</div>
 	<?php endif; ?>

@@ -41,7 +41,7 @@ if(! function_exists('get_route')){
 			break;			
 
 			case 'download_pdf':
-				$path = 'staff/download_pdf';
+				$path = 'user/download_pdf';
 			break;
 
 			case 'all_event':
@@ -119,6 +119,7 @@ if(! function_exists('get_msg')){
 			'staff_card'	=> 'Staff card',
 			'total_worktime'=> 'Total Workingtime',
 			'more_event'	=> 'More',
+			'upload_pp'		=>'Upload profile picture',
 			'user_update_failed'   => 'Error! Staff Not Upadted',
 			'download_report' 	   => 'Ladda ner rapport',
 			'event_rollback_error' => 'Error! Cannot Insert Event',
