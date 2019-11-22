@@ -48,15 +48,26 @@
 }
 
 .user-detail-table-wrapper {
-    background: $color_light_grey;
-    width: calc(100% + 60px);
-    margin-left: -30px;
-    margin-top: 30px;
-    padding-top: 40px;
+
+    @include media(mbUp) {
+        background: $color_light_grey;
+        width: calc(100% + 60px);
+        margin-left: -30px;
+        margin-top: 30px;
+        padding-top: 40px;  
+    }
+
+    @include media(mb) {
+        margin-top: 50px;
+    }
 
     .user-table-content {
         padding: 30px 30px 0;
         background: $color_white;
+
+        @include media(mb) {
+            padding: 30px 15px 0;
+        }
     }
 
     h2 {
@@ -78,4 +89,7 @@
 
 .staff-profile-th {
     width: auto !important;
+    @include media(mb) {
+        width: 100% !important;
+    }
 }
