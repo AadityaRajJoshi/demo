@@ -82,7 +82,7 @@
 
         var preview = $('#preview-btn');
         preview.click(function () {
-            var inputs = $('#my-form').serializeArray(); console.log(inputs);
+            var inputs = $('#my-form').serializeArray();
             $.ajax({
                 url: LUFTLEK.ajax_url + LUFTLEK.route.event_process_data,
                 type: 'POST',
@@ -95,7 +95,6 @@
                         });
                         var staff = $('#add_staff option:selected').toArray().map(function (item) {
                             return capitalize(item.text);
-
                         }).join(', ');
 
                         $('#preview_staff').html(staff);
