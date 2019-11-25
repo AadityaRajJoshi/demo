@@ -14,7 +14,12 @@
 		) ); ?>
 	</div>
 
-	<div class="luft-submit-wrapper">
+	<div class="luft-submit-wrapper luft-forgot-password">
+
+		<div>
+			<a href="#" class="go-back-btn"> Go Back </a>
+		</div>
+
 		<div class="luft-form-row luft-submit-type">
 			<?php echo form_submit('change_pass', get_msg( 'change_pass' )); ?>
 		</div>	

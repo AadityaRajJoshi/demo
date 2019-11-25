@@ -1224,8 +1224,9 @@ td.right-text {
       color: #020441;
       margin: 0; }
     .luft-evt-header > div h2 {
-      font-size: 18px;
-      font-weight: normal; }
+      font-size: 21px;
+      font-weight: 400;
+      text-transform: capitalize; }
     .luft-evt-header > div h5 {
       font-weight: 700;
       font-size: 15px; }
