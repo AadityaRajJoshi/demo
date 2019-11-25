@@ -26,7 +26,15 @@
         var end_date = end.format('YYYY-MM-DD');
        window.location.href = LUFTLEK.ajax_url + 'user/edit/' + id + '/'  + '?f=' +start_date + '&t=' + end_date;
       });
-    }   
+
+      $( 'input[name="birthday"]').daterangepicker({
+        opens:'left'
+      }, function( start, end, label ){
+        var start = start.format('YYYY-MM-DD');
+        var end = end.format('YYYY-MM-DD');
+        window.location.href = LUFTLEK.ajax_url + 'event/' + '?f=' +start + '&t=' + end;
+      });
+    }  
 
 
     var documentReadyCallbackFunc = () => {
@@ -110,7 +118,7 @@
     };
 
     /* DOM ready event */
-    $(document).ready(documentReadyCallbackFunc, toggleDetailTable(), filterByRange());
+    $(document).ready(documentReadyCallbackFunc, toggleDetailTable(),filterByRange());
 
 })(jQuery);
 
