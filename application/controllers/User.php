@@ -112,7 +112,10 @@ class User extends MY_Controller{
 	} 
 
 	public function edit($id=null, $mode='other'){
-		
+
+		$start_date = $this->input->get( 'f' );
+		$end_date = $this->input->get('t');
+
         if((is_staff() && get_session('id') != $id) ||  $id <= 0 ){
         	$this->invalid_access();
         }
