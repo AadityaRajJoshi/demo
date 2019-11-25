@@ -105,36 +105,38 @@
 					<!-- <th class="display-on-mobile staff-profile-extend"></th> -->
 				</thead>
 				<tbody>
-					<?php foreach ($events as $event) : ?>
-					<tr>						
-						<td class="profile-td">
-							<?php if( is_admin() ): ?>
-							<a href="<?php echo get_route('event_detail'). $event->id?>"><?php echo $event->name ?></a>
-							<?php else:
-								echo $event->name;
-							endif; ?>				
-						</td>
-						<td class="hide-on-mobile"><?php echo get_staff_type( $event->type ); ?></td>
-						<td class="profile-td"><?php echo  get_date_from_datetime( $event->start_time, 'd M Y' ); ?></td>
-						<td class="hide-on-mobile"><?php echo $event->city ?></td>				
-						<td class="profile-td"><?php echo seconds_to_time( $event->total_worktime );?></td>
-						<td class="staff-profile-extend display-on-mobile"> <a href="#" class="luft-extend-table display-on-mobile" ><span class="plus-minus"></span></a></td>
+					<?php $sum=0; foreach ($events as $event): $sum += $event->total_worktime; ?>
+						<tr>						
+							<td class="profile-td">
+								<?php if( is_admin() ): ?>
+								<a href="<?php echo get_route('event_detail'). $event->id?>">
+									<?php echo $event->name ?>
+								</a>
+								<?php else:
+									echo $event->name;
+								endif; ?>				
+							</td>
+							<td class="hide-on-mobile"><?php echo get_staff_type( $event->type ); ?></td>
+							<td class="profile-td"><?php echo  get_date_from_datetime( $event->start_time, 'd M Y' ); ?></td>
+							<td class="hide-on-mobile"><?php echo $event->city ?></td>				
+							<td class="profile-td"><?php echo seconds_to_time( $event->total_worktime );?></td>
+							<td class="staff-profile-extend display-on-mobile"> <a href="#" class="luft-extend-table display-on-mobile" ><span class="plus-minus"></span></a></td>
 
-						<td class="extend-data">        
-							<div> 
-								<span> <?php echo get_msg( 'type' ) ?> </span> <span> <?php echo get_staff_type( $event->type ); ?> </span> 
-							</div>
-							<div> 
-								<span> <?php echo get_msg( 'city' ) ?> </span> <span> <?php echo $event->city ?> </span> 
-							</div>
-						</td>
+							<td class="extend-data">        
+								<div> 
+									<span> <?php echo get_msg( 'type' ) ?> </span> <span> <?php echo get_staff_type( $event->type ); ?> </span> 
+								</div>
+								<div> 
+									<span> <?php echo get_msg( 'city' ) ?> </span> <span> <?php echo $event->city ?> </span> 
+								</div>
+							</td>
 
-					</tr>
-					<?php endforeach; ?>
+						</tr>
+					<?php  endforeach; ?>
 					<tr class="staff-total-time hide-on-mobile">
 						<td colspan="3"></td>
 						<td><b><?php echo get_msg( 'summa' ); ?></b></td>
-						<td><?php echo $total_worktime ?></td>
+						<td><?php echo seconds_to_time( $sum ); ?></td>
 					</tr>
 				</tbody>
 			</table>

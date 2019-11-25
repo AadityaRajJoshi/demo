@@ -24,6 +24,46 @@ class User_m extends MY_Model{
 		return false;
 	}
 
+	public function get( $column = '*', $where = false, $limit = false, $order = false ){
+		
+		$order = $order ? $order : $this->data['order_by'] . ' ' . $this->data['order'];
+
+	    $this->db->select( $column, false );
+	    $this->db->from( $this->table . ' u', false );
+	    $this->db->join($this->table_3 . ' es', 'es.user_id = u.id', 'left');
+	    $this->db->join($this->table_2 . ' e', 'es.event_id = e.id', 'left');
+
+	    if ( $where != false ){
+	        $this->db->where( $where );
+	    }
+
+	    if( $limit != false ){
+	    	if( is_array( $limit ) ){
+	        	$this->db->limit( $limit[0], $limit[1] );
+	    	}else{
+	        	$this->db->limit( $limit );
+	    	}
+	    }
+
+	    if($limit != 1){
+		    if ($order){
+		        $this->db->order_by( $order );
+		    }else{
+		        $this->db->order_by( 'u.id', $this->order );
+		    }
+	    }
+
+	    $this->db->group_by('u.id');
+
+	    $query = $this->db->get();
+	    if( $query ){
+	    	return $limit == 1 ? $query->row() : $query->result();
+	    }
+
+	    return false;
+	   
+	}
+
 	public function get_by_ids($ids){
 
 		$this->db->select( '*', false );
