@@ -3,22 +3,51 @@
 
 .display-on-desktop {
   display: block; }
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     .display-on-desktop {
       display: none; } }
 
 .display-on-mobile {
   display: none !important; }
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     .display-on-mobile {
       display: block !important; } }
+
+.luft-text-right {
+  text-align: right !important; }
+
+.d-flex-center {
+  display: flex;
+  align-items: center; }
+
+.has-error {
+  border-color: red !important; }
+  .has-error + span .select2-selection {
+    border-color: red !important; }
+    .has-error + span .select2-selection:after {
+      border: 1px solid;
+      border-color: red !important; }
+
+.f-100 {
+  flex: 0 0 100%; }
+
+.pr-5 {
+  padding-right: 50px; }
+  @media (max-width: 768px) {
+    .pr-5 {
+      padding-right: 0; } }
+
+@media (max-width: 768px) {
+  .hide-on-mobile {
+    display: none !important; } }
 
 body {
   max-width: 100%;
   margin: 0;
   padding: 0;
   font-size: 16px;
-  font-family: 'Roboto', sans-serif; }
+  font-family: 'Roboto', sans-serif;
+  counter-reset: section; }
 
 *, *::before, *::after {
   -webkit-box-sizing: border-box;
@@ -27,6 +56,9 @@ body {
 img {
   max-width: 100%;
   height: auto; }
+
+a {
+  text-decoration: none; }
 
 /* The luft-checkbox-type */
 .luft-checkbox-type {
@@ -78,6 +110,118 @@ img {
 .luft-checkbox-type input:checked ~ .checkmark:after {
   display: block; }
 
+.onoffswitch {
+  position: relative;
+  width: 65px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none; }
+
+.onoffswitch-checkbox {
+  display: none; }
+
+.onoffswitch-label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  border-radius: 20px; }
+
+.onoffswitch-inner {
+  display: block;
+  width: 200%;
+  margin-left: -100%;
+  transition: margin 0.3s ease-in 0s; }
+  .onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block;
+    float: left;
+    width: 50%;
+    height: 30px;
+    padding: 0;
+    line-height: 30px;
+    font-size: 14px;
+    color: white;
+    box-sizing: border-box; }
+  .onoffswitch-inner:before {
+    content: "Yes";
+    padding-left: 10px;
+    background-color: #58B975;
+    color: #FFFFFF; }
+  .onoffswitch-inner:after {
+    content: "No";
+    padding-right: 10px;
+    background-color: #DFDFE5;
+    color: #000;
+    text-align: right; }
+
+.onoffswitch-switch {
+  display: block;
+  width: 18px;
+  margin: 6px;
+  background: #F7F7F7;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 35px;
+  border-radius: 20px;
+  transition: all 0.3s ease-in 0s; }
+
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+  margin-left: 0; }
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+  right: 0px; }
+
+span.form-success {
+  position: fixed;
+  z-index: 999;
+  right: 0;
+  padding: 10px 25px;
+  color: white;
+  border: 1px solid #58B975;
+  top: 5px;
+  font-size: 14px;
+  background: #58B975; }
+
+span.form-err {
+  color: red;
+  text-align: left;
+  display: block;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  background: #fff;
+  padding: 10px 25px;
+  top: 5px;
+  font-size: 14px;
+  height: min-content;
+  -webkit-animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  z-index: 999;
+  box-shadow: 0 0 6px #adadad; }
+  span.form-err p {
+    margin: 0;
+    padding-bottom: 5px; }
+
+span.form-success + .form-err {
+  top: 50px; }
+
+@-webkit-keyframes slide-in-right {
+  0% {
+    -webkit-transform: translateX(1000px);
+    transform: translateX(1000px);
+    opacity: 0; }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1; } }
+@keyframes slide-in-right {
+  0% {
+    -webkit-transform: translateX(1000px);
+    transform: translateX(1000px);
+    opacity: 0; }
+  100% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+    opacity: 1; } }
 .luft-template-login {
   display: flex;
   justify-content: center;
@@ -93,7 +237,7 @@ img {
   width: 100%;
   -webkit-animation: scale-up-center 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) both;
   animation: scale-up-center 0.6s cubic-bezier(0.39, 0.575, 0.565, 1) both; }
-  @media (max-width: 576px) {
+  @media (max-width: 768px) {
     .luft-login-box {
       padding: 0 25px 60px; } }
   .luft-login-box .luft-form-row {
@@ -127,7 +271,7 @@ img {
       flex: 0 0 50%;
       align-items: center;
       display: flex; }
-      @media (max-width: 576px) {
+      @media (max-width: 768px) {
         .luft-login-box .luft-submit-wrapper > * {
           flex: 0 0 100%; } }
     .luft-login-box .luft-submit-wrapper .luft-submit-type {
@@ -148,10 +292,10 @@ img {
           background: #020441; }
         .luft-login-box .luft-submit-wrapper .luft-submit-type input[type="submit"]:focus {
           outline: none; }
-        @media (max-width: 576px) {
+        @media (max-width: 768px) {
           .luft-login-box .luft-submit-wrapper .luft-submit-type input[type="submit"] {
             width: 100%; } }
-      @media (max-width: 576px) {
+      @media (max-width: 768px) {
         .luft-login-box .luft-submit-wrapper .luft-submit-type {
           margin-top: 40px;
           margin-bottom: 0; } }
@@ -187,26 +331,9 @@ img {
     padding-left: 6px;
     color: #020441;
     font-size: 14px; }
-@media (max-width: 576px) {
+@media (max-width: 768px) {
   .luft-forget-password {
     margin-top: 20px; } }
-
-span.form-err {
-  color: red;
-  text-align: center;
-  display: block;
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  background: #fff;
-  padding: 10px 30px;
-  top: 15px;
-  font-size: 14px;
-  height: min-content;
-  -webkit-animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
-  span.form-err p {
-    margin: 0; }
 
 @-webkit-keyframes scale-up-center {
   0% {

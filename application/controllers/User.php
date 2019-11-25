@@ -153,7 +153,7 @@ class User extends MY_Controller{
         	$this->data['current_menu'] = 'dashboard';
         }else{
         	$this->load->model( 'event_m' );
-			$events = $this->user_m->get_events($id);
+			$events = $this->user_m->get_events($id, $start_date, $end_date);
         	$this->data['events'] = $events;
     		$this->data['meta'] = get_msg('meta_edit_profile');
 	        $this->data[ 'breadcrumb' ] = get_msg('breadcrumb_user_edit_other');
@@ -223,7 +223,6 @@ class User extends MY_Controller{
 					$this->load->library('upload', $config);
 					if($this->upload->do_upload('userfile')){
 						$upload_data = $this->upload->data();
-				
 						foreach(explode('|',$config['allowed_types']) as $ext){
 							$file_name = $id . '.' . $ext;
 							$path = $config['upload_path'] . $file_name;
