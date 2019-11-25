@@ -79,21 +79,23 @@ class User extends MY_Controller{
 			$user = $this->user_m->get( 'u.*', array( 'email' =>  $this->input->post( 'email' ) ), 1 );
 			if($user){
 				$new_pass = $this->random_password();
-				$update = $this->user_m->save(
-					array(
-						'password' => md5($new_pass)
-					),
-					array('id' => $user->id)
-				);
+				$update = $this->user_m->save(array('password' => md5($new_pass)),array('id' => $user->id));
 				if( $update ){
 					// TODO SEND EMAIL
-					file_put_contents(__DIR__.'../password.txt', print_r( $this->input->post( 'email' ).' => '. $new_pass, 1) );
+					// file_put_contents(__DIR__.'../password.txt', print_r( $this->input->post( 'email' ).' => '. $new_pass, 1) );
+					
+					$this->send_email(array(
+						'subject' => 'Password Reset',
+						'to' => $user->email,
+						'body' => 'Your new password is ' . $new_pass
+					));
+
 					$this->session->set_flashdata( 'success', get_msg( 'pass_reset' ) );
-					do_redirect('login');
+					
 				}else{
 					$this->session->set_flashdata( 'error', get_msg( 'pass_reset' ) );
-					do_redirect('login');
 				}
+				do_redirect('login');
 			}else{
 				$this->data['error'][] = get_msg( 'user_not_found' );
 			}
@@ -191,13 +193,13 @@ class User extends MY_Controller{
 
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('username', get_msg('label_name'), 'trim|required' );
-		$this->form_validation->set_rules('email', get_msg('label_email'), 'trim|required|valid_email|is_unique[users.email]',
-			array( 'is_unique' => get_msg( 'email_taken' ) )
-		);
 		$this->form_validation->set_rules('phone_number', get_msg('label_phone_number'), 'required|regex_match[/^[0-9]{10}$/]' );
 
-		if(! $id)
+		if(! $id){
 			$this->form_validation->set_rules('password', get_msg('label_password'), 'required' );
+			$this->form_validation->set_rules('email', get_msg('label_email'), 'trim|required|valid_email|is_unique[users.email]',
+				array( 'is_unique' => get_msg('email_taken')));
+		}
 		
 		if($this->form_validation->run()){
 			$username = $this->input->post('username');
@@ -207,7 +209,6 @@ class User extends MY_Controller{
 			
 			$data = array(
 				'username'=> $username,
-				'email' => $email,
 				'phone_number' => $phone_number,
 			);
 
@@ -238,6 +239,7 @@ class User extends MY_Controller{
 			}else{
 				# do insert
 				$data['role_id'] = get_role_id("staff");
+				$data['email'] = $email;
 			}
 			
 			$this->load->model( 'user_m' );
@@ -273,7 +275,7 @@ class User extends MY_Controller{
 			$this->invalid();
 
 		$this->load->model( 'user_m' );
-		$user = $this->user_m->get('*',['id' => $id], 1);
+		$user = $this->user_m->get('u.*',['u.id' => $id], 1);
 		if(!$user)
 			$this->invalid();
 
