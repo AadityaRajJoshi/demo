@@ -284,35 +284,31 @@
 			<?php
 			echo form_label( get_msg('label_event_add_product'), 'add_products' );
 			echo form_textarea( array(
-				'name' => 'add_products',
-				'placeholder' => get_msg('placeholder_event_add_product'),
-				'id' => 'add_product',
+				'name' 	=> 'add_products',
+				'id' 	=> 'add_product',
 				'value' => get_value($event, 'add_products'),
-				'rows'        => '8',
-				'cols'        => '30',
+				'rows'	=> '8',
+				'cols'	=> '30',
+				'placeholder' => get_msg('placeholder_event_add_product'),
 			) );?>
 		</div>	
 		
 		<div class="luft-form-row text-area-wrapper">
 			<?php echo form_label( get_msg('label_event_electricty'), 'Electricity' );
 			echo form_textarea( array(
-				'name' => 'electricity',
-				'id' => 'electricity',
+				'name' 	=> 'electricity',
+				'id' 	=> 'electricity',
 				'value' => get_value($event, 'electricity'),
-				'rows'        => '8',
-				'cols'        => '30',
+				'rows'	=> '8',
+				'cols'	=> '30',
 			) );?>
 		</div>
 	</div>
 	<a href="#preview-modal" rel="modal:open" class="preview-modal"  id="preview-btn"> preview-event </a>
-	<?php
-		// echo form_button( 'preview-event', get_msg('event_preview_btn') );
-		//echo form_submit( 'publish-event', get_msg('event_publish_btn') ); ?>
-
 		
-		<?php echo form_submit( 'publish-event', $mode == 'add' ? get_msg('event_publish_btn') : get_msg('event_update_btn') ); ?>
+	<?php echo form_submit( 'publish-event', $mode == 'add' ? get_msg('event_publish_btn') : get_msg('event_update_btn') ); ?>
 		<div class="display-on-mobile">
-			<a href="#"  class="go-back-btn"> Go back </a>
+			<a href="<?php echo $mode == 'add' ? get_route('dashboard') : get_route('event'); ?>"  class="go-back-btn"> <?php echo get_msg( 'go_back' ); ?> </a>
 		</div>
 </div>
 <?php echo form_close( '' ); ?>	

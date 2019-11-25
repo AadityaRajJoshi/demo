@@ -68,6 +68,19 @@ class MY_Controller extends CI_Controller{
 		);
 	}
 
+	public function send_email($arg){
+		$this->load->library('email');
+
+		$this->email->from('yujesh@localhost.com', 'Luftlek');
+		$this->email->to($arg['to']);
+		$this->email->subject($arg['subject']);
+		$this->email->message($arg['body']);
+		// mail($arg['to'],$arg['subject'],$arg['body']);
+		$t = $this->email->send();
+		// file_put_contents(__DIR__.'/password.txt', print_r( $t, 1) );
+					
+	}
+
     public function random_password($length = 10) {
 		$str = "";
 		$characters = array_merge(range('A','Z'), range('a','z'), range('0','9'));

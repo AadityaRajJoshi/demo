@@ -231,7 +231,7 @@ span.form-success + .form-err {
 
 .luft-login-box {
   background: #fff;
-  max-width: 500px;
+  max-width: 460px;
   padding: 0 45px 60px;
   border-radius: 10px;
   width: 100%;
@@ -255,7 +255,7 @@ span.form-success + .form-err {
       background: #F7F7F7;
       border: 1px solid #DFDFE5;
       border-radius: 5px;
-      height: 45px;
+      height: 40px;
       font-size: 14px;
       font-weight: normal; }
       .luft-login-box .luft-form-row.luft-input-type input:focus {
@@ -268,7 +268,7 @@ span.form-success + .form-err {
     align-items: center;
     flex-wrap: wrap; }
     .luft-login-box .luft-submit-wrapper > * {
-      flex: 0 0 50%;
+      flex: 0 0 45%;
       align-items: center;
       display: flex; }
       @media (max-width: 768px) {
@@ -334,6 +334,39 @@ span.form-success + .form-err {
 @media (max-width: 768px) {
   .luft-forget-password {
     margin-top: 20px; } }
+
+.luft-forgot-password > * {
+  flex: 0 0 50% !important; }
+  @media (max-width: 768px) {
+    .luft-forgot-password > * {
+      flex: 0 0 100% !important; } }
+.luft-forgot-password a.go-back-btn {
+  width: 100%;
+  margin-right: 10px;
+  border: none;
+  color: #ffffff;
+  font-weight: bold;
+  height: 55px;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all .3s;
+  text-transform: uppercase;
+  font-size: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #020441; }
+.luft-forgot-password .luft-form-row.luft-submit-type {
+  margin-bottom: 0; }
+  @media (max-width: 768px) {
+    .luft-forgot-password .luft-form-row.luft-submit-type {
+      margin-top: 20px; } }
+  .luft-forgot-password .luft-form-row.luft-submit-type input[type="submit"] {
+    font-size: 12px;
+    width: 180px; }
+    @media (max-width: 768px) {
+      .luft-forgot-password .luft-form-row.luft-submit-type input[type="submit"] {
+        width: 100%; } }
 
 @-webkit-keyframes scale-up-center {
   0% {

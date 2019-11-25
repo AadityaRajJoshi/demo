@@ -32,7 +32,7 @@ class User_m extends MY_Model{
 		return false;
 	}
 
-	public function get( $column = '*', $where = false, $limit = false, $order = false ){
+	public function get( $column = 'u.*', $where = false, $limit = false, $order = false ){
 		
 		$order = $order ? $order : $this->data['order_by'] . ' ' . $this->data['order'];
 
@@ -55,9 +55,9 @@ class User_m extends MY_Model{
 
 	    if($limit != 1){
 		    if ($order){
-		        $this->db->order_by( $order );
+		        $this->db->order_by($order);
 		    }else{
-		        $this->db->order_by( 'u.id', $this->order );
+		        $this->db->order_by('u.id', $this->order);
 		    }
 	    }
 
