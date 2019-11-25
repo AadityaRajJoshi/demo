@@ -36,10 +36,10 @@
 						<span class="onoffswitch-switch"></span>
 					</label>
 				</div>
-
 				<a href="#" class="luft-extend-table display-on-mobile" ><span class="plus-minus"></span></a>
 			<?php else: ?>
-				<a class="luft-view-more" href="<?php echo get_route( 'event_detail' ) . $event->id ?>"><?php echo get_msg( 'more_event' ); ?></a>
+				<a href="#" class="luft-extend-table display-on-mobile" ><span class="plus-minus"></span></a>
+				<a class="luft-view-more hide-on-mobile" href="<?php echo get_route( 'event_detail' ) . $event->id ?>"><?php echo get_msg( 'more_event' ); ?></a>
 			<?php endif; ?>
 			</td>
 
@@ -50,6 +50,8 @@
 				<div>
 					<?php if( is_admin() ) : ?>
 						<a href="<?php echo get_route('event_edit').'/'. $event->id; ?>"  class="luft-user-edit-btn" >Edit</a> 
+						<?php else: ?>
+						<a class="luft-view-more" href="<?php echo get_route( 'event_detail' ) . $event->id ?>"><?php echo get_msg( 'more_event' ); ?></a>
 					<?php endif; ?>
 				</div>
 

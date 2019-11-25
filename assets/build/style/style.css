@@ -33,6 +33,9 @@
 
 .pr-5 {
   padding-right: 50px; }
+  @media (max-width: 768px) {
+    .pr-5 {
+      padding-right: 0; } }
 
 @media (max-width: 768px) {
   .hide-on-mobile {
@@ -1236,6 +1239,10 @@ td.right-text {
 
 .evt-info {
   margin-top: 25px; }
+  @media (max-width: 768px) {
+    .evt-info {
+      display: flex;
+      flex-wrap: wrap; } }
   .evt-info h4 {
     margin: 0;
     color: #020441; }
@@ -1248,6 +1255,25 @@ td.right-text {
     .evt-info h4 span {
       padding-left: 10px;
       font-weight: normal; }
+    @media (max-width: 768px) {
+      .evt-info h4 {
+        display: flex !important;
+        flex: 0 0 100%; }
+        .evt-info h4:last-child {
+          order: 1; }
+        .evt-info h4:first-child {
+          order: 3; }
+        .evt-info h4:nth-child(2) {
+          order: 4; }
+        .evt-info h4:nth-child(3) {
+          order: 2; }
+        .evt-info h4 b, .evt-info h4 span {
+          flex: 0 0 50%;
+          width: 100%;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          margin-bottom: 8px;
+          font-size: 15px; } }
 
 .evt-time-wrapper {
   display: flex;
@@ -1310,14 +1336,22 @@ td.right-text {
       .evt-time-wrapper h4 {
         background: transparent !important;
         color: #020441 !important;
-        text-align: left; } }
+        text-align: left;
+        padding: 0;
+        margin-bottom: 8px;
+        line-height: 1.7; } }
   .evt-time-wrapper p {
     margin: 10px 0;
     font-weight: 600;
     color: #020441; }
     @media (max-width: 768px) {
       .evt-time-wrapper p {
-        font-weight: 300; } }
+        font-weight: normal;
+        padding: 0;
+        margin-bottom: 8px;
+        font-size: 15px;
+        line-height: 1.7;
+        margin-top: 0; } }
 
 .evt-detail-sect {
   display: flex;
@@ -1343,12 +1377,31 @@ td.right-text {
     padding: 30px 0; }
   .evt-detail-sect .evt-contact-second {
     margin-right: 40px; }
+  @media (max-width: 768px) {
+    .evt-detail-sect {
+      border-bottom: 1px solid #DFDFE5;
+      padding: 30px 0; }
+      .evt-detail-sect > div {
+        flex: 0 0 100% !important;
+        display: flex; }
+        .evt-detail-sect > div h4 {
+          padding-right: 10px; }
+        .evt-detail-sect > div h4, .evt-detail-sect > div p {
+          flex: 0 0 50%;
+          width: 100%;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          font-size: 15px;
+          line-height: 1.7; } }
 
 .evt-contact-six {
   margin-top: 25px; }
   .evt-contact-six a {
     text-decoration: underline;
     color: #58B975; }
+  @media (max-width: 768px) {
+    .evt-contact-six {
+      margin-top: 0; } }
 
 .blocker {
   z-index: 9999 !important; }
