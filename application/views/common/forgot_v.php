@@ -1,4 +1,7 @@
 <div class="luft-login-box">
+	<div class="luft-logo-wrapper">
+		<img src="<?php echo base_url();  ?>assets/image/logo.png" alt="luftlek-logo" />
+	</div>
 	<?php echo form_open( 'forgot' ); ?>
 
 	<div class="luft-form-row luft-input-type">
