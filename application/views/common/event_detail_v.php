@@ -27,8 +27,10 @@
                 </span>
             </h5>
             <h5>
-                <?php echo get_msg('preview_total_worktime'); ?>
-                <span id="preview_total_worktime"><?php echo get_value($event,'total_worktime'); ?></span>
+                <span>
+                    <?php echo get_msg('preview_total_worktime'); ?>
+                    <span id="preview_total_worktime"><?php echo get_value($event,'total_worktime'); ?></span>
+                </span>
             </h5>
         </div>
     </div>

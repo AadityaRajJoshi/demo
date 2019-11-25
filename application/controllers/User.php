@@ -72,6 +72,32 @@ class User extends MY_Controller{
 
 	public function forgot(){
 		$this->data['meta'] = get_msg('meta_forgot');
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('email', get_msg('label_email'), 'trim|required|valid_email');
+		if($this->form_validation->run()){
+			$this->load->model('user_m');
+			$user = $this->user_m->get( 'u.*', array( 'email' =>  $this->input->post( 'email' ) ), 1 );
+			if($user){
+				$new_pass = $this->random_password();
+				$update = $this->user_m->save(
+					array(
+						'password' => md5($new_pass)
+					),
+					array('id' => $user->id)
+				);
+				if( $update ){
+					// TODO SEND EMAIL
+					file_put_contents(__DIR__.'../password.txt', print_r( $this->input->post( 'email' ).' => '. $new_pass, 1) );
+					$this->session->set_flashdata( 'success', get_msg( 'pass_reset' ) );
+					do_redirect('login');
+				}else{
+					$this->session->set_flashdata( 'error', get_msg( 'pass_reset' ) );
+					do_redirect('login');
+				}
+			}else{
+				$this->data['error'][] = get_msg( 'user_not_found' );
+			}
+		}
 		$this->data['page'] = 'forgot_v';
 		$this->load->view( 'login_template_v', $this->data );
 	}
@@ -165,7 +191,9 @@ class User extends MY_Controller{
 
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('username', get_msg('label_name'), 'trim|required' );
-		$this->form_validation->set_rules('email', get_msg('label_email'), 'trim|required|valid_email' );
+		$this->form_validation->set_rules('email', get_msg('label_email'), 'trim|required|valid_email|is_unique[users.email]',
+			array( 'is_unique' => get_msg( 'email_taken' ) )
+		);
 		$this->form_validation->set_rules('phone_number', get_msg('label_phone_number'), 'required|regex_match[/^[0-9]{10}$/]' );
 
 		if(! $id)
@@ -186,7 +214,6 @@ class User extends MY_Controller{
 			if( $password != '' ){
 				$data['password'] = md5($password);
 			}
-
 			$where = $id ? array('id'=>$id) : false;
 			if( $where ){
 				# do update 

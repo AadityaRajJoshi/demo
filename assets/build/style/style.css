@@ -1228,10 +1228,15 @@ td.right-text {
       font-weight: normal; }
     .luft-evt-header > div h5 {
       font-weight: 700;
-      font-size: 14px; }
+      font-size: 15px; }
       .luft-evt-header > div h5 span {
         padding-left: 10px;
         font-weight: normal; }
+        @media (min-width: 768px) {
+          .luft-evt-header > div h5 span {
+            font-weight: bold; }
+            .luft-evt-header > div h5 span span {
+              font-weight: normal; } }
       .luft-evt-header > div h5:last-child {
         display: flex;
         align-items: flex-end;
