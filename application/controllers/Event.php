@@ -10,9 +10,13 @@ class Event extends MY_Controller{
 	}
 
 	public function index(){
+
+		$start_date = $this->input->get( 'f' );
+		$end_date = $this->input->get('t');
+
 		if( is_staff() ){
 			$this->load->model( 'user_m' );
-			$this->data[ 'events' ] = $this->user_m->get_events();
+			$this->data[ 'events' ] = $this->user_m->get_events('', $start_date, $end_date);
 		}else{
 			$this->data[ 'events' ] = $this->event_m->get( '*' );
 		}

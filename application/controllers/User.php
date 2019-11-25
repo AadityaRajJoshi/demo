@@ -84,10 +84,12 @@ class User extends MY_Controller{
 					// TODO SEND EMAIL
 					// file_put_contents(__DIR__.'../password.txt', print_r( $this->input->post( 'email' ).' => '. $new_pass, 1) );
 					
+					$body = get_msg('email_forgot_password');
+					$body = str_replace('{password}', $new_pass, $body);
 					$this->send_email(array(
-						'subject' => 'Password Reset',
+						'subject' => get_msg('sub_forgot_password'),
 						'to' => $user->email,
-						'body' => 'Your new password is ' . $new_pass
+						'body' => $body
 					));
 
 					$this->session->set_flashdata( 'success', get_msg( 'pass_reset' ) );
@@ -155,6 +157,7 @@ class User extends MY_Controller{
         }else{
         	$this->load->model( 'event_m' );
 			$events = $this->user_m->get_events($id, $start_date, $end_date);
+			$this->data['segment'] = 'user/edit/'.$id;
         	$this->data['events'] = $events;
     		$this->data['meta'] = get_msg('meta_edit_profile');
 	        $this->data[ 'breadcrumb' ] = get_msg('breadcrumb_user_edit_other');

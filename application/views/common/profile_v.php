@@ -97,11 +97,11 @@
 			<table class="luft-table luft-view-mobile">
 				<thead>
 					
-					<th class="luft-event-name staff-profile-th"><?php thead('event', 'name'); ?></th>
-					<th class="luft-event-type staff-profile-th hide-on-mobile"><?php echo get_msg( 'type' ) ?></th>						
-					<th class="luft-event-date staff-profile-th"><?php thead('date', 'start_time'); ?></th>
-					<th class="luft-event-city staff-profile-th hide-on-mobile"><?php thead('city'); ?></th>					
-					<th class="luft-working-time staff-profile-th"><?php thead('hour', 'total_worktime'); ?></th>
+					<th class="luft-event-name staff-profile-th"><?php thead('event','name', $segment); ?></th>
+					<th class="luft-event-type staff-profile-th hide-on-mobile"><?php echo get_msg('type','type', $segment) ?></th>						
+					<th class="luft-event-date staff-profile-th"><?php thead('date', 'start_time', $segment); ?></th>
+					<th class="luft-event-city staff-profile-th hide-on-mobile"><?php thead('city','city', $segment); ?></th>					
+					<th class="luft-working-time staff-profile-th"><?php thead('hour', 'total_worktime', $segment); ?></th>
 					<!-- <th class="display-on-mobile staff-profile-extend"></th> -->
 				</thead>
 				<tbody>

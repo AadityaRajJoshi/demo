@@ -284,6 +284,9 @@ if(! function_exists('get_msg')){
 	        'preview_dismantling_time'=> 'DISMANTALING TIME',
 
 	        'sms_added_to_event' => 'You are added in {event} event',
+
+	        'sub_forgot_password' => 'Password Reset',
+	        'email_forgot_password' => 'Your new password is {password}'
 		);
 		return $msg[ $key ];
 	}
@@ -658,10 +661,11 @@ function _parse_form_attributes($attributes, $default){
 	return $att;
 }
 
-function thead($key, $col_name=false){
+function thead($key, $col_name=false, $class=false){
 	$ci = get_instance();
 	$col_name = !$col_name ? $key : $col_name;
-	$url = $ci->router->fetch_class() . '/index/'.$col_name.'/';
+	$class = $class ? $class : $ci->router->fetch_class();
+	$url = $class . '?ob='.$col_name.'&o=';
 	
 	$url .= 'asc' == $ci->data['order'] ? 'desc' : 'asc';
 
