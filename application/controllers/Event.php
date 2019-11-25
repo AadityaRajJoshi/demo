@@ -131,6 +131,29 @@ class Event extends MY_Controller{
 
 			$this->db->trans_start();
 
+			if($is_update){
+				echo "<pre>";
+				$old_users = $this->events_staff_m->get( array( 'user_id', 'type' ), array( 'event_id'=> $is_update ) );
+				$new_staff = $this->input->post('add_staff');
+				$new_package_staff = $this->input->post('add_package_staff');
+				echo "old staff<br>";
+				var_export( $old_users );
+				echo "<br> New STAFF <br>";
+				var_export( $new_staff );
+				echo "<br> NEW PACKAGE STAFF <br>";
+				var_export( $new_package_staff );die;
+			}else{
+				# Send sms to newly added staffs
+				$staffs = $this->user_m->get_by_ids($event_staff);
+				foreach($staffs as $staff){
+					$msg = str_replace('{event}', $data['name'], get_msg('sms_added_to_event'));
+					$this->send_sms(array(
+						'number' => $staff->phone_number,
+						'message' => $msg,
+					));
+				}
+			}
+
 			if( $is_update ){
 				$event_id = $is_update;
 				$this->events_staff_m->delete( array( 'event_id' => $event_id ) );
@@ -150,20 +173,6 @@ class Event extends MY_Controller{
 					'type' =>  $event_package_staff && $s == $event_package_staff ? 3 : 1
 				);
 				$this->events_staff_m->save( $add_staff );
-			}
-
-			if($is_update){
-				$t = $this->input->post('old_staff');
-			}else{
-				# Send sms to newly added staffs
-				$staffs = $this->user_m->get_by_ids($event_staff);
-				foreach($staffs as $staff){
-					$msg = str_replace('{event}', $data['name'], get_msg('sms_added_to_event'));
-					$this->send_sms(array(
-						'number' => $staff->phone_number,
-						'message' => $msg,
-					));
-				}
 			}
 
 			# add package staff to table
