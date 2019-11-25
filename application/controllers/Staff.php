@@ -15,8 +15,8 @@ class Staff extends MY_Controller{
 
 		$this->data[ 'meta' ][ 'title' ] = get_msg( 'staff' );
 		$this->data[ 'breadcrumb' ] = get_msg( 'breadcrumb_all_staff' );	
-		$this->data['staffs'] = $this->user_m->get( '*', array(
-			'role_id' =>get_role_id("staff")
+		$this->data['staffs'] = $this->user_m->get( 'u.*, IFNULL(SUM(e.`total_worktime`), 0) worktime', array(
+			'u.role_id' =>get_role_id("staff")
 		));
 		$this->data['page'] = 'staff_list_v';
 		$this->data['current_menu'] = 'staff';

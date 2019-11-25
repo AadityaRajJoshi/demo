@@ -15,27 +15,27 @@
         $('.extend-data').slideUp(200);
     }
 
-    function filterByRange(){
-    
-      $('input[name="daterange"]').daterangepicker({
-        opens: 'left'
-      }, function(start, end, label) {
-        var start_date = start.format('YYYY-MM-DD');
-        var end_date = end.format('YYYY-MM-DD');
-        $.ajax({
-            url : LUFTLEK.ajax_url + LUFTLEK.route.date_data,
-            type : 'POST',
-            data : {start_date: start_date, end_date: end_date},
-            dataType: 'json',
-            success: function (res) {
-                if (200 != res.status) {
-                    alert(res.message);
-                    location.reload();
+    function filterByRange() {
+
+        $('input[name="daterange"]').daterangepicker({
+            opens: 'right'
+        }, function (start, end, label) {
+            var start_date = start.format('YYYY-MM-DD');
+            var end_date = end.format('YYYY-MM-DD');
+            $.ajax({
+                url: LUFTLEK.ajax_url + LUFTLEK.route.date_data,
+                type: 'POST',
+                data: { start_date: start_date, end_date: end_date },
+                dataType: 'json',
+                success: function (res) {
+                    if (200 != res.status) {
+                        alert(res.message);
+                        location.reload();
+                    }
                 }
-            }
+            });
         });
-      });
-    }   
+    }
 
     var documentReadyCallbackFunc = () => {
 

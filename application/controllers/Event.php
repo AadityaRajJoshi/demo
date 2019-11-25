@@ -134,6 +134,7 @@ class Event extends MY_Controller{
 			if( $is_update ){
 				$event_id = $is_update;
 				$this->events_staff_m->delete( array( 'event_id' => $event_id ) );
+				// var_dump($data); die;
 				$this->event_m->save( $data, array('id'=>$event_id) );
 			}else{
 				$event_id = $this->event_m->save( $data );

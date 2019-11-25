@@ -9,16 +9,15 @@
     </thead>
     <tbody>
     <?php foreach ($staffs as $key => $staff): ?>
-        <?php $worktime = get_staff_worktime( $staff->id ) ?>
         <tr>
             <td class="luft-user-id"><?php echo $key+1; ?></td>
             <td class="luft-user-name"><?php echo $staff->username; ?></td>
-            <td class="luft-staff-work-time"> <?php echo $worktime ? $worktime : get_msg( 'no_event_assigned' ) ?></td>
+            <td class="luft-staff-work-time"><?php echo $staff->worktime ? seconds_to_time($staff->worktime) : get_msg( 'no_event_assigned' ) ?></td>
             <td class="luft-update-download">
                 <a href="<?php echo get_route('user_edit') . '/' . $staff->id; ?>" class="luft-user-edit hide-on-mobile" >
                     <i class="far fa-edit"></i>
                 </a> 
-                 <?php if($worktime) :?>
+                 <?php if($staff->worktime) :?>
                     <a href="<?php echo get_route('download_pdf') . '/' . $staff->id; ?>" class="luft-user-download hide-on-mobile">
                         <i class="fas fa-file-pdf"></i>
                     </a> 
@@ -30,7 +29,7 @@
             <td class="extend-data">        
                 <div class="user-list-data">
                     <div>
-                         <?php if($worktime) :?>
+                         <?php if($staff->worktime) :?>
                             <a href="<?php echo get_route('download_pdf') . '/' . $staff->id; ?>" class="luft-user-download">
                                 <i class="fas fa-file-pdf"></i> <span><?php echo get_msg( 'download_report' ) ?> </span>
                             </a> 

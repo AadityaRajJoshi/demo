@@ -1,0 +1,50 @@
+.filter-by-date {
+    margin-bottom: 30px;
+    input {
+        border: 1px solid $color_border;
+        height: 45px;
+        border-radius: 5px;
+        padding: 10px;
+    }
+} 
+
+.daterangepicker {
+    box-shadow: 0 2px 6px 0 rgba(0,0,0,.1);
+    td {
+        &.active,
+        &.active:hover {
+            background-color: $color_primary !important;
+            border-radius: 0 !important; 
+        }
+
+        
+    }
+
+    .drp-calendar {
+        max-width: 315px !important;
+    }
+
+    .calendar-table {
+        th,
+        td {
+            min-width: 40px !important;
+            width: 40px !important;
+            height: 35px !important;
+            line-height: 35px !important;
+            font-size: 14px !important;
+        }
+    }
+
+    .drp-buttons {
+        button {
+            padding: 9px 19px !important;
+            background: $color_primary;
+            border: 0;
+            color: #fff;
+            cursor: pointer;
+            &:last-child {
+                background: $color_green;
+            }
+        }
+    }
+} 

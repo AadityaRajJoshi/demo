@@ -54,6 +54,10 @@ $prefix: luft;
 }
 .pr-5 {
     padding-right: 50px;
+
+    @include media(mb) {
+        padding-right: 0;
+    }
 }
 
 .hide-on-mobile {
