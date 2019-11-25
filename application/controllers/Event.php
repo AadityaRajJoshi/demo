@@ -18,7 +18,7 @@ class Event extends MY_Controller{
 			$this->load->model( 'user_m' );
 			$this->data[ 'events' ] = $this->user_m->get_events('', $start_date, $end_date);
 		}else{
-			$this->data[ 'events' ] = $this->event_m->get( '*' );
+			$this->data[ 'events' ] = $this->event_m->get( '*', $start_date, $end_date );
 		}
 		$this->data[ 'meta' ] = get_msg( 'meta_event' );
 		$this->data[ 'page' ] = 'event_list_v';

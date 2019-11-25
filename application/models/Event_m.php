@@ -4,7 +4,7 @@ class Event_m extends MY_Model{
 	protected $table_2 = 'users';
 	protected $table_3 = 'events_staff';
 
-	public function get_users($event_id=false){
+	public function get_users($event_id=false, $from=false,$to=false){
 
 		$this->db->select('u.*, es.type');
 		$this->db->from($this->table . ' e');
