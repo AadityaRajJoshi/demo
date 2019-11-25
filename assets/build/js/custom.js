@@ -15,6 +15,7 @@
         $('.extend-data').slideUp(200);
     }
 
+
     function filterByRange(){
         
       $('input[name="daterange"]').daterangepicker({
@@ -29,6 +30,7 @@
        window.location.href = LUFTLEK.ajax_url + 'user/edit/' + id + '/'  + '?f=' +start_date + '&t=' + end_date;
       });
     }   
+
 
     var documentReadyCallbackFunc = () => {
 

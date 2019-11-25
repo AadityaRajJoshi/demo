@@ -47,9 +47,15 @@
 
 .evt-info {
     margin-top: 25px;
+
+    @include media(mb) { 
+        display: flex;
+        flex-wrap: wrap;
+    }
     h4 {
         margin: 0;
         color: $color_primary;
+
         b {
             text-transform: uppercase;               
             font-size: 14px;
@@ -62,6 +68,35 @@
             padding-left: 10px;
             font-weight: normal;
         }
+
+        @include media(mb) {
+
+            display: flex !important;
+            flex: 0 0 100%;
+
+            &:last-child {
+                order: 1;
+            }
+            &:first-child {
+                order: 3;
+            }
+            &:nth-child(2) {
+                order: 4;
+            }
+            &:nth-child(3) {
+                order: 2;
+            }            
+            b, span {
+                flex: 0 0 50%;
+                width: 100%;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                margin-bottom: 8px;
+                font-size: 15px;
+            }
+           
+        }
+        
     }
 } 
 
@@ -143,6 +178,9 @@
             background: transparent !important;
             color: $color_primary !important;
             text-align: left;
+            padding: 0;
+            margin-bottom: 8px;
+            line-height: 1.7;
         }
     }
     p {
@@ -151,7 +189,12 @@
         color: $color_primary;
 
         @include media(mb) {
-            font-weight: 300;
+            font-weight: normal;
+            padding: 0;
+            margin-bottom: 8px;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-top: 0;
         }
     }
 }
@@ -159,6 +202,7 @@
 .evt-detail-sect {    
     display: flex;
     flex-wrap: wrap;
+
     h4 {
         margin: 0;
         color: $color_primary;
@@ -188,6 +232,27 @@
     .evt-contact-second {
         margin-right: 40px;
     }
+
+    @include media(mb) {
+        border-bottom: 1px solid $color_border;
+        padding: 30px 0;
+
+        > div {
+            flex: 0 0 100% !important;
+            display: flex;
+            h4 {
+                padding-right: 10px;
+            }
+            h4, p {
+                flex: 0 0 50%;
+                width: 100%;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                font-size: 15px;
+                line-height: 1.7;
+            }            
+        }
+    }
 }
 
 .evt-contact-six {
@@ -195,5 +260,8 @@
     a {
         text-decoration: underline;
         color: $color_green;
+    }
+    @include media(mb) {
+        margin-top: 0;
     }
 }

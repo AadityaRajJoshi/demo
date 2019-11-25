@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <div class="evt-order-number">
+        <div class="evt-order-number hide-on-mobile">
             <h5>
                 <span>
                     <?php echo get_msg('preview_ordernumber'); ?>
@@ -70,6 +70,16 @@
             <b><?php echo get_msg('preview_packing_time'); ?></b>
             <span id='preview_packing_time'><?php echo get_value($event,'packing_time'); ?></span>
         </h4>
+        <h4 class="display-on-mobile">
+            <b><?php echo get_msg('preview_ordernumber'); ?></b> 
+            <span id="preview_order_number"><?php echo get_value($event, 'order_number'); ?> </span>
+        </h4>
+        <h4 class="display-on-mobile">
+            <b> <?php echo get_msg('preview_total_worktime'); ?></b>
+            <span id="preview_total_worktime"><?php echo get_value($event,'total_worktime'); ?></span>
+        </h4>   
+
+        
     </div>
 
     <div class="evt-detail-sect evt-sect-border">
@@ -128,4 +138,9 @@
         </div>
         
     </div>
+
+    <div class="display-on-mobile">
+        <a href="#" class="go-back-btn"> Go Back </a>
+    </div>
 </section>
+

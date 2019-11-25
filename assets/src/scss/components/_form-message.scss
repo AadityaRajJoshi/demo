@@ -33,6 +33,11 @@ span.form-err {
    }         
 }
 
+
+span.form-success + .form-err {
+  top: 50px;
+}
+
 @-webkit-keyframes slide-in-right {
     0% {
       -webkit-transform: translateX(1000px);
