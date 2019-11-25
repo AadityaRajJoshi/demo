@@ -29,10 +29,17 @@
 
         h5{
             font-weight: 700;
-            font-size: 14px;
+            font-size: 15px;
             span {
                 padding-left: 10px;
                 font-weight: normal;
+
+                @include media(mbUp) {
+                    font-weight: bold;
+                    span {
+                        font-weight: normal;
+                    }
+                }
             }
 
             &:last-child {
