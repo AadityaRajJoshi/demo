@@ -118,12 +118,18 @@ if(! function_exists('get_msg')){
 			'order_number'	=> 'Order Number',
 			'go_back'		=> 'Go Back',
 			'staff_card'	=> 'Staff card',
+			'change_pass'	=> 'Change Password',
 			'total_worktime'=> 'Total Workingtime',
 			'more_event'	=> 'More',
 			'upload_pp'		=>'Upload profile picture',
+			'email_taken'	=>'Already Registerd Using This Email.',
+			'user_not_found' 	   => 'User Not Found.',
 			'user_update_failed'   => 'Error! Staff Not Upadted',
 			'download_report' 	   => 'Ladda ner rapport',
 			'event_rollback_error' => 'Error! Cannot Insert Event',
+
+			'pass_reset'		=> 'Password Changed Successfully. Please Check Your Email',
+			'pass_reset_failed' => 'There Was An Error Updating Your Password.',
 
 			'label_name'         => 'Name',
 			'label_email'        => 'Email',
@@ -136,6 +142,7 @@ if(! function_exists('get_msg')){
 			'placeholder_phone_number' 	=> 'Enter Phone Number',
 			'placeholder_password' 		=> 'Enter Password',
 			'placeholder_username' 		=> 'Enter Username Or Email',
+			'placeholder_find_email'	=> 'Your Registred Email Address',
 
 			'id' => 'ID',
 			'save_details'  => 'UPDATE DETAILS',

@@ -38,7 +38,7 @@
 						'value' => get_value($user, 'email'),
 						'placeholder' => get_msg('placeholder_email'),
 						'id' => 'email',
-						'type' => 'email',
+						'type' => 'email'
 					)); 
 				?>
 			</div>
