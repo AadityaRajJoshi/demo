@@ -246,7 +246,7 @@ class Event extends MY_Controller{
 			$session_user = $this->session->userdata('id');
 			$users = $this->event_m->get_users($id);
 			$available_user = array_map(function($v){
-				return $v->user_id;
+				return $v->id;
 			}, $users);
 			if( !in_array($session_user, $available_user) ){
 				$this->invalid_access();
@@ -355,7 +355,7 @@ class Event extends MY_Controller{
 
 		$this->data[ 'meta' ] = get_msg( 'meta_event_edit' );
 		$this->data[ 'page' ] = 'event_add_v';
-		$this->data[ 'current_menu' ] = 'event';
+		$this->data[ 'current_menu' ] = 'events';
 		$this->data[ 'breadcrumb' ] = get_msg( 'breadcrumb_event_edit' );
 		$this->data[ 'event' ] = $event;
 		$this->data[ 'mode' ] = 'edit';

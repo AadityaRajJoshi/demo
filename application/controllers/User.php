@@ -223,7 +223,6 @@ class User extends MY_Controller{
 					$this->load->library('upload', $config);
 					if($this->upload->do_upload('userfile')){
 						$upload_data = $this->upload->data();
-				
 						foreach(explode('|',$config['allowed_types']) as $ext){
 							$file_name = $id . '.' . $ext;
 							$path = $config['upload_path'] . $file_name;
