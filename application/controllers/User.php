@@ -76,7 +76,7 @@ class User extends MY_Controller{
 		$this->form_validation->set_rules('email', get_msg('label_email'), 'trim|required|valid_email');
 		if($this->form_validation->run()){
 			$this->load->model('user_m');
-			$user = $this->user_m->get( '*', array( 'email' =>  $this->input->post( 'email' ) ), 1 );
+			$user = $this->user_m->get( 'u.*', array( 'email' =>  $this->input->post( 'email' ) ), 1 );
 			if($user){
 				$new_pass = $this->random_password();
 				$update = $this->user_m->save(
