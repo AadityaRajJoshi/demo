@@ -1,3 +1,8 @@
+<div class="filter-by-date">		
+	<input type="text" name="birthday" />
+</div>
+
+
 <table class="luft-table luft-view-mobile">
   	<thead>
   		<th class="luft-event-id hide-on-mobile"><?php thead('order_number'); ?></th>
