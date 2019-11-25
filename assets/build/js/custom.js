@@ -16,17 +16,17 @@
     }
 
 
-    function filterByRange(){
-        
-      $('input[name="daterange"]').daterangepicker({
-        opens: 'left'
-      }, function(start, end, label) {
-        var id = $('[name ="id"]').val();
-        var start_date = start.format('YYYY-MM-DD');
-        var end_date = end.format('YYYY-MM-DD');
-       window.location.href = LUFTLEK.ajax_url + 'user/edit/' + id + '/'  + '?f=' +start_date + '&t=' + end_date;
-      });
-    }   
+    function filterByRange() {
+
+        $('input[name="daterange"]').daterangepicker({
+            opens: 'right'
+        }, function (start, end, label) {
+            var id = $('[name ="id"]').val();
+            var start_date = start.format('YYYY-MM-DD');
+            var end_date = end.format('YYYY-MM-DD');
+            window.location.href = LUFTLEK.ajax_url + 'user/edit/' + id + '/' + '?f=' + start_date + '&t=' + end_date;
+        });
+    }
 
 
     var documentReadyCallbackFunc = () => {

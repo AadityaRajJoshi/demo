@@ -42,7 +42,7 @@
                 background: $color_light_grey;
                 border: 1px solid $color_border;
                 border-radius: 5px;
-                height: 45px;
+                height: 40px;
                 font-size: 14px;
                 font-weight: normal;
 
@@ -178,6 +178,46 @@
 //        margin: 0;
 //    }         
 // }
+.luft-forgot-password {
+    > * {
+        flex: 0 0 50% !important; 
+        @include media(mb) {
+            flex: 0 0 100% !important; 
+        }
+    }
+    a.go-back-btn {
+        width: 100%;
+        margin-right: 10px;
+        border: none;
+        color: #ffffff;
+        font-weight: bold;
+        height: 55px;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all .3s;
+        text-transform: uppercase;
+        font-size: 12px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: $color_primary;
+    }
+    .luft-form-row.luft-submit-type {
+        margin-bottom: 0;
+        @include media(mb) {
+            margin-top: 20px;
+        }
+        input[type="submit"] {       
+            font-size: 12px;
+            width: 180px;
+            @include media(mb) {
+                width: 100%;; 
+            }
+        }
+    }
+    
+}
+
 
 @-webkit-keyframes scale-up-center {
     0% {
