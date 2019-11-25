@@ -8,6 +8,7 @@ class User_m extends MY_Model{
 	public function get_events($user_id=false, $from=false, $to=false){
 
 		$user_id = !$user_id ? get_session('id') : $user_id;
+		$order = 'e.' . $this->data['order_by'] . ' ' . $this->data['order'];
 
 		$this->db->select("e.*, es.type");
 		$this->db->from($this->table . ' u');
@@ -22,6 +23,8 @@ class User_m extends MY_Model{
 		if($to){
 			$this->db->where('e.start_time <=', $to . ' 24:00:00');
 		}
+
+		$this->db->order_by($order);
 
 		$query = $this->db->get();
 

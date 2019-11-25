@@ -28,10 +28,10 @@ class MY_Controller extends CI_Controller{
 
 	    $this->data['profile_picture'] = get_profile_picture();
 
-	    $order_by = $this->uri->segment(3, 0);
+	    $order_by = $this->input->get('ob');
 	    if($order_by){
-	    	$order = strtolower($this->uri->segment(4, 0));
-	    	if('asc' == $order || 'desc' == $order){
+	    	$order = strtolower($this->input->get('o'));
+	    	if($order && ('asc' == $order || 'desc' == $order)){
 	    		$this->data['order_by'] = $order_by;
 	    		$this->data['order'] = $order;
 	    	}
