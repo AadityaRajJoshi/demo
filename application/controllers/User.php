@@ -142,7 +142,6 @@ class User extends MY_Controller{
         	if($update)
         		$user = $this->user_m->get('u.*', array('u.id'=>$id ), 1);
         }
-
         $this->data['user'] = $user;
 
         if('own' == $mode){
@@ -165,7 +164,6 @@ class User extends MY_Controller{
         $this->data['mode'] = $mode;
         $this->data['common'] = true;
         $this->data['page'] = 'profile_v';
-        $this->data['current_menu'] = 'dashboard';
 
         $this->load->view('dashboard_template_v', $this->data);    
     }
