@@ -87,6 +87,9 @@ class User extends MY_Controller{
 
 	public function edit($id=null, $mode='other'){
 
+		$start_date = $this->input->get( 'f' );
+		$end_date = $this->input->get('t');
+
         if((is_staff() && get_session('id') != $id) ||  $id <= 0 ){
         	$this->invalid_access();
         }
@@ -124,7 +127,7 @@ class User extends MY_Controller{
         	$this->data['current_menu'] = 'dashboard';
         }else{
         	$this->load->model( 'event_m' );
-			$events = $this->user_m->get_events($id);
+			$events = $this->user_m->get_events($id, $start_date, $end_date);
         	$this->data['events'] = $events;
     		$this->data['meta'] = get_msg('meta_edit_profile');
 	        $this->data[ 'breadcrumb' ] = get_msg('breadcrumb_user_edit_other');
