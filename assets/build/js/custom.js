@@ -22,11 +22,8 @@
         opens: 'left'
       }, function(start, end, label) {
         var id = $('[name ="id"]').val();
-        // console.log(id);
         var start_date = start.format('YYYY-MM-DD');
         var end_date = end.format('YYYY-MM-DD');
-        // var a = LUFTLEK.ajax_url + 'user/edit/' + id + '/'  + start_date + '/' + end_date;
-        // console.log(a);
        window.location.href = LUFTLEK.ajax_url + 'user/edit/' + id + '/'  + '?f=' +start_date + '&t=' + end_date;
       });
     }   
