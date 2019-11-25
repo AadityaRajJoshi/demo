@@ -231,7 +231,7 @@ span.form-success + .form-err {
 
 .luft-login-box {
   background: #fff;
-  max-width: 500px;
+  max-width: 460px;
   padding: 0 45px 60px;
   border-radius: 10px;
   width: 100%;
@@ -268,7 +268,7 @@ span.form-success + .form-err {
     align-items: center;
     flex-wrap: wrap; }
     .luft-login-box .luft-submit-wrapper > * {
-      flex: 0 0 50%;
+      flex: 0 0 45%;
       align-items: center;
       display: flex; }
       @media (max-width: 768px) {

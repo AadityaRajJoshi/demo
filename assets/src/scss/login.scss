@@ -13,7 +13,7 @@
 
 .#{$prefix}-login-box {
     background: $color_white;
-    max-width: 500px;
+    max-width: 460px;
     padding: 0 45px 60px;
     border-radius: 10px;
     width: 100%;
@@ -63,7 +63,7 @@
         align-items: center;
         flex-wrap: wrap;
         > * {
-            flex: 0 0 50%;
+            flex: 0 0 45%;
             align-items: center;
             display: flex;
             @include media(mb) {
