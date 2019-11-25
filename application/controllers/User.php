@@ -42,7 +42,7 @@ class User extends MY_Controller{
 			);
 
 			$this->load->model( 'user_m' );
-			$db_user = $this->user_m->get( '*', $condition, 1 );
+			$db_user = $this->user_m->get( 'u.*', $condition, 1 );
 			if ( !$db_user ) {
 				$this->data['error'][] = get_msg( 'up_mismatched' );
 			}else{
