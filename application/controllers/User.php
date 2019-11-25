@@ -42,7 +42,7 @@ class User extends MY_Controller{
 			);
 
 			$this->load->model( 'user_m' );
-			$db_user = $this->user_m->get( '*', $condition, 1 );
+			$db_user = $this->user_m->get( 'u.*', $condition, 1 );
 			if ( !$db_user ) {
 				$this->data['error'][] = get_msg( 'up_mismatched' );
 			}else{
@@ -86,7 +86,7 @@ class User extends MY_Controller{
 	} 
 
 	public function edit($id=null, $mode='other'){
-
+		
         if((is_staff() && get_session('id') != $id) ||  $id <= 0 ){
         	$this->invalid_access();
         }

@@ -5,7 +5,7 @@ class User_m extends MY_Model{
 	protected $table_2 = 'events';
 	protected $table_3 = 'events_staff';
 
-	public function get_events($user_id=false){
+	public function get_events($user_id=false, $from=false, $to=false){
 
 		$user_id = !$user_id ? get_session('id') : $user_id;
 
@@ -15,9 +15,17 @@ class User_m extends MY_Model{
 		$this->db->join($this->table_2 . ' as e', "e.id = es.event_id");
 		$this->db->where('u.id', $user_id);
 
+		if( $from ){
+			$this->db->where('e.start_time >=', $from . ' 00:00:00');
+		}
+
+		if($to){
+			$this->db->where('e.start_time <=', $to . ' 24:00:00');
+		}
+
 		$query = $this->db->get();
+
 		if($query){
-			
 			return $query->result();
 		}
 
