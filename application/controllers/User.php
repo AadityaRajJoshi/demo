@@ -92,13 +92,11 @@ class User extends MY_Controller{
         }
 
         $this->load->model('user_m');
-        $user = $this->user_m->get('*', array('id'=>$id ), 1);
+        $user = $this->user_m->get('u.*', array('u.id'=>$id ), 1);
        
         if(! $user){
         	$this->invalid_access();
         }
-
-		$events = $this->user_m->get_events($id);
 		
 		if( $mode == 'own' ){
         	$id = $this->input->post('id');
@@ -113,20 +111,20 @@ class User extends MY_Controller{
 
         	$update = $this->save($id);
         	if($update)
-        		$user = $this->user_m->get('*', array('id'=>$id ), 1);
+        		$user = $this->user_m->get('u.*', array('u.id'=>$id ), 1);
         }
 
         $this->data['user'] = $user;
 
         if('own' == $mode){
         	# Editing own profile
-    		$this->data['meta'] = get_msg('meta_edit_staff');   
+    		$this->data['meta'] = get_msg('meta_edit_staff');
 	        $this->data['breadcrumb'] = get_msg('breadcrumb_user_edit_own');
 	        $this->data['body_class'] = 'template-profile';
         	$this->data['current_menu'] = 'dashboard';
         }else{
         	$this->load->model( 'event_m' );
-        	$this->data['total_worktime'] = get_staff_worktime($id, $events);
+			$events = $this->user_m->get_events($id);
         	$this->data['events'] = $events;
     		$this->data['meta'] = get_msg('meta_edit_profile');
 	        $this->data[ 'breadcrumb' ] = get_msg('breadcrumb_user_edit_other');
