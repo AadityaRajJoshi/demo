@@ -144,5 +144,5 @@
 	</div>
 <?php endif; ?>
 <div class="display-on-mobile">
-	<a href="#"  class="go-back-btn"> <?php echo get_msg( 'go_back' ) ?> </a>
+	<a href="<?php echo $mode == 'add' ? get_route('dashboard') : get_route('staff')?>"  class="go-back-btn"> <?php echo get_msg( 'go_back' ) ?> </a>
 </div>

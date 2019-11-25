@@ -49,7 +49,7 @@
 			</label>	
 			
 			<div class="luft-forget-password display-on-mobile">
-				<a href="#"><img src="assets/image/lock.png" alt="lock" /><span> <?php echo get_msg( 'forget_pass' ) ?> <span></a>
+				<a href="<?php echo get_route('forgot'); ?>"><img src="assets/image/lock.png" alt="lock" /><span> <?php echo get_msg( 'forget_pass' ) ?> <span></a>
 			</div>
 
 			<div class="luft-form-row luft-submit-type">

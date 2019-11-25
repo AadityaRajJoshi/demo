@@ -17,7 +17,7 @@
 	<div class="luft-submit-wrapper luft-forgot-password">
 
 		<div>
-			<a href="#" class="go-back-btn"> Go Back </a>
+			<a href="<?php echo get_route('/'); ?>" class="go-back-btn"> <?php echo get_msg( 'go_back' ); ?> </a>
 		</div>
 
 		<div class="luft-form-row luft-submit-type">
