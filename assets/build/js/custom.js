@@ -27,7 +27,7 @@
        window.location.href = LUFTLEK.ajax_url + 'user/edit/' + id + '/'  + '?f=' +start_date + '&t=' + end_date;
       });
 
-      $( 'input[name="birthday"]').daterangepicker({
+      $( 'input[name="eventDatePicker"]').daterangepicker({
         opens:'left'
       }, function( start, end, label ){
         var start = start.format('YYYY-MM-DD');
