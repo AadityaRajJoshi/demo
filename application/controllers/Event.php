@@ -137,34 +137,50 @@ class Event extends MY_Controller{
 			if($is_update){
 				echo "<pre>";
 				$old_users = $this->events_staff_m->get( array( 'user_id', 'type' ), array( 'event_id'=> $is_update ) );
-/*				$old_users = array_map(function($v){
-					return array('user_id' => $v->user_id, 'type' => $v->type);
-				}, $old_users);*/
+				$staff = array();
+				$package_staff = array();
+				foreach ($old_users as $u) {
+					if( $u->type == 1 ){
+						$staff[] = $u->user_id;
+					}elseif( $u->type == 2 ){
+						$package_staff[] = $u->user_id;
+					}else{
+						$staff[] = $u->user_id;
+						$package_staff[] = $u->user_id;
+					}
+				}
 				$new_staff = $this->input->post('add_staff');
 				$new_package_staff = $this->input->post('add_package_staff');
 				echo "old staff<br>";
-				var_export( $old_users );
+				var_export( $staff );
+				var_export( $package_staff );
 				echo "<br> New STAFF <br>";
 				var_export( $new_staff );
 				echo "<br> NEW PACKAGE STAFF <br>";
 				var_export( $new_package_staff );
 				echo "<pre>";
-				foreach ($old_users as $user) {
-					if( 1 == $user->type ){
-						if(in_array($user->user_id,$new_staff)){
-							echo "no change in staff.<br>";
+				$deleted = array_diff($staff, $new_staff);
+				if($deleted){
+					foreach ($deleted as $d) {
+						if( $d == $new_package_staff ){
+							echo $d." you have changed to package staff <br>";
 						}else{
-							echo $user->user_id." have been removed from package staff.<br>";
-						}
-					}elseif( 2 == $user->type ){
-						if( $new_package_staff == $user->user_id ){
-							echo "no change in package staff.<br>";
-						}else{
-							echo $user->user_id." package staff has been removed.<br>";
-							echo $new_package_staff." package staff has been added.<br>";
+							echo $d." DELETED STAFF <br>";
 						}
 					}
 				}
+				$updated = array_intersect($staff, $new_staff);
+				$added = array_diff($new_staff, $staff);
+				echo "<br> UPDATED STAFF <br>";
+				var_export($updated);
+				echo "<br> ADDED STAFF <br>";
+				var_export($added);
+
+				if( !in_array( $new_package_staff, $package_staff ) ){
+					echo $package_staff[0]." Package Staff Have been removed<br>";
+					echo $new_package_staff." Package Staff Have been added";
+				}
+
 				die;
 			}else{
 				# Send sms to newly added staffs
@@ -294,8 +310,7 @@ class Event extends MY_Controller{
 
 		$staff = $this->event_m->get_users( $id );
 		$event_staff = '';
-		$event_package_staff = '';
-		
+		$event_package_staff = '';		
 		foreach ($staff as $value) {
 			if( $value->type == 1 ){
 				$event_staff .= ucfirst($value->username).', ';
