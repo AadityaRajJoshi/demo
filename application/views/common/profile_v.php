@@ -90,9 +90,14 @@
 
 		<div class="user-table-content">
 
-			<div class="filter-by-date">		
-				<input type="text" name="daterange" />
+			<div class="filter-by-date">
+				<span>	
+					<i class="fas fa-angle-up"></i>	
+					<input type="text" name="daterange" />
+					<i class="fas fa-angle-down"></i>
+				</span>
 			</div>
+
 
 			<table class="luft-table luft-view-mobile">
 				<thead>

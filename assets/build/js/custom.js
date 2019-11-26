@@ -15,26 +15,32 @@
         $('.extend-data').slideUp(200);
     }
 
+    function openDateSelector() {
+        $('.filter-by-date .fas').on('click', function () {
+            $('.filter-by-date input').trigger('click');
+        });
+    }
 
-    function filterByRange(){
-        
-      $('input[name="daterange"]').daterangepicker({
-        opens: 'left'
-      }, function(start, end, label) {
-        var id = $('[name ="id"]').val();
-        var start_date = start.format('YYYY-MM-DD');
-        var end_date = end.format('YYYY-MM-DD');
-       window.location.href = LUFTLEK.ajax_url + 'user/edit/' + id + '/'  + '?f=' +start_date + '&t=' + end_date;
-      });
 
-      $( 'input[name="birthday"]').daterangepicker({
-        opens:'left'
-      }, function( start, end, label ){
-        var start = start.format('YYYY-MM-DD');
-        var end = end.format('YYYY-MM-DD');
-        window.location.href = LUFTLEK.ajax_url + 'event/' + '?f=' +start + '&t=' + end;
-      });
-    }  
+    function filterByRange() {
+
+        $('input[name="daterange"]').daterangepicker({
+            opens: 'right'
+        }, function (start, end, label) {
+            var id = $('[name ="id"]').val();
+            var start_date = start.format('YYYY-MM-DD');
+            var end_date = end.format('YYYY-MM-DD');
+            window.location.href = LUFTLEK.ajax_url + 'user/edit/' + id + '/' + '?f=' + start_date + '&t=' + end_date;
+        });
+
+        $('input[name="eventDatePicker"]').daterangepicker({
+            opens: 'right'
+        }, function (start, end, label) {
+            var start = start.format('YYYY-MM-DD');
+            var end = end.format('YYYY-MM-DD');
+            window.location.href = LUFTLEK.ajax_url + 'event/' + '?f=' + start + '&t=' + end;
+        });
+    }
 
 
     var documentReadyCallbackFunc = () => {
@@ -117,7 +123,7 @@
     };
 
     /* DOM ready event */
-    $(document).ready(documentReadyCallbackFunc, toggleDetailTable(),filterByRange());
+    $(document).ready(documentReadyCallbackFunc, toggleDetailTable(), filterByRange(), openDateSelector());
 
 })(jQuery);
 

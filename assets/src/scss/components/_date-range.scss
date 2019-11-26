@@ -5,7 +5,39 @@
         height: 45px;
         border-radius: 5px;
         padding: 10px;
+        @include media(mb) {
+            width: 100%;
+        }
     }
+
+    span {
+        
+        position: relative;
+        height: 45px;
+        display: inline-block;
+        cursor: pointer;
+        i {
+            position: absolute;
+            right: 0;
+            height: 50%;
+            width: 20px;
+            text-align: center;
+            color: $color_primary;
+            font-size: 12px;
+
+            &.fa-angle-down {
+                bottom: 0;
+            }
+
+            &.fa-angle-up {
+                top: 9px;
+            }
+        }
+
+        @include media(mb) {
+            width: 100%;
+        }
+    } 
 } 
 
 .daterangepicker {

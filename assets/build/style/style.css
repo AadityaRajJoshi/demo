@@ -519,6 +519,29 @@ textarea {
     height: 45px;
     border-radius: 5px;
     padding: 10px; }
+    @media (max-width: 768px) {
+      .filter-by-date input {
+        width: 100%; } }
+  .filter-by-date span {
+    position: relative;
+    height: 45px;
+    display: inline-block;
+    cursor: pointer; }
+    .filter-by-date span i {
+      position: absolute;
+      right: 0;
+      height: 50%;
+      width: 20px;
+      text-align: center;
+      color: #020441;
+      font-size: 12px; }
+      .filter-by-date span i.fa-angle-down {
+        bottom: 0; }
+      .filter-by-date span i.fa-angle-up {
+        top: 9px; }
+    @media (max-width: 768px) {
+      .filter-by-date span {
+        width: 100%; } }
 
 .daterangepicker {
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.1); }
@@ -1411,6 +1434,9 @@ td.right-text {
 
 .blocker {
   z-index: 9999 !important; }
+  @media (max-width: 768px) {
+    .blocker {
+      padding: 12px; } }
 
 div#preview-modal {
   max-width: 1360px;
@@ -1418,6 +1444,7 @@ div#preview-modal {
   border-radius: 0; }
   @media (max-width: 768px) {
     div#preview-modal {
-      padding: 30px 10px; } }
+      padding: 30px 10px;
+      width: 100%; } }
 
 /*# sourceMappingURL=style.css.map */
