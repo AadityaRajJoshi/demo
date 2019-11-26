@@ -1,3 +1,4 @@
+
 <?php echo form_open( '', array('id'=>'my-form') );?>
 <div class="luft-form-wrapper">
 	<div class="luft-form-row">
@@ -314,5 +315,5 @@
 <?php echo form_close( '' ); ?>	
 <!-- Modal -->
 <div id="preview-modal" class="modal">
-    <?php $this->load->view('common/event_detail_v'); ?>   
+     <?php $this->load->view('common/event_detail_v'); ?> 
 </div>

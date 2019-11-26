@@ -321,7 +321,6 @@ class Event extends MY_Controller{
 				$event_package_staff =  ucfirst($value->username);
 			}
 		}
-
 		$this->data[ 'event_package_staff' ] = $event_package_staff;
 		$this->data[ 'event_staff' ] = rtrim( $event_staff, ', ' );
 		$this->data['breadcrumb'][] = $query->name;
@@ -406,7 +405,8 @@ class Event extends MY_Controller{
 		$this->data[ 'breadcrumb' ] = get_msg( 'breadcrumb_event_edit' );
 		$this->data[ 'event' ] = $event;
 		$this->data[ 'mode' ] = 'edit';
-		$this->data[ 'event_package_users' ] = $event_package_staff;
+
+		$this->data[ 'event_package_staff' ] = $event_package_staff;
 		$this->data[ 'event_users' ] = $event_staff;
 		$this->data[ 'staffs' ] = get_staffs_dropdown();
 		$this->data[ 'event_staff' ] = '';

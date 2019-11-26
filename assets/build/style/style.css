@@ -92,7 +92,9 @@ a {
     border-radius: 3px;
     width: 100%;
     font-size: 14px;
-    position: relative; }
+    position: relative;
+    -webkit-appearance: none;
+    box-shadow: none; }
     .luft-form-row input::placeholder {
       color: #000; }
   .luft-form-row.full-width-row {
@@ -215,6 +217,11 @@ input[type=time]:after {
 
 input:focus,
 textarea:focus {
+  outline: none; }
+
+input[type='submit'] {
+  -webkit-appearance: none;
+  box-shadow: none;
   outline: none; }
 
 span.form-success {
@@ -529,7 +536,7 @@ textarea {
     cursor: pointer; }
     .filter-by-date span i {
       position: absolute;
-      right: 0;
+      right: 4px;
       height: 50%;
       width: 20px;
       text-align: center;
@@ -943,7 +950,7 @@ p.profile-name {
 img.filter-img {
   transition: all .3s; }
 
-.desc img.filter-img {
+img.filter-img.desc {
   transform: rotateX(180deg); }
 
 .extend-data {
@@ -1172,8 +1179,7 @@ td.right-text {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 140px;
-  background: #F7F7F7; }
+  width: 140px; }
 .template-profile .luft-form-row-file {
   margin-bottom: 20px;
   display: flex;
