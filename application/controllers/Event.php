@@ -138,6 +138,9 @@ class Event extends MY_Controller{
 			if($is_update){
 				echo "<pre>";
 				$old_users = $this->events_staff_m->get( array( 'user_id', 'type' ), array( 'event_id'=> $is_update ) );
+/*				$old_users = array_map(function($v){
+					return array('user_id' => $v->user_id, 'type' => $v->type);
+				}, $old_users);*/
 				$new_staff = $this->input->post('add_staff');
 				$new_package_staff = $this->input->post('add_package_staff');
 				echo "old staff<br>";
@@ -145,7 +148,25 @@ class Event extends MY_Controller{
 				echo "<br> New STAFF <br>";
 				var_export( $new_staff );
 				echo "<br> NEW PACKAGE STAFF <br>";
-				var_export( $new_package_staff );die;
+				var_export( $new_package_staff );
+				echo "<pre>";
+				foreach ($old_users as $user) {
+					if( 1 == $user->type ){
+						if(in_array($user->user_id,$new_staff)){
+							echo "no change in staff.<br>";
+						}else{
+							echo $user->user_id." have been removed from package staff.<br>";
+						}
+					}elseif( 2 == $user->type ){
+						if( $new_package_staff == $user->user_id ){
+							echo "no change in package staff.<br>";
+						}else{
+							echo $user->user_id." package staff has been removed.<br>";
+							echo $new_package_staff." package staff has been added.<br>";
+						}
+					}
+				}
+				die;
 			}else{
 				# Send sms to newly added staffs
 				$staffs = $this->user_m->get_by_ids($event_staff);
