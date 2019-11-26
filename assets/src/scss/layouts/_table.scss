@@ -87,11 +87,11 @@ img.filter-img{
     transition: all .3s;
 }
 
-.desc {
-    img.filter-img {
-        transform: rotateX(180deg);
-    }
+
+img.filter-img.desc {
+    transform: rotateX(180deg);
 }
+
 
 .extend-data {
     display: none;
