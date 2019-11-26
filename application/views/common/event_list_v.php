@@ -1,5 +1,5 @@
 <div class="filter-by-date">		
-	<input type="text" name="birthday" />
+	<input type="text" name="eventDatePicker" />
 </div>
 
 
