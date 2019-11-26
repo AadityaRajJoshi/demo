@@ -21,6 +21,8 @@
         width: 100%;  
         font-size: 14px; 
         position: relative;
+        -webkit-appearance: none;
+        box-shadow: none;
 
         &::placeholder {
             color: $color_black;
@@ -191,5 +193,11 @@ input[type=time]:after {
 
 input:focus,
 textarea:focus {
+    outline: none;
+}
+
+input[type='submit'] {
+    -webkit-appearance: none;
+    box-shadow: none;
     outline: none;
 }
