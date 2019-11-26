@@ -11,7 +11,7 @@ class MY_Controller extends CI_Controller{
 		),
 		'error' => array(),
 		'success' => array(),
-		'order' => 'desc',
+		'order' => 'asc',
 		'order_by' => 'id'
 	);
 

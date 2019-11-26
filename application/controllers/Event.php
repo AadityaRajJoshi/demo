@@ -135,7 +135,7 @@ class Event extends MY_Controller{
 			$this->db->trans_start();
 
 			if($is_update){
-				echo "<pre>";
+/*				echo "<pre>";
 				$old_users = $this->events_staff_m->get( array( 'user_id', 'type' ), array( 'event_id'=> $is_update ) );
 				$staff = array();
 				$package_staff = array();
@@ -181,7 +181,7 @@ class Event extends MY_Controller{
 					echo $new_package_staff." Package Staff Have been added";
 				}
 
-				die;
+				die;*/
 			}else{
 				# Send sms to newly added staffs
 				$staffs = $this->user_m->get_by_ids($event_staff);
