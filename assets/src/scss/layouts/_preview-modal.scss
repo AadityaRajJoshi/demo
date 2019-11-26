@@ -1,5 +1,8 @@
 .blocker {
     z-index: 9999 !important;
+    @include media(mb) {
+        padding: 12px;
+    }
 }
 
 div#preview-modal {
@@ -8,5 +11,6 @@ div#preview-modal {
     border-radius: 0;
     @include media(mb) {
         padding: 30px 10px;
+        width: 100%;
     }
 }

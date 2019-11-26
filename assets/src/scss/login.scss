@@ -201,6 +201,9 @@
         align-items: center;
         justify-content: center;
         background: $color_primary;
+        &:hover {
+            background: $color_green;
+        }
     }
     .luft-form-row.luft-submit-type {
         margin-bottom: 0;

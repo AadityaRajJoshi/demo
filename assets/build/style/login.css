@@ -356,6 +356,8 @@ span.form-success + .form-err {
   align-items: center;
   justify-content: center;
   background: #020441; }
+  .luft-forgot-password a.go-back-btn:hover {
+    background: #58B975; }
 .luft-forgot-password .luft-form-row.luft-submit-type {
   margin-bottom: 0; }
   @media (max-width: 768px) {
