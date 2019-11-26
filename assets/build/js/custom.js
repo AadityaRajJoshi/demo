@@ -15,6 +15,12 @@
         $('.extend-data').slideUp(200);
     }
 
+    function openDateSelector() {
+        $('.filter-by-date .fas').on('click', function () {
+            $('.filter-by-date input').trigger('click');
+        });
+    }
+
 
     function filterByRange() {
 
@@ -27,7 +33,7 @@
             window.location.href = LUFTLEK.ajax_url + 'user/edit/' + id + '/' + '?f=' + start_date + '&t=' + end_date;
         });
 
-        $('input[name="birthday"]').daterangepicker({
+        $('input[name="eventDatePicker"]').daterangepicker({
             opens: 'right'
         }, function (start, end, label) {
             var start = start.format('YYYY-MM-DD');
@@ -117,7 +123,7 @@
     };
 
     /* DOM ready event */
-    $(document).ready(documentReadyCallbackFunc, toggleDetailTable(), filterByRange());
+    $(document).ready(documentReadyCallbackFunc, toggleDetailTable(), filterByRange(), openDateSelector());
 
 })(jQuery);
 

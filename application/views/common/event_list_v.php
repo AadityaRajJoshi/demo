@@ -1,5 +1,9 @@
-<div class="filter-by-date">		
-	<input type="text" name="birthday" />
+<div class="filter-by-date">
+	<span>	
+		<i class="fas fa-angle-up"></i>	
+		<input type="text" name="eventDatePicker" />
+		<i class="fas fa-angle-down"></i>
+	</span>
 </div>
 
 
