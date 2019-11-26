@@ -156,7 +156,7 @@ class User extends MY_Controller{
         	$this->data['current_menu'] = 'dashboard';
         }else{
         	$this->load->model( 'event_m' );
-			$events = $this->user_m->get_events($id, $start_date, $end_date);
+			$events = $this->user_m->get_events($id, get_date_filter_params());
 			$this->data['segment'] = 'user/edit/'.$id;
         	$this->data['events'] = $events;
     		$this->data['meta'] = get_msg('meta_edit_profile');

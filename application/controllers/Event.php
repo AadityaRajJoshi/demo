@@ -6,26 +6,17 @@ class Event extends MY_Controller{
 	public function __construct(){
 		parent::__construct();
 		$this->load->library('form_validation');
-		$this->load->model( 'event_m' );
+		$this->load->model('event_m');
 	}
 
 	public function index(){
 
-		$start_date = $this->input->get( 'f' );
-		$end_date = $this->input->get('t');
+		$where = get_date_filter_params();
 
 		if( is_staff() ){
 			$this->load->model( 'user_m' );
-			$this->data[ 'events' ] = $this->user_m->get_events('', $start_date, $end_date);
+			$this->data[ 'events' ] = $this->user_m->get_events(false, $where);
 		}else{
-			$where = [];
-			if($start_date){
-				$where['start_time >='] = $start_date . ' 00:00:00';
-			}
-
-			if($end_date){
-				$where['start_time <='] = $end_date . ' 24:00:00';
-			}
 			$this->data[ 'events' ] = $this->event_m->get( '*', $where);
 		}
 		$this->data[ 'meta' ] = get_msg( 'meta_event' );

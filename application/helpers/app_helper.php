@@ -435,7 +435,7 @@ if(! function_exists('menu')){
 if(! function_exists('print_menu')){
 	function print_menu( $menu, $current_menu, $wrapper=true){
 	    $wrapper_class = 'sidebar-menu';
-	    $header = 'Menu';
+	    $header = get_msg('menu');
 
 	    if( $wrapper )
 	        echo sprintf('<ul class="%s"><li class="sidebar-header">%s</li>', $wrapper_class, $header);
@@ -574,7 +574,7 @@ if(! function_exists('get_staff_worktime')){
 		if($times){
 			$t = 0;
 			foreach($times as $key => $time){
-				$t = $t + $time->total_worktime;
+				$t += $time->total_worktime;
 			}
 			return seconds_to_time( $t );
 		}else{
@@ -650,8 +650,7 @@ function _parse_form_attributes($attributes, $default){
 	foreach ($default as $key => $val){
 		if ($key === 'value'){
 			$val = html_escape($val);
-		}
-		elseif ($key === 'name' && ! strlen($default['name'])){
+		}elseif ($key === 'name' && ! strlen($default['name'])){
 			continue;
 		}
 
@@ -663,13 +662,16 @@ function _parse_form_attributes($attributes, $default){
 
 function thead($key, $col_name=false, $class=false){
 	$ci = get_instance();
-	$col_name = !$col_name ? $key : $col_name;
-	$class = $class ? $class : $ci->router->fetch_class();
-	$url = $class . '?ob='.$col_name.'&o=';
+	$col_name || $col_name = $key;
+	$class || $class = $ci->router->fetch_class();
 	
+	$qs = rtrim(explode('ob=', $_SERVER['QUERY_STRING'])[0], '&');
+	$qs = $qs == '' ? '?' : '?' . $qs . '&';
+	
+	$url = $class . $qs . 'ob='.$col_name.'&o=';
 	$url .= 'asc' == $ci->data['order'] ? 'desc' : 'asc';
 
-	echo sprintf('<a href="%s">%s<img src="%s" alt="filter" class="filter-img %s" /></a>',
+	echo sprintf('<a href="%s">%s<img src="%s" alt="filter" class="filter-img %s"/></a>',
 		$url,
 		get_msg($key),
 		'assets/image/filter.png',
@@ -680,6 +682,17 @@ function thead($key, $col_name=false, $class=false){
 
 function get_start_end_time( $starttime, $endtime ){
 	return get_time_from_datetime( $starttime ) . ' - ' . get_time_from_datetime(  $endtime );  
+}
+
+function get_date_filter_params(){
+	$ci = get_instance();
+	$start_date = $ci->input->get('f');
+	$end_date = $ci->input->get('t');
+	$where = [];
+	$start_date && $where['start_time >='] = $start_date . ' 00:00:00';
+	$end_date && $where['start_time <='] = $end_date . ' 24:00:00';
+
+	return count($where) > 0 ? $where : false;
 }
 
 function get_staff_type( $type ){
