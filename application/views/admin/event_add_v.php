@@ -177,7 +177,7 @@
 				'id' => 'add_package_staff',
 				'options' => $staffs,
 				'class' => 'custom-styled-select',
-			), $staffs, isset( $event_package_users ) ? $event_package_users : false ); 
+			), $staffs, isset( $event_package_staff ) ? $event_package_staff : false ); 
 			?>
 		</div>
 		<div class="luft-form-row">

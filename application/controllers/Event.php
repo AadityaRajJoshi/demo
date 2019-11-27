@@ -134,65 +134,8 @@ class Event extends MY_Controller{
 
 			$this->db->trans_start();
 
-			if($is_update){
-/*				echo "<pre>";
-				$old_users = $this->events_staff_m->get( array( 'user_id', 'type' ), array( 'event_id'=> $is_update ) );
-				$staff = array();
-				$package_staff = array();
-				foreach ($old_users as $u) {
-					if( $u->type == 1 ){
-						$staff[] = $u->user_id;
-					}elseif( $u->type == 2 ){
-						$package_staff[] = $u->user_id;
-					}else{
-						$staff[] = $u->user_id;
-						$package_staff[] = $u->user_id;
-					}
-				}
-				$new_staff = $this->input->post('add_staff');
-				$new_package_staff = $this->input->post('add_package_staff');
-				echo "old staff<br>";
-				var_export( $staff );
-				var_export( $package_staff );
-				echo "<br> New STAFF <br>";
-				var_export( $new_staff );
-				echo "<br> NEW PACKAGE STAFF <br>";
-				var_export( $new_package_staff );
-				echo "<pre>";
-				$deleted = array_diff($staff, $new_staff);
-				if($deleted){
-					foreach ($deleted as $d) {
-						if( $d == $new_package_staff ){
-							echo $d." you have changed to package staff <br>";
-						}else{
-							echo $d." DELETED STAFF <br>";
-						}
-					}
-				}
-				$updated = array_intersect($staff, $new_staff);
-				$added = array_diff($new_staff, $staff);
-				echo "<br> UPDATED STAFF <br>";
-				var_export($updated);
-				echo "<br> ADDED STAFF <br>";
-				var_export($added);
-
-				if( !in_array( $new_package_staff, $package_staff ) ){
-					echo $package_staff[0]." Package Staff Have been removed<br>";
-					echo $new_package_staff." Package Staff Have been added";
-				}
-
-				die;*/
-			}else{
-				# Send sms to newly added staffs
-				$staffs = $this->user_m->get_by_ids($event_staff);
-				foreach($staffs as $staff){
-					$msg = str_replace('{event}', $data['name'], get_msg('sms_added_to_event'));
-					$this->send_sms(array(
-						'number' => $staff->phone_number,
-						'message' => $msg,
-					));
-				}
-			}
+			#send sms when event modified or addded
+			$this->notify_user_about_event( $is_update );
 
 			if( $is_update ){
 				$event_id = $is_update;
@@ -235,6 +178,72 @@ class Event extends MY_Controller{
 			}else{
 			   	$this->session->set_flashdata( 'error', get_msg( 'event_rollback_error' ) );
 			   	do_redirect('event');
+			}
+		}
+	}
+
+	public function notify_user_about_event( $is_update = false ){
+		echo "<pre>";
+		if($is_update){
+			$old_users = $this->events_staff_m->get( array( 'user_id', 'type' ), array( 'event_id'=> $is_update ) );
+			$old_staff = array();
+			$old_package_staff = array();
+			foreach ($old_users as $u) {
+				if( $u->type == 1 ){
+					$old_staff[] = $u->user_id;
+				}elseif( $u->type == 2 ){
+					$old_package_staff[] = $u->user_id;
+				}else{
+					$old_staff[] = $u->user_id;
+					$old_package_staff[] = $u->user_id;
+				}
+			}
+			$new_staff = $this->input->post('add_staff');
+			$new_package_staff = $this->input->post('add_package_staff');
+			$deleted = array_diff($old_staff, $new_staff);
+			if($deleted){
+				foreach ($deleted as $d) {
+					if( $d == $new_package_staff ){
+						echo $d." you have changed from staff to package staff <br>";
+					}else{
+						echo $d." DELETED STAFF <br>";
+					}
+				}
+			}
+			$updated = array_intersect($old_staff, $new_staff);
+			$added = array_diff($new_staff, $old_staff);
+			echo "<br> UPDATED STAFF <br>";
+			var_export($updated);
+			echo "<br>";
+			if( $added ){					
+				echo "<br> ADDED STAFF <br>";
+				var_export($added);
+			}
+
+			if( !in_array( $new_package_staff, $old_package_staff ) ){
+				if( in_array( $old_package_staff[0], $new_staff ) ){
+					echo $old_package_staff[0].' You have been changed from Package Staff To Staff<br>';
+				}else{
+					echo $old_package_staff[0].' You have been removed from Package Staff<br>';
+				}
+
+				if( !in_array( $new_package_staff, $deleted ) ){
+					echo $new_package_staff." Package Staff Have been added";
+				}
+			}else{
+				echo  $old_package_staff[0].' Event has been Updated<br>';
+			}
+
+			die;
+		}else{
+			# Send sms to newly added staffs
+			$staffs = $this->user_m->get_by_ids($event_staff);
+			foreach($staffs as $staff){
+				$msg = str_replace('{event}', $data['name'], get_msg('sms_added_to_event'));
+				$this->send_sms(array(
+					'number' => $staff->phone_number,
+					'message' => $msg,
+				));
 			}
 		}
 	}
