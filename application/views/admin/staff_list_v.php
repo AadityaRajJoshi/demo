@@ -11,7 +11,7 @@
     <?php foreach ($staffs as $key => $staff): ?>
         <tr>
             <td class="luft-user-id"><?php echo $key+1; ?></td>
-            <td class="luft-user-name"><?php echo $staff->username; ?></td>
+            <td class="luft-user-name"><?php echo $staff->name; ?></td>
             <td class="luft-staff-work-time"><?php echo $staff->worktime ? seconds_to_time($staff->worktime) : get_msg( 'no_event_assigned' ) ?></td>
             <td class="luft-update-download">
                 <a href="<?php echo get_route('user_edit') . '/' . $staff->id; ?>" class="luft-user-edit hide-on-mobile" >

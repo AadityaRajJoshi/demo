@@ -127,6 +127,7 @@ if(! function_exists('get_msg')){
 			'user_update_failed'   => 'Error! Staff Not Upadted',
 			'download_report' 	   => 'Ladda ner rapport',
 			'event_rollback_error' => 'Error! Cannot Insert Event',
+			'label_username'      => 'User Name',
 
 			'pass_reset'		=> 'Password Changed Successfully. Please Check Your Email',
 			'pass_reset_failed' => 'There Was An Error Updating Your Password.',
@@ -482,11 +483,11 @@ if(! function_exists('get_staffs_dropdown')){
 		$ci = get_instance();
 		$ci->load->model( 'user_m' );
 		$staffs = array();
-		$db_staffs = $ci->user_m->get( array( 'u.id', 'username' ) , array(
+		$db_staffs = $ci->user_m->get( array( 'u.id', 'u.name' ) , array(
 			'role_id' =>get_role_id("staff")
 		));
 		foreach ($db_staffs as $value) {
-			$staffs[ $value->id ] = $value->username;
+			$staffs[ $value->id ] = $value->name;
 		}
 
 		return $staffs;

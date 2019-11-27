@@ -193,7 +193,8 @@ class User extends MY_Controller{
 	public function save($id=false){
 
 		$this->load->library('form_validation');
-		$this->form_validation->set_rules('username', get_msg('label_name'), 'trim|required' );
+		$this->form_validation->set_rules('username', get_msg('label_username'), 'trim|required|is_unique[users.username]' );
+		$this->form_validation->set_rules('name', get_msg('label_name'), 'trim|required' );
 		$this->form_validation->set_rules('phone_number', get_msg('label_phone_number'), 'required|regex_match[/^[0-9]{10}$/]' );
 
 		if(! $id){
@@ -204,12 +205,15 @@ class User extends MY_Controller{
 		
 		if($this->form_validation->run()){
 			$username = $this->input->post('username');
+			$name = $this->input->post('name');
 			$email = $this->input->post('email');
 			$phone_number = $this->input->post('phone_number');
 			$password = $this->input->post('password');
+
 			
 			$data = array(
 				'username'=> $username,
+				'name' => $name,
 				'phone_number' => $phone_number,
 			);
 
