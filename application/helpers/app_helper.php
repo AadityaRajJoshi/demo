@@ -249,7 +249,7 @@ if(! function_exists('get_msg')){
 
 	        'placeholder_event_name'		=> 'Enter Event Name',
 	        'placeholder_event_car'			=> 'Enter City',
-	        'placeholder_event_order'		=> 'Enetr Order Number',
+	        'placeholder_event_order'		=> 'Enter Order Number',
 	        'placeholder_event_date'		=> 'Enter Date',
 	        'placeholder_event_address'		=> 'Enter Address',
 	        'placeholder_event_distance'	=> 'Distance To Event',

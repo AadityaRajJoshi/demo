@@ -29,7 +29,6 @@
 			echo form_label( get_msg('label_event_date'), 'date' );
 			echo form_input( array(
 				'name' => 'date',
-				'placeholder' => get_msg('placeholder_event_date'),
 				'id' => 'date',
 				'required' => 'required',
 				'value' => get_value($event, 'date'),
