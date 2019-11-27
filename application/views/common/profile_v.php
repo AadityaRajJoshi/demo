@@ -19,12 +19,24 @@
 	<div class="luft-form-wrapper">
 		<div class="luft-form-row">
 			<?php 
-				echo form_label(get_msg('label_name'), 'username');
+				echo form_label(get_msg('label_username'), 'username');
 				echo form_input(array(
 					'name' => 'username',
 					'value'=> get_value($user, 'username'),
 					'placeholder' => get_msg('placeholder_name'),
 					'id' => 'username',
+				)); 
+			?>
+		</div>
+
+		<div class="luft-form-row">
+			<?php 
+				echo form_label(get_msg('label_name'), 'name');
+				echo form_input(array(
+					'name' => 'name',
+					'value'=> get_value($user, 'name'),
+					'placeholder' => get_msg('placeholder_name'),
+					'id' => 'name',
 				)); 
 			?>
 		</div>

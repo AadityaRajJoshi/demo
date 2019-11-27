@@ -1,5 +1,5 @@
 <img src="">
-<p style="font-size:10px;">Name : <b><?php echo ucfirst($user->username); ?></b></p>
+<p style="font-size:10px;">Name : <b><?php echo ucfirst($user->name); ?></b></p>
 <p style="font-size:10px;">Email : <b><?php echo $user->email; ?></b></p>
 <p style="font-size:10px;">Number : <b><?php echo $user->phone_number; ?></b></p>
 <table border="1" style="padding: 5px; font-size: 10px; border-color: #efefef;">
