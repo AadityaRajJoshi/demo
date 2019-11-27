@@ -66,7 +66,6 @@ class User extends MY_Controller{
 				do_redirect('dashboard');
 			}
 		}
-
 		$this->index();
 	}
 
