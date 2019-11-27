@@ -284,10 +284,10 @@ if(! function_exists('get_msg')){
 	        'preview_total_worktime'  => 'TOTAL WORKINGTIME',
 	        'preview_dismantling_time'=> 'DISMANTALING TIME',
 
-	        'sms_added_to_event' => 'You are added in {event} event',
-	        'sms_deleted_from_event_es' => 'You are deleted from {event} event',
+	        'sms_added_to_event' 		 => 'You are added in {event} event',
+	        'sms_deleted_from_event_es'  => 'You are deleted from {event} event',
 	        'sms_deleted_from_event_eps' => 'You are deleted from {event} event',
-	        'sms_updated_event' =>'{event} event has been updated',
+	        'sms_updated_event' 		 =>'{event} event has been updated',
 
 	        'sub_forgot_password' => 'Password Reset',
 	        'email_forgot_password' => 'Your new password is {password}'

@@ -82,7 +82,7 @@ class User extends MY_Controller{
 				$update = $this->user_m->save(array('password' => md5($new_pass)),array('id' => $user->id));
 				if( $update ){
 					// TODO SEND EMAIL
-					// file_put_contents(__DIR__.'../password.txt', print_r( $this->input->post( 'email' ).' => '. $new_pass, 1) );
+					 //file_put_contents(__DIR__.'../password.txt', print_r( $this->input->post( 'email' ).' => '. $new_pass, 1) );
 					
 					$body = get_msg('email_forgot_password');
 					$body = str_replace('{password}', $new_pass, $body);
