@@ -135,7 +135,7 @@ class Event extends MY_Controller{
 			$this->db->trans_start();
 
 			#send sms when event modified or addded
-			$this->notify_user_about_event( $is_update );
+			$this->notify_user_about_event( $is_update, $data );
 
 			if( $is_update ){
 				$event_id = $is_update;
@@ -182,10 +182,11 @@ class Event extends MY_Controller{
 		}
 	}
 
-	public function notify_user_about_event( $is_update = false ){
-		echo "<pre>";
+	public function notify_user_about_event( $is_update = false, $data ){
 		if($is_update){
 			$old_users = $this->events_staff_m->get( array( 'user_id', 'type' ), array( 'event_id'=> $is_update ) );
+
+			# get old users and added on respective array according to type(1=>staff,2=>package,3=>both)
 			$old_staff = array();
 			$old_package_staff = array();
 			foreach ($old_users as $u) {
@@ -200,41 +201,51 @@ class Event extends MY_Controller{
 			}
 			$new_staff = $this->input->post('add_staff');
 			$new_package_staff = $this->input->post('add_package_staff');
+
+			#check if staff is deleted
 			$deleted = array_diff($old_staff, $new_staff);
 			if($deleted){
+				$deleted_staffs = $this->user_m->get_by_ids($deleted);
+				$msg_deleted = str_replace('{event}', $data['name'], get_msg('sms_deleted_from_event'));
 				foreach ($deleted as $d) {
-					if( $d == $new_package_staff ){
-						echo $d." you have changed from staff to package staff <br>";
-					}else{
-						echo $d." DELETED STAFF <br>";
-					}
+					$found_key = array_search($d, array_column($deleted_staffs, 'id'));
+					$info = $deleted_staffs[$found_key];
+					$this->send_sms(array(
+						'number' =>$info->phone_number,
+						'message' => $msg_deleted,
+					));
 				}
 			}
+
+			#If users are not added/deleted, notify event update msg
 			$updated = array_intersect($old_staff, $new_staff);
+			if( $updated ){
+				$updated_staff = $this->user_m->get_by_ids($updated);
+				$msg_updated = str_replace('{event}', $data['name'], get_msg('sms_updated_event'));
+				foreach ($updated as $u) {
+					$found_key = array_search($u, array_column($updated_staff, 'id'));
+					$info = $updated_staff[$found_key];
+					$this->send_sms(array(
+						'number' =>$info->phone_number,
+						'message' => $msg_updated,
+					));
+				}
+			}
+
+			#added new staff
 			$added = array_diff($new_staff, $old_staff);
-			echo "<br> UPDATED STAFF <br>";
-			var_export($updated);
-			echo "<br>";
-			if( $added ){					
-				echo "<br> ADDED STAFF <br>";
-				var_export($added);
+			if( $added ){
+				$added_staff = $this->user_m->get_by_ids($added);
+				$msg_added = str_replace('{event}', $data['name'], get_msg('sms_added_to_event'));
+				foreach ($added as $a) {
+					$found_key = array_search($a, array_column($added_staff, 'id'));
+					$info = $added_staff[$found_key];
+					$this->send_sms(array(
+						'number' =>$info->phone_number,
+						'message' => $msg_added,
+					));
+				}				
 			}
-
-			if( !in_array( $new_package_staff, $old_package_staff ) ){
-				if( in_array( $old_package_staff[0], $new_staff ) ){
-					echo $old_package_staff[0].' You have been changed from Package Staff To Staff<br>';
-				}else{
-					echo $old_package_staff[0].' You have been removed from Package Staff<br>';
-				}
-
-				if( !in_array( $new_package_staff, $deleted ) ){
-					echo $new_package_staff." Package Staff Have been added";
-				}
-			}else{
-				echo  $old_package_staff[0].' Event has been Updated<br>';
-			}
-
-			die;
 		}else{
 			# Send sms to newly added staffs
 			$staffs = $this->user_m->get_by_ids($event_staff);
