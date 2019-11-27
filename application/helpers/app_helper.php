@@ -127,11 +127,12 @@ if(! function_exists('get_msg')){
 			'user_update_failed'   => 'Error! Staff Not Upadted',
 			'download_report' 	   => 'Ladda ner rapport',
 			'event_rollback_error' => 'Error! Cannot Insert Event',
-			'label_username'      => 'User Name',
+			'event_and_packaging'  => 'Event And Packaging',
 
 			'pass_reset'		=> 'Password Changed Successfully. Please Check Your Email',
 			'pass_reset_failed' => 'There Was An Error Updating Your Password.',
 
+			'label_username'     => 'User Name',
 			'label_name'         => 'Name',
 			'label_email'        => 'Email',
 			'label_password'     => 'Password',
@@ -701,10 +702,10 @@ function get_date_filter_params(){
 
 function get_staff_type( $type ){
 	if( $type == 1 ){
-		return 'Event';
+		return get_msg( 'event' );
 	}elseif( $type == 2 ){
-		return 'Packaging';
+		return get_msg( 'packaging' );
 	}else{
-		return 'Event and Packaging';
+		return get_msg( 'event_and_packaging' );
 	}
 }
